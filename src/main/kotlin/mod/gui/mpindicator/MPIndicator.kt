@@ -12,7 +12,7 @@ import java.awt.Color
 class MPIndicator(mc: Minecraft) : Gui() {
 	companion object{
 		@JvmStatic
-		private val texture = ResourceLocation(Core.ID+"textures/mod.gui/mp_bar.png")
+		private val texture = ResourceLocation(Core.ID+":textures/gui/mp_bar.png")
 	}
 
 	init {
