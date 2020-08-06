@@ -33,50 +33,50 @@ import mod.proxy.CommonProxy
 @Mod(modid = Core.ID,name = Core.Name,version = Core.version,modLanguage = "kotlin")
 
 class Core {
-    companion object {
-        const val ID = "general-rpg"
-        const val Name = "GeneralRPG"
-        const val version = "1.0"
+	companion object {
+		const val ID = "general-rpg"
+		const val Name = "GeneralRPG"
+		const val version = "1.0"
 
-        @SidedProxy(clientSide = "mod.proxy.ClientProxy",serverSide = "mod.proxy.ServerProxy")
-        @JvmStatic
-        lateinit var proxy: CommonProxy
+		@SidedProxy(clientSide = "mod.proxy.ClientProxy",serverSide = "mod.proxy.ServerProxy")
+		@JvmStatic
+		lateinit var proxy: CommonProxy
 
-        val test: Item = Test
-    }
+		val test: Item = Test
+	}
 
-    @Mod.EventHandler
-    fun construct(event: FMLConstructionEvent?){
-        MinecraftForge.EVENT_BUS.register(this)
-        MinecraftForge.EVENT_BUS.register(proxy)
-    }
+	@Mod.EventHandler
+	fun construct(event: FMLConstructionEvent?){
+		MinecraftForge.EVENT_BUS.register(this)
+		MinecraftForge.EVENT_BUS.register(proxy)
+	}
 
-    @Mod.EventHandler
-    fun preInit(event: FMLPreInitializationEvent?){
-        proxy.preInit()
-    }
+	@Mod.EventHandler
+	fun preInit(event: FMLPreInitializationEvent?){
+		proxy.preInit()
+	}
 
-    @Mod.EventHandler
-    fun init(event: FMLInitializationEvent?){
-        CapabilityManager.INSTANCE?.register(IMaxMP::class.java, MaxMPStorage(), MaxMP::class.java)
-        CapabilityManager.INSTANCE?.register(ILevel::class.java, LevelStorage(), Level::class.java)
-        CapabilityManager.INSTANCE?.register(IExp::class.java, ExpStorage(), Exp::class.java)
-        CapabilityManager.INSTANCE?.register(IMP::class.java, MPStorage(), MP::class.java)
+	@Mod.EventHandler
+	fun init(event: FMLInitializationEvent?){
+		CapabilityManager.INSTANCE?.register(IMaxMP::class.java, MaxMPStorage(), MaxMP::class.java)
+		CapabilityManager.INSTANCE?.register(ILevel::class.java, LevelStorage(), Level::class.java)
+		CapabilityManager.INSTANCE?.register(IExp::class.java, ExpStorage(), Exp::class.java)
+		CapabilityManager.INSTANCE?.register(IMP::class.java, MPStorage(), MP::class.java)
 
 
-        MinecraftForge.EVENT_BUS.register(CapabilityHandler())
-        MinecraftForge.EVENT_BUS.register(CapabilityCloneEvent())
-        MinecraftForge.EVENT_BUS.register(LevelUpTest())
-    }
+		MinecraftForge.EVENT_BUS.register(CapabilityHandler())
+		MinecraftForge.EVENT_BUS.register(CapabilityCloneEvent())
+		MinecraftForge.EVENT_BUS.register(LevelUpTest())
+	}
 
-    @Mod.EventHandler
-    fun postInit(event: FMLPostInitializationEvent?){
-        MinecraftForge.EVENT_BUS.register(RenderMPIndicator())
-        proxy.postInit()
-    }
+	@Mod.EventHandler
+	fun postInit(event: FMLPostInitializationEvent?){
+		MinecraftForge.EVENT_BUS.register(RenderMPIndicator())
+		proxy.postInit()
+	}
 
-    @SubscribeEvent
-    fun registerItem(event: RegistryEvent.Register<Item?>?){
-        event?.registry?.register(test)
-    }
+	@SubscribeEvent
+	fun registerItem(event: RegistryEvent.Register<Item?>?){
+		event?.registry?.register(test)
+	}
 }
