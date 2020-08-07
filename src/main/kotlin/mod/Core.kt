@@ -34,7 +34,7 @@ import mod.proxy.CommonProxy
 
 class Core {
 	companion object {
-		const val ID = "general-rpg"
+		const val ID = "generalrpg"
 		const val Name = "GeneralRPG"
 		const val version = "1.0"
 
