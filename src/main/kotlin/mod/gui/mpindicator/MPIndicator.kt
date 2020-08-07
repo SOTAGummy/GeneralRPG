@@ -24,7 +24,7 @@ class MPIndicator(mc: Minecraft) : Gui() {
 		val mana = player.getCapability(MPProvider.MP_CAP!!,null)?.get().toString() + "/" + player.getCapability(MaxMPProvider.MAX_MP_CAP!!,null)?.get().toString()
 
 		mc.textureManager.bindTexture(texture)
-		this.drawTexturedModalRect(width/2+10,height-48,0,0,81,20)
+		this.drawTexturedModalRect(width/2+10,height-48,0,0,81,8)
 		mc.ingameGUI.drawCenteredString(mc.fontRenderer,hp,width/2+-10,height-48, Color.WHITE.rgb)
 		mc.ingameGUI.drawCenteredString(mc.fontRenderer,mana,width/2+30,height-48,4987)
 	}
