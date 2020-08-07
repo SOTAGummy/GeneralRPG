@@ -125,7 +125,6 @@ repositories {
     mavenCentral()
 }
 compileKotlin {
-    buildDir = "out/production"
     kotlinOptions {
         jvmTarget = "1.8"
     }
@@ -137,7 +136,7 @@ compileTestKotlin {
 
     sourceSets {
         main {
-            output.resourcesDir = "out/production/resources"
+            output.resourcesDir = "out.production.resources"
         }
     }
 }
