@@ -142,7 +142,7 @@ compileTestKotlin {
 
     sourceSets {
         main {
-            output.resourcesDir = "out/production/resources"
+            output.resourcesDir = "build/classes/kotlin/main"
         }
     }
 
