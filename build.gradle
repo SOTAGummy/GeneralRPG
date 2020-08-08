@@ -46,6 +46,12 @@ minecraft {
 
             // Recommended logging level for the console
             property 'forge.logging.console.level', 'debug'
+
+            mods {
+                KorgelinTest {
+                    source sourceSets.main
+                }
+            }
         }
 
         server {
@@ -139,4 +145,5 @@ compileTestKotlin {
             output.resourcesDir = "out/production/resources"
         }
     }
+
 }

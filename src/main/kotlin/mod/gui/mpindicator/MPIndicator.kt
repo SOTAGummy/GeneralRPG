@@ -23,7 +23,7 @@ class MPIndicator(mc: Minecraft) : Gui() {
 		val width = scaled.scaledWidth
 		val height = scaled.scaledHeight
 		val hp = (mc.player.health + 0.999999).toInt().toString() + "/" + mc.player.maxHealth.toInt().toString()
-		val mp = player.getCapability(MPProvider.MP_CAP!!,null)?.get().toString() + "/" + player.getCapability(MaxMPProvider.MAX_MP_CAP!!,null)?.get().toString()
+		val mp = player.getCapability(MPProvider.MP_CAP,null)?.get().toString() + "/" + player.getCapability(MaxMPProvider.MAX_MP_CAP,null)?.get().toString()
 		var currentMP = (MP / MaxMP) * 80
 
 		mc.textureManager.bindTexture(texture)
