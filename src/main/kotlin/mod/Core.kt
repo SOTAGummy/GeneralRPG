@@ -16,6 +16,7 @@ import mod.event.capabilityEvent.CapabilityCloneEvent
 import mod.event.capabilityEvent.CapabilityHandler
 import mod.event.capabilityEvent.LevelUpTest
 import mod.gui.mpindicator.RenderMPIndicator
+import mod.item.items.Heal
 import mod.item.items.Test
 import net.minecraft.item.Item
 import net.minecraftforge.common.MinecraftForge
@@ -29,6 +30,8 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 import mod.proxy.CommonProxy
+import mod.tab.GeneralRPGTab
+import net.minecraft.creativetab.CreativeTabs
 
 @Mod(modid = Core.ID,name = Core.Name,version = Core.version,modLanguage = "kotlin")
 
@@ -42,7 +45,10 @@ class Core {
 		@JvmStatic
 		lateinit var proxy: CommonProxy
 
+		var creativeaTab: CreativeTabs = GeneralRPGTab()
+
 		val test: Item = Test
+		val heal: Item = Heal
 	}
 
 	@Mod.EventHandler
@@ -78,5 +84,6 @@ class Core {
 	@SubscribeEvent
 	fun registerItem(event: RegistryEvent.Register<Item?>?){
 		event?.registry?.register(test)
+		event?.registry?.register(heal)
 	}
 }

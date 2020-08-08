@@ -8,7 +8,7 @@ import net.minecraft.util.ResourceLocation
 object Test : Item() {
     init {
         this.unlocalizedName = "test"
-        this.creativeTab = CreativeTabs.REDSTONE
+        this.creativeTab = Core.creativeaTab
         this.maxStackSize = 1
         this.registryName = ResourceLocation(Core.ID,"test")
     }
