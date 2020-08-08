@@ -31,7 +31,11 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 import mod.proxy.CommonProxy
 import mod.tab.GeneralRPGTab
+import net.minecraft.client.renderer.block.model.ModelResourceLocation
 import net.minecraft.creativetab.CreativeTabs
+import net.minecraft.util.ResourceLocation
+import net.minecraftforge.client.event.ModelRegistryEvent
+import net.minecraftforge.client.model.ModelLoader
 
 @Mod(modid = Core.ID,name = Core.Name,version = Core.version,modLanguage = "kotlin")
 
@@ -85,5 +89,10 @@ class Core {
 	fun registerItem(event: RegistryEvent.Register<Item?>?){
 		event?.registry?.register(test)
 		event?.registry?.register(heal)
+	}
+
+	@SubscribeEvent
+	fun registerModel(event: ModelRegistryEvent){
+		ModelLoader.setCustomModelResourceLocation(heal,0, ModelResourceLocation(ResourceLocation(ID,"heal"),"inventory"))
 	}
 }
