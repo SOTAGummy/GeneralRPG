@@ -1,7 +1,7 @@
 package mod.item.items
 
-import mod.item.baseitem.itemSkill
+import mod.item.baseitem.ItemSkill
 
-object Heal: itemSkill("heal"){
+object Heal: ItemSkill("heal"){
 
 }

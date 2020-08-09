@@ -31,6 +31,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 import mod.proxy.CommonProxy
 import mod.tab.GeneralRPGTab
+import mod.util.Storage
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.util.ResourceLocation
@@ -87,12 +88,15 @@ class Core {
 
 	@SubscribeEvent
 	fun registerItem(event: RegistryEvent.Register<Item?>?){
-		event?.registry?.register(test)
-		event?.registry?.register(heal)
+		for (item in Storage.Items){
+			event?.registry?.register(item)
+		}
 	}
 
 	@SubscribeEvent
 	fun registerModel(event: ModelRegistryEvent){
-		ModelLoader.setCustomModelResourceLocation(heal,0, ModelResourceLocation(ResourceLocation(ID,"heal"),"inventory"))
+		for (model in Storage.Items){
+			ModelLoader.setCustomModelResourceLocation(model,0, ModelResourceLocation(ResourceLocation(ID,model.unlocalizedName.split(".")[1]), "inventory"))
+		}
 	}
 }

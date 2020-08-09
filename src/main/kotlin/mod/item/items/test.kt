@@ -1,11 +1,12 @@
 package mod.item.items
 
 import mod.Core
+import mod.item.baseitem.GeneralRPGItem
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.item.Item
 import net.minecraft.util.ResourceLocation
 
-object Test : Item() {
+object Test : GeneralRPGItem() {
     init {
         this.unlocalizedName = "test"
         this.creativeTab = Core.creativeaTab

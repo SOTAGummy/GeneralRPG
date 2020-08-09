@@ -1,12 +1,16 @@
 package mod.item.baseitem
 
+import mod.util.Storage
 import net.minecraft.item.Item
 
 open class GeneralRPGItem: Item(){
-	@JvmField
-	var count = 0
+	companion object{
+		@JvmStatic
+		var count = 0
+	}
 
 	init {
 		count++
+		Storage.Items?.add(this)
 	}
 }
