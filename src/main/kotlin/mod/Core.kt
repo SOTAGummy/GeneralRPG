@@ -16,7 +16,9 @@ import mod.event.capabilityEvent.CapabilityCloneEvent
 import mod.event.capabilityEvent.CapabilityHandler
 import mod.event.capabilityEvent.LevelUpTest
 import mod.gui.mpindicator.RenderMPIndicator
+import mod.item.baseitem.ItemSkill
 import mod.item.items.Heal
+import mod.item.items.SkillBook
 import mod.item.items.Test
 import net.minecraft.item.Item
 import net.minecraftforge.common.MinecraftForge
@@ -53,7 +55,9 @@ class Core {
 		var creativeaTab: CreativeTabs = GeneralRPGTab()
 
 		val test: Item = Test
+		val itemskill = ItemSkill("itemskill")
 		val heal: Item = Heal
+		val skillbook = SkillBook
 	}
 
 	@Mod.EventHandler
