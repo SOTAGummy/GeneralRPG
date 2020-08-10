@@ -18,7 +18,7 @@ object SkillBook : GeneralRPGItem() {
 
 	override fun addInformation(stack: ItemStack, worldIn: World?, tooltip: MutableList<String>, flagIn: ITooltipFlag) {
 		super.addInformation(stack, worldIn, tooltip, flagIn)
-		if (stack.tagCompound != null && stack.tagCompound!!.getString("1") != null){
+		if (stack.tagCompound != null && stack.tagCompound!!.getString("1") != null) {
 			tooltip.add(ItemStack(Item.getByNameOrId("item." + stack.tagCompound!!.getString("1").toLowerCase())).displayName)
 		}
 		tooltip.add("a")

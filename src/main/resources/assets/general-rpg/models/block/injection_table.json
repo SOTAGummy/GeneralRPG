@@ -1,0 +1,11 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "up": "general-rpg:blocks/injection_table_top",
+    "down": "general-rpg:blocks/injection_table_down",
+    "north": "general-rpg:blocks/injection_table_side",
+    "east": "general-rpg:blocks/injection_table_side",
+    "south": "general-rpg:blocks/injection_table_side",
+    "west": "general-rpg:blocks/injection_table_side"
+  }
+}

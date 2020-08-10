@@ -1,5 +1,7 @@
 package mod
 
+import mod.block.InjectionTable
+import mod.block.TileEntityInjectionTable
 import mod.capability.exp.Exp
 import mod.capability.exp.ExpStorage
 import mod.capability.exp.IExp
@@ -22,10 +24,11 @@ import mod.item.items.Test
 import mod.proxy.CommonProxy
 import mod.tab.GeneralRPGTab
 import mod.util.Storage
+import net.minecraft.block.Block
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.item.Item
-import net.minecraft.item.crafting.IRecipe
+import net.minecraft.item.ItemBlock
 import net.minecraft.util.ResourceLocation
 import net.minecraftforge.client.event.ModelRegistryEvent
 import net.minecraftforge.client.model.ModelLoader
@@ -39,6 +42,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
+import net.minecraftforge.fml.common.registry.GameRegistry
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 
@@ -56,6 +60,9 @@ class Core {
 
 		var creativeaTab: CreativeTabs = GeneralRPGTab()
 
+		val injection_table = InjectionTable()
+		val te_injection_table = TileEntityInjectionTable()
+
 		val test: Item = Test
 		val heal: Item = Heal
 		val skillbook = SkillBook
@@ -70,6 +77,10 @@ class Core {
 	@Mod.EventHandler
 	fun preInit(event: FMLPreInitializationEvent?) {
 		proxy.preInit()
+		if (event?.side?.isClient!!){
+			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(injection_table), 0, ModelResourceLocation(ResourceLocation(ID, "injection_table"), "inventory"))
+			GameRegistry.registerTileEntity(TileEntityInjectionTable::class.java, ResourceLocation(Core.ID, "injection_table"))
+		}
 	}
 
 	@Mod.EventHandler
@@ -96,6 +107,12 @@ class Core {
 		for (item in Storage.Items) {
 			event?.registry?.register(item)
 		}
+		event?.registry?.register(ItemBlock(injection_table).setRegistryName(ResourceLocation(Core.ID, "injection_table")))
+	}
+
+	@SubscribeEvent
+	fun registerBlock(event: RegistryEvent.Register<Block?>?) {
+		event?.registry?.register(injection_table)
 	}
 
 	@SideOnly(Side.CLIENT)
