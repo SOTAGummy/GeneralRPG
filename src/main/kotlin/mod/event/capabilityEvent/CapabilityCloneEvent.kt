@@ -12,23 +12,23 @@ import net.minecraftforge.event.entity.player.PlayerEvent
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 
 class CapabilityCloneEvent {
-    @SubscribeEvent
-    fun onPlayerClone(event: PlayerEvent.Clone){
-        val level: ILevel? = event.entityPlayer?.getCapability(LevelProvider.LEVEL_CAP!!,null)
-        val oldLevel: ILevel? = event.original.getCapability(LevelProvider.LEVEL_CAP!!,null)
+	@SubscribeEvent
+	fun onPlayerClone(event: PlayerEvent.Clone) {
+		val level: ILevel? = event.entityPlayer?.getCapability(LevelProvider.LEVEL_CAP!!, null)
+		val oldLevel: ILevel? = event.original.getCapability(LevelProvider.LEVEL_CAP!!, null)
 
-        val mp: IMP? = event.entityPlayer?.getCapability(MPProvider.MP_CAP!!,null)
-        val oldmp: IMP? = event.original.getCapability(MPProvider.MP_CAP!!,null)
+		val mp: IMP? = event.entityPlayer?.getCapability(MPProvider.MP_CAP!!, null)
+		val oldmp: IMP? = event.original.getCapability(MPProvider.MP_CAP!!, null)
 
-        val exp: IExp? = event.entityPlayer?.getCapability(ExpProvider.EXP_CAP!!,null)
-        val oldexp: IExp? = event.original.getCapability(ExpProvider.EXP_CAP!!,null)
+		val exp: IExp? = event.entityPlayer?.getCapability(ExpProvider.EXP_CAP!!, null)
+		val oldexp: IExp? = event.original.getCapability(ExpProvider.EXP_CAP!!, null)
 
-        val maxmp: IMaxMP? = event.entityPlayer?.getCapability(MaxMPProvider.MAX_MP_CAP!!,null)
-        val oldmaxmp: IMaxMP? = event.original.getCapability(MaxMPProvider.MAX_MP_CAP!!,null)
+		val maxmp: IMaxMP? = event.entityPlayer?.getCapability(MaxMPProvider.MAX_MP_CAP!!, null)
+		val oldmaxmp: IMaxMP? = event.original.getCapability(MaxMPProvider.MAX_MP_CAP!!, null)
 
-        level?.set(oldLevel!!.get())
-        mp?.set(oldmp!!.get())
-        exp?.set(oldexp!!.get())
-        maxmp?.set(oldmaxmp!!.get())
-    }
+		level?.set(oldLevel!!.get())
+		mp?.set(oldmp!!.get())
+		exp?.set(oldexp!!.get())
+		maxmp?.set(oldmaxmp!!.get())
+	}
 }

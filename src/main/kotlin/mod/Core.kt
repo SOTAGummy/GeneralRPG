@@ -16,11 +16,18 @@ import mod.event.capabilityEvent.CapabilityCloneEvent
 import mod.event.capabilityEvent.CapabilityHandler
 import mod.event.capabilityEvent.LevelUpTest
 import mod.gui.mpindicator.RenderMPIndicator
-import mod.item.baseitem.ItemSkill
 import mod.item.items.Heal
 import mod.item.items.SkillBook
 import mod.item.items.Test
+import mod.proxy.CommonProxy
+import mod.tab.GeneralRPGTab
+import mod.util.Storage
+import net.minecraft.client.renderer.block.model.ModelResourceLocation
+import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.item.Item
+import net.minecraft.util.ResourceLocation
+import net.minecraftforge.client.event.ModelRegistryEvent
+import net.minecraftforge.client.model.ModelLoader
 import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.common.capabilities.CapabilityManager
 import net.minecraftforge.event.RegistryEvent
@@ -31,16 +38,10 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
-import mod.proxy.CommonProxy
-import mod.tab.GeneralRPGTab
-import mod.util.Storage
-import net.minecraft.client.renderer.block.model.ModelResourceLocation
-import net.minecraft.creativetab.CreativeTabs
-import net.minecraft.util.ResourceLocation
-import net.minecraftforge.client.event.ModelRegistryEvent
-import net.minecraftforge.client.model.ModelLoader
+import net.minecraftforge.fml.relauncher.Side
+import net.minecraftforge.fml.relauncher.SideOnly
 
-@Mod(modid = Core.ID,name = Core.Name,version = Core.version,modLanguage = "kotlin")
+@Mod(modid = Core.ID, name = Core.Name, version = Core.version, modLanguage = "kotlin")
 
 class Core {
 	companion object {
@@ -48,31 +49,30 @@ class Core {
 		const val Name = "GeneralRPG"
 		const val version = "1.0"
 
-		@SidedProxy(clientSide = "mod.proxy.ClientProxy",serverSide = "mod.proxy.ServerProxy")
+		@SidedProxy(clientSide = "mod.proxy.ClientProxy", serverSide = "mod.proxy.ServerProxy")
 		@JvmStatic
 		lateinit var proxy: CommonProxy
 
 		var creativeaTab: CreativeTabs = GeneralRPGTab()
 
 		val test: Item = Test
-		val itemskill = ItemSkill("itemskill")
 		val heal: Item = Heal
 		val skillbook = SkillBook
 	}
 
 	@Mod.EventHandler
-	fun construct(event: FMLConstructionEvent?){
+	fun construct(event: FMLConstructionEvent?) {
 		MinecraftForge.EVENT_BUS.register(this)
 		MinecraftForge.EVENT_BUS.register(proxy)
 	}
 
 	@Mod.EventHandler
-	fun preInit(event: FMLPreInitializationEvent?){
+	fun preInit(event: FMLPreInitializationEvent?) {
 		proxy.preInit()
 	}
 
 	@Mod.EventHandler
-	fun init(event: FMLInitializationEvent?){
+	fun init(event: FMLInitializationEvent?) {
 		CapabilityManager.INSTANCE?.register(IMaxMP::class.java, MaxMPStorage(), MaxMP::class.java)
 		CapabilityManager.INSTANCE?.register(ILevel::class.java, LevelStorage(), Level::class.java)
 		CapabilityManager.INSTANCE?.register(IExp::class.java, ExpStorage(), Exp::class.java)
@@ -85,22 +85,23 @@ class Core {
 	}
 
 	@Mod.EventHandler
-	fun postInit(event: FMLPostInitializationEvent?){
+	fun postInit(event: FMLPostInitializationEvent?) {
 		MinecraftForge.EVENT_BUS.register(RenderMPIndicator())
 		proxy.postInit()
 	}
 
 	@SubscribeEvent
-	fun registerItem(event: RegistryEvent.Register<Item?>?){
-		for (item in Storage.Items){
+	fun registerItem(event: RegistryEvent.Register<Item?>?) {
+		for (item in Storage.Items) {
 			event?.registry?.register(item)
 		}
 	}
 
+	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
-	fun registerModel(event: ModelRegistryEvent){
-		for (model in Storage.Items){
-			ModelLoader.setCustomModelResourceLocation(model,0, ModelResourceLocation(ResourceLocation(ID,model.unlocalizedName.split(".")[1]), "inventory"))
+	fun registerModel(event: ModelRegistryEvent) {
+		for (model in Storage.Items) {
+			ModelLoader.setCustomModelResourceLocation(model, 0, ModelResourceLocation(ResourceLocation(ID, model.unlocalizedName.split(".")[1]), "inventory"))
 		}
 	}
 }

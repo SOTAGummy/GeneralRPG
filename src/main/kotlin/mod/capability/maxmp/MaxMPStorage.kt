@@ -6,7 +6,7 @@ import net.minecraft.nbt.NBTTagInt
 import net.minecraft.util.EnumFacing
 import net.minecraftforge.common.capabilities.Capability
 
-class MaxMPStorage: Capability.IStorage<IMaxMP> {
+class MaxMPStorage : Capability.IStorage<IMaxMP> {
 	override fun readNBT(capability: Capability<IMaxMP>?, instance: IMaxMP?, side: EnumFacing?, nbt: NBTBase?) {
 		instance!!.set((nbt as NBTPrimitive).int)
 	}

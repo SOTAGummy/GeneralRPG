@@ -6,19 +6,19 @@ import net.minecraftforge.fml.common.Mod
 
 @Mod.EventBusSubscriber(modid = Core.ID)
 open class CommonProxy {
-    fun preInit(){
+	fun preInit() {
 
-    }
+	}
 
-    open fun init(){
+	open fun init() {
 
-    }
+	}
 
-    fun postInit(){
+	fun postInit() {
 
-    }
+	}
 
-    open fun getEntityPlayerInstance(): EntityPlayer? {
-        return null
-    }
+	open fun getEntityPlayerInstance(): EntityPlayer? {
+		return null
+	}
 }

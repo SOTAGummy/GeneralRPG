@@ -6,8 +6,8 @@ import net.minecraftforge.common.capabilities.Capability
 import net.minecraftforge.common.capabilities.CapabilityInject
 import net.minecraftforge.common.capabilities.ICapabilitySerializable
 
-class MaxMPProvider: ICapabilitySerializable<NBTBase> {
-	companion object{
+class MaxMPProvider : ICapabilitySerializable<NBTBase> {
+	companion object {
 		@CapabilityInject(IMaxMP::class)
 		val MAX_MP_CAP: Capability<IMaxMP?>? = null
 	}
@@ -15,7 +15,7 @@ class MaxMPProvider: ICapabilitySerializable<NBTBase> {
 	private val instance: IMaxMP? = MAX_MP_CAP?.defaultInstance
 
 	override fun <T : Any?> getCapability(capability: Capability<T>, facing: EnumFacing?): T? {
-		return if(capability === MAX_MP_CAP) MAX_MP_CAP.cast<T>(instance) else null
+		return if (capability === MAX_MP_CAP) MAX_MP_CAP.cast<T>(instance) else null
 	}
 
 	override fun hasCapability(capability: Capability<*>, facing: EnumFacing?): Boolean {
@@ -23,10 +23,10 @@ class MaxMPProvider: ICapabilitySerializable<NBTBase> {
 	}
 
 	override fun serializeNBT(): NBTBase? {
-		return MAX_MP_CAP!!.storage.writeNBT(MAX_MP_CAP,instance,null)
+		return MAX_MP_CAP!!.storage.writeNBT(MAX_MP_CAP, instance, null)
 	}
 
 	override fun deserializeNBT(nbt: NBTBase?) {
-		MAX_MP_CAP!!.storage.readNBT(MAX_MP_CAP,instance,null,nbt)
+		MAX_MP_CAP!!.storage.readNBT(MAX_MP_CAP, instance, null, nbt)
 	}
 }

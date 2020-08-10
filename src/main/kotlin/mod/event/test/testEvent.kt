@@ -1,5 +1,5 @@
 package mod.event.test
 
-class test{
+class test {
 
 }

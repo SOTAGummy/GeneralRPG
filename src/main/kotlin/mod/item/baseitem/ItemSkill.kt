@@ -8,6 +8,6 @@ open class ItemSkill(name: String) : GeneralRPGItem() {
 		this.unlocalizedName = name
 		this.creativeTab = Core.creativeaTab
 		this.maxStackSize = 1
-		this.registryName = ResourceLocation(Core.ID,name)
+		this.registryName = ResourceLocation(Core.ID, name)
 	}
 }

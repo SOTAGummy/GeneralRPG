@@ -9,10 +9,10 @@ import net.minecraftforge.fml.relauncher.SideOnly
 
 @SideOnly(Side.CLIENT)
 class RenderMPIndicator {
-    @SubscribeEvent(priority = EventPriority.NORMAL)
-    fun onRenderGui(event: RenderGameOverlayEvent.Post){
-        if(event.type == RenderGameOverlayEvent.ElementType.EXPERIENCE && !Minecraft.getMinecraft().player.isCreative){
-            MPIndicator(Minecraft.getMinecraft())
-        }
-    }
+	@SubscribeEvent(priority = EventPriority.NORMAL)
+	fun onRenderGui(event: RenderGameOverlayEvent.Post) {
+		if (event.type == RenderGameOverlayEvent.ElementType.EXPERIENCE && !Minecraft.getMinecraft().player.isCreative) {
+			MPIndicator(Minecraft.getMinecraft())
+		}
+	}
 }
