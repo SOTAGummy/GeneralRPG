@@ -2,7 +2,7 @@
   "forge_marker": 1,
   "defaults": {
     "textures": {
-      "particle": ":blocks/block_tomato"
+      "particle": "general-rpg:blocks/injection_table_side"
     },
     "model": "general-rpg:injection_table",
     "uvlock": false
@@ -11,6 +11,10 @@
     "normal": [{
     }],
     "inventory": [{
-    }]
+    }],
+    "facing=north": { "model": "general-rpg:injection_table" },
+    "facing=south": { "model": "general-rpg:injection_table", "y": 180 },
+    "facing=west":  { "model": "general-rpg:injection_table", "y": 270 },
+    "facing=east":  { "model": "general-rpg:injection_table", "y": 90 }
   }
 }

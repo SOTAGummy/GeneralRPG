@@ -58,6 +58,9 @@ class Core {
 		@JvmStatic
 		lateinit var proxy: CommonProxy
 
+		@Mod.Instance(Core.ID)
+		var instance: Core? = null
+
 		var creativeaTab: CreativeTabs = GeneralRPGTab()
 
 		val injection_table = InjectionTable()
@@ -77,7 +80,7 @@ class Core {
 	@Mod.EventHandler
 	fun preInit(event: FMLPreInitializationEvent?) {
 		proxy.preInit()
-		if (event?.side?.isClient!!){
+		if (event?.side?.isClient!!) {
 			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(injection_table), 0, ModelResourceLocation(ResourceLocation(ID, "injection_table"), "inventory"))
 			GameRegistry.registerTileEntity(TileEntityInjectionTable::class.java, ResourceLocation(Core.ID, "injection_table"))
 		}
@@ -121,5 +124,6 @@ class Core {
 		for (model in Storage.Items) {
 			ModelLoader.setCustomModelResourceLocation(model, 0, ModelResourceLocation(ResourceLocation(ID, model.unlocalizedName.split(".")[1]), "inventory"))
 		}
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(injection_table), 0, ModelResourceLocation(ResourceLocation(ID, "injection_table"), "inventory"))
 	}
 }
