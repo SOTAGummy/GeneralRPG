@@ -26,6 +26,7 @@ class TileEntityInjectionTable : TileEntity() {
 		return capability === CapabilityItemHandler.ITEM_HANDLER_CAPABILITY || super.hasCapability(capability, facing)
 	}
 
+	@SuppressWarnings("unchecked")
 	override fun <T : Any?> getCapability(capability: Capability<T>, facing: EnumFacing?): T? {
 		return if (capability === CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) inventory as T else super.getCapability(capability, facing)
 	}
