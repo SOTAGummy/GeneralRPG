@@ -1,6 +1,7 @@
 package mod
 
 import mod.block.InjectionTable
+import mod.block.InjectionTableGuiHandler
 import mod.block.TileEntityInjectionTable
 import mod.capability.exp.Exp
 import mod.capability.exp.ExpStorage
@@ -42,9 +43,11 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
+import net.minecraftforge.fml.common.network.NetworkRegistry
 import net.minecraftforge.fml.common.registry.GameRegistry
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
+
 
 @Mod(modid = Core.ID, name = Core.Name, version = Core.version, modLanguage = "kotlin")
 
@@ -83,6 +86,7 @@ class Core {
 		if (event?.side?.isClient!!) {
 			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(injection_table), 0, ModelResourceLocation(ResourceLocation(ID, "injection_table"), "inventory"))
 			GameRegistry.registerTileEntity(TileEntityInjectionTable::class.java, ResourceLocation(Core.ID, "injection_table"))
+			NetworkRegistry.INSTANCE.registerGuiHandler(this, InjectionTableGuiHandler())
 		}
 	}
 

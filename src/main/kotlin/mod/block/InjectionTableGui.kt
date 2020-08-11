@@ -6,7 +6,7 @@ import net.minecraft.client.renderer.GlStateManager
 import net.minecraft.inventory.IInventory
 import net.minecraft.util.ResourceLocation
 
-class InjectionTableGui(playerInv: IInventory, te: TileEntityInjectionTable) : GuiContainer(InjectionTableContainer(playerInv, te)) {
+class InjectionTableGui(playerInv: IInventory, te: TileEntityInjectionTable): GuiContainer(InjectionTableContainer(playerInv, te)) {
 	init {
 		this.xSize = 175
 		this.ySize = 165

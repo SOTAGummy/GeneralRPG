@@ -13,13 +13,13 @@ open class InjectionTableGuiHandler : IGuiHandler {
 
 	override fun getClientGuiElement(ID: Int, player: EntityPlayer?, world: World?, x: Int, y: Int, z: Int): Any? {
 		return if (ID == INJECTION_TABLE_CONTAINER) {
-			InjectionTableContainer(player?.inventory!!, world!!.getTileEntity(BlockPos(x, y, z)) as TileEntityInjectionTable)
+			InjectionTableGui(player?.inventory!!, world!!.getTileEntity(BlockPos(x, y, z)) as TileEntityInjectionTable)
 		} else null
 	}
 
 	override fun getServerGuiElement(ID: Int, player: EntityPlayer?, world: World?, x: Int, y: Int, z: Int): Any? {
 		return if (ID == INJECTION_TABLE_CONTAINER) {
-			InjectionTableGui(player?.inventory!!, world!!.getTileEntity(BlockPos(x, y, z)) as TileEntityInjectionTable)
+			InjectionTableContainer(player?.inventory!!, world!!.getTileEntity(BlockPos(x, y, z)) as TileEntityInjectionTable)
 		} else null
 	}
 }

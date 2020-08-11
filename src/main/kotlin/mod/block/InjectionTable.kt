@@ -48,7 +48,7 @@ class InjectionTable : BlockContainer(Material.IRON) {
 		if (!worldIn.isRemote){
 			var te = worldIn.getTileEntity(pos) as TileEntityInjectionTable
 			if (!playerIn.isSneaking){
-				playerIn.openGui(Core.instance as Any, InjectionTableGuiHandler.INJECTION_TABLE_CONTAINER, worldIn, pos.x, pos.y, pos.z)
+				playerIn.openGui(Core.instance, InjectionTableGuiHandler.INJECTION_TABLE_CONTAINER, worldIn, pos.x, pos.y, pos.z)
 			}
 			println("aaaaaaa")
 		}
