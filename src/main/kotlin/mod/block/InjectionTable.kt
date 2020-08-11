@@ -52,7 +52,6 @@ class InjectionTable : BlockContainer(Material.IRON) {
 			}
 			println("aaaaaaa")
 		}
-
 		return true
 	}
 }

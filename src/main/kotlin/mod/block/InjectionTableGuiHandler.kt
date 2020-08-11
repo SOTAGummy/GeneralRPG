@@ -6,7 +6,7 @@ import net.minecraft.world.World
 import net.minecraftforge.fml.common.network.IGuiHandler
 
 
-open class InjectionTableGuiHandler : IGuiHandler {
+class InjectionTableGuiHandler : IGuiHandler {
 	companion object {
 		const val INJECTION_TABLE_CONTAINER = 1
 	}
