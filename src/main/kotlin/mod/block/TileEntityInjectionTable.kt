@@ -2,32 +2,28 @@ package mod.block
 
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.tileentity.TileEntity
-import net.minecraft.util.EnumFacing
-import net.minecraftforge.common.capabilities.Capability
-import net.minecraftforge.items.CapabilityItemHandler
-import net.minecraftforge.items.ItemStackHandler
 
-class TileEntityInjectionTable : TileEntity() {
-	companion object {
-		private var inventory = ItemStackHandler(2)
-	}
 
-	override fun writeToNBT(compound: NBTTagCompound): NBTTagCompound {
-		compound.setTag("inventory", inventory.serializeNBT())
-		return super.writeToNBT(compound)
+class TileEntityInjectionTable: TileEntity(){
+	companion object{
+		private var skill = ""
 	}
 
 	override fun readFromNBT(compound: NBTTagCompound) {
-		inventory.deserializeNBT(compound.getCompoundTag("inventory"))
+		skill = compound.getString("skill")
 		super.readFromNBT(compound)
 	}
 
-	override fun hasCapability(capability: Capability<*>, facing: EnumFacing?): Boolean {
-		return capability === CapabilityItemHandler.ITEM_HANDLER_CAPABILITY || super.hasCapability(capability, facing)
+	override fun writeToNBT(compound: NBTTagCompound): NBTTagCompound? {
+		compound.setString("skill", skill)
+		return super.writeToNBT(compound)
 	}
 
-	@SuppressWarnings("unchecked")
-	override fun <T : Any?> getCapability(capability: Capability<T>, facing: EnumFacing?): T? {
-		return if (capability === CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) inventory as T else super.getCapability(capability, facing)
+	fun getSkill(): String {
+		return skill
+	}
+
+	fun setSkill(Skill: String){
+		skill = Skill
 	}
 }

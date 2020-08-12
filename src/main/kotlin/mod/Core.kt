@@ -1,8 +1,6 @@
 package mod
 
 import mod.block.InjectionTable
-import mod.block.InjectionTableGuiHandler
-import mod.block.TileEntityInjectionTable
 import mod.capability.exp.Exp
 import mod.capability.exp.ExpStorage
 import mod.capability.exp.IExp
@@ -15,6 +13,7 @@ import mod.capability.maxmp.MaxMPStorage
 import mod.capability.mp.IMP
 import mod.capability.mp.MP
 import mod.capability.mp.MPStorage
+import mod.event.bindSkillEvent.BindSkillEvent
 import mod.event.capabilityEvent.CapabilityCloneEvent
 import mod.event.capabilityEvent.CapabilityHandler
 import mod.event.capabilityEvent.LevelUpTest
@@ -43,8 +42,6 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
-import net.minecraftforge.fml.common.network.NetworkRegistry
-import net.minecraftforge.fml.common.registry.GameRegistry
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 
@@ -61,13 +58,12 @@ class Core {
 		@JvmStatic
 		lateinit var proxy: CommonProxy
 
-		@Mod.Instance(Core.ID)
+		@Mod.Instance(ID)
 		var instance: Core? = null
 
 		var creativeaTab: CreativeTabs = GeneralRPGTab()
 
 		val injection_table = InjectionTable()
-		val te_injection_table = TileEntityInjectionTable()
 
 		val test: Item = Test
 		val heal: Item = Heal
@@ -85,8 +81,6 @@ class Core {
 		proxy.preInit()
 		if (event?.side?.isClient!!) {
 			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(injection_table), 0, ModelResourceLocation(ResourceLocation(ID, "injection_table"), "inventory"))
-			GameRegistry.registerTileEntity(TileEntityInjectionTable::class.java, ResourceLocation(Core.ID, "injection_table"))
-			NetworkRegistry.INSTANCE.registerGuiHandler(this, InjectionTableGuiHandler())
 		}
 	}
 
@@ -101,6 +95,7 @@ class Core {
 		MinecraftForge.EVENT_BUS.register(CapabilityHandler())
 		MinecraftForge.EVENT_BUS.register(CapabilityCloneEvent())
 		MinecraftForge.EVENT_BUS.register(LevelUpTest())
+		MinecraftForge.EVENT_BUS.register(BindSkillEvent())
 	}
 
 	@Mod.EventHandler
@@ -114,7 +109,7 @@ class Core {
 		for (item in Storage.Items) {
 			event?.registry?.register(item)
 		}
-		event?.registry?.register(ItemBlock(injection_table).setRegistryName(ResourceLocation(Core.ID, "injection_table")))
+		event?.registry?.register(ItemBlock(injection_table).setRegistryName(ResourceLocation(ID, "injection_table")))
 	}
 
 	@SubscribeEvent
