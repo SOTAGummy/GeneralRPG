@@ -23,14 +23,12 @@ class BindSkillEvent {
 				var nbt = NBTTagCompound()
 				nbt.setString("1", te.getSkill())
 				item.tagCompound = nbt
-			} else if (item.tagCompound!!.getString("1") != null){
+			} else if (item.tagCompound!!.getString("2") == null){
 				item.tagCompound!!.setString("2", te.getSkill())
-			} else if (item.tagCompound!!.getString("2") != null){
+			} else if (item.tagCompound!!.getString("3") == null){
 				item.tagCompound!!.setString("3", te.getSkill())
-			} else if (item.tagCompound!!.getString("3") != null){
+			} else if (item.tagCompound!!.getString("4") == null){
 				item.tagCompound!!.setString("4", te.getSkill())
-			} else if (item.tagCompound!!.getString("4") != null){
-				return
 			}
 		}
 	}
