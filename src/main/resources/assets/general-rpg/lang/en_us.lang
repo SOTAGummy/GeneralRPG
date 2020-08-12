@@ -1,0 +1,4 @@
+#GeneralRPG English Language File
+item.heal.name = Heal
+item.skillbook.name = SkillBook
+itemGroup.general-rpg = GeneralRPG
