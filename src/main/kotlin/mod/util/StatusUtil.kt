@@ -6,8 +6,8 @@ import net.minecraft.entity.player.EntityPlayer
 
 class StatusUtil {
 	fun addMP(player: EntityPlayer, add: Int) {
-		var mp = player.getCapability(MPProvider.MP_CAP!!, null)?.get() as Int
-		var maxmp = player.getCapability(MaxMPProvider.MAX_MP_CAP!!, null)?.get() as Int
+		val mp = player.getCapability(MPProvider.MP_CAP!!, null)?.get() as Int
+		val maxmp = player.getCapability(MaxMPProvider.MAX_MP_CAP!!, null)?.get() as Int
 		if (mp + add >= maxmp) {
 			player.getCapability(MPProvider.MP_CAP, null)?.set(maxmp)
 		} else {
@@ -16,8 +16,8 @@ class StatusUtil {
 	}
 
 	fun useMP(player: EntityPlayer, use: Int) {
-		var mp = player.getCapability(MPProvider.MP_CAP!!, null)?.get() as Int
-		if (mp >= use){
+		val mp = player.getCapability(MPProvider.MP_CAP!!, null)?.get() as Int
+		if (mp >= use) {
 			player.getCapability(MPProvider.MP_CAP, null)?.set(mp - use)
 		}
 	}

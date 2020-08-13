@@ -2,7 +2,6 @@ package mod.item.items
 
 import mod.Core
 import mod.item.baseitem.GeneralRPGItem
-import mod.item.items.SkillBook.addPropertyOverride
 import mod.item.skill.SkillFunctions
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.entity.player.EntityPlayer
@@ -28,16 +27,16 @@ object SkillBook : GeneralRPGItem() {
 	override fun addInformation(stack: ItemStack, worldIn: World?, tooltip: MutableList<String>, flagIn: ITooltipFlag) {
 		super.addInformation(stack, worldIn, tooltip, flagIn)
 		if (stack.tagCompound != null && stack.tagCompound!!.getString("1") != null) {
-			tooltip.add(ItemStack(Item.getItemById(stack.tagCompound!!.getInteger("1"))).displayName)
+			tooltip.add(ItemStack(getItemById(stack.tagCompound!!.getInteger("1"))).displayName)
 		}
 	}
 
 	override fun onItemRightClick(world: World, player: EntityPlayer, handIn: EnumHand): ActionResult<ItemStack> {
-		var itemstack = player.getHeldItem(handIn)
+		val itemstack = player.getHeldItem(handIn)
 		player.activeHand = handIn
-		if (itemstack.tagCompound != null){
-			if (itemstack.tagCompound!!.getInteger("1") != null){
-				var name = Item.getItemById(itemstack.tagCompound!!.getInteger("1")).unlocalizedName.split(".")[1]
+		if (itemstack.tagCompound != null) {
+			if (itemstack.tagCompound!!.getInteger("1") != null) {
+				val name = getItemById(itemstack.tagCompound!!.getInteger("1")).unlocalizedName.split(".")[1]
 				SkillFunctions.valueOf(name.toUpperCase()).SkillFunction(world, player, handIn)
 			}
 		}

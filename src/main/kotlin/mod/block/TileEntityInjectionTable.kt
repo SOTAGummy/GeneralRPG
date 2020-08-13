@@ -4,8 +4,8 @@ import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.tileentity.TileEntity
 
 
-class TileEntityInjectionTable: TileEntity(){
-	companion object{
+class TileEntityInjectionTable : TileEntity() {
+	companion object {
 		private var skill: Int = 0
 	}
 
@@ -23,7 +23,7 @@ class TileEntityInjectionTable: TileEntity(){
 		return skill
 	}
 
-	fun setSkill(Skill: Int){
+	fun setSkill(Skill: Int) {
 		skill = Skill
 	}
 }
