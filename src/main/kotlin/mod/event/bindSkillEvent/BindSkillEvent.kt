@@ -13,12 +13,12 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 class BindSkillEvent {
 	@SubscribeEvent
 	fun onBindSkillEvent(event: PlayerInteractEvent.RightClickBlock){
-		if (event.entityPlayer.getHeldItem(EnumHand.MAIN_HAND).item is ItemSkill && event.world.getBlockState(event.pos).block.unlocalizedName == "tile.injection_table" && (event.world.getTileEntity(event.pos) as TileEntityInjectionTable).getSkill() == -1){
+		if (event.entityPlayer.getHeldItem(EnumHand.MAIN_HAND).item is ItemSkill && event.world.getBlockState(event.pos).block.unlocalizedName == "tile.injection_table" && (event.world.getTileEntity(event.pos) as TileEntityInjectionTable).getSkill() == 0){
 			val te  = event.world.getTileEntity(event.pos) as TileEntityInjectionTable
 			val item = event.entityPlayer.getHeldItem(EnumHand.MAIN_HAND).item
 			te.setSkill(Item.getIdFromItem(item))
 			event.entityPlayer.setHeldItem(EnumHand.MAIN_HAND, ItemStack.EMPTY)
-		} else if (event.entityPlayer.getHeldItem(EnumHand.MAIN_HAND).item is SkillBook && event.world.getBlockState(event.pos).block.unlocalizedName == "tile.injection_table" && (event.world.getTileEntity(event.pos) as TileEntityInjectionTable).getSkill() != -1){
+		} else if (event.entityPlayer.getHeldItem(EnumHand.MAIN_HAND).item is SkillBook && event.world.getBlockState(event.pos).block.unlocalizedName == "tile.injection_table" && (event.world.getTileEntity(event.pos) as TileEntityInjectionTable).getSkill() != 0){
 			val te  = event.world.getTileEntity(event.pos) as TileEntityInjectionTable
 			val item = event.entityPlayer.getHeldItem(EnumHand.MAIN_HAND)
 			if (item.tagCompound == null){
@@ -32,7 +32,7 @@ class BindSkillEvent {
 			} else if (item.tagCompound!!.getString("4") == null){
 				item.tagCompound!!.setInteger("4", te.getSkill())
 			}
-			te.setSkill(-1)
+			te.setSkill(0)
 		}
 	}
 }

@@ -14,8 +14,6 @@ class LevelUpTest {
 		if (event.source.getDamageType() == "player") {
 			val player = Minecraft.getMinecraft().player
 			player.getCapability(LevelProvider.LEVEL_CAP!!, null)?.add()
-			println(Core.heal.unlocalizedName)
-			println(ItemStack(Item.getByNameOrId(Core.heal.unlocalizedName)).displayName)
 		}
 	}
 }

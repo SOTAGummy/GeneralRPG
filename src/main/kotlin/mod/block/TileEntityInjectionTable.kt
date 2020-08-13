@@ -6,7 +6,7 @@ import net.minecraft.tileentity.TileEntity
 
 class TileEntityInjectionTable: TileEntity(){
 	companion object{
-		private var skill: Int = -1
+		private var skill: Int = 0
 	}
 
 	override fun readFromNBT(compound: NBTTagCompound) {

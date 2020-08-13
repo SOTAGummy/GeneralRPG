@@ -48,5 +48,6 @@ class InjectionTable : BlockContainer(Material.IRON) {
 			world?.spawnEntity(item)
 		}
 		super.breakBlock(world, pos, state)
+		world.removeTileEntity(pos)
 	}
 }

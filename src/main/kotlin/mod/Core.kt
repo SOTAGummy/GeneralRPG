@@ -19,6 +19,7 @@ import mod.event.capabilityEvent.CapabilityCloneEvent
 import mod.event.capabilityEvent.CapabilityHandler
 import mod.event.capabilityEvent.LevelUpTest
 import mod.gui.mpindicator.RenderMPIndicator
+import mod.item.items.Fulfill
 import mod.item.items.Heal
 import mod.item.items.SkillBook
 import mod.item.items.Test
@@ -30,6 +31,7 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.item.Item
 import net.minecraft.item.ItemBlock
+import net.minecraft.item.ItemSword
 import net.minecraft.util.ResourceLocation
 import net.minecraftforge.client.event.ModelRegistryEvent
 import net.minecraftforge.client.model.ModelLoader
@@ -67,8 +69,9 @@ class Core {
 
 		val injection_table = InjectionTable()
 
-		val test: Item = Test
-		val heal: Item = Heal
+		val test = Test
+		val heal = Heal
+		val fulfill = Fulfill
 		val skillbook = SkillBook
 	}
 

@@ -1,4 +1,6 @@
 #GeneralRPG English Language File
-item.heal.name = Heal
-item.skillbook.name = SkillBook
-itemGroup.general-rpg = GeneralRPG
+item.heal.name=Heal
+item.fulfill.name=FulFill
+item.skillbook.name=SkillBook
+tile.injection_table.name=InjectionTable
+itemGroup.general-rpg=GeneralRPG

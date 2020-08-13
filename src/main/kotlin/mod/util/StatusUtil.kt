@@ -4,7 +4,7 @@ import mod.capability.maxmp.MaxMPProvider
 import mod.capability.mp.MPProvider
 import net.minecraft.entity.player.EntityPlayer
 
-class CapabilityManager {
+class StatusUtil {
 	fun addMP(player: EntityPlayer, add: Int) {
 		var mp = player.getCapability(MPProvider.MP_CAP!!, null)?.get() as Int
 		var maxmp = player.getCapability(MaxMPProvider.MAX_MP_CAP!!, null)?.get() as Int
@@ -12,6 +12,13 @@ class CapabilityManager {
 			player.getCapability(MPProvider.MP_CAP, null)?.set(maxmp)
 		} else {
 			player.getCapability(MPProvider.MP_CAP, null)?.set(mp + add)
+		}
+	}
+
+	fun useMP(player: EntityPlayer, use: Int) {
+		var mp = player.getCapability(MPProvider.MP_CAP!!, null)?.get() as Int
+		if (mp >= use){
+			player.getCapability(MPProvider.MP_CAP, null)?.set(mp - use)
 		}
 	}
 }
