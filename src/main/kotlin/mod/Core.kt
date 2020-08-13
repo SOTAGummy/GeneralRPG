@@ -1,6 +1,7 @@
 package mod
 
 import mod.block.InjectionTable
+import mod.block.TileEntityInjectionTable
 import mod.capability.exp.Exp
 import mod.capability.exp.ExpStorage
 import mod.capability.exp.IExp
@@ -42,6 +43,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
+import net.minecraftforge.fml.common.registry.GameRegistry
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 
@@ -81,6 +83,7 @@ class Core {
 		proxy.preInit()
 		if (event?.side?.isClient!!) {
 			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(injection_table), 0, ModelResourceLocation(ResourceLocation(ID, "injection_table"), "inventory"))
+			GameRegistry.registerTileEntity(TileEntityInjectionTable::class.java, ResourceLocation(ID, "injection_table"))
 		}
 	}
 

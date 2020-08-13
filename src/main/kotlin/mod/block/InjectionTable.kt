@@ -4,7 +4,10 @@ import mod.Core
 import net.minecraft.block.BlockContainer
 import net.minecraft.block.material.Material
 import net.minecraft.block.state.IBlockState
+import net.minecraft.entity.item.EntityItem
 import net.minecraft.entity.player.EntityPlayer
+import net.minecraft.item.Item
+import net.minecraft.item.ItemStack
 import net.minecraft.tileentity.TileEntity
 import net.minecraft.util.EnumBlockRenderType
 import net.minecraft.util.EnumFacing
@@ -39,6 +42,11 @@ class InjectionTable : BlockContainer(Material.IRON) {
 	}
 
 	override fun breakBlock(world: World?, pos: BlockPos?, state: IBlockState?) {
+		var te = world?.getTileEntity(pos) as TileEntityInjectionTable
+		if (te.getSkill() !=  -1){
+			var item = EntityItem(world, pos?.x!!.toDouble(), pos?.y!!.toDouble(), pos?.z!!.toDouble(), ItemStack(Item.getItemById(te.getSkill())))
+			world?.spawnEntity(item)
+		}
 		super.breakBlock(world, pos, state)
 	}
 }

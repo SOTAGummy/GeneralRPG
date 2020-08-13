@@ -6,24 +6,24 @@ import net.minecraft.tileentity.TileEntity
 
 class TileEntityInjectionTable: TileEntity(){
 	companion object{
-		private var skill = ""
+		private var skill: Int = -1
 	}
 
 	override fun readFromNBT(compound: NBTTagCompound) {
-		skill = compound.getString("skill")
+		skill = compound.getInteger("ID")
 		super.readFromNBT(compound)
 	}
 
 	override fun writeToNBT(compound: NBTTagCompound): NBTTagCompound? {
-		compound.setString("skill", skill)
+		compound.setInteger("skill", skill)
 		return super.writeToNBT(compound)
 	}
 
-	fun getSkill(): String {
+	fun getSkill(): Int {
 		return skill
 	}
 
-	fun setSkill(Skill: String){
+	fun setSkill(Skill: Int){
 		skill = Skill
 	}
 }
