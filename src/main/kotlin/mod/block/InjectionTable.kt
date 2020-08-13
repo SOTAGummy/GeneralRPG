@@ -43,11 +43,11 @@ class InjectionTable : BlockContainer(Material.IRON) {
 
 	override fun breakBlock(world: World?, pos: BlockPos?, state: IBlockState?) {
 		val te = world?.getTileEntity(pos as BlockPos) as TileEntityInjectionTable
-		if (te.getSkill() != -1) {
+		if (te.getSkill() != 0) {
 			val item = EntityItem(world, pos?.x!!.toDouble(), pos?.y.toDouble(), pos?.z.toDouble(), ItemStack(Item.getItemById(te.getSkill())))
 			world.spawnEntity(item)
 		}
-		super.breakBlock(world, pos as BlockPos, state as IBlockState)
 		world.removeTileEntity(pos)
+		super.breakBlock(world, pos as BlockPos, state as IBlockState)
 	}
 }

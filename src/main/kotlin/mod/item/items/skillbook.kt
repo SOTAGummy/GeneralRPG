@@ -6,7 +6,6 @@ import mod.item.skill.SkillFunctions
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.EnumAction
-import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.util.ActionResult
 import net.minecraft.util.EnumActionResult
@@ -26,8 +25,11 @@ object SkillBook : GeneralRPGItem() {
 
 	override fun addInformation(stack: ItemStack, worldIn: World?, tooltip: MutableList<String>, flagIn: ITooltipFlag) {
 		super.addInformation(stack, worldIn, tooltip, flagIn)
-		if (stack.tagCompound != null && stack.tagCompound!!.getString("1") != null) {
+		if (stack.tagCompound != null && stack.tagCompound!!.getInteger("1") != null) {
 			tooltip.add(ItemStack(getItemById(stack.tagCompound!!.getInteger("1"))).displayName)
+		}
+		if (stack.tagCompound != null && stack.tagCompound!!.getInteger("2") != null) {
+			tooltip.add(ItemStack(getItemById(stack.tagCompound!!.getInteger("2"))).displayName)
 		}
 	}
 
@@ -35,9 +37,12 @@ object SkillBook : GeneralRPGItem() {
 		val itemstack = player.getHeldItem(handIn)
 		player.activeHand = handIn
 		if (itemstack.tagCompound != null) {
-			if (itemstack.tagCompound!!.getInteger("1") != null) {
-				val name = getItemById(itemstack.tagCompound!!.getInteger("1")).unlocalizedName.split(".")[1]
-				SkillFunctions.valueOf(name.toUpperCase()).SkillFunction(world, player, handIn)
+			repeat(4){
+				if (itemstack.tagCompound!!.getInteger(it.toString()) != null) {
+					val name = getItemById(itemstack.tagCompound!!.getInteger(it.toString())).unlocalizedName.split(".")[1]
+					SkillFunctions.valueOf(name.toUpperCase()).SkillFunction(world, player, handIn)
+					Thread.sleep(1000)
+				}
 			}
 		}
 		return ActionResult(EnumActionResult.SUCCESS, itemstack)
