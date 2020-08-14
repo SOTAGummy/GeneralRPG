@@ -5,9 +5,6 @@ import mod.block.TileEntityInjectionTable
 import mod.capability.exp.Exp
 import mod.capability.exp.ExpStorage
 import mod.capability.exp.IExp
-import mod.capability.level.ILevel
-import mod.capability.level.Level
-import mod.capability.level.LevelStorage
 import mod.capability.maxmp.IMaxMP
 import mod.capability.maxmp.MaxMP
 import mod.capability.maxmp.MaxMPStorage
@@ -19,11 +16,14 @@ import mod.event.capabilityEvent.CapabilityCloneEvent
 import mod.event.capabilityEvent.CapabilityHandler
 import mod.event.capabilityEvent.LevelUpTest
 import mod.gui.mpindicator.RenderMPIndicator
-import mod.item.items.Fulfill
-import mod.item.items.Heal
-import mod.item.items.SkillBook
+ import mod.item.items.SkillBook
 import mod.item.items.Test
+import mod.item.skill.skills.Fulfill
+import mod.item.skill.skills.Heal
+import mod.item.skill.skills.Rage
+import mod.item.skill.skills.ToggleMode
 import mod.proxy.CommonProxy
+import mod.tab.GeneralRPGSkillTab
 import mod.tab.GeneralRPGTab
 import mod.util.Storage
 import net.minecraft.block.Block
@@ -51,7 +51,7 @@ import net.minecraftforge.fml.relauncher.SideOnly
 
 @Mod(modid = Core.ID, name = Core.Name, version = Core.version, modLanguage = "kotlin")
 
-class Core {
+class Core{
 	companion object {
 		const val ID = "general-rpg"
 		const val Name = "GeneralRPG"
@@ -65,13 +65,16 @@ class Core {
 		var instance: Core? = null
 
 		var creativeaTab: CreativeTabs = GeneralRPGTab()
+		var skillTab: CreativeTabs = GeneralRPGSkillTab()
 
-		val injection_table = InjectionTable()
-
-		val test = Test
 		val heal = Heal
 		val fulfill = Fulfill
+		val rage = Rage
+		val togglemode = ToggleMode
+		val test = Test
 		val skillbook = SkillBook
+
+		val injection_table = InjectionTable()
 	}
 
 	@Mod.EventHandler
@@ -92,7 +95,6 @@ class Core {
 	@Mod.EventHandler
 	fun init(event: FMLInitializationEvent?) {
 		CapabilityManager.INSTANCE?.register(IMaxMP::class.java, MaxMPStorage(), MaxMP::class.java)
-		CapabilityManager.INSTANCE?.register(ILevel::class.java, LevelStorage(), Level::class.java)
 		CapabilityManager.INSTANCE?.register(IExp::class.java, ExpStorage(), Exp::class.java)
 		CapabilityManager.INSTANCE?.register(IMP::class.java, MPStorage(), MP::class.java)
 

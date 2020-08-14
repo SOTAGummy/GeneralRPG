@@ -1,4 +1,4 @@
-package mod.item.items
+package mod.item.skill.skills
 
 import mod.item.baseitem.ItemSkill
 

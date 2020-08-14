@@ -1,16 +1,12 @@
 package mod.item.baseitem
 
+import mod.Core
 import mod.util.Storage
 import net.minecraft.item.Item
 
 open class GeneralRPGItem : Item() {
-	companion object {
-		@JvmStatic
-		var count = 0
-	}
-
 	init {
-		count++
+		this.creativeTab = Core.creativeaTab
 		Storage.Items?.add(this)
 	}
 }

@@ -1,6 +1,5 @@
 package mod.event.capabilityEvent
 
-import mod.capability.level.LevelProvider
 import net.minecraft.client.Minecraft
 import net.minecraftforge.event.entity.living.LivingDeathEvent
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
@@ -10,7 +9,7 @@ class LevelUpTest {
 	fun onDeathEvent(event: LivingDeathEvent) {
 		if (event.source.getDamageType() == "player") {
 			val player = Minecraft.getMinecraft().player
-			player.getCapability(LevelProvider.LEVEL_CAP!!, null)?.add()
+			val entity = event.entityLiving
 		}
 	}
 }

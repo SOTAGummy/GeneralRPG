@@ -4,8 +4,8 @@ import mod.Core
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.item.ItemStack
 
-class GeneralRPGTab : CreativeTabs(Core.ID) {
+class GeneralRPGSkillTab: CreativeTabs(Core.ID + ".skill"){
 	override fun getTabIconItem(): ItemStack {
-		return ItemStack(Core.skillbook)
+		return ItemStack(Core.heal)
 	}
 }

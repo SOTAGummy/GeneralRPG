@@ -1,57 +1,68 @@
 package mod.item.items
 
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import mod.Core
 import mod.item.baseitem.GeneralRPGItem
-import mod.item.skill.SkillFunctionTask
 import mod.item.skill.SkillFunctions
+import mod.util.SkillRarity
+import net.minecraft.client.resources.I18n
 import net.minecraft.client.util.ITooltipFlag
-import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.EnumAction
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.util.*
+import net.minecraft.util.text.TextFormatting
 import net.minecraft.world.World
-import java.util.Timer
 
 
 object SkillBook : GeneralRPGItem() {
-	val time: Timer = Timer()
-
 	init {
 		this.unlocalizedName = "skillbook"
 		this.creativeTab = Core.creativeaTab
 		this.maxStackSize = 1
 		this.registryName = ResourceLocation(Core.ID, "skillbook")
-		this.addPropertyOverride(ResourceLocation("blocking")) { stack, worldIn, entityIn -> if (entityIn != null && entityIn.isHandActive && entityIn.activeItemStack == stack) 1.0f else 0.0f }
 	}
 
 	override fun addInformation(stack: ItemStack, worldIn: World?, tooltip: MutableList<String>, flagIn: ITooltipFlag) {
 		super.addInformation(stack, worldIn, tooltip, flagIn)
+		var cost = 0
 		repeat (5) {
 			if (stack.tagCompound != null && stack.tagCompound!!.getInteger(it.toString()) != 0) {
-				tooltip.add(it.toString() + " : " + ItemStack(getItemById(stack.tagCompound!!.getInteger(it.toString()))).displayName)
+				val name = getItemById(stack.tagCompound!!.getInteger(it.toString())).unlocalizedName.split(".")[1]
+				val color = SkillFunctions.valueOf(name.toUpperCase()).rare.colorChar
+				val format = I18n.format(ItemStack(getItemById(stack.tagCompound!!.getInteger(it.toString()))).displayName)
+				cost += SkillFunctions.valueOf(name.toUpperCase()).cost
+				tooltip.add("$it : $color${TextFormatting.UNDERLINE}$format")
 			}
 		}
+		if (stack.tagCompound != null) {
+			tooltip.add(cost.toString() + "MP")
+		}
+
 	}
 
 	override fun onItemRightClick(world: World, player: EntityPlayer, handIn: EnumHand): ActionResult<ItemStack> {
 		val itemstack = player.getHeldItem(handIn)
 		player.activeHand = handIn
 		if (itemstack.tagCompound != null) {
-			time.scheduleAtFixedRate(SkillFunctionTask(world, player, handIn), 0, 500)
+			GlobalScope.launch {
+				repeat(5) {
+					if (itemstack.tagCompound!!.getInteger(it.toString()) != 0){
+						var name = getItemById(itemstack.tagCompound!!.getInteger(it.toString())).unlocalizedName.split(".")[1]
+						SkillFunctions.valueOf(name.toUpperCase()).SkillFunction(world, player, handIn)
+						delay(500)
+					}
+				}
+			}
 		}
 		return ActionResult(EnumActionResult.SUCCESS, itemstack)
 	}
 
 	override fun getItemUseAction(stack: ItemStack): EnumAction {
 		return EnumAction.BLOCK
-	}
-
-	override fun getSubItems(tab: CreativeTabs, items: NonNullList<ItemStack>) {
-		val nbt = NBTTagCompound()
-		val stack = ItemStack(Core.skillbook, 1, 0, nbt)
-		items.add(stack)
 	}
 
 	override fun onCreated(stack: ItemStack, worldIn: World, playerIn: EntityPlayer) {
