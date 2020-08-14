@@ -46,6 +46,7 @@ class InjectionTable : BlockContainer(Material.IRON) {
 		if (te.getSkill() != 0) {
 			val item = EntityItem(world, pos?.x!!.toDouble(), pos?.y.toDouble(), pos?.z.toDouble(), ItemStack(Item.getItemById(te.getSkill())))
 			world.spawnEntity(item)
+			te.setSkill(0)
 		}
 		world.removeTileEntity(pos)
 		super.breakBlock(world, pos as BlockPos, state as IBlockState)

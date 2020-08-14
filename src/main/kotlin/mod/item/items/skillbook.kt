@@ -2,19 +2,22 @@ package mod.item.items
 
 import mod.Core
 import mod.item.baseitem.GeneralRPGItem
+import mod.item.skill.SkillFunctionTask
 import mod.item.skill.SkillFunctions
 import net.minecraft.client.util.ITooltipFlag
+import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.EnumAction
 import net.minecraft.item.ItemStack
-import net.minecraft.util.ActionResult
-import net.minecraft.util.EnumActionResult
-import net.minecraft.util.EnumHand
-import net.minecraft.util.ResourceLocation
+import net.minecraft.nbt.NBTTagCompound
+import net.minecraft.util.*
 import net.minecraft.world.World
+import java.util.Timer
 
 
 object SkillBook : GeneralRPGItem() {
+	val time: Timer = Timer()
+
 	init {
 		this.unlocalizedName = "skillbook"
 		this.creativeTab = Core.creativeaTab
@@ -25,11 +28,10 @@ object SkillBook : GeneralRPGItem() {
 
 	override fun addInformation(stack: ItemStack, worldIn: World?, tooltip: MutableList<String>, flagIn: ITooltipFlag) {
 		super.addInformation(stack, worldIn, tooltip, flagIn)
-		if (stack.tagCompound != null && stack.tagCompound!!.getInteger("1") != null) {
-			tooltip.add(ItemStack(getItemById(stack.tagCompound!!.getInteger("1"))).displayName)
-		}
-		if (stack.tagCompound != null && stack.tagCompound!!.getInteger("2") != null) {
-			tooltip.add(ItemStack(getItemById(stack.tagCompound!!.getInteger("2"))).displayName)
+		repeat (5) {
+			if (stack.tagCompound != null && stack.tagCompound!!.getInteger(it.toString()) != 0) {
+				tooltip.add(it.toString() + " : " + ItemStack(getItemById(stack.tagCompound!!.getInteger(it.toString()))).displayName)
+			}
 		}
 	}
 
@@ -37,18 +39,23 @@ object SkillBook : GeneralRPGItem() {
 		val itemstack = player.getHeldItem(handIn)
 		player.activeHand = handIn
 		if (itemstack.tagCompound != null) {
-			repeat(4){
-				if (itemstack.tagCompound!!.getInteger(it.toString()) != null) {
-					val name = getItemById(itemstack.tagCompound!!.getInteger(it.toString())).unlocalizedName.split(".")[1]
-					SkillFunctions.valueOf(name.toUpperCase()).SkillFunction(world, player, handIn)
-					Thread.sleep(1000)
-				}
-			}
+			time.scheduleAtFixedRate(SkillFunctionTask(world, player, handIn), 0, 500)
 		}
 		return ActionResult(EnumActionResult.SUCCESS, itemstack)
 	}
 
 	override fun getItemUseAction(stack: ItemStack): EnumAction {
 		return EnumAction.BLOCK
+	}
+
+	override fun getSubItems(tab: CreativeTabs, items: NonNullList<ItemStack>) {
+		val nbt = NBTTagCompound()
+		val stack = ItemStack(Core.skillbook, 1, 0, nbt)
+		items.add(stack)
+	}
+
+	override fun onCreated(stack: ItemStack, worldIn: World, playerIn: EntityPlayer) {
+		val nbt = NBTTagCompound()
+		stack.tagCompound = nbt
 	}
 }
