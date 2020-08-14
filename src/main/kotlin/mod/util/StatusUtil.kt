@@ -27,4 +27,8 @@ class StatusUtil {
 	fun getMaxMP(player: EntityPlayer): Int {
 		return player.getCapability(MaxMPProvider.MAX_MP_CAP!!, null)?.get()!!.toInt()
 	}
+
+	fun canLevelUp(player: EntityPlayer, currentLevel: Int){
+
+	}
 }
