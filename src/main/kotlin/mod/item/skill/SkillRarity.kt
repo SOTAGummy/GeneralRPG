@@ -1,4 +1,4 @@
-package mod.util
+package mod.item.skill
 
 import net.minecraft.util.text.TextFormatting
 
@@ -7,6 +7,6 @@ enum class SkillRarity(val colorChar: TextFormatting) {
 	UNCOMMON(TextFormatting.GREEN),
 	RARE(TextFormatting.AQUA),
 	EPIC(TextFormatting.LIGHT_PURPLE),
-	LEGENDALRY(TextFormatting.YELLOW),
+	LEGENDALRY(TextFormatting.GOLD),
 	MASTER(TextFormatting.RED)
 }

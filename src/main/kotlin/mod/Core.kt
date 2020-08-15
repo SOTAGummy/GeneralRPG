@@ -15,8 +15,9 @@ import mod.event.bindSkillEvent.BindSkillEvent
 import mod.event.capabilityEvent.CapabilityCloneEvent
 import mod.event.capabilityEvent.CapabilityHandler
 import mod.event.capabilityEvent.LevelUpTest
+import mod.event.capabilityEvent.PlayerAttributeEvent
 import mod.gui.mpindicator.RenderMPIndicator
- import mod.item.items.SkillBook
+import mod.item.items.SkillBook
 import mod.item.items.Test
 import mod.item.skill.skills.Fulfill
 import mod.item.skill.skills.Heal
@@ -51,7 +52,7 @@ import net.minecraftforge.fml.relauncher.SideOnly
 
 @Mod(modid = Core.ID, name = Core.Name, version = Core.version, modLanguage = "kotlin")
 
-class Core{
+class Core {
 	companion object {
 		const val ID = "general-rpg"
 		const val Name = "GeneralRPG"
@@ -68,9 +69,10 @@ class Core{
 		var skillTab: CreativeTabs = GeneralRPGSkillTab()
 
 		val heal = Heal
-		val fulfill = Fulfill
 		val rage = Rage
 		val togglemode = ToggleMode
+		val fulfill = Fulfill
+
 		val test = Test
 		val skillbook = SkillBook
 
@@ -103,6 +105,7 @@ class Core{
 		MinecraftForge.EVENT_BUS.register(CapabilityCloneEvent())
 		MinecraftForge.EVENT_BUS.register(LevelUpTest())
 		MinecraftForge.EVENT_BUS.register(BindSkillEvent())
+		MinecraftForge.EVENT_BUS.register(PlayerAttributeEvent())
 	}
 
 	@Mod.EventHandler

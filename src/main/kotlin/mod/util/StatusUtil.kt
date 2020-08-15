@@ -28,7 +28,7 @@ class StatusUtil {
 		return player.getCapability(MaxMPProvider.MAX_MP_CAP!!, null)?.get()!!.toInt()
 	}
 
-	fun canLevelUp(player: EntityPlayer, currentLevel: Int){
+	fun canLevelUp(player: EntityPlayer, currentLevel: Int) {
 
 	}
 }

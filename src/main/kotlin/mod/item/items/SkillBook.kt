@@ -5,15 +5,17 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import mod.Core
 import mod.item.baseitem.GeneralRPGItem
-import mod.item.skill.SkillFunctions
-import mod.util.SkillRarity
+import mod.item.baseitem.ItemSkill
 import net.minecraft.client.resources.I18n
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.EnumAction
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
-import net.minecraft.util.*
+import net.minecraft.util.ActionResult
+import net.minecraft.util.EnumActionResult
+import net.minecraft.util.EnumHand
+import net.minecraft.util.ResourceLocation
 import net.minecraft.util.text.TextFormatting
 import net.minecraft.world.World
 
@@ -29,12 +31,13 @@ object SkillBook : GeneralRPGItem() {
 	override fun addInformation(stack: ItemStack, worldIn: World?, tooltip: MutableList<String>, flagIn: ITooltipFlag) {
 		super.addInformation(stack, worldIn, tooltip, flagIn)
 		var cost = 0
-		repeat (5) {
+		repeat(5) {
 			if (stack.tagCompound != null && stack.tagCompound!!.getInteger(it.toString()) != 0) {
-				val name = getItemById(stack.tagCompound!!.getInteger(it.toString())).unlocalizedName.split(".")[1]
-				val color = SkillFunctions.valueOf(name.toUpperCase()).rare.colorChar
 				val format = I18n.format(ItemStack(getItemById(stack.tagCompound!!.getInteger(it.toString()))).displayName)
-				cost += SkillFunctions.valueOf(name.toUpperCase()).cost
+				val item = (getItemById(stack.tagCompound!!.getInteger(it.toString()))) as ItemSkill
+				val color = item.rarity.colorChar
+
+				cost += item.cost
 				tooltip.add("$it : $color${TextFormatting.UNDERLINE}$format")
 			}
 		}
@@ -50,9 +53,9 @@ object SkillBook : GeneralRPGItem() {
 		if (itemstack.tagCompound != null) {
 			GlobalScope.launch {
 				repeat(5) {
-					if (itemstack.tagCompound!!.getInteger(it.toString()) != 0){
-						var name = getItemById(itemstack.tagCompound!!.getInteger(it.toString())).unlocalizedName.split(".")[1]
-						SkillFunctions.valueOf(name.toUpperCase()).SkillFunction(world, player, handIn)
+					if (itemstack.tagCompound!!.getInteger(it.toString()) != 0) {
+						val item = (getItemById(itemstack.tagCompound!!.getInteger(it.toString()))) as ItemSkill
+						item.skillFunction(world, player, handIn)
 						delay(500)
 					}
 				}
