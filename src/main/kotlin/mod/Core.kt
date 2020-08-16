@@ -19,10 +19,7 @@ import mod.event.capabilityEvent.PlayerAttributeEvent
 import mod.gui.mpindicator.RenderMPIndicator
 import mod.item.items.SkillBook
 import mod.item.items.Test
-import mod.item.skill.skills.Fulfill
-import mod.item.skill.skills.Heal
-import mod.item.skill.skills.Rage
-import mod.item.skill.skills.ToggleMode
+import mod.item.skill.skills.*
 import mod.proxy.CommonProxy
 import mod.tab.GeneralRPGSkillTab
 import mod.tab.GeneralRPGTab
@@ -30,6 +27,7 @@ import mod.util.Storage
 import net.minecraft.block.Block
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
 import net.minecraft.creativetab.CreativeTabs
+import net.minecraft.init.Items
 import net.minecraft.item.Item
 import net.minecraft.item.ItemBlock
 import net.minecraft.util.ResourceLocation
@@ -70,6 +68,8 @@ class Core {
 
 		val heal = Heal
 		val rage = Rage
+		val shield = Shield
+		val leap = Leap
 		val togglemode = ToggleMode
 		val fulfill = Fulfill
 
