@@ -14,7 +14,7 @@ import mod.capability.mp.MPStorage
 import mod.event.bindSkillEvent.BindSkillEvent
 import mod.event.capabilityEvent.CapabilityCloneEvent
 import mod.event.capabilityEvent.CapabilityHandler
-import mod.event.capabilityEvent.LevelUpTest
+import mod.event.capabilityEvent.LevelUp
 import mod.event.capabilityEvent.PlayerAttributeEvent
 import mod.gui.mpindicator.RenderMPIndicator
 import mod.item.items.SkillBook
@@ -27,7 +27,6 @@ import mod.util.Storage
 import net.minecraft.block.Block
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
 import net.minecraft.creativetab.CreativeTabs
-import net.minecraft.init.Items
 import net.minecraft.item.Item
 import net.minecraft.item.ItemBlock
 import net.minecraft.util.ResourceLocation
@@ -103,7 +102,7 @@ class Core {
 
 		MinecraftForge.EVENT_BUS.register(CapabilityHandler())
 		MinecraftForge.EVENT_BUS.register(CapabilityCloneEvent())
-		MinecraftForge.EVENT_BUS.register(LevelUpTest())
+		MinecraftForge.EVENT_BUS.register(LevelUp())
 		MinecraftForge.EVENT_BUS.register(BindSkillEvent())
 		MinecraftForge.EVENT_BUS.register(PlayerAttributeEvent())
 	}

@@ -1,8 +1,10 @@
 package mod.util
 
+import mod.capability.exp.ExpProvider
 import mod.capability.maxmp.MaxMPProvider
 import mod.capability.mp.MPProvider
 import net.minecraft.entity.player.EntityPlayer
+import kotlin.math.log
 
 class StatusUtil {
 	fun addMP(player: EntityPlayer, add: Int) {
@@ -28,7 +30,8 @@ class StatusUtil {
 		return player.getCapability(MaxMPProvider.MAX_MP_CAP!!, null)?.get()!!.toInt()
 	}
 
-	fun canLevelUp(player: EntityPlayer, currentLevel: Int) {
-
+	fun getLevel(player: EntityPlayer): Int{
+		val exp = player.getCapability(ExpProvider.EXP_CAP!!, null)?.get()!!.toDouble()
+		return (log(0.1 * exp / 8, 1.1) + 1.0).toInt()
 	}
 }
