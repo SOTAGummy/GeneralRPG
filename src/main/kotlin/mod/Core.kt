@@ -69,6 +69,7 @@ class Core {
 		val rage = Rage
 		val shield = Shield
 		val leap = Leap
+		val explosion = Explosion
 		val togglemode = ToggleMode
 		val fulfill = Fulfill
 

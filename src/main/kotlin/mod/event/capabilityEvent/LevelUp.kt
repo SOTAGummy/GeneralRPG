@@ -11,6 +11,6 @@ class LevelUp {
 			val player = Minecraft.getMinecraft().player
 			val entity = event.entityLiving
 		}
-		println(event.source.damageType)
+		println(event.source)
 	}
 }

@@ -19,11 +19,15 @@ class StatusUtil {
 
 	fun useMP(player: EntityPlayer, use: Int): Boolean {
 		val mp = player.getCapability(MPProvider.MP_CAP!!, null)?.get() as Int
-		if (mp >= use) {
-			player.getCapability(MPProvider.MP_CAP, null)?.set(mp - use)
+		if (player.isCreative) {
 			return true
+		} else {
+			if (mp >= use) {
+				player.getCapability(MPProvider.MP_CAP, null)?.set(mp - use)
+				return true
+			}
+			return false
 		}
-		return false
 	}
 
 	fun getMaxMP(player: EntityPlayer): Int {

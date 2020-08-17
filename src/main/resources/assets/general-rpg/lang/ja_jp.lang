@@ -5,6 +5,7 @@ item.rage.name=レイジ
 item.togglemode.name=トグルモード
 item.shield.name=シールド
 item.leap.name=リープ
+item.explosion.name=エクスプロージョン
 item.skillbook.name=スキルブック
 tile.injection_table.name=インジェクションテーブル
 itemGroup.general-rpg=GeneralRPG
