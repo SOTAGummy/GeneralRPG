@@ -18,9 +18,6 @@ object Heal : ItemSkill("heal", 5, SkillRarity.COMMON) {
 			} else {
 				player.health += 2
 			}
-			val vec = player.rayTrace(15.0, 0.0F)?.hitVec
-			player.lookVec.distanceTo(vec)
-			println(Minecraft.getMinecraft().objectMouseOver)
 		}
 	}
 }

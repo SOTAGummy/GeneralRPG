@@ -1,7 +1,7 @@
 package mod.capability.exp
 
 class Exp : IExp {
-	private var Exp: Int = 0
+	private var Exp: Int = 1
 
 	override fun get(): Int {
 		return this.Exp
