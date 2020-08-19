@@ -6,6 +6,7 @@ item.togglemode.name=ToggleMode
 item.shield.name=Shield
 item.leap.name=Leap
 item.explosion.name=Explosion
+item.arrowrain.name=ArrowRain
 item.skillbook.name=SkillBook
 tile.injection_table.name=InjectionTable
 itemGroup.general-rpg=GeneralRPG
