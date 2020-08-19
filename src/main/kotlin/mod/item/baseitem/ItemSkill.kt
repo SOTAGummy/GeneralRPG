@@ -11,6 +11,8 @@ import net.minecraft.util.EnumHand
 import net.minecraft.util.ResourceLocation
 import net.minecraft.util.text.TextFormatting
 import net.minecraft.world.World
+import java.io.File
+import java.io.IOException
 
 open class ItemSkill(private val name: String, val cost: Int, val rarity: SkillRarity) : GeneralRPGItem() {
 	init {
@@ -21,9 +23,17 @@ open class ItemSkill(private val name: String, val cost: Int, val rarity: SkillR
 		Cost = cost
 		Rarity = rarity
 		Storage.Skills.add(this)
+
+		file = File("src/main/resources/assets/general-rpg/model/item/$name.json")
+			if (!file.exists()) {
+				file.createNewFile()
+			} else {
+
+			}
 	}
 
 	companion object {
+		var file = File("")
 		var Cost = 0
 		var Rarity = SkillRarity.COMMON
 	}

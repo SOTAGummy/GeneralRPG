@@ -63,8 +63,6 @@ class Core {
 		@Mod.Instance(ID)
 		var instance: Core? = null
 
-		val obj: Core = Core()
-
 		var creativeaTab: CreativeTabs = GeneralRPGTab()
 		var skillTab: CreativeTabs = GeneralRPGSkillTab()
 
@@ -73,6 +71,7 @@ class Core {
 		val shield = Shield
 		val leap = Leap
 		val explosion = Explosion
+		val arrowrain = ArrowRain
 		val togglemode = ToggleMode
 		val fulfill = Fulfill
 
