@@ -10,5 +10,6 @@ class LevelUp {
 
 		}
 		println(event.source.damageType)
+		println(event.source.setExplosion())
 	}
 }

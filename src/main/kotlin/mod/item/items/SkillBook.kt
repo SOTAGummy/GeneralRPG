@@ -52,9 +52,9 @@ object SkillBook : GeneralRPGItem() {
 		player.activeHand = handIn
 		if (itemstack.tagCompound != null) {
 			GlobalScope.launch {
-				repeat(5) {
+				repeat(5){
 					if (itemstack.tagCompound!!.getInteger(it.toString()) != 0) {
-						val item = (getItemById(itemstack.tagCompound!!.getInteger(it.toString()))) as ItemSkill
+						val item = (getItemById(itemstack.tagCompound!!.getInteger(it.toString())) )as ItemSkill
 						item.skillFunction(world, player, handIn)
 						delay(500)
 					}

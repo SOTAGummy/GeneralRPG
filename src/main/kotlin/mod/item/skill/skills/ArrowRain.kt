@@ -16,14 +16,15 @@ object ArrowRain: ItemSkill("arrowrain", 20, SkillRarity.RARE){
 		if (StatusUtil().useMP(player, this.cost)) {
 			GlobalScope.launch {
 				val pos = player.rayTrace(15.0, 0.0F)?.blockPos!!
-				repeat(5){
-					val arrow = EntityTippedArrow(world, pos.x.toDouble(), pos.y.toDouble() + 5.0, pos.z.toDouble())
-					arrow.setVelocity(0.0, -2.0, 0.0)
-					arrow.damage = 2.0
-					world.spawnEntity(arrow)
-					delay(300)
-					world.removeEntity(arrow)
-				}
+
+				val arrow = EntityTippedArrow(world, pos.x.toDouble(), pos.y.toDouble() + 5.0, pos.z.toDouble())
+				arrow.setVelocity(0.0, -2.0, 0.0)
+				arrow.damage = 2.0
+				arrow.shootingEntity = player
+				world.spawnEntity(arrow)
+				delay(300)
+				world.removeEntity(arrow)
+
 			}
 		}
 	}
