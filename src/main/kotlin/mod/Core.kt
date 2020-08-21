@@ -17,8 +17,8 @@ import mod.event.capabilityEvent.CapabilityHandler
 import mod.event.capabilityEvent.LevelUp
 import mod.event.capabilityEvent.PlayerAttributeEvent
 import mod.gui.mpindicator.RenderMPIndicator
-import mod.item.items.SkillBook
 import mod.item.items.Test
+import mod.item.skill.containers.SkillBook
 import mod.item.skill.skills.*
 import mod.proxy.CommonProxy
 import mod.tab.GeneralRPGSkillTab
