@@ -18,6 +18,8 @@ import net.minecraft.util.EnumHand
 import net.minecraft.util.ResourceLocation
 import net.minecraft.util.text.TextFormatting
 import net.minecraft.world.World
+import net.minecraftforge.fml.relauncher.Side
+import net.minecraftforge.fml.relauncher.SideOnly
 
 
 object SkillBook : GeneralRPGItem() {
@@ -47,6 +49,7 @@ object SkillBook : GeneralRPGItem() {
 
 	}
 
+	@SideOnly(Side.CLIENT)
 	override fun onItemRightClick(world: World, player: EntityPlayer, handIn: EnumHand): ActionResult<ItemStack> {
 		val itemstack = player.getHeldItem(handIn)
 		player.activeHand = handIn
@@ -54,13 +57,14 @@ object SkillBook : GeneralRPGItem() {
 			GlobalScope.launch {
 				repeat(5){
 					if (itemstack.tagCompound!!.getInteger(it.toString()) != 0) {
-						val item = (getItemById(itemstack.tagCompound!!.getInteger(it.toString())) )as ItemSkill
+						val item = (getItemById(itemstack.tagCompound!!.getInteger(it.toString()))) as ItemSkill
 						item.skillFunction(world, player, handIn)
 						delay(500)
 					}
 				}
 			}
 		}
+		player.cooldownTracker.setCooldown(this, 10)
 		return ActionResult(EnumActionResult.SUCCESS, itemstack)
 	}
 
