@@ -3,6 +3,7 @@ package mod.event.bindSkillEvent
 import mod.Core
 import mod.block.TileEntityInjectionTable
 import mod.item.baseitem.ItemSkill
+import mod.item.baseitem.ItemSkillContainer
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
@@ -32,22 +33,20 @@ class BindSkillEvent {
 				}
 
 				else -> {
-					if (stack.item == Core.skillbook) {
+					if (stack.item is ItemSkillContainer) {
 						if (stack.tagCompound == null) {
 							val nbt = NBTTagCompound()
 							nbt.setInteger("1", te.getSkill())
 							stack.tagCompound = nbt
 							te.setSkill(0)
 							println(0)
-						} else if (stack.tagCompound!!.getInteger("2") == 0) {
-							stack.tagCompound!!.setInteger("2", te.getSkill())
-							te.setSkill(0)
-						} else if (stack.tagCompound!!.getInteger("3") == 0) {
-							stack.tagCompound!!.setInteger("3", te.getSkill())
-							te.setSkill(0)
-						} else if (stack.tagCompound!!.getInteger("4") == 0) {
-							stack.tagCompound!!.setInteger("4", te.getSkill())
-							te.setSkill(0)
+						}
+						repeat((stack.item as ItemSkillContainer).capacity){
+							if (stack.tagCompound!!.getInteger((it + 1).toString()) == 0) {
+								stack.tagCompound!!.setInteger((it + 1).toString(), te.getSkill())
+								te.setSkill(0)
+								println((stack.item as ItemSkillContainer).capacity)
+							}
 						}
 					}
 				}

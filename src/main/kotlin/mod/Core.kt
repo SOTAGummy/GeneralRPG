@@ -19,6 +19,7 @@ import mod.event.capabilityEvent.PlayerAttributeEvent
 import mod.gui.mpindicator.RenderMPIndicator
 import mod.item.items.Test
 import mod.item.skill.containers.SkillBook
+import mod.item.skill.containers.SkillStaff
 import mod.item.skill.skills.*
 import mod.proxy.CommonProxy
 import mod.tab.GeneralRPGSkillTab
@@ -76,7 +77,9 @@ class Core {
 		val fulfill = Fulfill
 
 		val test = Test
+
 		val skillbook = SkillBook
+		val skillstaff = SkillStaff
 
 		val injection_table = InjectionTable()
 	}
