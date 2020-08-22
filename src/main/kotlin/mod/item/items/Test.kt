@@ -18,4 +18,5 @@ object Test : GeneralRPGItem() {
 		this.maxStackSize = 1
 		this.registryName = ResourceLocation(Core.ID, "test")
 	}
+
 }
