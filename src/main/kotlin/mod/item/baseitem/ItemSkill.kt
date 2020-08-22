@@ -21,6 +21,36 @@ open class ItemSkill(private val name: String, val cost: Int, val rarity: SkillR
 		Cost = cost
 		Rarity = rarity
 		Storage.Skills.add(this)
+
+		when(rarity){
+			SkillRarity.COMMON -> {
+				Storage.Common.add(this)
+			}
+
+			SkillRarity.UNCOMMON -> {
+				Storage.Uncommon.add(this)
+			}
+
+			SkillRarity.RARE -> {
+				Storage.Rare.add(this)
+			}
+
+			SkillRarity.EPIC -> {
+				Storage.Epic.add(this)
+			}
+
+			SkillRarity.LEGEND -> {
+				Storage.Legend.add(this)
+				}
+
+			SkillRarity.COMMON -> {
+				Storage.Common.add(this)
+			}
+
+			SkillRarity.MASTER -> {
+				Storage.Master.add(this)
+			}
+		}
 	}
 
 	companion object {
