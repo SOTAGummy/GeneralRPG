@@ -1,4 +1,10 @@
 #GeneralRPG English Language File
+item.common_token.name=CommonToken
+item.uncommon_token.name=UncommonToken
+item.rare_token.name=RareToken
+item.epic_token.name=EpicToken
+item.legend_token.name=LegendToken
+
 item.heal.name=Heal
 item.fulfill.name=FulFill
 item.rage.name=Rage
@@ -7,7 +13,10 @@ item.shield.name=Shield
 item.leap.name=Leap
 item.explosion.name=Explosion
 item.arrowrain.name=ArrowRain
+
 item.skillbook.name=SkillBook
+item.skillstaff.name=SkillStaff
+
 tile.injection_table.name=InjectionTable
 itemGroup.general-rpg=GeneralRPG
 itemGroup.general-rpg.skill=GeneralRPG-Skill

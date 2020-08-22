@@ -17,7 +17,7 @@ import mod.event.capabilityEvent.CapabilityHandler
 import mod.event.capabilityEvent.LevelUp
 import mod.event.capabilityEvent.PlayerAttributeEvent
 import mod.gui.mpindicator.RenderMPIndicator
-import mod.item.items.Test
+import mod.item.items.*
 import mod.item.skill.containers.SkillBook
 import mod.item.skill.containers.SkillStaff
 import mod.item.skill.skills.*
@@ -75,6 +75,12 @@ class Core {
 		val arrowrain = ArrowRain
 		val togglemode = ToggleMode
 		val fulfill = Fulfill
+
+		val common_token = CommonToken
+		val uncommon_token = UncommonToken
+		val rare_token = RareToken
+		val epic_token = EpicToken
+		val legend_token = LegendToken
 
 		val test = Test
 

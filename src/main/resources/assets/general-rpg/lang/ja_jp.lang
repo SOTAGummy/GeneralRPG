@@ -1,4 +1,10 @@
 #GeneralRPG 日本語言語ファイル
+item.common_token.name=コモントークン
+item.uncommon_token.name=アンコモントークン
+item.rare_token.name=レアトークン
+item.epic_token.name=エピックトークン
+item.legend_token.name=レジェンドトークン
+
 item.heal.name=ヒール
 item.fulfill.name=フルフィル
 item.rage.name=レイジ
@@ -7,7 +13,10 @@ item.shield.name=シールド
 item.leap.name=リープ
 item.explosion.name=エクスプロージョン
 item.arrowrain.name=矢の雨
+
 item.skillbook.name=スキルブック
+item.skillstaff.name=スキルスタッフ
+
 tile.injection_table.name=インジェクションテーブル
 itemGroup.general-rpg=GeneralRPG
 itemGroup.general-rpg.skill=GeneralRPG-Skill
