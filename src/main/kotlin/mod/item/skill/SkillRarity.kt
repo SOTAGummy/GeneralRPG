@@ -7,6 +7,6 @@ enum class SkillRarity(val colorChar: TextFormatting) {
 	UNCOMMON(TextFormatting.GREEN),
 	RARE(TextFormatting.AQUA),
 	EPIC(TextFormatting.LIGHT_PURPLE),
-	LEGENDALRY(TextFormatting.GOLD),
+	LEGEND(TextFormatting.GOLD),
 	MASTER(TextFormatting.RED)
 }
