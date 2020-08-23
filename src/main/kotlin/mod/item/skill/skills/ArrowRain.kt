@@ -29,8 +29,8 @@ object ArrowRain: ItemSkill("arrowrain", 20, SkillRarity.RARE){
 
 						val arrow1 = itemarrow.createArrow(world, itemstack, player)
 						arrow1.setPosition(pos.x.toDouble() + randomx, pos.y.toDouble() + 5.0, pos.z.toDouble() + randomz)
-						arrow1.setVelocity(0.0, -1.0, 0.0)
 						arrow1.damage = 1.0
+						arrow1.setVelocity(0.0, -1.0, 0.0)
 						world.spawnEntity(arrow1)
 						delay(50)
 						world.removeEntity(arrow1)
