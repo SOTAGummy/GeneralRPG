@@ -18,17 +18,12 @@ import net.minecraft.world.World
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 
-open class ItemSkillContainer(name: String, val capacity: Int, private val coolDown: Int, val saveRate:  Int): GeneralRPGItem(){
+open class ItemSkillContainer(name: String, val capacity: Int, private val coolDown: Int): GeneralRPGItem(){
 	init {
 		this.unlocalizedName = name
 		this.creativeTab = Core.creativeaTab
 		this.maxStackSize = 1
 		this.registryName = ResourceLocation(Core.ID, name)
-		SaveRate = saveRate
-	}
-
-	companion object{
-		var SaveRate = 100
 	}
 
 	override fun addInformation(stack: ItemStack, worldIn: World?, tooltip: MutableList<String>, flagIn: ITooltipFlag) {
@@ -59,7 +54,7 @@ open class ItemSkillContainer(name: String, val capacity: Int, private val coolD
 				for (i in 1 .. capacity){
 					if (itemstack.tagCompound!!.getInteger(i.toString()) != 0) {
 						val item = (getItemById(itemstack.tagCompound!!.getInteger(i.toString()))) as ItemSkill
-						item.skillFunction(world, player, handIn, saveRate)
+						item.skillFunction(world, player, handIn)
 						delay(500)
 					}
 				}
