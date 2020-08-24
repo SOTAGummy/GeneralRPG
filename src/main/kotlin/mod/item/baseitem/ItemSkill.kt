@@ -12,7 +12,7 @@ import net.minecraft.util.ResourceLocation
 import net.minecraft.util.text.TextFormatting
 import net.minecraft.world.World
 
-open class ItemSkill(private val name: String, val cost: Int, val rarity: SkillRarity) : GeneralRPGItem() {
+open class ItemSkill(name: String, val cost: Int, val rarity: SkillRarity) : GeneralRPGItem() {
 	init {
 		this.unlocalizedName = name
 		this.maxStackSize = 1
@@ -38,5 +38,5 @@ open class ItemSkill(private val name: String, val cost: Int, val rarity: SkillR
 		tooltip.add("Rarity : " + "${rarity.colorChar}${TextFormatting.BOLD}$rarityFormat")
 	}
 
-	open fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand) {}
+	open fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand, saveRate: Int) {}
 }

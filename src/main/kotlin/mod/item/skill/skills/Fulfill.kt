@@ -12,8 +12,8 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 
 object Fulfill : ItemSkill("fulfill", 0, SkillRarity.MASTER) {
-	override fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand) {
-		if (StatusUtil().useMP(player, this.cost)) {
+	override fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand, saveRate: Int) {
+		if (StatusUtil().useMP(player, this.cost, saveRate)) {
 			StatusUtil().addMP(player, StatusUtil().getMaxMP(player))
 		}
 	}
