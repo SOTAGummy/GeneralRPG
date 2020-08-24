@@ -75,6 +75,7 @@ class Core {
 		val arrowrain = ArrowRain
 		val togglemode = ToggleMode
 		val fulfill = Fulfill
+		val light = Light
 
 		val common_token = CommonToken
 		val uncommon_token = UncommonToken
