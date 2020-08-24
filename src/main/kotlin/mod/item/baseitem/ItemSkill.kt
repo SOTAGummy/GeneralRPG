@@ -38,5 +38,5 @@ open class ItemSkill(name: String, val cost: Int, val rarity: SkillRarity) : Gen
 		tooltip.add("Rarity : " + "${rarity.colorChar}${TextFormatting.BOLD}$rarityFormat")
 	}
 
-	open fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand, saveRate: Int) {}
+	open fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand) {}
 }

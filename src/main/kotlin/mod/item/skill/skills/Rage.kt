@@ -12,8 +12,8 @@ import net.minecraft.util.EnumHand
 import net.minecraft.world.World
 
 object Rage : ItemSkill("rage", 10, SkillRarity.UNCOMMON) {
-	override fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand, saveRate: Int){
-		if (StatusUtil().useMP(player, this.cost, saveRate)){
+	override fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand){
+		if (StatusUtil().useMP(player, this.cost)){
 			GlobalScope.launch {
 				player.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).baseValue += 2
 				delay(10000)

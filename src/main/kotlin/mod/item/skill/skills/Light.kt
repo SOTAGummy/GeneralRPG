@@ -10,8 +10,8 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 
 object Light: ItemSkill("light", 5, SkillRarity.COMMON){
-	override fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand, saveRate: Int) {
-		if (StatusUtil().useMP(player, this.cost, saveRate)){
+	override fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand) {
+		if (StatusUtil().useMP(player, this.cost)){
 			val pos = player.rayTrace(15.0, 0.0F)!!.blockPos
 			val down = BlockPos(pos.x, pos.y - 1, pos.z)
 			val side1 = BlockPos(pos.x + 1, pos.y, pos.z)
