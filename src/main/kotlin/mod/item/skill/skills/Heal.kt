@@ -13,7 +13,7 @@ import java.io.File
 
 object Heal : ItemSkill("heal", 5, SkillRarity.COMMON) {
 	override fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand, saveRate: Int) {
-		if (StatusUtil().useMP(player, this.cost, saveRate)) {
+		if (StatusUtil().useMP(player, this.cost, saveRate)){
 			if (player.maxHealth <= player.health + 2) {
 				player.health = player.maxHealth
 			} else {

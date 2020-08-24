@@ -13,7 +13,7 @@ import net.minecraft.world.World
 
 object Fulfill : ItemSkill("fulfill", 0, SkillRarity.MASTER) {
 	override fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand, saveRate: Int) {
-		if (StatusUtil().useMP(player, this.cost, saveRate)) {
+		if (StatusUtil().useMP(player, this.cost, saveRate)){
 			StatusUtil().addMP(player, StatusUtil().getMaxMP(player))
 		}
 	}

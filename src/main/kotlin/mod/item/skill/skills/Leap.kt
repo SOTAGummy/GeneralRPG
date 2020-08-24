@@ -10,8 +10,8 @@ import net.minecraft.world.World
 
 
 object Leap: ItemSkill("leap", 25, SkillRarity.EPIC){
-	override fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand, saveRate: Int) {
-		if (StatusUtil().useMP(player, this.cost, saveRate)) {
+	override fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand, saveRate: Int){
+		if (StatusUtil().useMP(player, this.cost, saveRate)){
 			val vx = -MathHelper.sin(Math.toRadians(player.rotationYaw.toDouble()).toFloat()) * MathHelper.cos(Math.toRadians(player.rotationPitch.toDouble()).toFloat())
 			val vz = MathHelper.cos(Math.toRadians(player.rotationYaw.toDouble()).toFloat()) * MathHelper.cos(Math.toRadians(player.rotationPitch.toDouble()).toFloat())
 			val vy = -MathHelper.sin(Math.toRadians(player.rotationPitch.toDouble()).toFloat())

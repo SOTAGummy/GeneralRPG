@@ -13,8 +13,8 @@ import net.minecraft.world.World
 import javax.xml.bind.JAXBElement
 
 object Shield: ItemSkill("shield", 15, SkillRarity.RARE){
-	override fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand, saveRate: Int) {
-		if (StatusUtil().useMP(player, this.cost, saveRate)) {
+	override fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand, saveRate: Int){
+		if (StatusUtil().useMP(player, this.cost, saveRate)){
 			GlobalScope.launch {
 				player.getEntityAttribute(SharedMonsterAttributes.ARMOR).baseValue += 2
 				delay(10000)

@@ -18,12 +18,12 @@ import kotlin.random.Random
 
 object ArrowRain: ItemSkill("arrowrain", 20, SkillRarity.RARE){
 	override fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand, saveRate: Int) {
-		if (StatusUtil().useMP(player, this.cost, saveRate)) {
+		if (StatusUtil().useMP(player, this.cost, saveRate)){
 			if (!world.isRemote){
 				GlobalScope.launch {
 					val pos = player.rayTrace(15.0, 0.0F)?.blockPos!!
 					val itemstack = ItemStack(Items.ARROW)
-					repeat(5) {
+					repeat(5){
 						val randomx = Random.nextDouble(3.0)
 						val randomz = Random.nextDouble(3.0)
 

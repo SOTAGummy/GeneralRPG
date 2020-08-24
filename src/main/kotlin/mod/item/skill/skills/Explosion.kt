@@ -7,7 +7,7 @@ import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.util.EnumHand
 import net.minecraft.world.World
 
-object Explosion: ItemSkill("explosion", 30, SkillRarity.RARE) {
+object Explosion: ItemSkill("explosion", 30, SkillRarity.RARE){
 	override fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand, saveRate: Int) {
 		if (StatusUtil().useMP(player, this.cost, saveRate)) {
 			val pos = player.rayTrace(15.0, 0.0F)?.blockPos!!
