@@ -19,8 +19,9 @@ object Light: ItemSkill("light", 5, SkillRarity.COMMON){
 			val side3 = BlockPos(pos.x, pos.y, pos.z + 1)
 			val side4 = BlockPos(pos.x, pos.y, pos.z - 1)
 
-			if (world.getBlockState(down).isFullBlock || world.getBlockState(side1).isFullBlock || world.getBlockState(side2).isFullBlock || world.getBlockState(side3).isFullBlock || world.getBlockState(side4).isFullBlock){
+			if (world.getBlockState(pos).block != null && world.getBlockState(down).isFullBlock || world.getBlockState(side1).isFullBlock || world.getBlockState(side2).isFullBlock || world.getBlockState(side3).isFullBlock || world.getBlockState(side4).isFullBlock){
 				world.setBlockState(pos, Blocks.TORCH.defaultState)
+
 			}
 		}
 	}
