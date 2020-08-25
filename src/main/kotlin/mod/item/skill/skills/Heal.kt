@@ -1,11 +1,14 @@
 package mod.item.skill.skills
 
+import mod.entity.AnimateItem
 import mod.item.baseitem.ItemSkill
 import mod.item.skill.SkillRarity
 import mod.util.StatusUtil
 import net.minecraft.client.Minecraft
 import net.minecraft.entity.EntityLiving
 import net.minecraft.entity.player.EntityPlayer
+import net.minecraft.init.Items
+import net.minecraft.item.ItemStack
 import net.minecraft.util.EnumHand
 import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World

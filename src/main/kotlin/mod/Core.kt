@@ -11,7 +11,6 @@ import mod.capability.maxmp.MaxMPStorage
 import mod.capability.mp.IMP
 import mod.capability.mp.MP
 import mod.capability.mp.MPStorage
-import mod.event.bindSkillEvent.BindSkillEvent
 import mod.event.capabilityEvent.CapabilityCloneEvent
 import mod.event.capabilityEvent.CapabilityHandler
 import mod.event.capabilityEvent.LevelUp
@@ -116,7 +115,6 @@ class Core {
 		MinecraftForge.EVENT_BUS.register(CapabilityHandler())
 		MinecraftForge.EVENT_BUS.register(CapabilityCloneEvent())
 		MinecraftForge.EVENT_BUS.register(LevelUp())
-		MinecraftForge.EVENT_BUS.register(BindSkillEvent())
 		MinecraftForge.EVENT_BUS.register(PlayerAttributeEvent())
 	}
 

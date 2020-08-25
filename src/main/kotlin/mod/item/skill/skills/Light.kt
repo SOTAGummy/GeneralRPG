@@ -21,7 +21,6 @@ object Light: ItemSkill("light", 5, SkillRarity.COMMON){
 
 			if (world.getBlockState(pos).block != null && world.getBlockState(down).isFullBlock || world.getBlockState(side1).isFullBlock || world.getBlockState(side2).isFullBlock || world.getBlockState(side3).isFullBlock || world.getBlockState(side4).isFullBlock){
 				world.setBlockState(pos, Blocks.TORCH.defaultState)
-
 			}
 		}
 	}

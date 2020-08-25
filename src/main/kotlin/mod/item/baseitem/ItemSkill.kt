@@ -32,10 +32,12 @@ open class ItemSkill(name: String, val cost: Int, val rarity: SkillRarity) : Gen
 	override fun addInformation(stack: ItemStack, worldIn: World?, tooltip: MutableList<String>, flagIn: ITooltipFlag) {
 		super.addInformation(stack, worldIn, tooltip, flagIn)
 		val rarityFormat = I18n.format(rarity.toString())
+		val costFormat = I18n.format(cost.toString())
 		val item = stack.item as ItemSkill
 		val rarity = item.rarity
 
-		tooltip.add("Rarity : " + "${rarity.colorChar}${TextFormatting.BOLD}$rarityFormat")
+		tooltip.add("Cost : ${TextFormatting.BOLD}$costFormat")
+		tooltip.add("Rarity : ${rarity.colorChar}${TextFormatting.BOLD}$rarityFormat")
 	}
 
 	open fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand) {}
