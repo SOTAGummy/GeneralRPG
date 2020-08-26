@@ -57,8 +57,7 @@ class Core {
 		const val version = "1.0"
 
 		@SidedProxy(clientSide = "mod.proxy.ClientProxy", serverSide = "mod.proxy.ServerProxy")
-		@JvmStatic
-		lateinit var proxy: CommonProxy
+		var proxy: CommonProxy? = null
 
 		@Mod.Instance(ID)
 		var instance: Core? = null
@@ -98,7 +97,7 @@ class Core {
 
 	@Mod.EventHandler
 	fun preInit(event: FMLPreInitializationEvent?) {
-		proxy.preInit()
+		proxy?.preInit()
 		if (event?.side?.isClient!!) {
 			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(injection_table), 0, ModelResourceLocation(ResourceLocation(ID, "injection_table"), "inventory"))
 			GameRegistry.registerTileEntity(TileEntityInjectionTable::class.java, ResourceLocation(ID, "injection_table"))
@@ -116,12 +115,13 @@ class Core {
 		MinecraftForge.EVENT_BUS.register(CapabilityCloneEvent())
 		MinecraftForge.EVENT_BUS.register(LevelUp())
 		MinecraftForge.EVENT_BUS.register(PlayerAttributeEvent())
+		proxy?.init()
 	}
 
 	@Mod.EventHandler
 	fun postInit(event: FMLPostInitializationEvent?) {
 		MinecraftForge.EVENT_BUS.register(RenderMPIndicator())
-		proxy.postInit()
+		proxy?.postInit()
 	}
 
 	@SubscribeEvent
@@ -137,12 +137,8 @@ class Core {
 		event?.registry?.register(injection_table)
 	}
 
-	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
 	fun registerModel(event: ModelRegistryEvent) {
-		for (model in Storage.Items) {
-			ModelLoader.setCustomModelResourceLocation(model, 0, ModelResourceLocation(ResourceLocation(ID, model.unlocalizedName.split(".")[1]), "inventory"))
-		}
-		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(injection_table), 0, ModelResourceLocation(ResourceLocation(ID, "injection_table"), "inventory"))
+		proxy?.registerModel()
 	}
 }

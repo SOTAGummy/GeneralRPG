@@ -47,43 +47,45 @@ class InjectionTable : BlockContainer(Material.IRON) {
 		val stack = player!!.getHeldItem(hand)
 		val sneak = player.isSneaking
 
-		when (te?.getSkill()) {
-			0 -> {
-				if (stack.item is ItemSkill) {
-					te.setSkill(Item.getIdFromItem(stack.item))
-					player.setHeldItem(EnumHand.MAIN_HAND, ItemStack.EMPTY)
+		if (!world.isRemote) {
+			when (te?.getSkill()) {
+				0 -> {
+					if (stack.item is ItemSkill) {
+						te.setSkill(Item.getIdFromItem(stack.item))
+						player.setHeldItem(EnumHand.MAIN_HAND, ItemStack.EMPTY)
 
-					val skill = ItemStack(Item.getItemById(te.getSkill()))
-					val item = AnimateItem(world, pos!!.x.toDouble() + 0.5, (pos.y + 1).toDouble(), pos.z.toDouble() + 0.5, skill, skill.displayName)
-					entity = item
-					if (world.isRemote) world.spawnEntity(entity)
-				}
-			}
-
-			else -> {
-				if (stack.item is ItemSkillContainer) {
-					if (stack.tagCompound == null) {
-						val nbt = NBTTagCompound()
-						nbt.setInteger("1", te!!.getSkill())
-						stack.tagCompound = nbt
-						te!!.setSkill(0)
+						val skill = ItemStack(Item.getItemById(te.getSkill()))
+						val item = AnimateItem(world, pos!!.x.toDouble() + 0.5, (pos.y + 1).toDouble(), pos.z.toDouble() + 0.5, skill, skill.displayName)
+						entity = item
+						if (world.isRemote) world.spawnEntity(entity)
 					}
+				}
 
-					repeat((stack.item as ItemSkillContainer).capacity){
-						if (stack.tagCompound!!.getInteger((it + 1).toString()) == 0) {
-							stack.tagCompound!!.setInteger((it + 1).toString(), te!!.getSkill())
-							te.setSkill(0)
+				else -> {
+					if (stack.item is ItemSkillContainer) {
+						if (stack.tagCompound == null) {
+							val nbt = NBTTagCompound()
+							nbt.setInteger("1", te!!.getSkill())
+							stack.tagCompound = nbt
+							te!!.setSkill(0)
 						}
 
-						if (entity != null) world.removeEntity(entity)
+						repeat((stack.item as ItemSkillContainer).capacity){
+							if (stack.tagCompound!!.getInteger((it + 1).toString()) == 0) {
+								stack.tagCompound!!.setInteger((it + 1).toString(), te!!.getSkill())
+								te.setSkill(0)
+							}
+
+							if (entity != null) world.removeEntity(entity)
+							entity = null
+						}
+
+					}else if (stack == ItemStack.EMPTY && sneak){
+						player.setHeldItem(hand, ItemStack(Item.getItemById(te!!.getSkill())))
+						te!!.setSkill(0)
+						world.removeEntity(entity)
 						entity = null
 					}
-
-				}else if (stack == ItemStack.EMPTY && sneak){
-					player.setHeldItem(hand, ItemStack(Item.getItemById(te!!.getSkill())))
-					te!!.setSkill(0)
-					world.removeEntity(entity)
-					entity = null
 				}
 			}
 		}
