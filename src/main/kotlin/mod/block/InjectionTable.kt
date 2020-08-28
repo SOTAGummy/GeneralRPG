@@ -48,19 +48,33 @@ class InjectionTable : Block(Material.IRON) {
 
 	override fun onBlockActivated(world: World, pos: BlockPos?, state: IBlockState?, player: EntityPlayer?, hand: EnumHand?, side: EnumFacing?, hitX: Float, hitY: Float, hitZ: Float): Boolean {
 		val stack = player?.getHeldItem(hand)
-		val itemPos = BlockPos(pos!!.x.toDouble() + 0.5, pos.y.toDouble() + 1.0, pos.z.toDouble() + 0.5)
-		val item = AnimateItem(world, pos.x.toDouble() + 0.5, pos.y.toDouble() + 1.0, pos.z.toDouble() + 0.5, stack!!, stack.displayName)
+		val item = AnimateItem(world, pos!!.x.toDouble() + 0.5, pos.y.toDouble() + 1.0, pos.z.toDouble() + 0.5, stack!!, stack.displayName)
+		val itemPos = BlockPos(pos!!.x + 0.5, pos.y + 1.0, pos.z + 0.5)
 
 		if (!world.isRemote){
-			if (stack.item is ItemSkill){
+			if (stack.item is ItemSkill && (IDMap[pos] == null || IDMap[pos] == 0)){
 				player.setHeldItem(hand, ItemStack.EMPTY)
 			}
 		}
 		if (world.isRemote){
-			if (stack.item is ItemSkill){
-				world.spawnEntity(item)
+			if (stack.item is ItemSkill && (IDMap[pos] == null || IDMap[pos] == 0)){
 				entityMap[BlockPos(item.posX, item.posY, item.posZ)] = item
 				IDMap[pos] = Item.getIdFromItem(stack.item)
+				world.spawnEntity(item)
+			}else if (stack.item is ItemSkillContainer && (IDMap[pos] != null || IDMap[pos] != 0)){
+				if (stack.tagCompound == null){
+					val nbt = NBTTagCompound()
+					stack.tagCompound = nbt
+				}
+				if (stack.tagCompound != null){
+					repeat((stack.item as ItemSkillContainer).capacity){
+						if (stack.tagCompound!!.getInteger(it.toString()) == 0){
+							stack.tagCompound!!.setInteger(it.toString(), IDMap[pos]!!)
+							IDMap[pos] = 0
+							world.removeEntity(entityMap[itemPos])
+						}
+					}
+				}
 			}
 		}
 		return true
@@ -74,6 +88,7 @@ class InjectionTable : Block(Material.IRON) {
 			item.setNoPickupDelay()
 			world.spawnEntity(item)
 			world.removeEntity(entityMap[itemPos])
+			IDMap[pos] = 0
 		}
 		super.breakBlock(world, pos, state as IBlockState)
 	}

@@ -29,30 +29,34 @@ open class ItemSkillContainer(name: String, val capacity: Int, private val coolD
 	override fun addInformation(stack: ItemStack, worldIn: World?, tooltip: MutableList<String>, flagIn: ITooltipFlag) {
 		super.addInformation(stack, worldIn, tooltip, flagIn)
 		var cost = 0
-		repeat(capacity + 1) {
-			if (stack.tagCompound != null && stack.tagCompound!!.getInteger(it.toString()) != 0) {
+
+		repeat(capacity) {
+			if (stack.tagCompound != null && stack.tagCompound!!.getInteger(it.toString()) != 0){
 				val format = I18n.format(ItemStack(getItemById(stack.tagCompound!!.getInteger(it.toString()))).displayName)
 				val item = (getItemById(stack.tagCompound!!.getInteger(it.toString()))) as ItemSkill
 				val color = item.rarity.colorChar
+				val count = (it + 1).toString()
 
 				cost += item.cost
-				tooltip.add("$it : $color${TextFormatting.UNDERLINE}$format")
+				tooltip.add("$count : $color${TextFormatting.UNDERLINE}$format")
 			}
 		}
-		if (stack.tagCompound != null) {
-			tooltip.add(cost.toString() + "MP")
-		}
 
+		tooltip.add("")
+
+		if (stack.tagCompound != null){
+			tooltip.add("Cost : " + cost.toString() + "MP")
+		}
 	}
 
 	@SideOnly(Side.CLIENT)
 	override fun onItemRightClick(world: World, player: EntityPlayer, handIn: EnumHand): ActionResult<ItemStack> {
 		val itemstack = player.getHeldItem(handIn)
 		player.activeHand = handIn
-		if (itemstack.tagCompound != null) {
+		if (itemstack.tagCompound != null){
 			GlobalScope.launch {
 				for (i in 1 .. capacity){
-					if (itemstack.tagCompound!!.getInteger(i.toString()) != 0) {
+					if (itemstack.tagCompound!!.getInteger(i.toString()) != 0){
 						val item = (getItemById(itemstack.tagCompound!!.getInteger(i.toString()))) as ItemSkill
 						item.skillFunction(world, player, handIn)
 						delay(500)
