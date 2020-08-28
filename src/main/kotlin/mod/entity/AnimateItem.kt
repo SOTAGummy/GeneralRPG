@@ -10,6 +10,7 @@ class AnimateItem(world: World, val x: Double, val y: Double, val z: Double, ite
 		this.lifespan
 		this.customNameTag = nametag
 		this.setPosition(x, y, z)
+		this.setPickupDelay(10)
 	}
 
 	init {

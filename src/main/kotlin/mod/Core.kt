@@ -100,7 +100,6 @@ class Core {
 		proxy?.preInit()
 		if (event?.side?.isClient!!) {
 			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(injection_table), 0, ModelResourceLocation(ResourceLocation(ID, "injection_table"), "inventory"))
-			GameRegistry.registerTileEntity(TileEntityInjectionTable::class.java, ResourceLocation(ID, "injection_table"))
 		}
 	}
 
