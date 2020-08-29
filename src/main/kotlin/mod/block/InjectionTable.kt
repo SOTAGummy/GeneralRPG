@@ -61,6 +61,7 @@ class InjectionTable : Block(Material.IRON) {
 				entityMap[BlockPos(item.posX, item.posY, item.posZ)] = item
 				IDMap[pos] = Item.getIdFromItem(stack.item)
 				world.spawnEntity(item)
+				player.setHeldItem(hand, ItemStack.EMPTY)
 			}else if (stack.item is ItemSkillContainer && (IDMap[pos] != null || IDMap[pos] != 0)){
 				if (stack.tagCompound == null){
 					val nbt = NBTTagCompound()

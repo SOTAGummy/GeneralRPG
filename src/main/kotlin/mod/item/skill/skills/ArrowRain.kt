@@ -3,6 +3,7 @@ package mod.item.skill.skills
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import mod.item.baseitem.ItemSkill
 import mod.item.skill.SkillRarity
 import mod.util.StatusUtil
@@ -17,10 +18,10 @@ import net.minecraft.world.World
 import kotlin.random.Random
 
 object ArrowRain: ItemSkill("arrowrain", 20, SkillRarity.RARE){
-	override fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand) {
+	override suspend fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand) {
 		if (StatusUtil().useMP(player, this.cost)){
 			if (!world.isRemote){
-				GlobalScope.launch {
+				runBlocking{
 					val pos = player.rayTrace(15.0, 0.0F)?.blockPos!!
 					val itemstack = ItemStack(Items.ARROW)
 					repeat(5){
@@ -31,9 +32,9 @@ object ArrowRain: ItemSkill("arrowrain", 20, SkillRarity.RARE){
 						val arrow1 = itemarrow.createArrow(world, itemstack, player)
 						arrow1.setPosition(pos.x.toDouble() + randomx, pos.y.toDouble() + 5.0, pos.z.toDouble() + randomz)
 						arrow1.damage = 1.0
-						arrow1.setVelocity(0.0, -1.0, 0.0)
+						arrow1.setVelocity(0.0, -2.0, 0.0)
 						world.spawnEntity(arrow1)
-						delay(100)
+						delay(50)
 						world.removeEntity(arrow1)
 					}
 				}
