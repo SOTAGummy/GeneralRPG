@@ -55,7 +55,7 @@ open class ItemSkillContainer(name: String, val capacity: Int, private val coolD
 		player.activeHand = handIn
 		if (itemstack.tagCompound != null) {
 			GlobalScope.launch {
-				for (i in 1..capacity) {
+				for (i in 0..capacity) {
 					if (itemstack.tagCompound!!.getInteger(i.toString()) != 0) {
 						val item = (getItemById(itemstack.tagCompound!!.getInteger(i.toString()))) as ItemSkill
 						item.skillFunction(world, player, handIn)

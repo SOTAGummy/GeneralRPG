@@ -69,7 +69,7 @@ class Core {
 		val togglemode = ToggleMode
 		val fulfill = Fulfill
 		val light = Light
-		val hole = Hole
+		val blackhole = BlackHole
 
 		val common_token = CommonToken
 		val uncommon_token = UncommonToken
