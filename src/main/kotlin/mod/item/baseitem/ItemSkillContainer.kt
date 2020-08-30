@@ -30,10 +30,10 @@ open class ItemSkillContainer(name: String, val capacity: Int, private val coolD
 		super.addInformation(stack, worldIn, tooltip, flagIn)
 		var cost = 0
 
-		repeat(capacity) {
-			if (stack.tagCompound != null && stack.tagCompound!!.getInteger(it.toString()) != 0) {
-				val format = I18n.format(ItemStack(getItemById(stack.tagCompound!!.getInteger(it.toString()))).displayName)
-				val item = (getItemById(stack.tagCompound!!.getInteger(it.toString()))) as ItemSkill
+		repeat(capacity + 1) {
+			if (stack.tagCompound != null && stack.tagCompound!!.getInteger((it + 1).toString()) != 0) {
+				val format = I18n.format(ItemStack(getItemById(stack.tagCompound!!.getInteger((it + 1).toString()))).displayName)
+				val item = (getItemById(stack.tagCompound!!.getInteger((it + 1).toString()))) as ItemSkill
 				val color = item.rarity.colorChar
 				val count = (it + 1).toString()
 
@@ -55,9 +55,9 @@ open class ItemSkillContainer(name: String, val capacity: Int, private val coolD
 		player.activeHand = handIn
 		if (itemstack.tagCompound != null) {
 			GlobalScope.launch {
-				for (i in 0..capacity) {
-					if (itemstack.tagCompound!!.getInteger(i.toString()) != 0) {
-						val item = (getItemById(itemstack.tagCompound!!.getInteger(i.toString()))) as ItemSkill
+				repeat(capacity + 1){
+					if (itemstack.tagCompound!!.getInteger((it + 1) .toString()) != 0) {
+						val item = (getItemById(itemstack.tagCompound!!.getInteger((it + 1).toString()))) as ItemSkill
 						item.skillFunction(world, player, handIn)
 						delay(500)
 					}

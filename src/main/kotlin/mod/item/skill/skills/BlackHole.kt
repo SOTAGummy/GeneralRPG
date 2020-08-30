@@ -10,6 +10,7 @@ import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.util.EnumHand
 import net.minecraft.world.World
 import kotlin.math.abs
+import kotlin.math.pow
 
 object BlackHole : ItemSkill("blackhole", 50, SkillRarity.LEGEND) {
 	override suspend fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand) {
@@ -18,22 +19,14 @@ object BlackHole : ItemSkill("blackhole", 50, SkillRarity.LEGEND) {
 		val pos = player.rayTrace(15.0, 0.0F)!!.blockPos
 
 		repeat(entityList.size) {
-			if (entityList[it] is EntityLiving && entityList[it].getDistanceSq(pos) <= 15) {
+			if (entityList[it] is EntityLiving && entityList[it] !is EntityPlayer && entityList[it].getDistanceSq(pos).toInt() <= 15.0) {
 				livingList.add(entityList[it] as EntityLiving)
+				println(entityList[it].getDistanceSq(pos))
 			}
 		}
 
-		GlobalScope.launch {
-			repeat(10) {
-				repeat(livingList.size) {
-					val disX = abs(pos.x - livingList[it].posX)
-					val disY = abs(pos.y - livingList[it].posY)
-					val disZ = abs(pos.z - livingList[it].posZ)
-
-					entityList[it].addVelocity(disX, disY, disZ)
-					delay(10)
-				}
-			}
+		repeat(livingList.size){
+			livingList[it].setPosition(pos.x.toDouble(), pos.y.toDouble() + 1.0, pos.z.toDouble())
 		}
 	}
 }
