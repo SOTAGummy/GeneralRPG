@@ -6,19 +6,19 @@ import net.minecraftforge.fml.common.Mod
 
 @Mod.EventBusSubscriber(modid = Core.ID)
 open class CommonProxy {
-	open fun preInit(){
+	open fun preInit() {
 
 	}
 
-	open fun init(){
+	open fun init() {
 
 	}
 
-	open fun postInit(){
+	open fun postInit() {
 
 	}
 
-	open fun registerModel(){
+	open fun registerModel() {
 
 	}
 

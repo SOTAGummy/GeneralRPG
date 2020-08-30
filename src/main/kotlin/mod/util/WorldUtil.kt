@@ -14,7 +14,7 @@ class WorldUtil {
 		return world.getEntitiesWithinAABB(Entity::class.java, AxisAlignedBB(x, y, z, x + radius, y + radius, z + radius))
 	}
 
-	fun getAnimateItemFromUniqueId(world: World, uuid: UUID){
+	fun getAnimateItemFromUniqueId(world: World, uuid: UUID) {
 
 	}
 }

@@ -1,6 +1,1 @@
-{
-  "parent": "item/generated",
-  "textures": {
-	"layer0": "general-rpg:items/itemskill"
-  }
-}
+{"parent":"item/generated","textures":{"layer0":"general-rpg:items/itemskill"}}

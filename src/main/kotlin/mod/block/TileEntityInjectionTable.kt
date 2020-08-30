@@ -2,7 +2,6 @@ package mod.block
 
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.tileentity.TileEntity
-import java.util.*
 
 
 class TileEntityInjectionTable : TileEntity() {

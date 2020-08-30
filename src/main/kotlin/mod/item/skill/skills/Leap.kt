@@ -9,9 +9,9 @@ import net.minecraft.util.math.MathHelper
 import net.minecraft.world.World
 
 
-object Leap: ItemSkill("leap", 25, SkillRarity.EPIC){
-	override suspend fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand){
-		if (StatusUtil().useMP(player, this.cost)){
+object Leap : ItemSkill("leap", 25, SkillRarity.EPIC) {
+	override suspend fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand) {
+		if (StatusUtil().useMP(player, this.cost)) {
 			val vx = -MathHelper.sin(Math.toRadians(player.rotationYaw.toDouble()).toFloat()) * MathHelper.cos(Math.toRadians(player.rotationPitch.toDouble()).toFloat())
 			val vz = MathHelper.cos(Math.toRadians(player.rotationYaw.toDouble()).toFloat()) * MathHelper.cos(Math.toRadians(player.rotationPitch.toDouble()).toFloat())
 			val vy = -MathHelper.sin(Math.toRadians(player.rotationPitch.toDouble()).toFloat())

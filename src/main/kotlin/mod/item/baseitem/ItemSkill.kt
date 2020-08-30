@@ -1,7 +1,11 @@
 package mod.item.baseitem
 
+import com.google.gson.Gson
+import com.google.gson.stream.JsonWriter
 import mod.Core
 import mod.item.skill.SkillRarity
+import mod.json.ItemJson
+import mod.json.Textures
 import mod.util.Storage
 import net.minecraft.client.resources.I18n
 import net.minecraft.client.util.ITooltipFlag
@@ -11,8 +15,10 @@ import net.minecraft.util.EnumHand
 import net.minecraft.util.ResourceLocation
 import net.minecraft.util.text.TextFormatting
 import net.minecraft.world.World
+import java.io.File
+import java.io.FileWriter
 
-open class ItemSkill(name: String, val cost: Int, val rarity: SkillRarity) : GeneralRPGItem() {
+open class ItemSkill(val name: String, val cost: Int, val rarity: SkillRarity) : GeneralRPGItem() {
 	init {
 		this.unlocalizedName = name
 		this.maxStackSize = 1
@@ -22,6 +28,20 @@ open class ItemSkill(name: String, val cost: Int, val rarity: SkillRarity) : Gen
 		Rarity = rarity
 		Storage.Skills.add(this)
 		rarity.skills.add(this)
+
+		val path  = "D:\\mod\\GeneralRPG\\src\\main\\resources\\assets\\general-rpg\\models\\item\\$name.json"
+		val json = JsonWriter(FileWriter(path))
+
+		if (File(path).exists()){
+			json.beginObject() // {
+			json.name("parent").value("item/generated") // "parent" : "item/generated"
+			json.name("textures") // "textures : "
+			json.beginObject() // {
+			json.name("layer0").value("general-rpg:items/itemskill") // "layer0" : "general-rpg:items/itemskill"
+			json.endObject() // }
+			json.endObject() // }
+			json.close()
+		}
 	}
 
 	companion object {

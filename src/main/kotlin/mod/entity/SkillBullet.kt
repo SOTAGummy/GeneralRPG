@@ -5,7 +5,7 @@ import net.minecraft.entity.IProjectile
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.world.World
 
-class SkillBullet(worldIn: World) : Entity(worldIn), IProjectile{
+class SkillBullet(worldIn: World) : Entity(worldIn), IProjectile {
 	override fun entityInit() {
 
 	}

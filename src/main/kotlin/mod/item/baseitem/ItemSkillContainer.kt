@@ -18,7 +18,7 @@ import net.minecraft.world.World
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 
-open class ItemSkillContainer(name: String, val capacity: Int, private val coolDown: Int): GeneralRPGItem(){
+open class ItemSkillContainer(name: String, val capacity: Int, private val coolDown: Int) : GeneralRPGItem() {
 	init {
 		this.unlocalizedName = name
 		this.creativeTab = Core.creativeaTab
@@ -31,7 +31,7 @@ open class ItemSkillContainer(name: String, val capacity: Int, private val coolD
 		var cost = 0
 
 		repeat(capacity) {
-			if (stack.tagCompound != null && stack.tagCompound!!.getInteger(it.toString()) != 0){
+			if (stack.tagCompound != null && stack.tagCompound!!.getInteger(it.toString()) != 0) {
 				val format = I18n.format(ItemStack(getItemById(stack.tagCompound!!.getInteger(it.toString()))).displayName)
 				val item = (getItemById(stack.tagCompound!!.getInteger(it.toString()))) as ItemSkill
 				val color = item.rarity.colorChar
@@ -44,7 +44,7 @@ open class ItemSkillContainer(name: String, val capacity: Int, private val coolD
 
 		tooltip.add("")
 
-		if (stack.tagCompound != null){
+		if (stack.tagCompound != null) {
 			tooltip.add("Cost : " + cost.toString() + "MP")
 		}
 	}
@@ -53,10 +53,10 @@ open class ItemSkillContainer(name: String, val capacity: Int, private val coolD
 	override fun onItemRightClick(world: World, player: EntityPlayer, handIn: EnumHand): ActionResult<ItemStack> {
 		val itemstack = player.getHeldItem(handIn)
 		player.activeHand = handIn
-		if (itemstack.tagCompound != null){
+		if (itemstack.tagCompound != null) {
 			GlobalScope.launch {
-				for (i in 1 .. capacity){
-					if (itemstack.tagCompound!!.getInteger(i.toString()) != 0){
+				for (i in 1..capacity) {
+					if (itemstack.tagCompound!!.getInteger(i.toString()) != 0) {
 						val item = (getItemById(itemstack.tagCompound!!.getInteger(i.toString()))) as ItemSkill
 						item.skillFunction(world, player, handIn)
 						delay(500)

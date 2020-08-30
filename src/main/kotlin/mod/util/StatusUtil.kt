@@ -34,7 +34,7 @@ class StatusUtil {
 		return player.getCapability(MaxMPProvider.MAX_MP_CAP!!, null)?.get()!!.toInt()
 	}
 
-	fun getLevel(player: EntityPlayer): Int{
+	fun getLevel(player: EntityPlayer): Int {
 		val exp = player.getCapability(ExpProvider.EXP_CAP!!, null)?.get()!!.toDouble()
 		return (log(0.1 * exp / 8, 1.1) + 1.0).toInt()
 	}
