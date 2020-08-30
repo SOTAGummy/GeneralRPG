@@ -18,6 +18,7 @@ item.blackhole.name=BlackHole
 
 item.skillbook.name=SkillBook
 item.skillstaff.name=SkillStaff
+item.skillorb.name=SkillOrb
 
 tile.injection_table.name=InjectionTable
 itemGroup.general-rpg=GeneralRPG

@@ -10,13 +10,11 @@ import mod.capability.maxmp.MaxMPStorage
 import mod.capability.mp.IMP
 import mod.capability.mp.MP
 import mod.capability.mp.MPStorage
-import mod.event.capabilityEvent.CapabilityCloneEvent
-import mod.event.capabilityEvent.CapabilityHandler
-import mod.event.capabilityEvent.LevelUp
-import mod.event.capabilityEvent.PlayerAttributeEvent
+import mod.event.capabilityEvent.*
 import mod.gui.mpindicator.RenderMPIndicator
 import mod.item.items.*
 import mod.item.skill.containers.SkillBook
+import mod.item.skill.containers.SkillOrb
 import mod.item.skill.containers.SkillStaff
 import mod.item.skill.skills.*
 import mod.proxy.CommonProxy
@@ -81,6 +79,7 @@ class Core {
 
 		val skillbook = SkillBook
 		val skillstaff = SkillStaff
+		val skillorb = SkillOrb
 
 		val injection_table = InjectionTable()
 	}
@@ -110,6 +109,7 @@ class Core {
 		MinecraftForge.EVENT_BUS.register(CapabilityCloneEvent())
 		MinecraftForge.EVENT_BUS.register(LevelUp())
 		MinecraftForge.EVENT_BUS.register(PlayerAttributeEvent())
+		MinecraftForge.EVENT_BUS.register(TickEvent())
 		proxy?.init()
 	}
 

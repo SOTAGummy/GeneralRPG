@@ -18,6 +18,7 @@ item.blackhole.name=ブラックホール
 
 item.skillbook.name=スキルブック
 item.skillstaff.name=スキルスタッフ
+item.skillorb.name=スキルオーブ
 
 tile.injection_table.name=インジェクションテーブル
 itemGroup.general-rpg=GeneralRPG

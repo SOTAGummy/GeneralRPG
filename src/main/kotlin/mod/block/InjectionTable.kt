@@ -63,7 +63,7 @@ class InjectionTable : Block(Material.IRON) {
 					stack.tagCompound = nbt
 				}
 				if (stack.tagCompound != null) {
-					repeat((stack.item as ItemSkillContainer).capacity + 1) {
+					repeat((stack.item as ItemSkillContainer).capacity) {
 						if (stack.tagCompound!!.getInteger((it + 1).toString()) == 0) {
 							stack.tagCompound!!.setInteger((it + 1).toString(), IDMap[pos]!!)
 							IDMap[pos] = 0

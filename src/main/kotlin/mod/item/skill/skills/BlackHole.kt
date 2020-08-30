@@ -1,19 +1,14 @@
 package mod.item.skill.skills
 
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import mod.item.baseitem.ItemSkill
 import mod.item.skill.SkillRarity
 import net.minecraft.entity.EntityLiving
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.util.EnumHand
 import net.minecraft.world.World
-import kotlin.math.abs
-import kotlin.math.pow
 
-object BlackHole : ItemSkill("blackhole", 50, SkillRarity.LEGEND) {
-	override suspend fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand) {
+object BlackHole : ItemSkill("blackhole", 50, SkillRarity.RARE) {
+	override fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand) {
 		val entityList = world.loadedEntityList
 		val livingList = arrayListOf<EntityLiving>()
 		val pos = player.rayTrace(15.0, 0.0F)!!.blockPos

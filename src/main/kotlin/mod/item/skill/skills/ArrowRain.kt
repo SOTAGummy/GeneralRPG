@@ -1,7 +1,6 @@
 package mod.item.skill.skills
 
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.*
 import mod.item.baseitem.ItemSkill
 import mod.item.skill.SkillRarity
 import mod.util.StatusUtil
@@ -14,23 +13,24 @@ import net.minecraft.world.World
 import kotlin.random.Random
 
 object ArrowRain : ItemSkill("arrowrain", 20, SkillRarity.RARE) {
-	override suspend fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand) {
+	override fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand) {
 		if (StatusUtil().useMP(player, this.cost)) {
 			if (!world.isRemote) {
-				runBlocking {
-					val pos = player.rayTrace(15.0, 0.0F)?.blockPos!!
-					val itemstack = ItemStack(Items.ARROW)
-					repeat(5) {
-						val randomx = Random.nextDouble(3.0)
-						val randomz = Random.nextDouble(3.0)
+				val pos = player.rayTrace(15.0, 0.0F)?.blockPos!!
+				val itemstack = ItemStack(Items.ARROW)
+				repeat(5) {
+					val randomx = Random.nextDouble(3.0)
+					val randomz = Random.nextDouble(3.0)
 
-						val itemarrow = (if (itemstack.getItem() is ItemArrow) itemstack.getItem() else Items.ARROW) as ItemArrow
-						val arrow1 = itemarrow.createArrow(world, itemstack, player)
-						arrow1.setPosition(pos.x.toDouble() + randomx, pos.y.toDouble() + 5.0, pos.z.toDouble() + randomz)
-						arrow1.damage = 1.0
-						arrow1.setVelocity(0.0, -2.0, 0.0)
+					val itemarrow = (if (itemstack.getItem() is ItemArrow) itemstack.getItem() else Items.ARROW) as ItemArrow
+					val arrow1 = itemarrow.createArrow(world, itemstack, player)
+					arrow1.setPosition(pos.x.toDouble() + randomx, pos.y.toDouble() + 5.0, pos.z.toDouble() + randomz)
+					arrow1.damage = 1.0
+					arrow1.shootingEntity = player
+					arrow1.addVelocity(0.0, -2.0, 0.0)
+					GlobalScope.launch{
 						world.spawnEntity(arrow1)
-						delay(50)
+						delay(100)
 						world.removeEntity(arrow1)
 					}
 				}
