@@ -8,7 +8,7 @@ import net.minecraft.util.EnumHand
 import net.minecraft.world.World
 
 object BlackHole : ItemSkill("blackhole", 50, SkillRarity.RARE) {
-	override fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand) {
+	override suspend fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand) {
 		val entityList = world.loadedEntityList
 		val livingList = arrayListOf<EntityLiving>()
 		val pos = player.rayTrace(15.0, 0.0F)!!.blockPos

@@ -9,5 +9,7 @@ enum class SkillRarity(val colorChar: TextFormatting, val skills: ArrayList<Item
 	RARE(TextFormatting.AQUA, arrayListOf()),
 	EPIC(TextFormatting.LIGHT_PURPLE, arrayListOf()),
 	LEGEND(TextFormatting.GOLD, arrayListOf()),
+	MYTHIC(TextFormatting.YELLOW, arrayListOf()),
+	EXTRA(TextFormatting.DARK_BLUE, arrayListOf()),
 	MASTER(TextFormatting.RED, arrayListOf())
 }

@@ -3,11 +3,13 @@ package mod.item.baseitem
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import mod.Core
 import net.minecraft.client.resources.I18n
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.EnumAction
+import net.minecraft.item.ItemDye
 import net.minecraft.item.ItemStack
 import net.minecraft.util.ActionResult
 import net.minecraft.util.EnumActionResult
@@ -57,9 +59,13 @@ open class ItemSkillContainer(name: String, val capacity: Int, private val coolD
 			repeat(capacity + 1){
 				if (itemstack.tagCompound!!.getInteger((it + 1) .toString()) != 0) {
 					val item = (getItemById(itemstack.tagCompound!!.getInteger((it + 1).toString()))) as ItemSkill
-					item.skillFunction(world, player, handIn)
 					GlobalScope.launch {
-						delay(500)
+						runBlocking {
+							item.skillFunction(world, player, handIn)
+						}
+						GlobalScope.launch {
+							delay(500)
+						}.join()
 					}
 				}
 			}

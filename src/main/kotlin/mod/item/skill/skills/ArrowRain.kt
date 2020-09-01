@@ -1,10 +1,14 @@
 package mod.item.skill.skills
 
-import kotlinx.coroutines.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import mod.item.baseitem.ItemSkill
 import mod.item.skill.SkillRarity
 import mod.util.StatusUtil
 import net.minecraft.entity.player.EntityPlayer
+import net.minecraft.entity.projectile.EntityTippedArrow
 import net.minecraft.init.Items
 import net.minecraft.item.ItemArrow
 import net.minecraft.item.ItemStack
@@ -12,8 +16,8 @@ import net.minecraft.util.EnumHand
 import net.minecraft.world.World
 import kotlin.random.Random
 
-object ArrowRain : ItemSkill("arrowrain", 20, SkillRarity.RARE) {
-	override fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand) {
+object ArrowRain : ItemSkill("arrowrain", 20, SkillRarity.UNCOMMON) {
+	override suspend fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand) {
 		if (StatusUtil().useMP(player, this.cost)) {
 			if (!world.isRemote) {
 				val pos = player.rayTrace(15.0, 0.0F)?.blockPos!!
@@ -28,9 +32,15 @@ object ArrowRain : ItemSkill("arrowrain", 20, SkillRarity.RARE) {
 					arrow1.damage = 1.0
 					arrow1.shootingEntity = player
 					arrow1.addVelocity(0.0, -2.0, 0.0)
-					GlobalScope.launch{
+					runBlocking {
 						world.spawnEntity(arrow1)
+					}
+
+					GlobalScope.launch {
 						delay(100)
+					}.join()
+
+					runBlocking {
 						world.removeEntity(arrow1)
 					}
 				}
