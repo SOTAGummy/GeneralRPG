@@ -3,8 +3,6 @@ package mod.entity
 import net.minecraft.entity.item.EntityItem
 import net.minecraft.item.ItemStack
 import net.minecraft.world.World
-import net.minecraftforge.fml.relauncher.Side
-import net.minecraftforge.fml.relauncher.SideOnly
 
 class AnimateItem(world: World, val x: Double, val y: Double, val z: Double, item: ItemStack, val nametag: String) : EntityItem(world, x, y, z, item) {
 	override fun onUpdate() {

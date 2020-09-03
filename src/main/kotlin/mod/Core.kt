@@ -10,6 +10,8 @@ import mod.capability.maxmp.MaxMPStorage
 import mod.capability.mp.IMP
 import mod.capability.mp.MP
 import mod.capability.mp.MPStorage
+import mod.entity.bullet.RenderSkillBullet
+import mod.entity.bullet.SkillBullet
 import mod.event.capabilityEvent.*
 import mod.gui.mpindicator.RenderMPIndicator
 import mod.item.items.*
@@ -32,6 +34,7 @@ import net.minecraftforge.client.model.ModelLoader
 import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.common.capabilities.CapabilityManager
 import net.minecraftforge.event.RegistryEvent
+import net.minecraftforge.fml.client.registry.RenderingRegistry
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.common.SidedProxy
 import net.minecraftforge.fml.common.event.FMLConstructionEvent
@@ -39,6 +42,8 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
+import net.minecraftforge.fml.common.registry.EntityEntry
+import net.minecraftforge.fml.common.registry.EntityEntryBuilder
 
 
 @Mod(modid = Core.ID, name = Core.Name, version = Core.version, modLanguage = "kotlin")
@@ -58,6 +63,13 @@ class Core {
 		var creativeaTab: CreativeTabs = GeneralRPGTab()
 		var skillTab: CreativeTabs = GeneralRPGSkillTab()
 
+		val skill_bullet = EntityEntryBuilder.create<SkillBullet>()
+				.entity(SkillBullet::class.java)
+				.id(ResourceLocation(ID + "skill_bullet"), 1)
+				.name("skill_bullet")
+				.tracker(128, 1, true)
+				.build()
+
 		val heal = Heal
 		val rage = Rage
 		val shield = Shield
@@ -76,6 +88,7 @@ class Core {
 		val legend_token = LegendToken
 
 		val test = Test
+		val item_skill_bullet = ItemSkillBullet()
 
 		val skillbook = SkillBook
 		val skillstaff = SkillStaff
@@ -133,7 +146,13 @@ class Core {
 	}
 
 	@SubscribeEvent
+	fun registerEntities(event: RegistryEvent.Register<EntityEntry>) {
+		event.registry.register(skill_bullet)
+	}
+
+	@SubscribeEvent
 	fun registerModel(event: ModelRegistryEvent) {
 		proxy?.registerModel()
+		//RenderingRegistry.registerEntityRenderingHandler(SkillBullet::class.java, RenderSkillBullet(item_skill_bullet))
 	}
 }

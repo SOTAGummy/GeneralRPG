@@ -8,7 +8,6 @@ import mod.item.baseitem.ItemSkill
 import mod.item.skill.SkillRarity
 import mod.util.StatusUtil
 import net.minecraft.entity.player.EntityPlayer
-import net.minecraft.entity.projectile.EntityTippedArrow
 import net.minecraft.init.Items
 import net.minecraft.item.ItemArrow
 import net.minecraft.item.ItemStack
@@ -32,17 +31,13 @@ object ArrowRain : ItemSkill("arrowrain", 20, SkillRarity.UNCOMMON) {
 					arrow1.damage = 1.0
 					arrow1.shootingEntity = player
 					arrow1.addVelocity(0.0, -2.0, 0.0)
+
 					runBlocking {
 						world.spawnEntity(arrow1)
 					}
-
 					GlobalScope.launch {
 						delay(100)
 					}.join()
-
-					runBlocking {
-						world.removeEntity(arrow1)
-					}
 				}
 			}
 		}

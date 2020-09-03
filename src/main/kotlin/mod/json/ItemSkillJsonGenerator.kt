@@ -1,6 +1,6 @@
 package mod.json
 
-class ItemSkillJsonGenerator {
+object ItemSkillJsonGenerator {
 	val jsonText = "{\n" +
 			"\t\"credit\": \"Made with Blockbench\",\n" +
 			"\t\"textures\": {\n" +
@@ -295,9 +295,11 @@ class ItemSkillJsonGenerator {
 			"\t\t\t\"scale\": [0.4, 0.4, 0.4]\n" +
 			"\t\t},\n" +
 			"\t\t\"firstperson_righthand\": {\n" +
+			"\t\t\t\"translation\": [0, 2.5, 0],\n" +
 			"\t\t\t\"scale\": [0.5, 0.5, 0.5]\n" +
 			"\t\t},\n" +
 			"\t\t\"firstperson_lefthand\": {\n" +
+			"\t\t\t\"translation\": [0, 2.5, 0],\n" +
 			"\t\t\t\"scale\": [0.5, 0.5, 0.5]\n" +
 			"\t\t},\n" +
 			"\t\t\"ground\": {\n" +
@@ -313,8 +315,4 @@ class ItemSkillJsonGenerator {
 			"\t\t}\n" +
 			"\t]\n" +
 			"}"
-
-	fun createItemSkillJson(name: String) {
-
-	}
 }

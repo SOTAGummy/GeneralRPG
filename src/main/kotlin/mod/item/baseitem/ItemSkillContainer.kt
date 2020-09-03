@@ -3,13 +3,11 @@ package mod.item.baseitem
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import mod.Core
 import net.minecraft.client.resources.I18n
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.EnumAction
-import net.minecraft.item.ItemDye
 import net.minecraft.item.ItemStack
 import net.minecraft.util.ActionResult
 import net.minecraft.util.EnumActionResult
@@ -17,8 +15,6 @@ import net.minecraft.util.EnumHand
 import net.minecraft.util.ResourceLocation
 import net.minecraft.util.text.TextFormatting
 import net.minecraft.world.World
-import net.minecraftforge.fml.relauncher.Side
-import net.minecraftforge.fml.relauncher.SideOnly
 
 open class ItemSkillContainer(name: String, val capacity: Int, private val coolDown: Int) : GeneralRPGItem() {
 	init {
@@ -51,21 +47,16 @@ open class ItemSkillContainer(name: String, val capacity: Int, private val coolD
 		}
 	}
 
-	@SideOnly(Side.CLIENT)
 	override fun onItemRightClick(world: World, player: EntityPlayer, handIn: EnumHand): ActionResult<ItemStack> {
 		val itemstack = player.getHeldItem(handIn)
 		player.activeHand = handIn
 		if (itemstack.tagCompound != null) {
-			repeat(capacity + 1){
-				if (itemstack.tagCompound!!.getInteger((it + 1) .toString()) != 0) {
-					val item = (getItemById(itemstack.tagCompound!!.getInteger((it + 1).toString()))) as ItemSkill
-					GlobalScope.launch {
-						runBlocking {
-							item.skillFunction(world, player, handIn)
-						}
-						GlobalScope.launch {
-							delay(500)
-						}.join()
+			GlobalScope.launch {
+				repeat(capacity + 1) {
+					if (itemstack.tagCompound!!.getInteger((it + 1).toString()) != 0) {
+						val item = (getItemById(itemstack.tagCompound!!.getInteger((it + 1).toString()))) as ItemSkill
+						item.skillFunction(world, player, handIn)
+						delay(500)
 					}
 				}
 			}

@@ -20,7 +20,7 @@ object BlackHole : ItemSkill("blackhole", 50, SkillRarity.RARE) {
 			}
 		}
 
-		repeat(livingList.size){
+		repeat(livingList.size) {
 			livingList[it].setPosition(pos.x.toDouble(), pos.y.toDouble() + 1.0, pos.z.toDouble())
 		}
 	}

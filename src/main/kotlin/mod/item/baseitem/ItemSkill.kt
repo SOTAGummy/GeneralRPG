@@ -1,13 +1,11 @@
 package mod.item.baseitem
 
-import com.google.gson.stream.JsonWriter
 import mod.Core
 import mod.item.skill.SkillRarity
 import mod.json.ItemSkillJsonGenerator
 import mod.util.Storage
 import net.minecraft.client.resources.I18n
 import net.minecraft.client.util.ITooltipFlag
-import net.minecraft.entity.item.EntityXPOrb
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemStack
 import net.minecraft.util.EnumHand
@@ -15,8 +13,6 @@ import net.minecraft.util.ResourceLocation
 import net.minecraft.util.text.TextFormatting
 import net.minecraft.world.World
 import java.io.File
-import java.io.FileWriter
-import java.lang.Exception
 
 open class ItemSkill(val name: String, val cost: Int, val rarity: SkillRarity) : GeneralRPGItem() {
 	init {
@@ -30,12 +26,10 @@ open class ItemSkill(val name: String, val cost: Int, val rarity: SkillRarity) :
 		rarity.skills.add(this)
 
 		val file = File("D:\\mod\\GeneralRPG\\src\\main\\resources\\assets\\general-rpg\\models\\item\\$name.json")
-		if (!file.exists()){
+		if (!file.exists()) {
 			file.createNewFile()
-			file.writeText(ItemSkillJsonGenerator().jsonText)
+			file.writeText(ItemSkillJsonGenerator.jsonText)
 		}
-
-		ItemSkillJsonGenerator().createItemSkillJson(name)
 	}
 
 	companion object {

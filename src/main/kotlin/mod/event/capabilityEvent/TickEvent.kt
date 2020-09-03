@@ -8,9 +8,9 @@ class TickEvent {
 	var count = 0
 
 	@SubscribeEvent
-	fun onTickEvent(event: TickEvent.PlayerTickEvent){
+	fun onTickEvent(event: TickEvent.PlayerTickEvent) {
 		count++
-		if (count == 40){
+		if (count == 80) {
 			count = 0
 			StatusUtil().addMP(event.player, 1)
 			println(event.player.name)
