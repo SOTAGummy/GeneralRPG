@@ -15,6 +15,7 @@ item.explosion.name=Explosion
 item.arrowrain.name=ArrowRain
 item.light.name=Light
 item.blackhole.name=BlackHole
+item.skillbullettest.name=SkillBulletTest
 
 item.skillbook.name=SkillBook
 item.skillstaff.name=SkillStaff

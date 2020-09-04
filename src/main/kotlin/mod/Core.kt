@@ -14,7 +14,7 @@ import mod.entity.bullet.RenderSkillBullet
 import mod.entity.bullet.SkillBullet
 import mod.event.capabilityEvent.*
 import mod.gui.mpindicator.RenderMPIndicator
-import mod.item.items.*
+import mod.item.items.tokens.*
 import mod.item.skill.containers.SkillBook
 import mod.item.skill.containers.SkillOrb
 import mod.item.skill.containers.SkillStaff
@@ -28,6 +28,7 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.item.Item
 import net.minecraft.item.ItemBlock
+import net.minecraft.util.DamageSource
 import net.minecraft.util.ResourceLocation
 import net.minecraftforge.client.event.ModelRegistryEvent
 import net.minecraftforge.client.model.ModelLoader
@@ -43,7 +44,7 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 import net.minecraftforge.fml.common.registry.EntityEntry
-import net.minecraftforge.fml.common.registry.EntityEntryBuilder
+import net.minecraftforge.fml.common.registry.EntityRegistry
 
 
 @Mod(modid = Core.ID, name = Core.Name, version = Core.version, modLanguage = "kotlin")
@@ -60,15 +61,10 @@ class Core {
 		@Mod.Instance(ID)
 		var instance: Core? = null
 
-		var creativeaTab: CreativeTabs = GeneralRPGTab()
-		var skillTab: CreativeTabs = GeneralRPGSkillTab()
+		val SkillDamage = DamageSource("skill").setDamageIsAbsolute()
 
-		val skill_bullet = EntityEntryBuilder.create<SkillBullet>()
-				.entity(SkillBullet::class.java)
-				.id(ResourceLocation(ID + "skill_bullet"), 1)
-				.name("skill_bullet")
-				.tracker(128, 1, true)
-				.build()
+		val creativeaTab: CreativeTabs = GeneralRPGTab()
+		val skillTab: CreativeTabs = GeneralRPGSkillTab()
 
 		val heal = Heal
 		val rage = Rage
@@ -80,15 +76,13 @@ class Core {
 		val fulfill = Fulfill
 		val light = Light
 		val blackhole = BlackHole
+		val skillbullettest = SkillBulletTest
 
 		val common_token = CommonToken
 		val uncommon_token = UncommonToken
 		val rare_token = RareToken
 		val epic_token = EpicToken
 		val legend_token = LegendToken
-
-		val test = Test
-		val item_skill_bullet = ItemSkillBullet()
 
 		val skillbook = SkillBook
 		val skillstaff = SkillStaff
@@ -123,6 +117,9 @@ class Core {
 		MinecraftForge.EVENT_BUS.register(LevelUp())
 		MinecraftForge.EVENT_BUS.register(PlayerAttributeEvent())
 		MinecraftForge.EVENT_BUS.register(TickEvent())
+
+		RenderingRegistry.registerEntityRenderingHandler(SkillBullet::class.java, RenderSkillBullet())
+
 		proxy?.init()
 	}
 
@@ -147,12 +144,11 @@ class Core {
 
 	@SubscribeEvent
 	fun registerEntities(event: RegistryEvent.Register<EntityEntry>) {
-		event.registry.register(skill_bullet)
+		EntityRegistry.registerModEntity(ResourceLocation("skill_bullet"), SkillBullet::class.java, "skill_bullet", 1, instance, 64, 10, true)
 	}
 
 	@SubscribeEvent
 	fun registerModel(event: ModelRegistryEvent) {
 		proxy?.registerModel()
-		//RenderingRegistry.registerEntityRenderingHandler(SkillBullet::class.java, RenderSkillBullet(item_skill_bullet))
 	}
 }

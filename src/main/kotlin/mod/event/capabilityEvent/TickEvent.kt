@@ -13,7 +13,6 @@ class TickEvent {
 		if (count == 80) {
 			count = 0
 			StatusUtil().addMP(event.player, 1)
-			println(event.player.name)
 		}
 	}
 }
