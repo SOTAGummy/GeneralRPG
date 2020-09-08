@@ -70,6 +70,8 @@ class Core {
 		val rage = Rage
 		val shield = Shield
 		val leap = Leap
+		val leapP = LeapP
+		val leapPP = LeapPP
 		val explosion = Explosion
 		val arrowrain = ArrowRain
 		val togglemode = ToggleMode
@@ -118,7 +120,7 @@ class Core {
 		MinecraftForge.EVENT_BUS.register(PlayerAttributeEvent())
 		MinecraftForge.EVENT_BUS.register(TickEvent())
 
-		RenderingRegistry.registerEntityRenderingHandler(SkillBullet::class.java, RenderSkillBullet())
+		//RenderingRegistry.registerEntityRenderingHandler(SkillBullet::class.java, RenderSkillBullet())
 
 		proxy?.init()
 	}

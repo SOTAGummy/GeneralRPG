@@ -11,12 +11,13 @@ item.rage.name=レイジ
 item.togglemode.name=トグルモード
 item.shield.name=シールド
 item.leap.name=リープ
+item.leap+.name=リープ＋
+item.leap++.name=リープ＋＋
 item.explosion.name=エクスプロージョン
 item.arrowrain.name=矢の雨
 item.light.name=ライト
 item.blackhole.name=ブラックホール
 item.skillbullettest.name=スキルバレットテスト
-
 
 item.skillbook.name=スキルブック
 item.skillstaff.name=スキルスタッフ

@@ -40,9 +40,8 @@ open class ItemSkillContainer(name: String, val capacity: Int, private val coolD
 			}
 		}
 
-		tooltip.add("")
-
 		if (stack.tagCompound != null) {
+			tooltip.add("")
 			tooltip.add("Cost : " + cost.toString() + "MP")
 		}
 	}
