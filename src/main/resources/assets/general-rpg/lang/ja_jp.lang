@@ -6,6 +6,8 @@ item.epic_token.name=エピックトークン
 item.legend_token.name=レジェンドトークン
 
 item.heal.name=ヒール
+item.heal+.name=ヒール＋
+item.heal++.name=ヒール＋＋
 item.fulfill.name=フルフィル
 item.rage.name=レイジ
 item.togglemode.name=トグルモード
@@ -24,4 +26,6 @@ item.skillstaff.name=スキルスタッフ
 item.skillorb.name=スキルオーブ
 
 tile.injection_table.name=インジェクションテーブル
-itemGroup.general-rpg=GeneralRPG
+
+itemGroup.general-rpg.skill=GeneralRPG-Skill
+itemGroup.general-rpg.skill=GeneralRPG

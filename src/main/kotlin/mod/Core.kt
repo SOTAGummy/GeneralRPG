@@ -67,6 +67,8 @@ class Core {
 		val skillTab: CreativeTabs = GeneralRPGSkillTab()
 
 		val heal = Heal
+		val healP = HealP
+		val healPP = HealPP
 		val rage = Rage
 		val shield = Shield
 		val leap = Leap

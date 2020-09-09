@@ -6,6 +6,8 @@ item.epic_token.name=EpicToken
 item.legend_token.name=LegendToken
 
 item.heal.name=Heal
+item.heal+.name=Heal+
+item.heal++.name=Heal++
 item.fulfill.name=FulFill
 item.rage.name=Rage
 item.togglemode.name=ToggleMode
@@ -24,5 +26,6 @@ item.skillstaff.name=SkillStaff
 item.skillorb.name=SkillOrb
 
 tile.injection_table.name=InjectionTable
+
 itemGroup.general-rpg=GeneralRPG
 itemGroup.general-rpg.skill=GeneralRPG-Skill
