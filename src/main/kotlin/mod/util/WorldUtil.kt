@@ -14,7 +14,15 @@ class WorldUtil {
 		return world.getEntitiesWithinAABB(Entity::class.java, AxisAlignedBB(x, y, z, x + radius, y + radius, z + radius))
 	}
 
-	fun getAnimateItemFromUniqueId(world: World, uuid: UUID) {
+	fun blow(world: World, pos1: BlockPos, pos2: BlockPos){
+		val xDis = pos1.x - pos2.x
+		val yDis = pos1.y - pos2.y
+		val zDis = pos1.z - pos2.z
+		var xVel = 0
+		var yVel = 0
+		var zVel = 0
+		if (pos1.x > pos2.x){
 
+		}
 	}
 }
