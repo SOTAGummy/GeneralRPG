@@ -1,5 +1,6 @@
 package mod.event.capabilityEvent
 
+import mod.capability.StatusProvider
 import mod.util.StatusUtil
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 import net.minecraftforge.fml.common.gameevent.TickEvent
@@ -12,7 +13,7 @@ class TickEvent {
 		count++
 		if (count == 80) {
 			count = 0
-			StatusUtil().addMP(event.player, 1)
+			event.player.getCapability(StatusProvider.STATUS_CAP!!, null)?.addMp(2)
 		}
 	}
 }

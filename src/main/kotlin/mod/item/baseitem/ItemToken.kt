@@ -1,7 +1,7 @@
 package mod.item.baseitem
 
 import mod.Core
-import mod.item.skill.SkillRarity
+import mod.enums.SkillRarity
 import net.minecraft.entity.item.EntityItem
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemStack

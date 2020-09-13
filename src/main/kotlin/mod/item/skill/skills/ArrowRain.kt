@@ -5,7 +5,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import mod.item.baseitem.ItemSkill
-import mod.item.skill.SkillRarity
+import mod.enums.SkillRarity
 import mod.util.StatusUtil
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.init.Items
@@ -32,9 +32,8 @@ object ArrowRain : ItemSkill("arrowrain", 20, SkillRarity.UNCOMMON) {
 					arrow1.shootingEntity = player
 					arrow1.addVelocity(0.0, -2.0, 0.0)
 
-					runBlocking {
-						world.spawnEntity(arrow1)
-					}
+					world.spawnEntity(arrow1)
+
 					GlobalScope.launch {
 						delay(100)
 					}.join()

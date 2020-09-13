@@ -1,7 +1,7 @@
 package mod.item.baseitem
 
 import mod.Core
-import mod.item.skill.SkillRarity
+import mod.enums.SkillRarity
 import mod.json.ItemSkillJsonGenerator
 import mod.util.Storage
 import net.minecraft.client.resources.I18n

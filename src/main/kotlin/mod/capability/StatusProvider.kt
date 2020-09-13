@@ -1,4 +1,4 @@
-package mod.capability.maxmp
+package mod.capability
 
 import net.minecraft.nbt.NBTBase
 import net.minecraft.util.EnumFacing
@@ -6,27 +6,27 @@ import net.minecraftforge.common.capabilities.Capability
 import net.minecraftforge.common.capabilities.CapabilityInject
 import net.minecraftforge.common.capabilities.ICapabilitySerializable
 
-class MaxMPProvider : ICapabilitySerializable<NBTBase> {
+class StatusProvider: ICapabilitySerializable<NBTBase> {
 	companion object {
-		@CapabilityInject(IMaxMP::class)
-		val MAX_MP_CAP: Capability<IMaxMP?>? = null
+		@CapabilityInject(IStatus::class)
+		val STATUS_CAP: Capability<IStatus?>? = null
 	}
 
-	private val instance: IMaxMP? = MAX_MP_CAP?.defaultInstance
+	private val instance: IStatus? = STATUS_CAP?.defaultInstance
 
 	override fun <T : Any?> getCapability(capability: Capability<T>, facing: EnumFacing?): T? {
-		return if (capability === MAX_MP_CAP) MAX_MP_CAP.cast<T>(instance) else null
+		return if (capability === STATUS_CAP) STATUS_CAP.cast<T>(instance) else null
 	}
 
 	override fun hasCapability(capability: Capability<*>, facing: EnumFacing?): Boolean {
-		return capability == MAX_MP_CAP
+		return capability == STATUS_CAP
 	}
 
 	override fun serializeNBT(): NBTBase? {
-		return MAX_MP_CAP!!.storage.writeNBT(MAX_MP_CAP, instance, null)
+		return STATUS_CAP!!.storage.writeNBT(STATUS_CAP, instance, null)
 	}
 
 	override fun deserializeNBT(nbt: NBTBase?) {
-		MAX_MP_CAP!!.storage.readNBT(MAX_MP_CAP, instance, null, nbt)
+		STATUS_CAP!!.storage.readNBT(STATUS_CAP, instance, null, nbt)
 	}
 }

@@ -19,6 +19,7 @@ item.explosion.name=エクスプロージョン
 item.arrowrain.name=矢の雨
 item.light.name=ライト
 item.blackhole.name=ブラックホール
+item.blow.name=ブロウ
 item.skillbullettest.name=スキルバレットテスト
 
 item.skillbook.name=スキルブック
@@ -27,5 +28,5 @@ item.skillorb.name=スキルオーブ
 
 tile.injection_table.name=インジェクションテーブル
 
+itemGroup.general-rpg=GeneralRPG
 itemGroup.general-rpg.skill=GeneralRPG-Skill
-itemGroup.general-rpg.skill=GeneralRPG

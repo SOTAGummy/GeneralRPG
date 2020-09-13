@@ -1,16 +1,8 @@
 package mod
 
 import mod.block.InjectionTable
-import mod.capability.exp.Exp
-import mod.capability.exp.ExpStorage
-import mod.capability.exp.IExp
-import mod.capability.maxmp.IMaxMP
-import mod.capability.maxmp.MaxMP
-import mod.capability.maxmp.MaxMPStorage
-import mod.capability.mp.IMP
-import mod.capability.mp.MP
-import mod.capability.mp.MPStorage
-import mod.entity.bullet.RenderSkillBullet
+import mod.capability.IStatus
+import mod.capability.Status
 import mod.entity.bullet.SkillBullet
 import mod.event.capabilityEvent.*
 import mod.gui.mpindicator.RenderMPIndicator
@@ -28,14 +20,16 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.item.Item
 import net.minecraft.item.ItemBlock
-import net.minecraft.util.DamageSource
+import net.minecraft.nbt.NBTBase
+import net.minecraft.nbt.NBTTagCompound
+import net.minecraft.util.EnumFacing
 import net.minecraft.util.ResourceLocation
 import net.minecraftforge.client.event.ModelRegistryEvent
 import net.minecraftforge.client.model.ModelLoader
 import net.minecraftforge.common.MinecraftForge
+import net.minecraftforge.common.capabilities.Capability
 import net.minecraftforge.common.capabilities.CapabilityManager
 import net.minecraftforge.event.RegistryEvent
-import net.minecraftforge.fml.client.registry.RenderingRegistry
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.common.SidedProxy
 import net.minecraftforge.fml.common.event.FMLConstructionEvent
@@ -45,6 +39,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 import net.minecraftforge.fml.common.registry.EntityEntry
 import net.minecraftforge.fml.common.registry.EntityRegistry
+import java.util.concurrent.Callable
 
 
 @Mod(modid = Core.ID, name = Core.Name, version = Core.version, modLanguage = "kotlin")
@@ -60,8 +55,6 @@ class Core {
 
 		@Mod.Instance(ID)
 		var instance: Core? = null
-
-		val SkillDamage = DamageSource("skill").setDamageIsAbsolute()
 
 		val creativeaTab: CreativeTabs = GeneralRPGTab()
 		val skillTab: CreativeTabs = GeneralRPGSkillTab()
@@ -111,10 +104,26 @@ class Core {
 
 	@Mod.EventHandler
 	fun init(event: FMLInitializationEvent?) {
-		CapabilityManager.INSTANCE?.register(IMaxMP::class.java, MaxMPStorage(), MaxMP::class.java)
-		CapabilityManager.INSTANCE?.register(IExp::class.java, ExpStorage(), Exp::class.java)
-		CapabilityManager.INSTANCE?.register(IMP::class.java, MPStorage(), MP::class.java)
+		val side = event?.side
+		println(side)
 
+		CapabilityManager.INSTANCE.register(IStatus::class.java, object: Capability.IStorage<IStatus?> {
+			override fun readNBT(capability: Capability<IStatus?>?, instance: IStatus?, side: EnumFacing?, nbt: NBTBase?) {
+				instance!!.setExp((nbt as NBTTagCompound).getInteger("exp"))
+				instance.setLevel(nbt.getInteger("level"))
+				instance.setMp(nbt.getInteger("mp"))
+				instance.setMaxMp(nbt.getInteger("maxmp"))
+			}
+
+			override fun writeNBT(capability: Capability<IStatus?>?, instance: IStatus?, side: EnumFacing?): NBTBase? {
+				val nbt = NBTTagCompound()
+				nbt.setInteger("exp", instance!!.getExp())
+				nbt.setInteger("level", instance.getLevel())
+				nbt.setInteger("mp", instance.getMp())
+				nbt.setInteger("maxmp", instance.getMaxMp())
+				return nbt
+			}
+		}, Callable { Status() })
 
 		MinecraftForge.EVENT_BUS.register(CapabilityHandler())
 		MinecraftForge.EVENT_BUS.register(CapabilityCloneEvent())

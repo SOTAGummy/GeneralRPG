@@ -1,4 +1,4 @@
-package mod.item.skill
+package mod.enums
 
 import mod.item.baseitem.ItemSkill
 import net.minecraft.util.text.TextFormatting

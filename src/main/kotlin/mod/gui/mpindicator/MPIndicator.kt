@@ -1,8 +1,7 @@
 package mod.gui.mpindicator
 
 import mod.Core
-import mod.capability.maxmp.MaxMPProvider
-import mod.capability.mp.MPProvider
+import mod.capability.StatusProvider
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.Gui
 import net.minecraft.client.gui.ScaledResolution
@@ -17,14 +16,14 @@ class MPIndicator(mc: Minecraft) : Gui() {
 
 	init {
 		val player = mc.player
-		var MP = player.getCapability(MPProvider.MP_CAP!!, null)?.get() as Int
-		var MaxMP = player.getCapability(MaxMPProvider.MAX_MP_CAP!!, null)?.get() as Int
+		val MP = player.getCapability(StatusProvider.STATUS_CAP!!, null)?.getMp()
+		val MaxMP = player.getCapability(StatusProvider.STATUS_CAP, null)?.getMaxMp()
 		val scaled = ScaledResolution(mc)
 		val width = scaled.scaledWidth
 		val height = scaled.scaledHeight
 		val hp = (mc.player.health + 0.999999).toInt().toString() + "/" + mc.player.maxHealth.toInt().toString()
-		val mp = player.getCapability(MPProvider.MP_CAP, null)?.get().toString() + "/" + player.getCapability(MaxMPProvider.MAX_MP_CAP, null)?.get().toString()
-		var currentMP = ((MP.toFloat() / MaxMP.toFloat()) * 81).toInt()
+		val mp = player.getCapability(StatusProvider.STATUS_CAP, null)?.getMp().toString() + "/" + player.getCapability(StatusProvider.STATUS_CAP, null)?.getMaxMp().toString()
+		val currentMP = ((MP!!.toFloat() / MaxMP!!.toFloat()) * 81).toInt()
 
 		mc.textureManager.bindTexture(texture)
 		this.drawTexturedModalRect(width / 2 + 10, height - 48, 0, 0, 81, 8)

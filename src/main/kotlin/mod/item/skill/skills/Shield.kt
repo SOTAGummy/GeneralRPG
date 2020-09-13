@@ -4,7 +4,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import mod.item.baseitem.ItemSkill
-import mod.item.skill.SkillRarity
+import mod.enums.SkillRarity
 import mod.util.StatusUtil
 import net.minecraft.entity.SharedMonsterAttributes
 import net.minecraft.entity.player.EntityPlayer

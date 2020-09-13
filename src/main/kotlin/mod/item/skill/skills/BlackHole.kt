@@ -1,9 +1,11 @@
 package mod.item.skill.skills
 
+import mod.Core
 import mod.item.baseitem.ItemSkill
-import mod.item.skill.SkillRarity
+import mod.enums.SkillRarity
 import net.minecraft.entity.EntityLiving
 import net.minecraft.entity.player.EntityPlayer
+import net.minecraft.util.DamageSource
 import net.minecraft.util.EnumHand
 import net.minecraft.world.World
 
@@ -16,7 +18,6 @@ object BlackHole : ItemSkill("blackhole", 50, SkillRarity.RARE) {
 		repeat(entityList.size) {
 			if (entityList[it] is EntityLiving && entityList[it] !is EntityPlayer && entityList[it].getDistanceSq(pos).toInt() <= 15.0) {
 				livingList.add(entityList[it] as EntityLiving)
-				println(entityList[it].getDistanceSq(pos))
 			}
 		}
 
