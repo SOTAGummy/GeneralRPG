@@ -6,16 +6,19 @@ import mod.capability.Status
 import mod.entity.bullet.SkillBullet
 import mod.event.capabilityEvent.*
 import mod.gui.mpindicator.RenderMPIndicator
-import mod.item.items.tokens.*
-import mod.item.skill.containers.SkillBook
-import mod.item.skill.containers.SkillOrb
-import mod.item.skill.containers.SkillStaff
-import mod.item.skill.skills.*
+import mod.item.containers.SkillBook
+import mod.item.containers.SkillOrb
+import mod.item.containers.SkillStaff
+import mod.item.fruit.LifeFruit
+import mod.item.fruit.SkillFruit
+import mod.item.skills.*
+import mod.item.tokens.*
 import mod.proxy.CommonProxy
 import mod.tab.GeneralRPGSkillTab
 import mod.tab.GeneralRPGTab
 import mod.util.Storage
 import net.minecraft.block.Block
+import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.item.Item
@@ -74,6 +77,7 @@ class Core {
 		val light = Light
 		val blackhole = BlackHole
 		val skillbullettest = SkillBulletTest
+		val blow = Blow
 
 		val common_token = CommonToken
 		val uncommon_token = UncommonToken
@@ -84,6 +88,9 @@ class Core {
 		val skillbook = SkillBook
 		val skillstaff = SkillStaff
 		val skillorb = SkillOrb
+
+		val skillfruit = SkillFruit
+		val lifefruit = LifeFruit
 
 		val injection_table = InjectionTable()
 	}
@@ -147,7 +154,9 @@ class Core {
 		for (item in Storage.Items) {
 			event?.registry?.register(item)
 		}
-		event?.registry?.register(ItemBlock(injection_table).setRegistryName(ResourceLocation(ID, "injection_table")))
+		event!!.registry.register(ItemBlock(injection_table).setRegistryName(ResourceLocation(ID, "injection_table")))
+		event.registry.register(skillfruit)
+		event.registry.register(lifefruit)
 	}
 
 	@SubscribeEvent

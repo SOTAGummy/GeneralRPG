@@ -12,7 +12,7 @@ import net.minecraft.util.ResourceLocation
 import net.minecraft.world.World
 import java.util.*
 
-open class ItemToken(name: String, private val rarity: SkillRarity) : GeneralRPGItem() {
+open class ItemToken(name: String, private val rarity: SkillRarity): GeneralRPGItem() {
 	init {
 		this.maxStackSize = 64
 		this.unlocalizedName = name

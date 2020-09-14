@@ -26,6 +26,9 @@ item.skillbook.name=スキルブック
 item.skillstaff.name=スキルスタッフ
 item.skillorb.name=スキルオーブ
 
+item.skill_fruit.name=スキルフルーツ
+item.life_fruit.name=ライフフルーツ
+
 tile.injection_table.name=インジェクションテーブル
 
 itemGroup.general-rpg=GeneralRPG

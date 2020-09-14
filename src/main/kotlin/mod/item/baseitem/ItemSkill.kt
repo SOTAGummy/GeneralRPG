@@ -2,7 +2,7 @@ package mod.item.baseitem
 
 import mod.Core
 import mod.enums.SkillRarity
-import mod.json.ItemSkillJsonGenerator
+import mod.json.ItemSkillJsonReference
 import mod.util.Storage
 import net.minecraft.client.resources.I18n
 import net.minecraft.client.util.ITooltipFlag
@@ -14,7 +14,7 @@ import net.minecraft.util.text.TextFormatting
 import net.minecraft.world.World
 import java.io.File
 
-open class ItemSkill(val name: String, val cost: Int, val rarity: SkillRarity) : GeneralRPGItem() {
+open class ItemSkill(val name: String, val cost: Int, val rarity: SkillRarity): GeneralRPGItem() {
 	init {
 		this.unlocalizedName = name
 		this.maxStackSize = 1
@@ -28,7 +28,7 @@ open class ItemSkill(val name: String, val cost: Int, val rarity: SkillRarity) :
 		val file = File("D:\\mod\\GeneralRPG\\src\\main\\resources\\assets\\general-rpg\\models\\item\\$name.json")
 		if (!file.exists()) {
 			file.createNewFile()
-			file.writeText(ItemSkillJsonGenerator.jsonText)
+			file.writeText(ItemSkillJsonReference.jsonText)
 		}
 	}
 

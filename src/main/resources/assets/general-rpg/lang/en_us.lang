@@ -26,6 +26,9 @@ item.skillbook.name=SkillBook
 item.skillstaff.name=SkillStaff
 item.skillorb.name=SkillOrb
 
+item.skill_fruit.name=SkillFruit
+item.life_fruit.name=LifeFruit
+
 tile.injection_table.name=InjectionTable
 
 itemGroup.general-rpg=GeneralRPG

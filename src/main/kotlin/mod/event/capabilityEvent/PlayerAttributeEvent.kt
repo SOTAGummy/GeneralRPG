@@ -7,6 +7,7 @@ import net.minecraftforge.fml.common.gameevent.PlayerEvent
 class PlayerAttributeEvent {
 	@SubscribeEvent
 	fun onJoinEvent(event: PlayerEvent.PlayerLoggedInEvent) {
+
 		event.player.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).baseValue = 1.0
 		event.player.getEntityAttribute(SharedMonsterAttributes.ARMOR).baseValue = event.player.totalArmorValue.toDouble()
 	}

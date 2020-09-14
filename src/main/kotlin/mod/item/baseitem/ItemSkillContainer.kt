@@ -19,7 +19,7 @@ import net.minecraft.world.World
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 
-open class ItemSkillContainer(name: String, val capacity: Int, private val coolDown: Int) : GeneralRPGItem() {
+open class ItemSkillContainer(name: String, val capacity: Int, private val coolDown: Int): GeneralRPGItem() {
 	init {
 		this.unlocalizedName = name
 		this.creativeTab = Core.creativeaTab
