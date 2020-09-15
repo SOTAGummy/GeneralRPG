@@ -6,6 +6,8 @@ import mod.capability.Status
 import mod.entity.bullet.SkillBullet
 import mod.event.capabilityEvent.*
 import mod.gui.mpindicator.RenderMPIndicator
+import mod.item.SkillDust
+import mod.item.containers.EnderDragonArtifact
 import mod.item.containers.SkillBook
 import mod.item.containers.SkillOrb
 import mod.item.containers.SkillStaff
@@ -59,8 +61,10 @@ class Core {
 		@Mod.Instance(ID)
 		var instance: Core? = null
 
-		val creativeaTab: CreativeTabs = GeneralRPGTab()
+		val modTab: CreativeTabs = GeneralRPGTab()
 		val skillTab: CreativeTabs = GeneralRPGSkillTab()
+
+		val skilldust = SkillDust
 
 		val heal = Heal
 		val healP = HealP
@@ -76,7 +80,6 @@ class Core {
 		val fulfill = Fulfill
 		val light = Light
 		val blackhole = BlackHole
-		val skillbullettest = SkillBulletTest
 		val blow = Blow
 
 		val common_token = CommonToken
@@ -88,9 +91,10 @@ class Core {
 		val skillbook = SkillBook
 		val skillstaff = SkillStaff
 		val skillorb = SkillOrb
+		val ender_dragon_artifact = EnderDragonArtifact
 
-		val skillfruit = SkillFruit
-		val lifefruit = LifeFruit
+		val skill_fruit = SkillFruit
+		val life_fruit = LifeFruit
 
 		val injection_table = InjectionTable()
 	}
@@ -155,8 +159,8 @@ class Core {
 			event?.registry?.register(item)
 		}
 		event!!.registry.register(ItemBlock(injection_table).setRegistryName(ResourceLocation(ID, "injection_table")))
-		event.registry.register(skillfruit)
-		event.registry.register(lifefruit)
+		event.registry.register(skill_fruit)
+		event.registry.register(life_fruit)
 	}
 
 	@SubscribeEvent

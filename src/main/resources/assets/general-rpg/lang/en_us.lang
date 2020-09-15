@@ -5,6 +5,8 @@ item.rare_token.name=RareToken
 item.epic_token.name=EpicToken
 item.legend_token.name=LegendToken
 
+item.skill_dust.name=SkillDust
+
 item.heal.name=Heal
 item.heal+.name=Heal+
 item.heal++.name=Heal++
@@ -25,6 +27,7 @@ item.skillbullettest.name=SkillBulletTest
 item.skillbook.name=SkillBook
 item.skillstaff.name=SkillStaff
 item.skillorb.name=SkillOrb
+item.ender_dragon_artifact.name=EnderDragonArtifact
 
 item.skill_fruit.name=SkillFruit
 item.life_fruit.name=LifeFruit

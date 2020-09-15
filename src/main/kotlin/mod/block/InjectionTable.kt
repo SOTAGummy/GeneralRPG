@@ -28,7 +28,7 @@ class InjectionTable : Block(Material.IRON) {
 	}
 
 	init {
-		this.setCreativeTab(Core.creativeaTab)
+		this.setCreativeTab(Core.modTab)
 		this.unlocalizedName = "injection_table"
 		this.registryName = ResourceLocation(Core.ID, "injection_table")
 		this.setHardness(7.0F)

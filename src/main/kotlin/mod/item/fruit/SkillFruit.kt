@@ -15,7 +15,7 @@ object SkillFruit: ItemFood(0, 0F, false){
 		this.unlocalizedName = "skill_fruit"
 		this.registryName = ResourceLocation(Core.ID, "skill_fruit")
 		this.setAlwaysEdible()
-		this.creativeTab = Core.creativeaTab
+		this.creativeTab = Core.modTab
 
 		Storage.Items.add(this)
 	}

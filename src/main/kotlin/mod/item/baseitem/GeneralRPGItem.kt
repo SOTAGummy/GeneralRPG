@@ -6,7 +6,7 @@ import net.minecraft.item.Item
 
 open class GeneralRPGItem: Item() {
 	init {
-		this.creativeTab = Core.creativeaTab
+		this.creativeTab = Core.modTab
 		Storage.Items.add(this)
 	}
 }

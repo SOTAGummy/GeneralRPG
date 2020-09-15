@@ -5,6 +5,8 @@ item.rare_token.name=レアトークン
 item.epic_token.name=エピックトークン
 item.legend_token.name=レジェンドトークン
 
+item.skill_dust.name=スキルダスト
+
 item.heal.name=ヒール
 item.heal+.name=ヒール＋
 item.heal++.name=ヒール＋＋
@@ -25,6 +27,7 @@ item.skillbullettest.name=スキルバレットテスト
 item.skillbook.name=スキルブック
 item.skillstaff.name=スキルスタッフ
 item.skillorb.name=スキルオーブ
+item.ender_dragon_artifact.name=エンダードラゴンアーティファクト
 
 item.skill_fruit.name=スキルフルーツ
 item.life_fruit.name=ライフフルーツ

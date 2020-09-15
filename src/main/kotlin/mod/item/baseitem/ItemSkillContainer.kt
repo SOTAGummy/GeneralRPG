@@ -3,7 +3,6 @@ package mod.item.baseitem
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import mod.Core
 import net.minecraft.client.resources.I18n
 import net.minecraft.client.util.ITooltipFlag
@@ -22,7 +21,7 @@ import net.minecraftforge.fml.relauncher.SideOnly
 open class ItemSkillContainer(name: String, val capacity: Int, private val coolDown: Int): GeneralRPGItem() {
 	init {
 		this.unlocalizedName = name
-		this.creativeTab = Core.creativeaTab
+		this.creativeTab = Core.modTab
 		this.maxStackSize = 1
 		this.registryName = ResourceLocation(Core.ID, name)
 	}
