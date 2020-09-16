@@ -10,8 +10,8 @@ import net.minecraft.world.World
 import kotlin.math.abs
 
 object Blow: ItemSkill("blow", 40, SkillRarity.UNCOMMON){
-	override suspend fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand) {
-		if (StatusUtil().useMP(player, this.cost)){
+	override suspend fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand, savingRate: Float) {
+		if (StatusUtil().useMP(player, this.cost, savingRate)){
 			val entity = arrayListOf<EntityLiving>()
 			repeat(world.loadedEntityList.size){
 				if (world.loadedEntityList[it] is EntityLiving && player.getDistance(world.loadedEntityList[it]).toInt() <= 10){

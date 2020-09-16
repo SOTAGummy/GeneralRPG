@@ -9,8 +9,8 @@ import net.minecraft.util.EnumHand
 import net.minecraft.world.World
 
 object Light : ItemSkill("light", 5, SkillRarity.COMMON) {
-	override suspend fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand) {
-		if (StatusUtil().useMP(player, this.cost)) {
+	override suspend fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand, savingRate: Float) {
+		if (StatusUtil().useMP(player, this.cost, savingRate)) {
 			val pos = player.rayTrace(15.0, 0.0F)!!.blockPos
 			//val down = pos.down()
 			//val side1 = pos.north().up()

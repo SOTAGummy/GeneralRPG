@@ -18,7 +18,7 @@ import net.minecraft.world.World
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 
-open class ItemSkillContainer(name: String, val capacity: Int, private val coolDown: Int): GeneralRPGItem() {
+open class ItemSkillContainer(name: String, val capacity: Int, private val coolDown: Int, val savingRate: Float): GeneralRPGItem() {
 	init {
 		this.unlocalizedName = name
 		this.creativeTab = Core.modTab
@@ -46,6 +46,7 @@ open class ItemSkillContainer(name: String, val capacity: Int, private val coolD
 			tooltip.add("")
 			tooltip.add("Cost : " + cost.toString() + "MP")
 		}
+		tooltip.add("SavingRate : $savingRate")
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -57,7 +58,7 @@ open class ItemSkillContainer(name: String, val capacity: Int, private val coolD
 				repeat(capacity + 1) {
 					if (itemstack.tagCompound!!.getInteger((it + 1).toString()) != 0) {
 						val item = (getItemById(itemstack.tagCompound!!.getInteger((it + 1).toString()))) as ItemSkill
-						item.skillFunction(world, player, handIn)
+						item.skillFunction(world, player, handIn, savingRate)
 						delay(500)
 					}
 				}

@@ -8,14 +8,13 @@ import net.minecraft.util.EnumHand
 import net.minecraft.world.World
 
 object Heal : ItemSkill("heal", 5, SkillRarity.COMMON) {
-	override suspend fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand) {
-		if (StatusUtil().useMP(player, this.cost)) {
+	override suspend fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand, savingRate: Float) {
+		if (StatusUtil().useMP(player, this.cost, savingRate)) {
 			if (player.maxHealth <= player.health + 2) {
 				player.health = player.maxHealth
 			} else {
 				player.health += 2
 			}
-			println(System.getProperty("java.class.path"))
 		}
 	}
 }

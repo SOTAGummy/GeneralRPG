@@ -16,8 +16,8 @@ import net.minecraft.world.World
 import kotlin.random.Random
 
 object ArrowRain : ItemSkill("arrowrain", 20, SkillRarity.UNCOMMON) {
-	override suspend fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand) {
-		if (StatusUtil().useMP(player, this.cost)) {
+	override suspend fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand, savingRate: Float) {
+		if (StatusUtil().useMP(player, this.cost, savingRate)) {
 			if (!world.isRemote) {
 				val pos = player.rayTrace(15.0, 0.0F)?.blockPos!!
 				val itemstack = ItemStack(Items.ARROW)

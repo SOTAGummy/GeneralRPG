@@ -10,8 +10,8 @@ import net.minecraft.util.math.MathHelper
 import net.minecraft.world.World
 
 object SkillBulletTest : ItemSkill("skillbullettest", 0, SkillRarity.EXTRA) {
-	override suspend fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand) {
-		if (StatusUtil().useMP(player, 0)) {
+	override suspend fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand, savingRate: Float) {
+		if (StatusUtil().useMP(player, 0, savingRate)) {
 			val bullet = SkillBullet(world)
 			val vx = -MathHelper.sin(Math.toRadians(player.rotationYaw.toDouble()).toFloat()) * MathHelper.cos(Math.toRadians(player.rotationPitch.toDouble()).toFloat()).toDouble()
 			val vz = MathHelper.cos(Math.toRadians(player.rotationYaw.toDouble()).toFloat()) * MathHelper.cos(Math.toRadians(player.rotationPitch.toDouble()).toFloat()).toDouble()

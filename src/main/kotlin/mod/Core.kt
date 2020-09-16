@@ -134,7 +134,7 @@ class Core {
 				nbt.setInteger("maxmp", instance.getMaxMp())
 				return nbt
 			}
-		}, Callable { Status() })
+		}) { Status() }
 
 		MinecraftForge.EVENT_BUS.register(CapabilityHandler())
 		MinecraftForge.EVENT_BUS.register(CapabilityCloneEvent())
