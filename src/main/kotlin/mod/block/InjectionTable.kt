@@ -3,6 +3,7 @@ package mod.block
 import mod.Core
 import mod.entity.AnimateItem
 import mod.item.baseitem.ItemSkill
+import mod.item.baseitem.ItemSkillContainer
 import mod.util.WorldUtil
 import net.minecraft.block.Block
 import net.minecraft.block.BlockContainer
@@ -12,6 +13,7 @@ import net.minecraft.entity.item.EntityItem
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
+import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.tileentity.TileEntity
 import net.minecraft.util.EnumBlockRenderType
 import net.minecraft.util.EnumFacing
@@ -46,6 +48,26 @@ class InjectionTable : BlockContainer(Material.IRON) {
 				te.setUUID(entity.uniqueID)
 				stack.count--
 				player.setHeldItem(hand, stack)
+			} else if (stack.item is ItemSkillContainer){
+				if (te.getSkill() != 0){
+					if (stack.tagCompound == null){
+						val nbt = NBTTagCompound()
+						stack.tagCompound = nbt
+						println("a")
+					}
+					if (stack.tagCompound != null){
+						println("b")
+						repeat((stack.item as ItemSkillContainer).capacity){
+							if (stack.tagCompound!!.getInteger("${it + 1}") == 0){
+								stack.tagCompound!!.setInteger("${it + 1}", te.getSkill())
+								te.setSkill(0)
+								if (WorldUtil().getEntityFromUUID(world, te.getUUID()!!) != null)
+								world.removeEntity(WorldUtil().getEntityFromUUID(world, te.getUUID()!!))
+								te.setUUID(null)
+							}
+						}
+					}
+				}
 			}
 		}
 		return true

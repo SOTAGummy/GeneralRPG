@@ -57,20 +57,20 @@ open class ItemSkillContainer(name: String, val capacity: Int, private val coolD
 		val itemstack = player.getHeldItem(handIn)
 		player.activeHand = handIn
 		if (itemstack.tagCompound != null) {
-				repeat(capacity + 1) {
-					if (itemstack.tagCompound!!.getInteger((it + 1).toString()) != 0) {
-						val item = (getItemById(itemstack.tagCompound!!.getInteger((it + 1).toString()))) as ItemSkill
+			repeat(capacity + 1) {
+				if (itemstack.tagCompound!!.getInteger((it + 1).toString()) != 0) {
+					val item = (getItemById(itemstack.tagCompound!!.getInteger((it + 1).toString()))) as ItemSkill
+					GlobalScope.launch {
 						runBlocking {
 							item.skillFunction(world, player, handIn, savingRate)
 						}
-						GlobalScope.launch {
-							launch {
-								delay(500)
-							}
-						}
+						launch {
+							delay(500)
+						}.join()
 					}
 				}
 			}
+		}
 		player.cooldownTracker.setCooldown(this, coolDown)
 		return ActionResult(EnumActionResult.SUCCESS, itemstack)
 	}
