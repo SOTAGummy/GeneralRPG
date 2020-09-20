@@ -5,7 +5,6 @@ import net.minecraft.util.math.AxisAlignedBB
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 import java.util.*
-import kotlin.math.abs
 
 class WorldUtil {
 	fun getNearEntity(world: World, radius: Int, pos: BlockPos): MutableList<Entity> {
@@ -13,5 +12,15 @@ class WorldUtil {
 		val y = pos.y.toDouble()
 		val z = pos.z.toDouble()
 		return world.getEntitiesWithinAABB(Entity::class.java, AxisAlignedBB(x, y, z, x + radius, y + radius, z + radius))
+	}
+
+	fun getEntityFromUUID(world: World, UUID: UUID): Entity?{
+		repeat(world.loadedEntityList.size){
+			if (world.loadedEntityList[it].uniqueID == UUID){
+				return world.loadedEntityList[it]
+				return@repeat
+			}
+		}
+		return null
 	}
 }

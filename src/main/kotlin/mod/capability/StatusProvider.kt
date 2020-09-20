@@ -9,7 +9,7 @@ import net.minecraftforge.common.capabilities.ICapabilitySerializable
 class StatusProvider: ICapabilitySerializable<NBTBase> {
 	companion object {
 		@CapabilityInject(IStatus::class)
-		val STATUS_CAP: Capability<IStatus?>? = null
+		val STATUS_CAP: Capability<IStatus>? = null
 	}
 
 	private val instance: IStatus? = STATUS_CAP?.defaultInstance

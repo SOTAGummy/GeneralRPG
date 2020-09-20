@@ -9,7 +9,7 @@ import net.minecraft.util.math.MathHelper
 import net.minecraft.world.World
 
 object LeapP: ItemSkill("leap+", 35, SkillRarity.LEGEND){
-	override suspend fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand, savingRate: Float) {
+	override fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand, savingRate: Float) {
 		if (StatusUtil().useMP(player, this.cost, savingRate)) {
 			val vx = -MathHelper.sin(Math.toRadians(player.rotationYaw.toDouble()).toFloat()) * MathHelper.cos(Math.toRadians(player.rotationPitch.toDouble()).toFloat())
 			val vz = MathHelper.cos(Math.toRadians(player.rotationYaw.toDouble()).toFloat()) * MathHelper.cos(Math.toRadians(player.rotationPitch.toDouble()).toFloat())

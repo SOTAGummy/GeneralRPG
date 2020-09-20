@@ -3,30 +3,26 @@ package mod.block
 import mod.Core
 import mod.entity.AnimateItem
 import mod.item.baseitem.ItemSkill
-import mod.item.baseitem.ItemSkillContainer
+import mod.util.WorldUtil
 import net.minecraft.block.Block
+import net.minecraft.block.BlockContainer
 import net.minecraft.block.material.Material
 import net.minecraft.block.state.IBlockState
-import net.minecraft.client.resources.I18n
 import net.minecraft.entity.item.EntityItem
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
-import net.minecraft.nbt.NBTTagCompound
+import net.minecraft.tileentity.TileEntity
 import net.minecraft.util.EnumBlockRenderType
 import net.minecraft.util.EnumFacing
 import net.minecraft.util.EnumHand
 import net.minecraft.util.ResourceLocation
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
+import java.util.*
 
 
-class InjectionTable : Block(Material.IRON) {
-	companion object {
-		var entityMap = mutableMapOf<BlockPos, AnimateItem>()
-		var IDMap = mutableMapOf<BlockPos, Int>()
-	}
-
+class InjectionTable : BlockContainer(Material.IRON) {
 	init {
 		this.setCreativeTab(Core.modTab)
 		this.unlocalizedName = "injection_table"
@@ -40,52 +36,33 @@ class InjectionTable : Block(Material.IRON) {
 	}
 
 	override fun onBlockActivated(world: World, pos: BlockPos?, state: IBlockState?, player: EntityPlayer?, hand: EnumHand?, side: EnumFacing?, hitX: Float, hitY: Float, hitZ: Float): Boolean {
-		val stack = player?.getHeldItem(hand!!)
-		val format = I18n.format(stack?.displayName!!)
-		val itemPos = BlockPos(pos!!.x + 0.5, pos.y + 1.0, pos.z + 0.5)
-
+		val te = world.getTileEntity(pos) as TileEntityInjectionTable
+		val stack = player!!.getHeldItem(hand)
 		if (!world.isRemote) {
-			if (stack.item is ItemSkill && (IDMap[pos] == null || IDMap[pos] == 0)) {
-				player.setHeldItem(hand!!, ItemStack.EMPTY)
-			}
-		}
-		if (world.isRemote) {
-			if (stack.item is ItemSkill && (IDMap[pos] == null || IDMap[pos] == 0)) {
-				val name = "${(stack.item as ItemSkill).rarity.colorChar}$format"
-				val item = AnimateItem(world, pos.x.toDouble() + 0.5, pos.y.toDouble() + 1.0, pos.z.toDouble() + 0.5, stack, name)
-				entityMap[BlockPos(item.posX, item.posY, item.posZ)] = item
-				IDMap[pos] = Item.getIdFromItem(stack.item)
-				world.spawnEntity(item)
-				player.setHeldItem(hand!!, ItemStack.EMPTY)
-			} else if (stack.item is ItemSkillContainer && (IDMap[pos] != null || IDMap[pos] != 0)) {
-				if (stack.tagCompound == null) {
-					val nbt = NBTTagCompound()
-					stack.tagCompound = nbt
-				}
-				if (stack.tagCompound != null) {
-					repeat((stack.item as ItemSkillContainer).capacity) {
-						if (stack.tagCompound!!.getInteger((it + 1).toString()) == 0) {
-							stack.tagCompound!!.setInteger((it + 1).toString(), IDMap[pos]!!)
-							IDMap[pos] = 0
-							world.removeEntity(entityMap[itemPos])
-						}
-					}
-				}
+			if (stack.item is ItemSkill){
+				te.setSkill(Item.getIdFromItem(stack.item))
+				val entity = AnimateItem(world, pos!!.x.toDouble() + 0.5, pos.y.toDouble() + 1, pos.z.toDouble() + 0.5, ItemStack(Item.getItemById(te.getSkill())), ItemStack(Item.getItemById(te.getSkill())).displayName)
+				world.spawnEntity(entity)
+				te.setUUID(entity.uniqueID)
+				stack.count--
+				player.setHeldItem(hand, stack)
 			}
 		}
 		return true
 	}
 
-	override fun breakBlock(world: World, pos: BlockPos?, state: IBlockState?) {
-		val itemPos = BlockPos(pos!!.x + 0.5, pos.y + 1.0, pos.z + 0.5)
+	override fun createNewTileEntity(worldIn: World, meta: Int): TileEntity? {
+		return TileEntityInjectionTable()
+	}
 
-		if (IDMap[pos] != null) {
-			val item = EntityItem(world, pos.x.toDouble(), pos.y.toDouble(), pos.z.toDouble(), ItemStack(Item.getItemById(IDMap[pos]!!)))
-			item.setNoPickupDelay()
-			world.spawnEntity(item)
-			world.removeEntity(entityMap[itemPos])
-			IDMap[pos] = 0
+	override fun breakBlock(world: World, pos: BlockPos?, state: IBlockState?) {
+		val te = world.getTileEntity(pos) as TileEntityInjectionTable
+		if (te.getUUID() != null){
+			val entity = WorldUtil().getEntityFromUUID(world, te.getUUID()!!)
+			world.removeEntity(entity)
+			val item = ItemStack(Item.getItemById(te.getSkill()))
+			world.spawnEntity(EntityItem(world, pos!!.x.toDouble(), pos.y.toDouble(), pos.z.toDouble(), item))
 		}
-		super.breakBlock(world, pos, state as IBlockState)
+		super.breakBlock(world, pos!!, state as IBlockState)
 	}
 }

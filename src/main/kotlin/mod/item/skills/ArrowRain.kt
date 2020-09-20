@@ -16,7 +16,7 @@ import net.minecraft.world.World
 import kotlin.random.Random
 
 object ArrowRain : ItemSkill("arrowrain", 20, SkillRarity.UNCOMMON) {
-	override suspend fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand, savingRate: Float) {
+	override fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand, savingRate: Float) {
 		if (StatusUtil().useMP(player, this.cost, savingRate)) {
 			if (!world.isRemote) {
 				val pos = player.rayTrace(15.0, 0.0F)?.blockPos!!
@@ -26,17 +26,22 @@ object ArrowRain : ItemSkill("arrowrain", 20, SkillRarity.UNCOMMON) {
 					val randomz = Random.nextDouble(3.0)
 
 					val itemarrow = (if (itemstack.getItem() is ItemArrow) itemstack.getItem() else Items.ARROW) as ItemArrow
-					val arrow1 = itemarrow.createArrow(world, itemstack, player)
-					arrow1.setPosition(pos.x.toDouble() + randomx, pos.y.toDouble() + 5.0, pos.z.toDouble() + randomz)
-					arrow1.damage = 1.0
-					arrow1.shootingEntity = player
-					arrow1.addVelocity(0.0, -2.0, 0.0)
+					val arrow = itemarrow.createArrow(world, itemstack, player)
+					arrow.setPosition(pos.x.toDouble() + randomx, pos.y.toDouble() + 5.0, pos.z.toDouble() + randomz)
+					arrow.damage = 1.0
+					arrow.shootingEntity = player
+					arrow.addVelocity(0.0, -2.0, 0.0)
 
-					world.spawnEntity(arrow1)
+					runBlocking {
+						world.spawnEntity(arrow)
+					}
 
 					GlobalScope.launch {
-						delay(100)
-					}.join()
+						GlobalScope.launch {
+							delay(100)
+							world.removeEntity(arrow)
+						}.join()
+					}
 				}
 			}
 		}

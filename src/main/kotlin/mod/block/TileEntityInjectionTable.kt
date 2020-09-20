@@ -2,28 +2,38 @@ package mod.block
 
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.tileentity.TileEntity
+import java.util.*
 
 
 class TileEntityInjectionTable : TileEntity() {
-	companion object {
-		private var skill: Int = 0
-	}
+	private var id: Int = 0
+	private var uuid: UUID? = null
 
 	override fun readFromNBT(compound: NBTTagCompound) {
-		skill = compound.getInteger("ID")
+		id = compound.getInteger("id")
+		uuid = compound.getUniqueId("uuid")
 		super.readFromNBT(compound)
 	}
 
 	override fun writeToNBT(compound: NBTTagCompound): NBTTagCompound? {
-		compound.setInteger("skill", skill)
+		compound.setInteger("id", id)
+		compound.setUniqueId("uuid", uuid)
 		return super.writeToNBT(compound)
 	}
 
 	fun getSkill(): Int {
-		return skill
+		return id
 	}
 
 	fun setSkill(Skill: Int) {
-		skill = Skill
+		id = Skill
+	}
+
+	fun getUUID(): UUID? {
+		return uuid
+	}
+
+	fun setUUID(UUID: UUID){
+		uuid = UUID
 	}
 }

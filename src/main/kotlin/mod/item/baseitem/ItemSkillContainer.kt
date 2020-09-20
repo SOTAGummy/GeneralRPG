@@ -3,6 +3,7 @@ package mod.item.baseitem
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import mod.Core
 import net.minecraft.client.resources.I18n
 import net.minecraft.client.util.ITooltipFlag
@@ -13,6 +14,7 @@ import net.minecraft.util.ActionResult
 import net.minecraft.util.EnumActionResult
 import net.minecraft.util.EnumHand
 import net.minecraft.util.ResourceLocation
+import net.minecraft.util.text.TextComponentTranslation
 import net.minecraft.util.text.TextFormatting
 import net.minecraft.world.World
 import net.minecraftforge.fml.relauncher.Side
@@ -44,9 +46,10 @@ open class ItemSkillContainer(name: String, val capacity: Int, private val coolD
 
 		if (stack.tagCompound != null) {
 			tooltip.add("")
-			tooltip.add("Cost : " + cost.toString() + "MP")
+			tooltip.add("${TextComponentTranslation("text.skill_cost").formattedText} : " + cost.toString() + "MP")
 		}
-		tooltip.add("SavingRate : $savingRate")
+		tooltip.add("${TextComponentTranslation("text.saving_rate").formattedText} : $savingRate%")
+		tooltip.add("${TextComponentTranslation("text.cooldown").formattedText} : ${coolDown.toFloat() / 20F}${TextComponentTranslation("text.second").formattedText}")
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -54,16 +57,20 @@ open class ItemSkillContainer(name: String, val capacity: Int, private val coolD
 		val itemstack = player.getHeldItem(handIn)
 		player.activeHand = handIn
 		if (itemstack.tagCompound != null) {
-			GlobalScope.launch {
 				repeat(capacity + 1) {
 					if (itemstack.tagCompound!!.getInteger((it + 1).toString()) != 0) {
 						val item = (getItemById(itemstack.tagCompound!!.getInteger((it + 1).toString()))) as ItemSkill
-						item.skillFunction(world, player, handIn, savingRate)
-						delay(500)
+						runBlocking {
+							item.skillFunction(world, player, handIn, savingRate)
+						}
+						GlobalScope.launch {
+							launch {
+								delay(500)
+							}
+						}
 					}
 				}
 			}
-		}
 		player.cooldownTracker.setCooldown(this, coolDown)
 		return ActionResult(EnumActionResult.SUCCESS, itemstack)
 	}

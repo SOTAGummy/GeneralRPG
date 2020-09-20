@@ -12,7 +12,7 @@ import net.minecraft.util.EnumHand
 import net.minecraft.world.World
 
 object Shield : ItemSkill("shield", 15, SkillRarity.RARE) {
-	override suspend fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand, savingRate: Float) {
+	override fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand, savingRate: Float) {
 		if (StatusUtil().useMP(player, this.cost, savingRate)) {
 			GlobalScope.launch {
 				player.getEntityAttribute(SharedMonsterAttributes.ARMOR).baseValue += 2

@@ -18,7 +18,6 @@ class CapabilityHandler {
 	fun attachCapability(event: AttachCapabilitiesEvent<Entity?>) {
 		if (event.getObject() is EntityPlayer) {
 			event.addCapability(STATUS_CAP, StatusProvider())
-
 		}
 	}
 }

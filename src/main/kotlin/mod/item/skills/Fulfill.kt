@@ -9,7 +9,7 @@ import net.minecraft.util.EnumHand
 import net.minecraft.world.World
 
 object Fulfill : ItemSkill("fulfill", 0, SkillRarity.MASTER) {
-	override suspend fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand, savingRate: Float) {
+	override fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand, savingRate: Float) {
 		if (StatusUtil().useMP(player, this.cost, savingRate)) {
 			player.getCapability(StatusProvider.STATUS_CAP!!, null)?.setMp(player.getCapability(StatusProvider.STATUS_CAP, null)?.getMaxMp()!!)
 		}

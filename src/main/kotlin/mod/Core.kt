@@ -1,16 +1,14 @@
 package mod
 
 import mod.block.InjectionTable
+import mod.block.TileEntityInjectionTable
 import mod.capability.IStatus
 import mod.capability.Status
 import mod.entity.bullet.SkillBullet
 import mod.event.capabilityEvent.*
 import mod.gui.mpindicator.RenderMPIndicator
 import mod.item.SkillDust
-import mod.item.containers.EnderDragonArtifact
-import mod.item.containers.SkillBook
-import mod.item.containers.SkillOrb
-import mod.item.containers.SkillStaff
+import mod.item.containers.*
 import mod.item.fruit.LifeFruit
 import mod.item.fruit.SkillFruit
 import mod.item.skills.*
@@ -44,6 +42,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 import net.minecraftforge.fml.common.registry.EntityEntry
 import net.minecraftforge.fml.common.registry.EntityRegistry
+import net.minecraftforge.fml.common.registry.GameRegistry
 import java.util.concurrent.Callable
 
 
@@ -91,7 +90,8 @@ class Core {
 		val skillbook = SkillBook
 		val skillstaff = SkillStaff
 		val skillorb = SkillOrb
-		val ender_dragon_artifact = EnderDragonArtifact
+		val enderdragonartifact = EnderDragonArtifact
+		val witherartifact = WitherArtifact
 
 		val skill_fruit = SkillFruit
 		val life_fruit = LifeFruit
@@ -111,6 +111,7 @@ class Core {
 		if (event?.side?.isClient!!) {
 			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(injection_table), 0, ModelResourceLocation(ResourceLocation(ID, "injection_table"), "inventory"))
 		}
+		GameRegistry.registerTileEntity(TileEntityInjectionTable::class.java, ResourceLocation(ID, "injection_table"))
 	}
 
 	@Mod.EventHandler
@@ -118,7 +119,7 @@ class Core {
 		val side = event?.side
 		println(side)
 
-		CapabilityManager.INSTANCE.register(IStatus::class.java, object: Capability.IStorage<IStatus?> {
+		CapabilityManager.INSTANCE.register(IStatus::class.java, object: Capability.IStorage<IStatus> {
 			override fun readNBT(capability: Capability<IStatus?>?, instance: IStatus?, side: EnumFacing?, nbt: NBTBase?) {
 				instance!!.setExp((nbt as NBTTagCompound).getInteger("exp"))
 				instance.setLevel(nbt.getInteger("level"))

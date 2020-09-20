@@ -12,7 +12,7 @@ import net.minecraft.util.EnumHand
 import net.minecraft.world.World
 
 object Rage : ItemSkill("rage", 10, SkillRarity.UNCOMMON) {
-	override suspend fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand, savingRate: Float) {
+	override fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand, savingRate: Float) {
 		if (StatusUtil().useMP(player, this.cost, savingRate)) {
 			GlobalScope.launch {
 				player.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).baseValue += 2

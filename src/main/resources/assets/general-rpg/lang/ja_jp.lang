@@ -28,6 +28,7 @@ item.skillbook.name=スキルブック
 item.skillstaff.name=スキルスタッフ
 item.skillorb.name=スキルオーブ
 item.ender_dragon_artifact.name=エンダードラゴンアーティファクト
+item.wither_artifact.name=ウィザーアーティファクト
 
 item.skill_fruit.name=スキルフルーツ
 item.life_fruit.name=ライフフルーツ
@@ -36,3 +37,8 @@ tile.injection_table.name=インジェクションテーブル
 
 itemGroup.general-rpg=GeneralRPG
 itemGroup.general-rpg.skill=GeneralRPG-Skill
+
+text.skill_cost=コスト
+text.saving_rate=節約率
+text.cooldown=クールダウン
+text.second=秒
