@@ -61,9 +61,7 @@ open class ItemSkillContainer(name: String, val capacity: Int, private val coolD
 				if (itemstack.tagCompound!!.getInteger((it + 1).toString()) != 0) {
 					val item = (getItemById(itemstack.tagCompound!!.getInteger((it + 1).toString()))) as ItemSkill
 					GlobalScope.launch {
-						runBlocking {
-							item.skillFunction(world, player, handIn, savingRate)
-						}
+						item.skillFunction(world, player, handIn, savingRate)
 						launch {
 							delay(500)
 						}.join()

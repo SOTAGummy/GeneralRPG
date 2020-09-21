@@ -53,10 +53,8 @@ class InjectionTable : BlockContainer(Material.IRON) {
 					if (stack.tagCompound == null){
 						val nbt = NBTTagCompound()
 						stack.tagCompound = nbt
-						println("a")
 					}
 					if (stack.tagCompound != null){
-						println("b")
 						repeat((stack.item as ItemSkillContainer).capacity){
 							if (stack.tagCompound!!.getInteger("${it + 1}") == 0){
 								stack.tagCompound!!.setInteger("${it + 1}", te.getSkill())

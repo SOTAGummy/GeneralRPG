@@ -4,13 +4,13 @@ object ItemSkillJsonReference {
 	val jsonText = "{\n" +
 			"\t\"credit\": \"Made with Blockbench\",\n" +
 			"\t\"textures\": {\n" +
-			"\t\t\"1\": \"general-rpg:items/b\",\n" +
-			"\t\t\"2\": \"general-rpg:items/c\",\n" +
-			"\t\t\"3\": \"general-rpg:items/d\",\n" +
-			"\t\t\"4\": \"general-rpg:items/e\",\n" +
-			"\t\t\"5\": \"general-rpg:items/f\",\n" +
-			"\t\t\"6\": \"general-rpg:items/g\",\n" +
-			"\t\t\"particle\": \"general-rpg:items/a\"\n" +
+			"\t\t\"1\": \"general-rpg:items/itemskill/b\",\n" +
+			"\t\t\"2\": \"general-rpg:items/itemskill/c\",\n" +
+			"\t\t\"3\": \"general-rpg:items/itemskill/d\",\n" +
+			"\t\t\"4\": \"general-rpg:items/itemskill/e\",\n" +
+			"\t\t\"5\": \"general-rpg:items/itemskill/f\",\n" +
+			"\t\t\"6\": \"general-rpg:items/itemskill/g\",\n" +
+			"\t\t\"particle\": \"general-rpg:items/itemskill/a\"\n" +
 			"\t},\n" +
 			"\t\"elements\": [\n" +
 			"\t\t{\n" +

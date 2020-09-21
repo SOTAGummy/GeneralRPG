@@ -1,13 +1,13 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"1": "general-rpg:items/b",
-		"2": "general-rpg:items/c",
-		"3": "general-rpg:items/d",
-		"4": "general-rpg:items/e",
-		"5": "general-rpg:items/f",
-		"6": "general-rpg:items/g",
-		"particle": "general-rpg:items/a"
+		"1": "general-rpg:items/itemskill/b",
+		"2": "general-rpg:items/itemskill/c",
+		"3": "general-rpg:items/itemskill/d",
+		"4": "general-rpg:items/itemskill/e",
+		"5": "general-rpg:items/itemskill/f",
+		"6": "general-rpg:items/itemskill/g",
+		"particle": "general-rpg:items/itemskill/a"
 	},
 	"elements": [
 		{

@@ -1,5 +1,6 @@
 package mod.gui.mpindicator
 
+import mod.gui.skilllist.SkillListIndicator
 import net.minecraft.client.Minecraft
 import net.minecraftforge.client.event.RenderGameOverlayEvent
 import net.minecraftforge.fml.common.eventhandler.EventPriority
@@ -13,6 +14,7 @@ class RenderMPIndicator {
 	fun onRenderGui(event: RenderGameOverlayEvent.Post) {
 		if (event.type == RenderGameOverlayEvent.ElementType.EXPERIENCE && !Minecraft.getMinecraft().player.isCreative) {
 			MPIndicator(Minecraft.getMinecraft())
+			SkillListIndicator(Minecraft.getMinecraft())
 		}
 	}
 }
