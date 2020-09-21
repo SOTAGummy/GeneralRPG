@@ -1,7 +1,5 @@
 package mod.enums
 
-import mod.source.SkillDamageSource
-
 enum class SkillParticle(val particleName: String, val ID: Int) {
 	FIRE("fire", 4611),
 	ICE("ice", 4612),

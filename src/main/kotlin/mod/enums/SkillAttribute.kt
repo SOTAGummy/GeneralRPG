@@ -1,14 +1,14 @@
 package mod.enums
 
-import mod.source.SkillDamageSource
+import net.minecraft.util.DamageSource
 
-enum class SkillAttribute(val source: SkillDamageSource){
-	FIRE(SkillDamageSource("fire")),
-	ICE(SkillDamageSource("ice")),
-	WIND(SkillDamageSource("wind")),
-	EARTHEN(SkillDamageSource("earthen")),
-	LIGHTNING(SkillDamageSource("lightning")),
-	WATER(SkillDamageSource("water")),
-	LIGHT(SkillDamageSource("light")),
-	DARK(SkillDamageSource("dark"))
+enum class SkillAttribute(val source: DamageSource){
+	FIRE(DamageSource("fire")),
+	ICE(DamageSource("ice")),
+	WIND(DamageSource("wind")),
+	EARTHEN(DamageSource("earthen")),
+	LIGHTNING(DamageSource("lightning")),
+	WATER(DamageSource("water")),
+	LIGHT(DamageSource("light")),
+	DARK(DamageSource("dark"))
 }

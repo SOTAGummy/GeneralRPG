@@ -17,4 +17,19 @@ class StatusUtil {
 			return false
 		}
 	}
+
+	fun canLevelUp(player: EntityPlayer): Boolean{
+		val exp = player.getCapability(StatusProvider.STATUS_CAP!!, null)?.getExp()!!
+		val level = player.getCapability(StatusProvider.STATUS_CAP!!, null)?.getLevel()!!
+		if (level < 17){
+			if (level * 17 <= exp){
+				return true
+			}
+		} else {
+			if ((272 + ((level - 16) - 1) * 3 + 20) <= exp){
+				return true
+			}
+		}
+		return false
+	}
 }
