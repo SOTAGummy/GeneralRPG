@@ -14,7 +14,7 @@ import net.minecraft.util.text.TextFormatting
 import net.minecraft.world.World
 import java.io.File
 
-open class ItemSkill(val name: String, val cost: Int, val rarity: SkillRarity): GeneralRPGItem() {
+open class ItemSkill(val name: String, val cost: Int, val rarity: SkillRarity, val includeEvents: Boolean): GeneralRPGItem() {
 	init {
 		this.unlocalizedName = name
 		this.maxStackSize = 1
@@ -24,6 +24,7 @@ open class ItemSkill(val name: String, val cost: Int, val rarity: SkillRarity): 
 		Rarity = rarity
 		Storage.Skills.add(this)
 		rarity.skills.add(this)
+		if (includeEvents) Storage.Instances.add(this)
 
 		val file = File("D:\\mod\\GeneralRPG\\src\\main\\resources\\assets\\general-rpg\\models\\item\\$name.json")
 		if (!file.exists()) {

@@ -8,7 +8,7 @@ import net.minecraft.util.EnumHand
 import net.minecraft.util.math.MathHelper
 import net.minecraft.world.World
 
-object LeapPP: ItemSkill("leap++", 50, SkillRarity.MYTHIC){
+object LeapPP: ItemSkill("leap++", 50, SkillRarity.MYTHIC, false){
 	override fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand, savingRate: Float) {
 		if (StatusUtil().useMP(player, this.cost, savingRate)) {
 			val vx = -MathHelper.sin(Math.toRadians(player.rotationYaw.toDouble()).toFloat()) * MathHelper.cos(Math.toRadians(player.rotationPitch.toDouble()).toFloat())

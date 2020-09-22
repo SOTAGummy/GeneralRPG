@@ -8,7 +8,7 @@ import net.minecraft.util.EnumFacing
 import net.minecraft.util.EnumHand
 import net.minecraft.world.World
 
-object Light : ItemSkill("light", 5, SkillRarity.COMMON) {
+object Light : ItemSkill("light", 5, SkillRarity.COMMON, false) {
 	override fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand, savingRate: Float) {
 		if (StatusUtil().useMP(player, this.cost, savingRate)) {
 			val pos = player.rayTrace(15.0, 0.0F)!!.blockPos

@@ -9,7 +9,7 @@ import net.minecraft.util.EnumHand
 import net.minecraft.util.math.MathHelper
 import net.minecraft.world.World
 
-object SkillBulletTest : ItemSkill("skillbullettest", 0, SkillRarity.EXTRA) {
+object SkillBulletTest : ItemSkill("skillbullettest", 0, SkillRarity.EXTRA, false) {
 	override fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand, savingRate: Float) {
 		if (StatusUtil().useMP(player, 0, savingRate)) {
 			val bullet = SkillBullet(world)

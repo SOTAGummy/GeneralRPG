@@ -11,7 +11,7 @@ import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.util.EnumHand
 import net.minecraft.world.World
 
-object Shield : ItemSkill("shield", 15, SkillRarity.RARE) {
+object Shield : ItemSkill("shield", 15, SkillRarity.RARE, false) {
 	override fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand, savingRate: Float) {
 		if (StatusUtil().useMP(player, this.cost, savingRate)) {
 			GlobalScope.launch {

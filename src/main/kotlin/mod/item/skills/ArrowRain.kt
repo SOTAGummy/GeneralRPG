@@ -15,7 +15,7 @@ import net.minecraft.util.EnumHand
 import net.minecraft.world.World
 import kotlin.random.Random
 
-object ArrowRain : ItemSkill("arrowrain", 20, SkillRarity.UNCOMMON) {
+object ArrowRain : ItemSkill("arrowrain", 20, SkillRarity.UNCOMMON, false) {
 	override fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand, savingRate: Float) {
 		if (StatusUtil().useMP(player, this.cost, savingRate)) {
 			if (!world.isRemote) {

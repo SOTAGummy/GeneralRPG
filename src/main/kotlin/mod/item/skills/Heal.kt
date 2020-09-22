@@ -9,7 +9,7 @@ import net.minecraft.item.ItemStack
 import net.minecraft.util.EnumHand
 import net.minecraft.world.World
 
-object Heal : ItemSkill("heal", 5, SkillRarity.COMMON) {
+object Heal : ItemSkill("heal", 5, SkillRarity.COMMON, false) {
 	override fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand, savingRate: Float) {
 		if (StatusUtil().useMP(player, this.cost, savingRate)) {
 			if (player.maxHealth <= player.health + 2) {

@@ -18,7 +18,6 @@ import mod.tab.GeneralRPGSkillTab
 import mod.tab.GeneralRPGTab
 import mod.util.Storage
 import net.minecraft.block.Block
-import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.item.Item
@@ -43,7 +42,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 import net.minecraftforge.fml.common.registry.EntityEntry
 import net.minecraftforge.fml.common.registry.EntityRegistry
 import net.minecraftforge.fml.common.registry.GameRegistry
-import java.util.concurrent.Callable
 
 
 @Mod(modid = Core.ID, name = Core.Name, version = Core.version, modLanguage = "kotlin")
@@ -103,6 +101,9 @@ class Core {
 	fun construct(event: FMLConstructionEvent?) {
 		MinecraftForge.EVENT_BUS.register(this)
 		MinecraftForge.EVENT_BUS.register(proxy)
+		for(item in Storage.Instances){
+			MinecraftForge.EVENT_BUS.register(item)
+		}
 	}
 
 	@Mod.EventHandler
@@ -116,9 +117,6 @@ class Core {
 
 	@Mod.EventHandler
 	fun init(event: FMLInitializationEvent?) {
-		val side = event?.side
-		println(side)
-
 		CapabilityManager.INSTANCE.register(IStatus::class.java, object: Capability.IStorage<IStatus> {
 			override fun readNBT(capability: Capability<IStatus?>?, instance: IStatus?, side: EnumFacing?, nbt: NBTBase?) {
 				instance!!.setExp((nbt as NBTTagCompound).getInteger("exp"))

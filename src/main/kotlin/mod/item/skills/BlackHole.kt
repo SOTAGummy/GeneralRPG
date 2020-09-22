@@ -9,7 +9,7 @@ import net.minecraft.util.EnumHand
 import net.minecraft.util.EnumParticleTypes
 import net.minecraft.world.World
 
-object BlackHole : ItemSkill("blackhole", 50, SkillRarity.RARE) {
+object BlackHole : ItemSkill("blackhole", 50, SkillRarity.RARE, false) {
 	override fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand, savingRate: Float) {
 		if (StatusUtil().useMP(player, this.cost, savingRate)){
 			val entityList = world.loadedEntityList

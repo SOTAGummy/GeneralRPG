@@ -8,7 +8,7 @@ import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.util.EnumHand
 import net.minecraft.world.World
 
-object Fulfill : ItemSkill("fulfill", 0, SkillRarity.MASTER) {
+object Fulfill : ItemSkill("fulfill", 0, SkillRarity.MASTER, false) {
 	override fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand, savingRate: Float) {
 		if (StatusUtil().useMP(player, this.cost, savingRate)) {
 			player.getCapability(StatusProvider.STATUS_CAP!!, null)?.setMp(player.getCapability(StatusProvider.STATUS_CAP, null)?.getMaxMp()!!)
