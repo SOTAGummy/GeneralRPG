@@ -1,6 +1,8 @@
 package mod.event.capabilityEvent
 
 import mod.capability.StatusProvider
+import mod.packet.PacketHandler
+import mod.packet.StatusMessage
 import mod.util.StatusUtil
 import net.minecraft.client.Minecraft
 import net.minecraftforge.event.entity.EntityEvent
@@ -20,9 +22,6 @@ class TickEvent {
 			count = 0
 			event.player.getCapability(StatusProvider.STATUS_CAP!!, null)?.addMp(2)
 			println(event.player.getCapability(StatusProvider.STATUS_CAP!!, null)?.getMaxMp())
-			if (event.side.isServer){
-
-			}
 		}
 	}
 }

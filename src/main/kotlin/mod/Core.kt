@@ -4,6 +4,7 @@ import mod.block.InjectionTable
 import mod.block.TileEntityInjectionTable
 import mod.capability.IStatus
 import mod.capability.Status
+import mod.capability.StatusStorage
 import mod.entity.bullet.SkillBullet
 import mod.event.capabilityEvent.*
 import mod.gui.mpindicator.RenderMPIndicator
@@ -53,11 +54,13 @@ class Core {
 		const val Name = "GeneralRPG"
 		const val version = "1.0"
 
+		@JvmStatic
 		@SidedProxy(clientSide = "mod.proxy.ClientProxy", serverSide = "mod.proxy.ServerProxy")
-		var proxy: CommonProxy? = null
+		lateinit var proxy: CommonProxy
 
+		@JvmStatic
 		@Mod.Instance(ID)
-		var instance: Core? = null
+		lateinit var instance: Core
 
 		val modTab: CreativeTabs = GeneralRPGTab()
 		val skillTab: CreativeTabs = GeneralRPGSkillTab()
@@ -118,23 +121,7 @@ class Core {
 
 	@Mod.EventHandler
 	fun init(event: FMLInitializationEvent?) {
-		CapabilityManager.INSTANCE.register(IStatus::class.java, object: Capability.IStorage<IStatus> {
-			override fun readNBT(capability: Capability<IStatus?>?, instance: IStatus?, side: EnumFacing?, nbt: NBTBase?) {
-				instance!!.setExp((nbt as NBTTagCompound).getInteger("exp"))
-				instance.setLevel(nbt.getInteger("level"))
-				instance.setMp(nbt.getInteger("mp"))
-				instance.setMaxMp(nbt.getInteger("maxmp"))
-			}
-
-			override fun writeNBT(capability: Capability<IStatus?>?, instance: IStatus?, side: EnumFacing?): NBTBase? {
-				val nbt = NBTTagCompound()
-				nbt.setInteger("exp", instance!!.getExp())
-				nbt.setInteger("level", instance.getLevel())
-				nbt.setInteger("mp", instance.getMp())
-				nbt.setInteger("maxmp", instance.getMaxMp())
-				return nbt
-			}
-		}, Callable { Status() })
+		CapabilityManager.INSTANCE.register(IStatus::class.java, StatusStorage(), Callable { Status() })
 
 		MinecraftForge.EVENT_BUS.register(CapabilityHandler())
 		MinecraftForge.EVENT_BUS.register(CapabilityCloneEvent())

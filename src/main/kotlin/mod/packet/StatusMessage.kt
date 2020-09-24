@@ -7,12 +7,15 @@ import net.minecraft.nbt.NBTTagCompound
 import net.minecraftforge.fml.common.network.ByteBufUtils
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage
 
-class MessageStatus(val player: EntityPlayer): IMessage{
-	val nbt = NBTTagCompound()
+class StatusMessage(val player: EntityPlayer): IMessage{
+	var nbt = NBTTagCompound()
+
+	init {
+		nbt = StatusProvider().serializeNBT() as NBTTagCompound
+	}
 
 	override fun fromBytes(buf: ByteBuf?) {
-
-
+		nbt = ByteBufUtils.readTag(buf)!!
 	}
 
 	override fun toBytes(buf: ByteBuf?) {

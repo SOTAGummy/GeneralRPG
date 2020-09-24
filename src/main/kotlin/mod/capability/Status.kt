@@ -63,8 +63,4 @@ class Status: IStatus{
 	override fun addMaxMp(maxmp: Int) {
 		MAXMP += maxmp
 	}
-
-	init {
-
-	}
 }
