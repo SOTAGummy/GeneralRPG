@@ -13,13 +13,16 @@ import net.minecraftforge.fml.relauncher.SideOnly
 class TickEvent {
 	var count = 0
 
-	@SideOnly(Side.SERVER)
 	@SubscribeEvent
 	fun onTickEvent(event: TickEvent.PlayerTickEvent) {
 		count++
-		if (count == 80) {
+		if (count >= 80) {
 			count = 0
 			event.player.getCapability(StatusProvider.STATUS_CAP!!, null)?.addMp(2)
+			println(event.player.getCapability(StatusProvider.STATUS_CAP!!, null)?.getMaxMp())
+			if (event.side.isServer){
+
+			}
 		}
 	}
 }

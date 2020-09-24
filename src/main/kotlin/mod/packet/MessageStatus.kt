@@ -1,22 +1,21 @@
 package mod.packet
 
 import io.netty.buffer.ByteBuf
+import mod.capability.StatusProvider
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.nbt.NBTTagCompound
+import net.minecraftforge.fml.common.network.ByteBufUtils
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage
 
-class StatusMessage(player: EntityPlayer) : IMessage{
+class MessageStatus(val player: EntityPlayer): IMessage{
 	val nbt = NBTTagCompound()
 
-	init {
-
-	}
-
 	override fun fromBytes(buf: ByteBuf?) {
-		TODO("Not yet implemented")
+
+
 	}
 
 	override fun toBytes(buf: ByteBuf?) {
-		TODO("Not yet implemented")
+		ByteBufUtils.writeTag(buf, nbt)
 	}
 }

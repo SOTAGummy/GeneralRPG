@@ -43,7 +43,7 @@ class Status: IStatus{
 	}
 
 	override fun addMp(mp: Int) {
-		if (MP + mp < MAXMP){
+		if (MP + mp > MAXMP){
 			MP = MAXMP
 		}else{
 			MP += mp
@@ -62,5 +62,9 @@ class Status: IStatus{
 
 	override fun addMaxMp(maxmp: Int) {
 		MAXMP += maxmp
+	}
+
+	init {
+
 	}
 }

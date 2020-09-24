@@ -22,6 +22,7 @@ object SkillFruit: ItemFood(0, 0F, false){
 
 	override fun onFoodEaten(stack: ItemStack, worldIn: World, player: EntityPlayer) {
 		player.getCapability(StatusProvider.STATUS_CAP!!, null)?.addMaxMp(2)
+		player.getCapability(StatusProvider.STATUS_CAP, null)?.addMp(2)
 	}
 
 	override fun getMaxItemUseDuration(stack: ItemStack): Int {

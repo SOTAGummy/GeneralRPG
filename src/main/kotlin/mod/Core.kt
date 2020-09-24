@@ -42,6 +42,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 import net.minecraftforge.fml.common.registry.EntityEntry
 import net.minecraftforge.fml.common.registry.EntityRegistry
 import net.minecraftforge.fml.common.registry.GameRegistry
+import java.util.concurrent.Callable
 
 
 @Mod(modid = Core.ID, name = Core.Name, version = Core.version, modLanguage = "kotlin")
@@ -133,7 +134,7 @@ class Core {
 				nbt.setInteger("maxmp", instance.getMaxMp())
 				return nbt
 			}
-		}) { Status() }
+		}, Callable { Status() })
 
 		MinecraftForge.EVENT_BUS.register(CapabilityHandler())
 		MinecraftForge.EVENT_BUS.register(CapabilityCloneEvent())
