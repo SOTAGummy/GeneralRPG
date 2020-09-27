@@ -1,8 +1,10 @@
 package mod.item.skills
 
+import mod.capability.StatusProvider
 import mod.item.baseitem.ItemSkill
 import mod.enums.SkillRarity
 import mod.util.StatusUtil
+import mod.util.percent
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
@@ -17,6 +19,7 @@ object Heal : ItemSkill("heal", 5, SkillRarity.COMMON, false) {
 			} else {
 				player.health += 2
 			}
+			println(player.getCapability(StatusProvider.STATUS_CAP!!, null)?.getMp()?.percent(player.getCapability(StatusProvider.STATUS_CAP!!, null)?.getMaxMp()!!))
 		}
 	}
 }

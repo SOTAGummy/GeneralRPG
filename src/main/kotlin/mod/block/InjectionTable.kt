@@ -4,8 +4,7 @@ import mod.Core
 import mod.entity.AnimateItem
 import mod.item.baseitem.ItemSkill
 import mod.item.baseitem.ItemSkillContainer
-import mod.util.WorldUtil
-import net.minecraft.block.Block
+import mod.util.getEntityFromUUID
 import net.minecraft.block.BlockContainer
 import net.minecraft.block.material.Material
 import net.minecraft.block.state.IBlockState
@@ -21,7 +20,6 @@ import net.minecraft.util.EnumHand
 import net.minecraft.util.ResourceLocation
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
-import java.util.*
 
 
 class InjectionTable : BlockContainer(Material.IRON) {
@@ -59,8 +57,8 @@ class InjectionTable : BlockContainer(Material.IRON) {
 							if (stack.tagCompound!!.getInteger("${it + 1}") == 0){
 								stack.tagCompound!!.setInteger("${it + 1}", te.getSkill())
 								te.setSkill(0)
-								if (WorldUtil().getEntityFromUUID(world, te.getUUID()!!) != null)
-								world.removeEntity(WorldUtil().getEntityFromUUID(world, te.getUUID()!!))
+								if (world.getEntityFromUUID(te.getUUID()!!) != null)
+								world.removeEntity(world.getEntityFromUUID(te.getUUID()!!))
 								te.setUUID(null)
 							}
 						}
@@ -78,7 +76,7 @@ class InjectionTable : BlockContainer(Material.IRON) {
 	override fun breakBlock(world: World, pos: BlockPos?, state: IBlockState?) {
 		val te = world.getTileEntity(pos) as TileEntityInjectionTable
 		if (te.getUUID() != null){
-			val entity = WorldUtil().getEntityFromUUID(world, te.getUUID()!!)
+			val entity = world.getEntityFromUUID(te.getUUID()!!)
 			world.removeEntity(entity)
 			val item = ItemStack(Item.getItemById(te.getSkill()))
 			world.spawnEntity(EntityItem(world, pos!!.x.toDouble(), pos.y.toDouble(), pos.z.toDouble(), item))
