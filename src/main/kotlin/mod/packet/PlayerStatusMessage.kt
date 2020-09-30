@@ -5,7 +5,7 @@ import net.minecraft.entity.player.EntityPlayer
 import net.minecraftforge.fml.common.network.ByteBufUtils
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage
 
-class PlayerStatusMessage(player: EntityPlayer): IMessage{
+class PlayerStatusMessage(player: EntityPlayer) : IMessage {
 	private var uuid = ""
 
 	init {
@@ -20,11 +20,11 @@ class PlayerStatusMessage(player: EntityPlayer): IMessage{
 		ByteBufUtils.writeUTF8String(buf, this.uuid)
 	}
 
-	fun getUuid(): String{
+	fun getUuid(): String {
 		return uuid
 	}
 
-	fun setUuid(uuid: String){
+	fun setUuid(uuid: String) {
 		this.uuid = uuid
 	}
 }

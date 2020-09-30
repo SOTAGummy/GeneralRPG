@@ -3,7 +3,6 @@ package mod.item.baseitem
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import mod.Core
 import net.minecraft.client.resources.I18n
 import net.minecraft.client.util.ITooltipFlag
@@ -20,7 +19,7 @@ import net.minecraft.world.World
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 
-open class ItemSkillContainer(name: String, val capacity: Int, private val coolDown: Int, val savingRate: Float): GeneralRPGItem() {
+open class ItemSkillContainer(name: String, val capacity: Int, private val coolDown: Int, val savingRate: Float) : GeneralRPGItem() {
 	init {
 		this.unlocalizedName = name
 		this.creativeTab = Core.modTab

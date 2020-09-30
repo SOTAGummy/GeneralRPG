@@ -4,8 +4,8 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import mod.item.baseitem.ItemSkill
 import mod.enums.SkillRarity
+import mod.item.baseitem.ItemSkill
 import mod.util.StatusUtil
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.init.Items

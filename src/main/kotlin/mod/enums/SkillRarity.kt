@@ -2,7 +2,6 @@ package mod.enums
 
 import mod.item.baseitem.ItemSkill
 import net.minecraft.util.text.TextFormatting
-import java.awt.Color
 
 enum class SkillRarity(val colorChar: TextFormatting, val skills: ArrayList<ItemSkill>, val colorCode: Int) {
 	COMMON(TextFormatting.WHITE, arrayListOf(), 16777215),

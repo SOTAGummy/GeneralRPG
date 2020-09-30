@@ -33,7 +33,7 @@ class TileEntityInjectionTable : TileEntity() {
 		return uuid
 	}
 
-	fun setUUID(UUID: UUID?){
+	fun setUUID(UUID: UUID?) {
 		uuid = UUID
 	}
 }

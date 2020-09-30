@@ -1,16 +1,8 @@
 package mod.event.capabilityEvent
 
 import mod.capability.StatusProvider
-import mod.packet.PacketHandler
-import mod.packet.StatusMessage
-import mod.util.StatusUtil
-import net.minecraft.client.Minecraft
-import net.minecraftforge.event.entity.EntityEvent
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
-import net.minecraftforge.fml.common.gameevent.PlayerEvent
 import net.minecraftforge.fml.common.gameevent.TickEvent
-import net.minecraftforge.fml.relauncher.Side
-import net.minecraftforge.fml.relauncher.SideOnly
 
 class TickEvent {
 	var count = 0

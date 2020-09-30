@@ -23,14 +23,10 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.item.Item
 import net.minecraft.item.ItemBlock
-import net.minecraft.nbt.NBTBase
-import net.minecraft.nbt.NBTTagCompound
-import net.minecraft.util.EnumFacing
 import net.minecraft.util.ResourceLocation
 import net.minecraftforge.client.event.ModelRegistryEvent
 import net.minecraftforge.client.model.ModelLoader
 import net.minecraftforge.common.MinecraftForge
-import net.minecraftforge.common.capabilities.Capability
 import net.minecraftforge.common.capabilities.CapabilityManager
 import net.minecraftforge.event.RegistryEvent
 import net.minecraftforge.fml.common.Mod
@@ -105,7 +101,7 @@ class Core {
 	fun construct(event: FMLConstructionEvent?) {
 		MinecraftForge.EVENT_BUS.register(this)
 		MinecraftForge.EVENT_BUS.register(proxy)
-		for(item in Storage.Instances){
+		for (item in Storage.Instances) {
 			MinecraftForge.EVENT_BUS.register(item)
 		}
 	}

@@ -5,7 +5,7 @@ import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.util.EnumFacing
 import net.minecraftforge.common.capabilities.Capability
 
-class StatusStorage: Capability.IStorage<IStatus>{
+class StatusStorage : Capability.IStorage<IStatus> {
 	override fun readNBT(capability: Capability<IStatus>?, instance: IStatus?, side: EnumFacing?, nbt: NBTBase?) {
 		instance!!.setExp((nbt as NBTTagCompound).getInteger("exp"))
 		instance.setLevel(nbt.getInteger("level"))

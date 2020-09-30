@@ -13,9 +13,9 @@ fun World.getNearEntity(radius: Int, pos: BlockPos): MutableList<Entity> {
 	return this.getEntitiesWithinAABB(Entity::class.java, AxisAlignedBB(x, y, z, x + radius, y + radius, z + radius))
 }
 
-fun World.getEntityFromUUID(UUID: UUID): Entity?{
-	repeat(this.loadedEntityList.size){
-		if (this.loadedEntityList[it].uniqueID == UUID){
+fun World.getEntityFromUUID(UUID: UUID): Entity? {
+	repeat(this.loadedEntityList.size) {
+		if (this.loadedEntityList[it].uniqueID == UUID) {
 			return this.loadedEntityList[it]
 			return@repeat
 		}

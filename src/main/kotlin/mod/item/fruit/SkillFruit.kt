@@ -9,7 +9,7 @@ import net.minecraft.item.ItemStack
 import net.minecraft.util.ResourceLocation
 import net.minecraft.world.World
 
-object SkillFruit: ItemFood(0, 0F, false){
+object SkillFruit : ItemFood(0, 0F, false) {
 	init {
 		this.maxStackSize = 64
 		this.unlocalizedName = "skill_fruit"

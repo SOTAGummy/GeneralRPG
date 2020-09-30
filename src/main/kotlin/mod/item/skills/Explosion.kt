@@ -1,9 +1,8 @@
 package mod.item.skills
 
-import mod.capability.StatusProvider
 import mod.enums.SkillAttribute
-import mod.item.baseitem.ItemSkill
 import mod.enums.SkillRarity
+import mod.item.baseitem.ItemSkill
 import mod.item.baseitem.ItemSkillContainer
 import mod.util.StatusUtil
 import net.minecraft.client.Minecraft
@@ -11,8 +10,6 @@ import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.util.EnumHand
 import net.minecraft.world.World
 import net.minecraftforge.event.entity.living.LivingHurtEvent
-import net.minecraftforge.event.world.ExplosionEvent
-import net.minecraftforge.event.world.WorldEvent
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 
 object Explosion : ItemSkill("explosion", 30, SkillRarity.RARE, true) {
@@ -24,8 +21,8 @@ object Explosion : ItemSkill("explosion", 30, SkillRarity.RARE, true) {
 	}
 
 	@SubscribeEvent
-	fun onExplode(event: LivingHurtEvent){
-		if (event.source.damageType == "explosion.player" && Minecraft.getMinecraft().player.getHeldItem(EnumHand.MAIN_HAND).item is ItemSkillContainer){
+	fun onExplode(event: LivingHurtEvent) {
+		if (event.source.damageType == "explosion.player" && Minecraft.getMinecraft().player.getHeldItem(EnumHand.MAIN_HAND).item is ItemSkillContainer) {
 			event.entityLiving.attackEntityFrom(SkillAttribute.FIRE.source, 5F)
 			event.entityLiving.attackEntityFrom(SkillAttribute.EARTHEN.source, 5F)
 		}

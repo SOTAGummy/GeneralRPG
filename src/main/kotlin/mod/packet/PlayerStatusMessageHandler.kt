@@ -4,7 +4,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext
 
-class PlayerStatusMessageHandler: IMessageHandler<PlayerStatusMessage, IMessage>{
+class PlayerStatusMessageHandler : IMessageHandler<PlayerStatusMessage, IMessage> {
 	override fun onMessage(message: PlayerStatusMessage?, ctx: MessageContext?): IMessage? {
 		val uuidString = message!!.getUuid();
 		val player = ctx!!.serverHandler.player;

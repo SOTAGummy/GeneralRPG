@@ -11,11 +11,11 @@ import net.minecraft.world.World
 
 object BlackHole : ItemSkill("blackhole", 50, SkillRarity.RARE, false) {
 	override fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand, savingRate: Float) {
-		if (StatusUtil().useMP(player, this.cost, savingRate)){
+		if (StatusUtil().useMP(player, this.cost, savingRate)) {
 			val entityList = world.loadedEntityList
 			val livingList = arrayListOf<EntityLiving>()
 			val pos = player.rayTrace(15.0, 0.0F)!!.blockPos
-			repeat(10){
+			repeat(10) {
 				world.spawnParticle(EnumParticleTypes.SPELL_WITCH, pos.x.toDouble(), pos.y.toDouble(), pos.z.toDouble(), 0.0, 0.5, 0.0)
 			}
 

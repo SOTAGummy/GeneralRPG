@@ -1,6 +1,6 @@
 package mod.capability
 
-class Status: IStatus{
+class Status : IStatus {
 	private var EXP = 0
 	private var LEVEL = 1
 	private var MP = 100
@@ -43,9 +43,9 @@ class Status: IStatus{
 	}
 
 	override fun addMp(mp: Int) {
-		if (MP + mp > MAXMP){
+		if (MP + mp > MAXMP) {
 			MP = MAXMP
-		}else{
+		} else {
 			MP += mp
 		}
 	}

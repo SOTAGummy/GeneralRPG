@@ -6,7 +6,7 @@ import net.minecraftforge.common.capabilities.Capability
 import net.minecraftforge.common.capabilities.CapabilityInject
 import net.minecraftforge.common.capabilities.ICapabilitySerializable
 
-class StatusProvider: ICapabilitySerializable<NBTBase> {
+class StatusProvider : ICapabilitySerializable<NBTBase> {
 	companion object {
 		@CapabilityInject(IStatus::class)
 		val STATUS_CAP: Capability<IStatus>? = null

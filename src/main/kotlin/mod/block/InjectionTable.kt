@@ -39,26 +39,26 @@ class InjectionTable : BlockContainer(Material.IRON) {
 		val te = world.getTileEntity(pos) as TileEntityInjectionTable
 		val stack = player!!.getHeldItem(hand)
 		if (!world.isRemote) {
-			if (stack.item is ItemSkill){
+			if (stack.item is ItemSkill) {
 				te.setSkill(Item.getIdFromItem(stack.item))
 				val entity = AnimateItem(world, pos!!.x.toDouble() + 0.5, pos.y.toDouble() + 1, pos.z.toDouble() + 0.5, ItemStack(Item.getItemById(te.getSkill())), ItemStack(Item.getItemById(te.getSkill())).displayName)
 				world.spawnEntity(entity)
 				te.setUUID(entity.uniqueID)
 				stack.count--
 				player.setHeldItem(hand, stack)
-			} else if (stack.item is ItemSkillContainer){
-				if (te.getSkill() != 0){
-					if (stack.tagCompound == null){
+			} else if (stack.item is ItemSkillContainer) {
+				if (te.getSkill() != 0) {
+					if (stack.tagCompound == null) {
 						val nbt = NBTTagCompound()
 						stack.tagCompound = nbt
 					}
-					if (stack.tagCompound != null){
-						repeat((stack.item as ItemSkillContainer).capacity){
-							if (stack.tagCompound!!.getInteger("${it + 1}") == 0){
+					if (stack.tagCompound != null) {
+						repeat((stack.item as ItemSkillContainer).capacity) {
+							if (stack.tagCompound!!.getInteger("${it + 1}") == 0) {
 								stack.tagCompound!!.setInteger("${it + 1}", te.getSkill())
 								te.setSkill(0)
 								if (world.getEntityFromUUID(te.getUUID()!!) != null)
-								world.removeEntity(world.getEntityFromUUID(te.getUUID()!!))
+									world.removeEntity(world.getEntityFromUUID(te.getUUID()!!))
 								te.setUUID(null)
 							}
 						}
@@ -75,7 +75,7 @@ class InjectionTable : BlockContainer(Material.IRON) {
 
 	override fun breakBlock(world: World, pos: BlockPos?, state: IBlockState?) {
 		val te = world.getTileEntity(pos) as TileEntityInjectionTable
-		if (te.getUUID() != null){
+		if (te.getUUID() != null) {
 			val entity = world.getEntityFromUUID(te.getUUID()!!)
 			world.removeEntity(entity)
 			val item = ItemStack(Item.getItemById(te.getSkill()))

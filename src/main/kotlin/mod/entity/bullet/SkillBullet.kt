@@ -32,7 +32,7 @@ class SkillBullet(world: World) : EntityThrowable(world) {
 		}
 	}
 
-	fun setDamageAmount(amount: Float){
+	fun setDamageAmount(amount: Float) {
 		this.damage = amount
 	}
 }

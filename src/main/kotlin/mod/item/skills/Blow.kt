@@ -1,7 +1,7 @@
 package mod.item.skills
 
-import mod.item.baseitem.ItemSkill
 import mod.enums.SkillRarity
+import mod.item.baseitem.ItemSkill
 import mod.util.StatusUtil
 import net.minecraft.entity.EntityLiving
 import net.minecraft.entity.player.EntityPlayer
@@ -9,29 +9,29 @@ import net.minecraft.util.EnumHand
 import net.minecraft.world.World
 import kotlin.math.abs
 
-object Blow: ItemSkill("blow", 40, SkillRarity.UNCOMMON, false){
+object Blow : ItemSkill("blow", 40, SkillRarity.UNCOMMON, false) {
 	override fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand, savingRate: Float) {
-		if (StatusUtil().useMP(player, this.cost, savingRate)){
+		if (StatusUtil().useMP(player, this.cost, savingRate)) {
 			val entity = arrayListOf<EntityLiving>()
-			repeat(world.loadedEntityList.size){
-				if (world.loadedEntityList[it] is EntityLiving && player.getDistance(world.loadedEntityList[it]).toInt() <= 10){
+			repeat(world.loadedEntityList.size) {
+				if (world.loadedEntityList[it] is EntityLiving && player.getDistance(world.loadedEntityList[it]).toInt() <= 10) {
 					entity.add(world.loadedEntityList[it] as EntityLiving)
 				}
 			}
-			repeat(entity.size){
+			repeat(entity.size) {
 				val pos1 = player.position
 				val pos2 = entity[it].position
 
 				val xDis = if (pos1.x > pos2.x) {
 					-abs(pos1.x - pos2.x)
-				}else{
+				} else {
 					abs(pos1.x - pos2.x)
 				}
 
 
 				val zDis = if (pos1.z > pos2.z) {
 					-abs(pos1.z - pos2.z)
-				}else{
+				} else {
 					abs(pos1.z - pos2.z)
 				}
 

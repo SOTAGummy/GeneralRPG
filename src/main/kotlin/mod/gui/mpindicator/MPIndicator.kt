@@ -8,7 +8,7 @@ import net.minecraft.client.gui.ScaledResolution
 import net.minecraft.util.ResourceLocation
 import java.awt.Color
 
-class MPIndicator(mc: Minecraft): Gui() {
+class MPIndicator(mc: Minecraft) : Gui() {
 	companion object {
 		@JvmStatic
 		private val texture = ResourceLocation(Core.ID + ":textures/gui/mp_bar.png")
