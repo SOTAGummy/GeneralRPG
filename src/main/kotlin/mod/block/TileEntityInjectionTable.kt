@@ -17,7 +17,8 @@ class TileEntityInjectionTable : TileEntity() {
 
 	override fun writeToNBT(compound: NBTTagCompound): NBTTagCompound? {
 		compound.setInteger("id", id)
-		compound.setUniqueId("uuid", uuid)
+		if (uuid != null)
+			compound.setUniqueId("uuid", uuid)
 		return super.writeToNBT(compound)
 	}
 

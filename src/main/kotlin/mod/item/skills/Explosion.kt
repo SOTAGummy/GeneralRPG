@@ -23,7 +23,7 @@ object Explosion : ItemSkill("explosion", 30, SkillRarity.RARE, true) {
 	@SubscribeEvent
 	fun onExplode(event: LivingHurtEvent) {
 		if (event.source.damageType == "explosion.player" && Minecraft.getMinecraft().player.getHeldItem(EnumHand.MAIN_HAND).item is ItemSkillContainer) {
-			event.entityLiving.attackEntityFrom(SkillAttribute.FIRE.source, 5F)
+			event.entityLiving.attackEntityFrom(SkillAttribute.FIRE.source, 50F)
 			event.entityLiving.attackEntityFrom(SkillAttribute.EARTHEN.source, 5F)
 		}
 	}

@@ -14,6 +14,7 @@ import mod.item.fruit.LifeFruit
 import mod.item.fruit.SkillFruit
 import mod.item.skills.*
 import mod.item.tokens.*
+import mod.potion.*
 import mod.proxy.CommonProxy
 import mod.tab.GeneralRPGSkillTab
 import mod.tab.GeneralRPGTab
@@ -23,6 +24,7 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.item.Item
 import net.minecraft.item.ItemBlock
+import net.minecraft.potion.Potion
 import net.minecraft.util.ResourceLocation
 import net.minecraftforge.client.event.ModelRegistryEvent
 import net.minecraftforge.client.model.ModelLoader
@@ -95,6 +97,13 @@ class Core {
 		val life_fruit = LifeFruit
 
 		val injection_table = InjectionTable()
+
+		val burnEffect = BurningEffect()
+		val frozenEffect = FrozenEffect()
+		val paralysisEffect = ParalysisEffect()
+		val muddyEffect = MuddyEffect()
+		val electricShockEffect = ElectricShockEffect()
+		val floodedEffect = FloodedEffect()
 	}
 
 	@Mod.EventHandler
@@ -108,7 +117,7 @@ class Core {
 
 	@Mod.EventHandler
 	fun preInit(event: FMLPreInitializationEvent?) {
-		proxy?.preInit()
+		proxy.preInit()
 		if (event?.side?.isClient!!) {
 			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(injection_table), 0, ModelResourceLocation(ResourceLocation(ID, "injection_table"), "inventory"))
 		}
@@ -127,13 +136,13 @@ class Core {
 
 		//RenderingRegistry.registerEntityRenderingHandler(SkillBullet::class.java, RenderSkillBullet())
 
-		proxy?.init()
+		proxy.init()
 	}
 
 	@Mod.EventHandler
 	fun postInit(event: FMLPostInitializationEvent?) {
 		MinecraftForge.EVENT_BUS.register(RenderMPIndicator())
-		proxy?.postInit()
+		proxy.postInit()
 	}
 
 	@SubscribeEvent
@@ -157,7 +166,17 @@ class Core {
 	}
 
 	@SubscribeEvent
+	fun registerPotionEffects(event: RegistryEvent.Register<Potion>) {
+		event.registry.register(burnEffect)
+		event.registry.register(frozenEffect)
+		event.registry.register(paralysisEffect)
+		event.registry.register(muddyEffect)
+		event.registry.register(electricShockEffect)
+		event.registry.register(floodedEffect)
+	}
+
+	@SubscribeEvent
 	fun registerModel(event: ModelRegistryEvent) {
-		proxy?.registerModel()
+		proxy.registerModel()
 	}
 }

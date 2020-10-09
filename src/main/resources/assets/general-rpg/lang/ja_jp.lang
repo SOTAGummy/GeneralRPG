@@ -43,3 +43,10 @@ text.saving_rate=節約率
 text.cooldown=クールダウン
 text.second=秒
 text.level_up=レベルアップ！！
+
+potion.burning.name=火傷
+potion.frozen.name=凍結
+potion.paralysis.name=麻痺
+potion.muddy.name=泥だらけ
+potion.electricshock.name=感電
+potion.flooded.name=水浸し

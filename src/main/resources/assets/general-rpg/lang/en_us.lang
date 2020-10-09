@@ -43,3 +43,10 @@ text.saving_rate=SavingRate
 text.cooldown=CoolDown
 text.second=s
 text.level_up=Level UP !!
+
+potion.burning.name=Burning
+potion.frozen.name=Frozen
+potion.paralysis.name=Paralysis
+potion.muddy.name=Muddy
+potion.electricshock.name=ElectricShock
+potion.flooded.name=Flooded

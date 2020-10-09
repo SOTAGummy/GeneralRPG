@@ -1,9 +1,11 @@
 package mod.item.skills
 
+import mod.Core
 import mod.enums.SkillRarity
 import mod.item.baseitem.ItemSkill
 import mod.util.StatusUtil
 import net.minecraft.entity.player.EntityPlayer
+import net.minecraft.potion.PotionEffect
 import net.minecraft.util.EnumHand
 import net.minecraft.world.World
 
@@ -15,6 +17,8 @@ object Heal : ItemSkill("heal", 5, SkillRarity.COMMON, false) {
 			} else {
 				player.health += 2
 			}
+			player.addPotionEffect(PotionEffect(Core.burnEffect, 2000))
+			player.addPotionEffect(PotionEffect(Core.frozenEffect, 2000))
 		}
 	}
 }
