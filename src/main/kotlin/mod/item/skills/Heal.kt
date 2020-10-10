@@ -19,6 +19,10 @@ object Heal : ItemSkill("heal", 5, SkillRarity.COMMON, false) {
 			}
 			player.addPotionEffect(PotionEffect(Core.burnEffect, 2000))
 			player.addPotionEffect(PotionEffect(Core.frozenEffect, 2000))
+			player.addPotionEffect(PotionEffect(Core.electricShockEffect, 2000))
+			player.addPotionEffect(PotionEffect(Core.floodedEffect, 2000))
+			player.addPotionEffect(PotionEffect(Core.paralysisEffect, 2000))
+			player.addPotionEffect(PotionEffect(Core.muddyEffect, 2000))
 		}
 	}
 }
