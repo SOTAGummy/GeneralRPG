@@ -14,6 +14,7 @@ import mod.item.fruit.LifeFruit
 import mod.item.fruit.SkillFruit
 import mod.item.skills.*
 import mod.item.tokens.*
+import mod.packet.PacketHandler
 import mod.potion.*
 import mod.proxy.CommonProxy
 import mod.tab.GeneralRPGSkillTab
@@ -59,6 +60,8 @@ class Core {
 		@JvmStatic
 		@Mod.Instance(ID)
 		lateinit var instance: Core
+
+		val Packet = PacketHandler()
 
 		val modTab: CreativeTabs = GeneralRPGTab()
 		val skillTab: CreativeTabs = GeneralRPGSkillTab()
@@ -118,6 +121,7 @@ class Core {
 	@Mod.EventHandler
 	fun preInit(event: FMLPreInitializationEvent?) {
 		proxy.preInit()
+		Packet.init()
 		if (event?.side?.isClient!!) {
 			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(injection_table), 0, ModelResourceLocation(ResourceLocation(ID, "injection_table"), "inventory"))
 		}
@@ -127,13 +131,6 @@ class Core {
 	@Mod.EventHandler
 	fun init(event: FMLInitializationEvent?) {
 		CapabilityManager.INSTANCE.register(IStatus::class.java, StatusStorage(), Callable { Status() })
-
-		MinecraftForge.EVENT_BUS.register(CapabilityHandler())
-		MinecraftForge.EVENT_BUS.register(CapabilityCloneEvent())
-		MinecraftForge.EVENT_BUS.register(LevelUp())
-		MinecraftForge.EVENT_BUS.register(PlayerAttributeEvent())
-		MinecraftForge.EVENT_BUS.register(TickEvent())
-
 		//RenderingRegistry.registerEntityRenderingHandler(SkillBullet::class.java, RenderSkillBullet())
 
 		proxy.init()

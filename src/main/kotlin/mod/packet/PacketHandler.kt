@@ -5,9 +5,9 @@ import net.minecraftforge.fml.common.network.NetworkRegistry
 import net.minecraftforge.fml.relauncher.Side
 
 class PacketHandler {
-	val INSTANCE = NetworkRegistry.INSTANCE.newSimpleChannel(Core.ID + "message")
+	val INSTANCE = NetworkRegistry.INSTANCE.newSimpleChannel(Core.ID)
 
-	fun Initialization() {
+	fun init() {
 		INSTANCE.registerMessage(StatusMessageHandler::class.java, StatusMessage::class.java, 34, Side.CLIENT)
 	}
 }
