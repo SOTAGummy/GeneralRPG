@@ -2,7 +2,7 @@ package mod.item.baseitem
 
 import mod.Core
 import mod.enums.SkillRarity
-import mod.json.ItemSkillJsonReference
+import mod.util.ItemSkillJsonReference
 import mod.util.Storage
 import net.minecraft.client.resources.I18n
 import net.minecraft.client.util.ITooltipFlag

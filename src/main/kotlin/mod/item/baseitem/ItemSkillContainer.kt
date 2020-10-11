@@ -6,7 +6,6 @@ import kotlinx.coroutines.launch
 import mod.Core
 import mod.packet.PacketHandler
 import mod.packet.PlayerStatusMessage
-import mod.packet.StatusMessage
 import net.minecraft.client.resources.I18n
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.entity.player.EntityPlayer
@@ -19,8 +18,6 @@ import net.minecraft.util.ResourceLocation
 import net.minecraft.util.text.TextComponentTranslation
 import net.minecraft.util.text.TextFormatting
 import net.minecraft.world.World
-import net.minecraftforge.fml.relauncher.Side
-import net.minecraftforge.fml.relauncher.SideOnly
 
 open class ItemSkillContainer(name: String, val capacity: Int, private val coolDown: Int, val savingRate: Float) : GeneralRPGItem() {
 	init {
@@ -54,7 +51,6 @@ open class ItemSkillContainer(name: String, val capacity: Int, private val coolD
 		tooltip.add("${TextComponentTranslation("text.cooldown").formattedText} : ${coolDown.toFloat() / 20F}${TextComponentTranslation("text.second").formattedText}")
 	}
 
-	@SideOnly(Side.CLIENT)
 	override fun onItemRightClick(world: World, player: EntityPlayer, handIn: EnumHand): ActionResult<ItemStack> {
 		val itemstack = player.getHeldItem(handIn)
 		player.activeHand = handIn

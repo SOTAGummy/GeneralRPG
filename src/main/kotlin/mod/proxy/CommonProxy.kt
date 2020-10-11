@@ -2,6 +2,7 @@ package mod.proxy
 
 import mod.Core
 import mod.event.capabilityEvent.*
+import mod.packet.PacketHandler
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.fml.common.Mod
@@ -9,7 +10,6 @@ import net.minecraftforge.fml.common.Mod
 @Mod.EventBusSubscriber(modid = Core.ID)
 open class CommonProxy {
 	open fun preInit() {
-
 	}
 
 	open fun init() {

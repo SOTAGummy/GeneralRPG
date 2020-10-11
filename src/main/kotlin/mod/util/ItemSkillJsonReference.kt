@@ -1,4 +1,4 @@
-package mod.json
+package mod.util
 
 object ItemSkillJsonReference {
 	val jsonText = "{\n" +

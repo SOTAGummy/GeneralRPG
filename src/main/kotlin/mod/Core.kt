@@ -6,7 +6,6 @@ import mod.capability.IStatus
 import mod.capability.Status
 import mod.capability.StatusStorage
 import mod.entity.bullet.SkillBullet
-import mod.event.capabilityEvent.*
 import mod.gui.mpindicator.RenderMPIndicator
 import mod.item.SkillDust
 import mod.item.containers.*
@@ -55,7 +54,7 @@ class Core {
 
 		@JvmStatic
 		@SidedProxy(clientSide = "mod.proxy.ClientProxy", serverSide = "mod.proxy.ServerProxy")
-		lateinit var proxy: CommonProxy
+		var proxy: CommonProxy? = null
 
 		@JvmStatic
 		@Mod.Instance(ID)
@@ -120,8 +119,8 @@ class Core {
 
 	@Mod.EventHandler
 	fun preInit(event: FMLPreInitializationEvent?) {
-		proxy.preInit()
-		Packet.init()
+		proxy?.preInit()
+		Packet.registerMessage()
 		if (event?.side?.isClient!!) {
 			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(injection_table), 0, ModelResourceLocation(ResourceLocation(ID, "injection_table"), "inventory"))
 		}
@@ -133,13 +132,13 @@ class Core {
 		CapabilityManager.INSTANCE.register(IStatus::class.java, StatusStorage(), Callable { Status() })
 		//RenderingRegistry.registerEntityRenderingHandler(SkillBullet::class.java, RenderSkillBullet())
 
-		proxy.init()
+		proxy?.init()
 	}
 
 	@Mod.EventHandler
 	fun postInit(event: FMLPostInitializationEvent?) {
 		MinecraftForge.EVENT_BUS.register(RenderMPIndicator())
-		proxy.postInit()
+		proxy?.postInit()
 	}
 
 	@SubscribeEvent
@@ -164,16 +163,13 @@ class Core {
 
 	@SubscribeEvent
 	fun registerPotionEffects(event: RegistryEvent.Register<Potion>) {
-		event.registry.register(burnEffect)
-		event.registry.register(frozenEffect)
-		event.registry.register(paralysisEffect)
-		event.registry.register(muddyEffect)
-		event.registry.register(electricShockEffect)
-		event.registry.register(floodedEffect)
+		repeat(Storage.Effects.size){
+			event.registry.register(Storage.Effects[it])
+		}
 	}
 
 	@SubscribeEvent
 	fun registerModel(event: ModelRegistryEvent) {
-		proxy.registerModel()
+		proxy?.registerModel()
 	}
 }
