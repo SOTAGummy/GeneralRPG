@@ -1,35 +1,28 @@
 package mod.util
 
-import mod.capability.StatusProvider
+import net.minecraft.entity.ai.attributes.AttributeModifier
+import net.minecraft.entity.ai.attributes.IAttribute
 import net.minecraft.entity.player.EntityPlayer
+import java.util.*
 
-class StatusUtil {
-	fun useMP(player: EntityPlayer, use: Int, savingRate: Float): Boolean {
-		val mp = player.getCapability(StatusProvider.STATUS_CAP!!, null)?.getMp()!!
-		val cost = (use.toFloat() * ((100.0 - savingRate) / 100.0)).toInt()
+object StatusUtil {
+	fun useMP(player: EntityPlayer, use: Double, savingRate: Double): Boolean {
+		val mp = player.getEntityAttribute(Attributes.MP).attributeValue.toInt()
+		val cost = (use * ((100.0 - savingRate) / 100.0))
 		if (player.isCreative) {
 			return true
 		} else {
 			if (mp >= cost) {
-				player.getCapability(StatusProvider.STATUS_CAP, null)?.setMp(mp - cost)
+				val mod = AttributeModifier(UUID.randomUUID(), "mp", -cost, 0)
+				player.getEntityAttribute(Attributes.MP).applyModifier(mod)
 				return true
 			}
 			return false
 		}
 	}
 
-	fun canLevelUp(player: EntityPlayer): Boolean {
-		val exp = player.getCapability(StatusProvider.STATUS_CAP!!, null)?.getExp()!!
-		val level = player.getCapability(StatusProvider.STATUS_CAP!!, null)?.getLevel()!!
-		if (level < 17) {
-			if (level * 17 <= exp) {
-				return true
-			}
-		} else {
-			if ((272 + ((level - 16) - 1) * 3 + 20) <= exp) {
-				return true
-			}
-		}
-		return false
+	fun addAttributeValue(player: EntityPlayer, attribute: IAttribute, amount: Double) {
+		val mod = AttributeModifier(UUID.randomUUID(), attribute.name, amount, 0)
+		player.getEntityAttribute(attribute).applyModifier(mod)
 	}
 }

@@ -8,9 +8,9 @@ import net.minecraft.util.EnumHand
 import net.minecraft.world.GameType
 import net.minecraft.world.World
 
-object ToggleMode : ItemSkill("togglemode", 0, SkillRarity.MASTER, false) {
-	override fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand, savingRate: Float) {
-		if (StatusUtil().useMP(player, this.cost, savingRate)) {
+object ToggleMode : ItemSkill("togglemode", 0.0, SkillRarity.MASTER, false) {
+	override fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand, savingRate: Double) {
+		if (StatusUtil.useMP(player, this.cost, savingRate)) {
 			if (player.isCreative) {
 				player.setGameType(GameType.SURVIVAL)
 			} else {

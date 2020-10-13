@@ -14,7 +14,7 @@ import net.minecraft.util.text.TextFormatting
 import net.minecraft.world.World
 import java.io.File
 
-open class ItemSkill(val name: String, val cost: Int, val rarity: SkillRarity, val includeEvents: Boolean) : GeneralRPGItem() {
+open class ItemSkill(val name: String, val cost: Double, val rarity: SkillRarity, val includeEvents: Boolean) : GeneralRPGItem() {
 	init {
 		this.unlocalizedName = name
 		this.maxStackSize = 1
@@ -34,7 +34,7 @@ open class ItemSkill(val name: String, val cost: Int, val rarity: SkillRarity, v
 	}
 
 	companion object {
-		var Cost = 0
+		var Cost = 0.0
 		var Rarity = SkillRarity.COMMON
 	}
 
@@ -49,5 +49,5 @@ open class ItemSkill(val name: String, val cost: Int, val rarity: SkillRarity, v
 		tooltip.add("Rarity : ${rarity.colorChar}${TextFormatting.BOLD}$rarityFormat")
 	}
 
-	open fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand, savingRate: Float) {}
+	open fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand, savingRate: Double) {}
 }

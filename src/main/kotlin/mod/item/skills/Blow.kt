@@ -9,9 +9,9 @@ import net.minecraft.util.EnumHand
 import net.minecraft.world.World
 import kotlin.math.abs
 
-object Blow : ItemSkill("blow", 40, SkillRarity.UNCOMMON, false) {
-	override fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand, savingRate: Float) {
-		if (StatusUtil().useMP(player, this.cost, savingRate)) {
+object Blow : ItemSkill("blow", 40.0, SkillRarity.UNCOMMON, false) {
+	override fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand, savingRate: Double) {
+		if (StatusUtil.useMP(player, this.cost, savingRate)) {
 			val entity = arrayListOf<EntityLiving>()
 			repeat(world.loadedEntityList.size) {
 				if (world.loadedEntityList[it] is EntityLiving && player.getDistance(world.loadedEntityList[it]).toInt() <= 10) {

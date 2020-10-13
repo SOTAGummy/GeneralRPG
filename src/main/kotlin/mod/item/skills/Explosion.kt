@@ -12,9 +12,9 @@ import net.minecraft.world.World
 import net.minecraftforge.event.entity.living.LivingHurtEvent
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 
-object Explosion : ItemSkill("explosion", 30, SkillRarity.RARE, true) {
-	override fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand, savingRate: Float) {
-		if (StatusUtil().useMP(player, this.cost, savingRate)) {
+object Explosion : ItemSkill("explosion", 30.0, SkillRarity.RARE, true) {
+	override fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand, savingRate: Double) {
+		if (StatusUtil.useMP(player, this.cost, savingRate)) {
 			val pos = player.rayTrace(15.0, 0.0F)?.blockPos!!
 			world.createExplosion(player, pos.x.toDouble(), pos.y.toDouble(), pos.z.toDouble(), 3.0F, false)
 		}

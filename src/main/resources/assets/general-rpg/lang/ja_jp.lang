@@ -33,16 +33,30 @@ item.wither_artifact.name=ウィザーアーティファクト
 item.skill_fruit.name=スキルフルーツ
 item.life_fruit.name=ライフフルーツ
 
+item.strong_helmet.name=ストロングヘルメット
+item.strong_chestplate.name=ストロングチェストプレート
+item.strong_leggins.name=ストロングレギンス
+item.strong_boots.name=ストロングブーツ
+item.wizard_helmet.name=ウィザードヘルメット
+item.wizard_chestplate.name=ウィザードチェストプレート
+item.wizard_leggins.name=ウィザードレギンス
+item.wizard_boots.name=ウィザードブーツ
+
+
 tile.injection_table.name=インジェクションテーブル
 
 itemGroup.general-rpg=GeneralRPG
 itemGroup.general-rpg.skill=GeneralRPG-Skill
 
+attribute.name.general-rpg.maxmp=最大MP
+attribute.name.general-rpg.dexterity=MP節約率
+attribute.name.general-rpg.mprecoverrate=自然MP回復量
+
 text.skill_cost=コスト
-text.saving_rate=節約率
 text.cooldown=クールダウン
 text.second=秒
 text.level_up=レベルアップ！！
+text.strength=攻撃力
 
 potion.burning.name=火傷
 potion.frozen.name=凍結

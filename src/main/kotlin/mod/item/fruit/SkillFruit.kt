@@ -1,13 +1,15 @@
 package mod.item.fruit
 
 import mod.Core
-import mod.capability.StatusProvider
+import mod.util.Attributes
 import mod.util.Storage
+import net.minecraft.entity.ai.attributes.AttributeModifier
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemFood
 import net.minecraft.item.ItemStack
 import net.minecraft.util.ResourceLocation
 import net.minecraft.world.World
+import java.util.*
 
 object SkillFruit : ItemFood(0, 0F, false) {
 	init {
@@ -21,8 +23,11 @@ object SkillFruit : ItemFood(0, 0F, false) {
 	}
 
 	override fun onFoodEaten(stack: ItemStack, worldIn: World, player: EntityPlayer) {
-		player.getCapability(StatusProvider.STATUS_CAP!!, null)?.addMaxMp(2)
-		player.getCapability(StatusProvider.STATUS_CAP, null)?.addMp(2)
+		val addMaxMP = AttributeModifier(UUID.randomUUID(), "maxmp", 2.0, 0)
+		val addMP = AttributeModifier(UUID.randomUUID(), "mp", 2.0, 0)
+
+		player.getEntityAttribute(Attributes.MAXMP).applyModifier(addMaxMP)
+		player.getEntityAttribute(Attributes.MP).applyModifier(addMP)
 	}
 
 	override fun getMaxItemUseDuration(stack: ItemStack): Int {

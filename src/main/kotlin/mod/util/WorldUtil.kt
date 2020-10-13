@@ -1,10 +1,14 @@
 package mod.util
 
+import net.minecraft.client.renderer.block.model.ModelResourceLocation
 import net.minecraft.entity.Entity
+import net.minecraft.item.Item
 import net.minecraft.util.math.AxisAlignedBB
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
+import net.minecraftforge.client.model.ModelLoader
 import java.util.*
+
 
 fun World.getNearEntity(radius: Int, pos: BlockPos): MutableList<Entity> {
 	val x = pos.x.toDouble()
@@ -21,4 +25,8 @@ fun World.getEntityFromUUID(UUID: UUID): Entity? {
 		}
 	}
 	return null
+}
+
+fun registerModel(item: Item, meta: Int) {
+	ModelLoader.setCustomModelResourceLocation(item, meta, ModelResourceLocation(item.registryName, "inventory"))
 }

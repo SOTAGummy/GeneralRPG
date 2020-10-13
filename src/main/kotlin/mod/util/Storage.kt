@@ -1,19 +1,17 @@
 package mod.util
 
 import mod.item.baseitem.ItemSkill
-import net.minecraft.entity.player.EntityPlayer
+import net.minecraft.entity.ai.attributes.IAttribute
 import net.minecraft.item.Item
-import net.minecraft.network.datasync.DataParameter
-import net.minecraft.network.datasync.DataSerializers
-import net.minecraft.network.datasync.EntityDataManager
 import net.minecraft.potion.Potion
 
 class Storage {
-	companion object{
-		var Items: ArrayList<Item> = arrayListOf()
-		var Skills: ArrayList<ItemSkill> = arrayListOf()
-		var Effects: ArrayList<Potion> = arrayListOf()
-		var Instances: ArrayList<ItemSkill> = arrayListOf()
+	companion object {
+		val Items: ArrayList<Item> = arrayListOf()
+		val Skills: ArrayList<ItemSkill> = arrayListOf()
+		val Effects: ArrayList<Potion> = arrayListOf()
+		val Instances: ArrayList<Item> = arrayListOf()
+		val Attributes: ArrayList<IAttribute> = arrayListOf()
 	}
 }
 

@@ -9,9 +9,9 @@ import net.minecraft.util.EnumHand
 import net.minecraft.util.math.MathHelper
 import net.minecraft.world.World
 
-object SkillBulletTest : ItemSkill("skillbullettest", 0, SkillRarity.EXTRA, false) {
-	override fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand, savingRate: Float) {
-		if (StatusUtil().useMP(player, 0, savingRate)) {
+object SkillBulletTest : ItemSkill("skillbullettest", 0.0, SkillRarity.EXTRA, false) {
+	override fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand, savingRate: Double) {
+		if (StatusUtil.useMP(player, this.cost, savingRate)) {
 			val bullet = SkillBullet(world)
 			val vx = -MathHelper.sin(Math.toRadians(player.rotationYaw.toDouble()).toFloat()) * MathHelper.cos(Math.toRadians(player.rotationPitch.toDouble()).toFloat()).toDouble()
 			val vz = MathHelper.cos(Math.toRadians(player.rotationYaw.toDouble()).toFloat()) * MathHelper.cos(Math.toRadians(player.rotationPitch.toDouble()).toFloat()).toDouble()

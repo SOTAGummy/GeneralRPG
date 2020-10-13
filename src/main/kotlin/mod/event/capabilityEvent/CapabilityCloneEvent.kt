@@ -1,19 +1,22 @@
 package mod.event.capabilityEvent
 
 
-import mod.capability.StatusProvider
+import mod.util.Storage
+import net.minecraft.entity.ai.attributes.AttributeModifier
 import net.minecraftforge.event.entity.player.PlayerEvent
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
+import java.util.*
 
 class CapabilityCloneEvent {
 	@SubscribeEvent
 	fun onPlayerClone(event: PlayerEvent.Clone) {
-		val status = event.entityPlayer?.getCapability(StatusProvider.STATUS_CAP!!, null)!!
-		val oldStatus = event.original.getCapability(StatusProvider.STATUS_CAP!!, null)!!
-
-		status.setExp(oldStatus.getExp())
-		status.setLevel(oldStatus.getLevel())
-		status.setMp(oldStatus.getMp())
-		status.setMaxMp(oldStatus.getMaxMp())
+		repeat(Storage.Attributes.size) {
+			val oldStatus = event.original.getEntityAttribute(Storage.Attributes[it]).attributeValue
+			val status = event.entityPlayer?.getEntityAttribute(Storage.Attributes[it])
+			val base = status?.baseValue
+			val add = oldStatus - base!!
+			val mod = AttributeModifier(UUID.randomUUID(), Storage.Attributes[it].name, add, 0)
+			status.applyModifier(mod)
+		}
 	}
 }

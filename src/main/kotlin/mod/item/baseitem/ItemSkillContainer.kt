@@ -4,8 +4,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import mod.Core
-import mod.packet.PacketHandler
-import mod.packet.PlayerStatusMessage
+import mod.util.Attributes
 import net.minecraft.client.resources.I18n
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.entity.player.EntityPlayer
@@ -19,7 +18,7 @@ import net.minecraft.util.text.TextComponentTranslation
 import net.minecraft.util.text.TextFormatting
 import net.minecraft.world.World
 
-open class ItemSkillContainer(name: String, val capacity: Int, private val coolDown: Int, val savingRate: Float) : GeneralRPGItem() {
+open class ItemSkillContainer(name: String, val capacity: Int, private val coolDown: Int, val savingRate: Double) : GeneralRPGItem() {
 	init {
 		this.unlocalizedName = name
 		this.creativeTab = Core.modTab
@@ -29,7 +28,7 @@ open class ItemSkillContainer(name: String, val capacity: Int, private val coolD
 
 	override fun addInformation(stack: ItemStack, worldIn: World?, tooltip: MutableList<String>, flagIn: ITooltipFlag) {
 		super.addInformation(stack, worldIn, tooltip, flagIn)
-		var cost = 0
+		var cost = 0.0
 
 		repeat(capacity + 1) {
 			if (stack.tagCompound != null && stack.tagCompound!!.getInteger((it + 1).toString()) != 0) {
@@ -39,6 +38,7 @@ open class ItemSkillContainer(name: String, val capacity: Int, private val coolD
 				val count = (it + 1).toString()
 
 				cost += item.cost
+				cost.toInt()
 				tooltip.add("$count : $color${TextFormatting.UNDERLINE}$format")
 			}
 		}
@@ -47,7 +47,7 @@ open class ItemSkillContainer(name: String, val capacity: Int, private val coolD
 			tooltip.add("")
 			tooltip.add("${TextComponentTranslation("text.skill_cost").formattedText} : " + cost.toString() + "MP")
 		}
-		tooltip.add("${TextComponentTranslation("text.saving_rate").formattedText} : $savingRate%")
+		tooltip.add("${TextComponentTranslation("attribute.name.general-rpg.dexterity").formattedText} : $savingRate%")
 		tooltip.add("${TextComponentTranslation("text.cooldown").formattedText} : ${coolDown.toFloat() / 20F}${TextComponentTranslation("text.second").formattedText}")
 	}
 
@@ -58,8 +58,9 @@ open class ItemSkillContainer(name: String, val capacity: Int, private val coolD
 			repeat(capacity + 1) {
 				if (itemstack.tagCompound!!.getInteger((it + 1).toString()) != 0) {
 					val item = (getItemById(itemstack.tagCompound!!.getInteger((it + 1).toString()))) as ItemSkill
+					val save = player.getEntityAttribute(Attributes.DEXTERITY).attributeValue
 					GlobalScope.launch {
-						item.skillFunction(world, player, handIn, savingRate)
+						item.skillFunction(world, player, handIn, savingRate + save)
 						launch {
 							delay(500)
 						}.join()
