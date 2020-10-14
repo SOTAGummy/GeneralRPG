@@ -35,12 +35,16 @@ item.life_fruit.name=LifeFruit
 
 item.strong_helmet.name=StrongHelmet
 item.strong_chestplate.name=StrongChestPlate
-item.strong_leggins.name=StrongLeggins
+item.strong_leggings.name=StrongLeggings
 item.strong_boots.name=StrongBoots
 item.wizard_helmet.name=WizardHelmet
 item.wizard_chestplate.name=WizardChestplate
-item.wizard_leggins.name=WizardLeggins
+item.wizard_leggings.name=WizardLeggings
 item.wizard_boots.name=WizardBoots
+item.electric_helmet.name=ElectricHelmet
+item.electric_chestplate.name=ElectricChestplate
+item.electric_leggings.name=ElectricLeggings
+item.electric_boots.name=ElectricBoots
 
 tile.injection_table.name=InjectionTable
 
@@ -50,6 +54,8 @@ itemGroup.general-rpg.skill=GeneralRPG-Skill
 attribute.name.general-rpg.maxmp=MaxMP
 attribute.name.general-rpg.dexterity=MPSavingRate
 attribute.name.general-rpg.mprecoverrate=NaturalMPRecoveryRate
+attribute.name.general-rpg.electricattack=ElectricAttack
+attribute.name.general-rpg.electricbody=ElectricBody
 
 text.skill_cost=Cost
 text.cooldown=CoolDown

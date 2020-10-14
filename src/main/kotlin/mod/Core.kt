@@ -5,14 +5,18 @@ import mod.block.TileEntityInjectionTable
 import mod.entity.bullet.SkillBullet
 import mod.gui.mpindicator.RenderMPIndicator
 import mod.item.SkillDust
+import mod.item.armor.electric_armor.ElectricBoots
+import mod.item.armor.electric_armor.ElectricChestplate
+import mod.item.armor.electric_armor.ElectricHelmet
+import mod.item.armor.electric_armor.ElectricLeggings
 import mod.item.armor.strong_armor.StrongBoots
 import mod.item.armor.strong_armor.StrongChestplate
 import mod.item.armor.strong_armor.StrongHelmet
-import mod.item.armor.strong_armor.StrongLeggins
+import mod.item.armor.strong_armor.StrongLeggings
 import mod.item.armor.wizard_armor.WizardBoots
 import mod.item.armor.wizard_armor.WizardChestplate
 import mod.item.armor.wizard_armor.WizardHelmet
-import mod.item.armor.wizard_armor.WizardLeggins
+import mod.item.armor.wizard_armor.WizardLeggings
 import mod.item.containers.*
 import mod.item.fruit.LifeFruit
 import mod.item.fruit.SkillFruit
@@ -31,6 +35,7 @@ import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.item.Item
 import net.minecraft.item.ItemBlock
 import net.minecraft.potion.Potion
+import net.minecraft.util.DamageSource
 import net.minecraft.util.ResourceLocation
 import net.minecraftforge.client.event.ModelRegistryEvent
 import net.minecraftforge.client.model.ModelLoader
@@ -102,14 +107,27 @@ class Core {
 
 		val strong_helmet = StrongHelmet
 		val strong_chestplate = StrongChestplate
-		val strong_leggins = StrongLeggins
+		val strong_leggins = StrongLeggings
 		val strong_boots = StrongBoots
 		val wizard_helmet = WizardHelmet
 		val wizard_chestplate = WizardChestplate
-		val wizard_leggins = WizardLeggins
+		val wizard_leggins = WizardLeggings
 		val wizard_boots = WizardBoots
+		val electric_helmet = ElectricHelmet
+		val electric_chestplate = ElectricChestplate
+		val electric_leggins = ElectricLeggings
+		val electric_boots = ElectricBoots
 
 		val injection_table = InjectionTable()
+
+		val FireSource = DamageSource("fire")
+		val IceSource = DamageSource("ice")
+		val WindSource = DamageSource("wind")
+		val EarthenSource = DamageSource("earthen")
+		val LightningSource = DamageSource("lightning")
+		val WaterSource = DamageSource("water")
+		val LightSource = DamageSource("light")
+		val DarkSource = DamageSource("light")
 
 		val burnEffect = BurningEffect()
 		val frozenEffect = FrozenEffect()

@@ -2,7 +2,7 @@ package mod.item.baseitem
 
 import mod.Core
 import mod.enums.ItemRarity
-import mod.util.ItemSkillJsonReference
+import mod.util.JsonReference
 import mod.util.Storage
 import net.minecraft.client.resources.I18n
 import net.minecraft.client.util.ITooltipFlag
@@ -29,7 +29,7 @@ open class ItemSkill(val name: String, val cost: Double, val rarity: ItemRarity,
 		val file = File("D:\\mod\\GeneralRPG\\src\\main\\resources\\assets\\general-rpg\\models\\item\\$name.json")
 		if (!file.exists()) {
 			file.createNewFile()
-			file.writeText(ItemSkillJsonReference.jsonText)
+			file.writeText(JsonReference.ItemSkillJsonText)
 		}
 	}
 

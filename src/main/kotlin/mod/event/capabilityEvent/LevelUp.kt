@@ -24,5 +24,6 @@ class LevelUp {
 			player.getEntityAttribute(Attributes.EXP).applyModifier(mod)
 		}
 		StatusUtil.canLevelUp(player)
+		println(type)
 	}
 }

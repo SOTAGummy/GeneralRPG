@@ -1,6 +1,6 @@
 package mod.item.skills
 
-import mod.enums.SkillAttribute
+import mod.Core
 import mod.enums.ItemRarity
 import mod.item.baseitem.ItemSkill
 import mod.item.baseitem.ItemSkillContainer
@@ -23,8 +23,8 @@ object Explosion : ItemSkill("explosion", 30.0, ItemRarity.RARE, true) {
 	@SubscribeEvent
 	fun onExplode(event: LivingHurtEvent) {
 		if (event.source.damageType == "explosion.player" && Minecraft.getMinecraft().player.getHeldItem(EnumHand.MAIN_HAND).item is ItemSkillContainer) {
-			event.entityLiving.attackEntityFrom(SkillAttribute.FIRE.source, 50F)
-			event.entityLiving.attackEntityFrom(SkillAttribute.EARTHEN.source, 5F)
+			event.entityLiving.attackEntityFrom(Core.FireSource, 50F)
+			event.entityLiving.attackEntityFrom(Core.EarthenSource, 5F)
 		}
 	}
 }

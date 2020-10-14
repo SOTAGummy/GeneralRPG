@@ -35,12 +35,16 @@ item.life_fruit.name=ライフフルーツ
 
 item.strong_helmet.name=ストロングヘルメット
 item.strong_chestplate.name=ストロングチェストプレート
-item.strong_leggins.name=ストロングレギンス
+item.strong_leggings.name=ストロングレギンス
 item.strong_boots.name=ストロングブーツ
 item.wizard_helmet.name=ウィザードヘルメット
 item.wizard_chestplate.name=ウィザードチェストプレート
-item.wizard_leggins.name=ウィザードレギンス
+item.wizard_leggings.name=ウィザードレギンス
 item.wizard_boots.name=ウィザードブーツ
+item.electric_helmet.name=エレキヘルメット
+item.electric_chestplate.name=エレキチェストプレート
+item.electric_leggings.name=エレキレギンス
+item.electric_boots.name=エレキブーツ
 
 
 tile.injection_table.name=インジェクションテーブル
@@ -51,6 +55,8 @@ itemGroup.general-rpg.skill=GeneralRPG-Skill
 attribute.name.general-rpg.maxmp=最大MP
 attribute.name.general-rpg.dexterity=MP節約率
 attribute.name.general-rpg.mprecoverrate=自然MP回復量
+attribute.name.general-rpg.electricattack=雷攻撃
+attribute.name.general-rpg.electricbody=雷ボディ
 
 text.skill_cost=コスト
 text.cooldown=クールダウン

@@ -1,7 +1,7 @@
 package mod.util
 
-object ItemSkillJsonReference {
-	val jsonText = "{\n" +
+object JsonReference {
+	val ItemSkillJsonText = "{\n" +
 			"\t\"credit\": \"Made with Blockbench\",\n" +
 			"\t\"textures\": {\n" +
 			"\t\t\"1\": \"general-rpg:items/itemskill/b\",\n" +
@@ -315,4 +315,13 @@ object ItemSkillJsonReference {
 			"\t\t}\n" +
 			"\t]\n" +
 			"}"
+
+	fun getJsonText(name: String): String{
+		return "{\n" +
+				"  \"parent\": \"item/generated\",\n" +
+				"  \"textures\": {\n" +
+				"\t\"layer0\": \"general-rpg:items/$name\"\n" +
+				"  }\n" +
+				"}"
+	}
 }

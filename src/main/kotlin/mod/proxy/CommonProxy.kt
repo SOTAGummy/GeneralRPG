@@ -1,10 +1,7 @@
 package mod.proxy
 
 import mod.Core
-import mod.event.capabilityEvent.CapabilityCloneEvent
-import mod.event.capabilityEvent.LevelUp
-import mod.event.capabilityEvent.PlayerAttributeEvent
-import mod.event.capabilityEvent.TickEvent
+import mod.event.capabilityEvent.*
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.fml.common.Mod
@@ -19,6 +16,7 @@ open class CommonProxy {
 		MinecraftForge.EVENT_BUS.register(LevelUp())
 		MinecraftForge.EVENT_BUS.register(PlayerAttributeEvent())
 		MinecraftForge.EVENT_BUS.register(TickEvent())
+		MinecraftForge.EVENT_BUS.register(ElementAttackEvent())
 	}
 
 	open fun postInit() {
