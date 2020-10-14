@@ -1,6 +1,6 @@
 package mod.item.skills
 
-import mod.enums.SkillRarity
+import mod.enums.ItemRarity
 import mod.item.baseitem.ItemSkill
 import mod.util.StatusUtil
 import net.minecraft.entity.EntityLiving
@@ -9,7 +9,7 @@ import net.minecraft.util.EnumHand
 import net.minecraft.util.EnumParticleTypes
 import net.minecraft.world.World
 
-object BlackHole : ItemSkill("blackhole", 50.0, SkillRarity.RARE, false) {
+object BlackHole : ItemSkill("blackhole", 50.0, ItemRarity.RARE, false) {
 	override fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand, savingRate: Double) {
 		if (StatusUtil.useMP(player, this.cost, savingRate)) {
 			val entityList = world.loadedEntityList

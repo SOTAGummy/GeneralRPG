@@ -1,7 +1,7 @@
 package mod.item.baseitem
 
 import mod.Core
-import mod.enums.SkillRarity
+import mod.enums.ItemRarity
 import mod.util.ItemSkillJsonReference
 import mod.util.Storage
 import net.minecraft.client.resources.I18n
@@ -14,7 +14,7 @@ import net.minecraft.util.text.TextFormatting
 import net.minecraft.world.World
 import java.io.File
 
-open class ItemSkill(val name: String, val cost: Double, val rarity: SkillRarity, val includeEvents: Boolean) : GeneralRPGItem() {
+open class ItemSkill(val name: String, val cost: Double, val rarity: ItemRarity, val includeEvents: Boolean) : GeneralRPGItem() {
 	init {
 		this.unlocalizedName = name
 		this.maxStackSize = 1
@@ -35,7 +35,7 @@ open class ItemSkill(val name: String, val cost: Double, val rarity: SkillRarity
 
 	companion object {
 		var Cost = 0.0
-		var Rarity = SkillRarity.COMMON
+		var Rarity = ItemRarity.COMMON
 	}
 
 	override fun addInformation(stack: ItemStack, worldIn: World?, tooltip: MutableList<String>, flagIn: ITooltipFlag) {

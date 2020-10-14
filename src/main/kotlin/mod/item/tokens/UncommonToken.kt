@@ -1,6 +1,6 @@
 package mod.item.tokens
 
-import mod.enums.SkillRarity
+import mod.enums.ItemRarity
 import mod.item.baseitem.ItemToken
 
-object UncommonToken : ItemToken("uncommon_token", SkillRarity.UNCOMMON) {}
+object UncommonToken : ItemToken("uncommon_token", ItemRarity.UNCOMMON) {}

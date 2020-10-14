@@ -1,7 +1,7 @@
 package mod.item.armor.strong_armor
 
 import com.google.common.collect.Multimap
-import mod.enums.SkillRarity
+import mod.enums.ItemRarity
 import mod.item.baseitem.GeneralRPGArmor
 import mod.util.ArmorType
 import mod.util.Attributes
@@ -10,7 +10,7 @@ import net.minecraft.entity.ai.attributes.AttributeModifier
 import net.minecraft.inventory.EntityEquipmentSlot
 import net.minecraft.item.ItemStack
 
-object StrongLeggins : GeneralRPGArmor("strong_leggins", ArmorType.StrongArmor, EntityEquipmentSlot.LEGS, SkillRarity.RARE) {
+object StrongLeggins : GeneralRPGArmor("strong_leggins", ArmorType.StrongArmor, EntityEquipmentSlot.LEGS, ItemRarity.RARE) {
 	override fun getAttributeModifiers(slot: EntityEquipmentSlot, stack: ItemStack): Multimap<String, AttributeModifier> {
 		val multimap = super.getAttributeModifiers(slot, stack)
 		if (slot == EntityEquipmentSlot.LEGS) {

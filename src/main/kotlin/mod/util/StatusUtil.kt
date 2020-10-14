@@ -1,7 +1,6 @@
 package mod.util
 
 import net.minecraft.entity.ai.attributes.AttributeModifier
-import net.minecraft.entity.ai.attributes.IAttribute
 import net.minecraft.entity.player.EntityPlayer
 import java.util.*
 
@@ -21,8 +20,41 @@ object StatusUtil {
 		}
 	}
 
-	fun addAttributeValue(player: EntityPlayer, attribute: IAttribute, amount: Double) {
-		val mod = AttributeModifier(UUID.randomUUID(), attribute.name, amount, 0)
-		player.getEntityAttribute(attribute).applyModifier(mod)
+	fun addMP(player: EntityPlayer, amount: Double){
+		val mp = player.getEntityAttribute(Attributes.MP).attributeValue
+		val max = player.getEntityAttribute(Attributes.MAXMP).attributeValue
+		if (mp + amount <= max){
+			val mod = AttributeModifier(UUID.randomUUID(), "mp", amount, 0)
+			player.getEntityAttribute(Attributes.MP).applyModifier(mod)
+			println(1)
+		} else {
+			val mod = AttributeModifier(UUID.randomUUID(), "mp", max - mp, 0)
+			player.getEntityAttribute(Attributes.MP).applyModifier(mod)
+			println(2)
+		}
+	}
+
+	fun canLevelUp(player: EntityPlayer){
+		if (player.getEntityAttribute(Attributes.LEVEL).attributeValue.toInt() <= 15){
+			if (player.getEntityAttribute(Attributes.LEVEL).attributeValue * 17 <= player.getEntityAttribute(Attributes.EXP).attributeValue){
+				val difference = player.getEntityAttribute(Attributes.EXP).attributeValue - player.getEntityAttribute(Attributes.LEVEL).attributeValue * 17
+				val mod = AttributeModifier(UUID.randomUUID(), "exp", difference, 0)
+				player.getEntityAttribute(Attributes.EXP).removeAllModifiers()
+				player.getEntityAttribute(Attributes.EXP).applyModifier(mod)
+				val add = AttributeModifier(UUID.randomUUID(), "level", 1.0, 0)
+				player.getEntityAttribute(Attributes.LEVEL).applyModifier(add)
+			}
+		} else {
+			val level = player.getEntityAttribute(Attributes.LEVEL).attributeValue
+			val exp = player.getEntityAttribute(Attributes.EXP).attributeValue
+			if ((1.5 * level * level + 15.5 * level + 255.0) <= exp){
+				val difference = player.getEntityAttribute(Attributes.EXP).attributeValue - (1.5 * level * level + 15.5 * level + 255.0)
+				val mod = AttributeModifier(UUID.randomUUID(), "exp", difference, 0)
+				player.getEntityAttribute(Attributes.EXP).removeAllModifiers()
+				player.getEntityAttribute(Attributes.EXP).applyModifier(mod)
+				val add = AttributeModifier(UUID.randomUUID(), "level", 1.0, 0)
+				player.getEntityAttribute(Attributes.LEVEL).applyModifier(add)
+			}
+		}
 	}
 }

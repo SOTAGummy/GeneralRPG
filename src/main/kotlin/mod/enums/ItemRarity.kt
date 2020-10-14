@@ -3,7 +3,7 @@ package mod.enums
 import mod.item.baseitem.ItemSkill
 import net.minecraft.util.text.TextFormatting
 
-enum class SkillRarity(val colorChar: TextFormatting, val skills: ArrayList<ItemSkill>, val colorCode: Int) {
+enum class ItemRarity(val colorChar: TextFormatting, val skills: ArrayList<ItemSkill>, val colorCode: Int) {
 	COMMON(TextFormatting.WHITE, arrayListOf(), 16777215),
 	UNCOMMON(TextFormatting.GREEN, arrayListOf(), 5635925),
 	RARE(TextFormatting.AQUA, arrayListOf(), 5636095),

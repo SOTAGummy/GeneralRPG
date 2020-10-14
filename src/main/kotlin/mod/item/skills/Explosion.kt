@@ -1,7 +1,7 @@
 package mod.item.skills
 
 import mod.enums.SkillAttribute
-import mod.enums.SkillRarity
+import mod.enums.ItemRarity
 import mod.item.baseitem.ItemSkill
 import mod.item.baseitem.ItemSkillContainer
 import mod.util.StatusUtil
@@ -12,7 +12,7 @@ import net.minecraft.world.World
 import net.minecraftforge.event.entity.living.LivingHurtEvent
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 
-object Explosion : ItemSkill("explosion", 30.0, SkillRarity.RARE, true) {
+object Explosion : ItemSkill("explosion", 30.0, ItemRarity.RARE, true) {
 	override fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand, savingRate: Double) {
 		if (StatusUtil.useMP(player, this.cost, savingRate)) {
 			val pos = player.rayTrace(15.0, 0.0F)?.blockPos!!

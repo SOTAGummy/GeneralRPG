@@ -24,11 +24,15 @@ class MPIndicator(mc: Minecraft) : Gui() {
 		val hp = (mc.player.health + 0.999999).toInt().toString() + "/" + mc.player.maxHealth.toInt().toString()
 		val currentMP = ((MP.toFloat() / MaxMP.toFloat()) * 81).toInt()
 		val mp = "${player.getEntityAttribute(Attributes.MP).attributeValue.toInt()}/${player.getEntityAttribute(Attributes.MAXMP).attributeValue.toInt()}"
+		val exp = "${player.getEntityAttribute(Attributes.EXP).attributeValue}"
+		val level = "${player.getEntityAttribute(Attributes.LEVEL).attributeValue}"
 
 		mc.textureManager.bindTexture(texture)
 		this.drawTexturedModalRect(width / 2 + 10, height - 48, 0, 0, 81, 8)
 		this.drawTexturedModalRect(width / 2 + 11, height - 47, 0, 8, currentMP, 8)
 		mc.ingameGUI.drawCenteredString(mc.fontRenderer, hp, width / 2 - 48, height - 40, Color.WHITE.rgb)
 		mc.ingameGUI.drawCenteredString(mc.fontRenderer, mp, width / 2 + 50, height - 48, Color.WHITE.rgb)
+		mc.ingameGUI.drawCenteredString(mc.fontRenderer, exp, width / 2 + 50, height - 55, Color.WHITE.rgb)
+		mc.ingameGUI.drawCenteredString(mc.fontRenderer, level, width / 2 + 50, height - 60, Color.WHITE.rgb)
 	}
 }

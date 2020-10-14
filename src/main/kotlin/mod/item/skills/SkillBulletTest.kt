@@ -1,7 +1,7 @@
 package mod.item.skills
 
 import mod.entity.bullet.SkillBullet
-import mod.enums.SkillRarity
+import mod.enums.ItemRarity
 import mod.item.baseitem.ItemSkill
 import mod.util.StatusUtil
 import net.minecraft.entity.player.EntityPlayer
@@ -9,7 +9,7 @@ import net.minecraft.util.EnumHand
 import net.minecraft.util.math.MathHelper
 import net.minecraft.world.World
 
-object SkillBulletTest : ItemSkill("skillbullettest", 0.0, SkillRarity.EXTRA, false) {
+object SkillBulletTest : ItemSkill("skillbullettest", 0.0, ItemRarity.EXTRA, false) {
 	override fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand, savingRate: Double) {
 		if (StatusUtil.useMP(player, this.cost, savingRate)) {
 			val bullet = SkillBullet(world)
