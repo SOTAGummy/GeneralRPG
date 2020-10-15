@@ -9,7 +9,7 @@ import net.minecraft.entity.ai.attributes.AttributeModifier
 import net.minecraft.inventory.EntityEquipmentSlot
 import net.minecraft.item.ItemStack
 
-object WizardLeggins : GeneralRPGArmor("wizard_leggins", ArmorType.WizardArmor, EntityEquipmentSlot.LEGS, ItemRarity.RARE) {
+object WizardLeggings : GeneralRPGArmor("wizard_leggings", ArmorType.WizardArmor, EntityEquipmentSlot.LEGS, ItemRarity.RARE) {
 	override fun getAttributeModifiers(slot: EntityEquipmentSlot, stack: ItemStack): Multimap<String, AttributeModifier> {
 		val multimap = super.getAttributeModifiers(slot, stack)
 		if (slot == EntityEquipmentSlot.LEGS) {

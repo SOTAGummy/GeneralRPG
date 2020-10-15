@@ -10,7 +10,7 @@ import net.minecraft.entity.ai.attributes.AttributeModifier
 import net.minecraft.inventory.EntityEquipmentSlot
 import net.minecraft.item.ItemStack
 
-object StrongLeggins : GeneralRPGArmor("strong_leggins", ArmorType.StrongArmor, EntityEquipmentSlot.LEGS, ItemRarity.RARE) {
+object StrongLeggings : GeneralRPGArmor("strong_leggings", ArmorType.StrongArmor, EntityEquipmentSlot.LEGS, ItemRarity.RARE) {
 	override fun getAttributeModifiers(slot: EntityEquipmentSlot, stack: ItemStack): Multimap<String, AttributeModifier> {
 		val multimap = super.getAttributeModifiers(slot, stack)
 		if (slot == EntityEquipmentSlot.LEGS) {
