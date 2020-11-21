@@ -5,6 +5,7 @@ import mod.block.TileEntityInjectionTable
 import mod.entity.bullet.SkillBullet
 import mod.gui.mpindicator.RenderMPIndicator
 import mod.item.SkillDust
+import mod.item.animate.TargetMark
 import mod.item.armor.electric_armor.ElectricBoots
 import mod.item.armor.electric_armor.ElectricChestplate
 import mod.item.armor.electric_armor.ElectricHelmet
@@ -57,7 +58,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry
 
 class Core {
 	companion object {
-		const val ID = "general-rpg"
+		const val ID = "general_rpg"
 		const val Name = "GeneralRPG"
 		const val version = "1.0"
 
@@ -135,6 +136,8 @@ class Core {
 		val muddyEffect = MuddyEffect()
 		val electricShockEffect = ElectricShockEffect()
 		val floodedEffect = FloodedEffect()
+
+		val target_mark = TargetMark
 	}
 
 	@Mod.EventHandler

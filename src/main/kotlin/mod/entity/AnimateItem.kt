@@ -21,4 +21,12 @@ class AnimateItem(world: World, val x: Double, val y: Double, val z: Double, ite
 		this.setVelocity(0.0, 0.0, 0.0)
 		this.setPosition(x, y, z)
 	}
+
+	override fun hasNoGravity(): Boolean {
+		return true
+	}
+
+	override fun setOnFireFromLava() {
+
+	}
 }

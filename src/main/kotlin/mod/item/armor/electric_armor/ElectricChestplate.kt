@@ -13,9 +13,9 @@ import net.minecraft.item.ItemStack
 object ElectricChestplate: GeneralRPGArmor("electric_chestplate", ArmorType.ElectricArmor, EntityEquipmentSlot.CHEST, ItemRarity.EPIC){
 	override fun getAttributeModifiers(slot: EntityEquipmentSlot, stack: ItemStack): Multimap<String, AttributeModifier> {
 		val multimap = super.getAttributeModifiers(slot, stack)
-		if (slot == EntityEquipmentSlot.FEET) {
+		if (slot == EntityEquipmentSlot.CHEST) {
 			multimap.put(Attributes.ELECTRICBODY.name, AttributeModifier(ARMOR_MODIFIERS[equipmentSlot.index], "electricattack", 1.0, 0))
-			multimap.put(SharedMonsterAttributes.MAX_HEALTH.name, AttributeModifier(ARMOR_MODIFIERS[equipmentSlot.index], "maxhealth", 2.5, 0))
+			multimap.put(SharedMonsterAttributes.MAX_HEALTH.name, AttributeModifier(ARMOR_MODIFIERS[equipmentSlot.index], "maxhealth", 5.0, 0))
 		}
 		return multimap
 	}

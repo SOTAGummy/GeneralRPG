@@ -12,9 +12,9 @@ import net.minecraft.item.ItemStack
 object ElectricLeggings: GeneralRPGArmor("electric_leggings", ArmorType.ElectricArmor, EntityEquipmentSlot.LEGS, ItemRarity.EPIC){
 	override fun getAttributeModifiers(slot: EntityEquipmentSlot, stack: ItemStack): Multimap<String, AttributeModifier> {
 		val multimap = super.getAttributeModifiers(slot, stack)
-		if (slot == EntityEquipmentSlot.FEET) {
+		if (slot == EntityEquipmentSlot.LEGS) {
 			multimap.put(SharedMonsterAttributes.KNOCKBACK_RESISTANCE.name, AttributeModifier(ARMOR_MODIFIERS[equipmentSlot.index], "knockbackregistance", 0.5, 0))
-			multimap.put(SharedMonsterAttributes.MAX_HEALTH.name, AttributeModifier(ARMOR_MODIFIERS[equipmentSlot.index], "maxhealth", 2.5, 0))
+			multimap.put(SharedMonsterAttributes.MAX_HEALTH.name, AttributeModifier(ARMOR_MODIFIERS[equipmentSlot.index], "maxhealth", 5.0, 0))
 		}
 		return multimap
 	}

@@ -1,0 +1,13 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "item/generated",
+	"textures": {
+		"layer0": "general-rpg:items/target_mark"
+	},
+	"display": {
+		"ground": {
+			"translation": [0, 13, 0],
+			"scale": [1.5, 1.5, 1.5]
+		}
+	}
+}

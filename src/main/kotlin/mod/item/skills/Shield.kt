@@ -7,18 +7,21 @@ import mod.enums.ItemRarity
 import mod.item.baseitem.ItemSkill
 import mod.util.StatusUtil
 import net.minecraft.entity.SharedMonsterAttributes
+import net.minecraft.entity.ai.attributes.AttributeModifier
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.util.EnumHand
 import net.minecraft.world.World
+import java.util.*
 
 object Shield : ItemSkill("shield", 15.0, ItemRarity.RARE, false) {
 	override fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand, savingRate: Double) {
 		if (StatusUtil.useMP(player, this.cost, savingRate)) {
 			GlobalScope.launch {
-				player.getEntityAttribute(SharedMonsterAttributes.ARMOR).baseValue += 2
+				val uuid = UUID.fromString("55453023-7166-4cd7-970a-9c12803b53c3")
+				val mod = AttributeModifier(uuid, "def", 2.0, 0)
+				player.getEntityAttribute(SharedMonsterAttributes.ARMOR).applyModifier(mod)
 				delay(10000)
-				player.getEntityAttribute(SharedMonsterAttributes.ARMOR).baseValue -= 2
-				player.addVelocity(player.pitchYaw.x.toDouble(), player.pitchYaw.y.toDouble(), 0.1)
+				player.getEntityAttribute(SharedMonsterAttributes.ARMOR).removeModifier(mod)
 			}
 		}
 	}

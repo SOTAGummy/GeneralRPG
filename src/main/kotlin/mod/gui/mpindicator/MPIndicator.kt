@@ -34,5 +34,8 @@ class MPIndicator(mc: Minecraft) : Gui() {
 		mc.ingameGUI.drawCenteredString(mc.fontRenderer, mp, width / 2 + 50, height - 48, Color.WHITE.rgb)
 		mc.ingameGUI.drawCenteredString(mc.fontRenderer, exp, width / 2 + 50, height - 55, Color.WHITE.rgb)
 		mc.ingameGUI.drawCenteredString(mc.fontRenderer, level, width / 2 + 50, height - 60, Color.WHITE.rgb)
+
+		mc.textureManager.bindTexture(ResourceLocation(Core.ID + ":textures/gui/background_2.png"))
+		this.drawTexturedModalRect(5, 5, 0, 0, 107, 43)
 	}
 }
