@@ -37,5 +37,6 @@ class MPIndicator(mc: Minecraft) : Gui() {
 
 		mc.textureManager.bindTexture(ResourceLocation(Core.ID + ":textures/gui/background_2.png"))
 		this.drawTexturedModalRect(5, 5, 0, 0, 107, 43)
+		mc.ingameGUI.drawCenteredString(mc.fontRenderer, "${player.getEntityAttribute(Attributes.SAVINGRATE).attributeValue}", 10, 10, Color.GREEN.rgb)
 	}
 }

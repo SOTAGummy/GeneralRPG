@@ -10,8 +10,8 @@ import net.minecraft.util.EnumParticleTypes
 import net.minecraft.world.World
 
 object BlackHole : ItemSkill("blackhole", 50.0, ItemRarity.RARE, false) {
-	override fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand, savingRate: Double) {
-		if (StatusUtil.useMP(player, this.cost, savingRate)) {
+	override fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand) {
+		if (StatusUtil.useMP(player, this.cost)) {
 			val entityList = world.loadedEntityList
 			val livingList = arrayListOf<EntityLiving>()
 			val pos = player.rayTrace(15.0, 0.0F)!!.blockPos

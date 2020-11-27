@@ -1,25 +1,16 @@
 package mod.item.fruit
 
-import mod.Core
+import mod.item.baseitem.GeneralRPGFood
 import mod.util.Attributes
-import mod.util.Storage
 import net.minecraft.entity.ai.attributes.AttributeModifier
 import net.minecraft.entity.player.EntityPlayer
-import net.minecraft.item.ItemFood
 import net.minecraft.item.ItemStack
-import net.minecraft.util.ResourceLocation
 import net.minecraft.world.World
 import java.util.*
 
-object SkillFruit : ItemFood(0, 0F, false) {
+object SkillFruit : GeneralRPGFood(0, 0F, false, "skill_fruit") {
 	init {
-		this.maxStackSize = 64
-		this.unlocalizedName = "skill_fruit"
-		this.registryName = ResourceLocation(Core.ID, "skill_fruit")
 		this.setAlwaysEdible()
-		this.creativeTab = Core.modTab
-
-		Storage.Items.add(this)
 	}
 
 	override fun onFoodEaten(stack: ItemStack, worldIn: World, player: EntityPlayer) {

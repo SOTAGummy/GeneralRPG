@@ -14,8 +14,8 @@ import net.minecraft.world.World
 import java.util.*
 
 object Shield : ItemSkill("shield", 15.0, ItemRarity.RARE, false) {
-	override fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand, savingRate: Double) {
-		if (StatusUtil.useMP(player, this.cost, savingRate)) {
+	override fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand) {
+		if (StatusUtil.useMP(player, this.cost)) {
 			GlobalScope.launch {
 				val uuid = UUID.fromString("55453023-7166-4cd7-970a-9c12803b53c3")
 				val mod = AttributeModifier(uuid, "def", 2.0, 0)

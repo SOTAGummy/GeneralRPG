@@ -1,13 +1,17 @@
 package mod.item.baseitem
 
+import com.google.common.collect.Multimap
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import mod.Core
 import mod.util.Attributes
+import mod.util.UUIDReference
 import net.minecraft.client.resources.I18n
 import net.minecraft.client.util.ITooltipFlag
+import net.minecraft.entity.ai.attributes.AttributeModifier
 import net.minecraft.entity.player.EntityPlayer
+import net.minecraft.inventory.EntityEquipmentSlot
 import net.minecraft.item.EnumAction
 import net.minecraft.item.ItemStack
 import net.minecraft.util.ActionResult
@@ -47,7 +51,6 @@ open class ItemSkillContainer(name: String, val capacity: Int, private val coolD
 			tooltip.add("")
 			tooltip.add("${TextComponentTranslation("text.skill_cost").formattedText} : " + cost.toString() + "MP")
 		}
-		tooltip.add("${TextComponentTranslation("attribute.name.general-rpg.dexterity").formattedText} : $savingRate%")
 		tooltip.add("${TextComponentTranslation("text.cooldown").formattedText} : ${coolDown.toFloat() / 20F}${TextComponentTranslation("text.second").formattedText}")
 	}
 
@@ -58,9 +61,9 @@ open class ItemSkillContainer(name: String, val capacity: Int, private val coolD
 			repeat(capacity + 1) {
 				if (itemstack.tagCompound!!.getInteger((it + 1).toString()) != 0) {
 					val item = (getItemById(itemstack.tagCompound!!.getInteger((it + 1).toString()))) as ItemSkill
-					val save = player.getEntityAttribute(Attributes.DEXTERITY).attributeValue
+					player.getEntityAttribute(Attributes.SAVINGRATE).attributeValue
 					GlobalScope.launch {
-						item.skillFunction(world, player, handIn, savingRate + save)
+						item.skillFunction(world, player, handIn)
 						launch {
 							delay(500)
 						}.join()
@@ -74,5 +77,15 @@ open class ItemSkillContainer(name: String, val capacity: Int, private val coolD
 
 	override fun getItemUseAction(stack: ItemStack): EnumAction {
 		return EnumAction.BLOCK
+	}
+
+	override fun getAttributeModifiers(slot: EntityEquipmentSlot, stack: ItemStack): Multimap<String, AttributeModifier> {
+		val multimap = super.getAttributeModifiers(slot, stack)
+		return if (slot == EntityEquipmentSlot.MAINHAND && savingRate != 0.0){
+			multimap.put(Attributes.SAVINGRATE.name, AttributeModifier(UUIDReference.ItemSkillContainerSavingRate, "savingrate", savingRate, 0))
+			multimap
+		}else{
+			super.getAttributeModifiers(slot, stack)
+		}
 	}
 }

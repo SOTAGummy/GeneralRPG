@@ -5,8 +5,9 @@ import net.minecraft.entity.player.EntityPlayer
 import java.util.*
 
 object StatusUtil {
-	fun useMP(player: EntityPlayer, use: Double, savingRate: Double): Boolean {
+	fun useMP(player: EntityPlayer, use: Double): Boolean {
 		val mp = player.getEntityAttribute(Attributes.MP).attributeValue.toInt()
+		val savingRate = player.getEntityAttribute(Attributes.SAVINGRATE).attributeValue
 		val cost = (use * ((100.0 - savingRate) / 100.0))
 		if (player.isCreative) {
 			return true

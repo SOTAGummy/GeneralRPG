@@ -14,7 +14,7 @@ object WizardHelmet : GeneralRPGArmor("wizard_helmet", ArmorType.WizardArmor, En
 		val multimap = super.getAttributeModifiers(slot, stack)
 		if (slot == EntityEquipmentSlot.HEAD) {
 			multimap.put(Attributes.MAXMP.name, AttributeModifier(ARMOR_MODIFIERS[equipmentSlot.index], "maxmp", 50.0, 0))
-			multimap.put(Attributes.DEXTERITY.name, AttributeModifier(ARMOR_MODIFIERS[equipmentSlot.index], "dexterity", 5.0, 0))
+			multimap.put(Attributes.SAVINGRATE.name, AttributeModifier(ARMOR_MODIFIERS[equipmentSlot.index], "savingrate", 5.0, 0))
 			multimap.put(Attributes.MPRECOVERRATE.name, AttributeModifier(ARMOR_MODIFIERS[equipmentSlot.index], "reloadrate", 2.0, 0))
 		}
 		return multimap

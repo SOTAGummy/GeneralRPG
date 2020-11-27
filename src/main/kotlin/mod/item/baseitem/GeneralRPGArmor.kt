@@ -2,6 +2,7 @@ package mod.item.baseitem
 
 import mod.Core
 import mod.enums.ItemRarity
+import mod.module.IGeneralRarity
 import mod.util.JsonReference
 import mod.util.Storage
 import net.minecraft.client.resources.I18n
@@ -14,7 +15,7 @@ import net.minecraft.world.World
 import java.io.File
 import java.util.*
 
-open class GeneralRPGArmor(name: String, material: ArmorMaterial?, ArmorSlot: EntityEquipmentSlot, private val rarity: ItemRarity, includeEvents: Boolean = false) : ItemArmor(material!!, 0, ArmorSlot) {
+open class GeneralRPGArmor(name: String, material: ArmorMaterial?, ArmorSlot: EntityEquipmentSlot, private val rarity: ItemRarity, includeEvents: Boolean = false) : ItemArmor(material!!, 0, ArmorSlot){
 	init {
 		this.maxStackSize = 1
 		this.unlocalizedName = name

@@ -58,7 +58,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry
 
 class Core {
 	companion object {
-		const val ID = "general_rpg"
+		const val ID = "general-rpg"
 		const val Name = "GeneralRPG"
 		const val version = "1.0"
 

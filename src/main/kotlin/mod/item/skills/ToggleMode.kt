@@ -9,8 +9,8 @@ import net.minecraft.world.GameType
 import net.minecraft.world.World
 
 object ToggleMode : ItemSkill("togglemode", 0.0, ItemRarity.MASTER, false) {
-	override fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand, savingRate: Double) {
-		if (StatusUtil.useMP(player, this.cost, savingRate)) {
+	override fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand) {
+		if (StatusUtil.useMP(player, this.cost)) {
 			if (player.isCreative) {
 				player.setGameType(GameType.SURVIVAL)
 			} else {

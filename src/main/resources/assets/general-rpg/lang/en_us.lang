@@ -52,7 +52,7 @@ itemGroup.general-rpg=GeneralRPG
 itemGroup.general-rpg.skill=GeneralRPG-Skill
 
 attribute.name.general-rpg.maxmp=MaxMP
-attribute.name.general-rpg.dexterity=MPSavingRate
+attribute.name.general-rpg.savingrate=MPSavingRate
 attribute.name.general-rpg.mprecoverrate=NaturalMPRecoveryRate
 attribute.name.general-rpg.electricattack=ElectricAttack
 attribute.name.general-rpg.electricbody=ElectricBody

@@ -49,5 +49,5 @@ open class ItemSkill(val name: String, val cost: Double, val rarity: ItemRarity,
 		tooltip.add("Rarity : ${rarity.colorChar}${TextFormatting.BOLD}$rarityFormat")
 	}
 
-	open fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand, savingRate: Double) {}
+	open fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand){}
 }

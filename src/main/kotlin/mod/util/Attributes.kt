@@ -10,12 +10,12 @@ class Attributes {
 		val MAXMP = addAttribute("maxmp", 100.0, 100.0, Double.MAX_VALUE)
 		val EXP = addAttribute("exp", 0.0, 0.0, Double.MAX_VALUE)
 		val LEVEL = addAttribute("level", 1.0, 1.0, Double.MAX_VALUE)
-		val DEXTERITY = addAttribute("dexterity", 0.0, 0.0, 80.0)
+		val SAVINGRATE = addAttribute("savingrate", 0.0, 0.0, 80.0)
 		val MPRECOVERRATE = addAttribute("mprecoverrate", 2.0, 2.0, Double.MAX_VALUE)
 		val ELECTRICATTACK = addAttribute("electricattack", 0.0, 0.0, 1.0)
 		val ELECTRICBODY = addAttribute("electricbody", 0.0, 0.0, 1.0)
 
-		fun addAttribute(name: String, baseValue: Double, minValue: Double, maxValue: Double): IAttribute {
+		private fun addAttribute(name: String, baseValue: Double, minValue: Double, maxValue: Double): IAttribute {
 			val attributes = RangedAttribute(null, "${Core.ID}.$name", baseValue, minValue, maxValue).setShouldWatch(true)
 			Storage.Attributes.add(attributes)
 			return attributes
