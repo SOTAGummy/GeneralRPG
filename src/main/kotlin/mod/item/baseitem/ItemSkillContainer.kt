@@ -5,6 +5,8 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import mod.Core
+import mod.enums.ItemRarity
+import mod.module.IGeneralRarity
 import mod.util.Attributes
 import mod.util.UUIDReference
 import net.minecraft.client.resources.I18n
@@ -22,7 +24,7 @@ import net.minecraft.util.text.TextComponentTranslation
 import net.minecraft.util.text.TextFormatting
 import net.minecraft.world.World
 
-open class ItemSkillContainer(name: String, val capacity: Int, private val coolDown: Int, val savingRate: Double) : GeneralRPGItem() {
+open class ItemSkillContainer(name: String, rarity: ItemRarity, val capacity: Int, private val coolDown: Int, val savingRate: Double): GeneralRPGItem(), IGeneralRarity{
 	init {
 		this.unlocalizedName = name
 		this.creativeTab = Core.modTab
@@ -30,15 +32,17 @@ open class ItemSkillContainer(name: String, val capacity: Int, private val coolD
 		this.registryName = ResourceLocation(Core.ID, name)
 	}
 
+	override val itemRarity: ItemRarity = rarity
+	override var originalName: String = ""
+
 	override fun addInformation(stack: ItemStack, worldIn: World?, tooltip: MutableList<String>, flagIn: ITooltipFlag) {
 		super.addInformation(stack, worldIn, tooltip, flagIn)
 		var cost = 0.0
-
 		repeat(capacity + 1) {
 			if (stack.tagCompound != null && stack.tagCompound!!.getInteger((it + 1).toString()) != 0) {
-				val format = I18n.format(ItemStack(getItemById(stack.tagCompound!!.getInteger((it + 1).toString()))).displayName)
+				val format = I18n.format((getItemById(stack.tagCompound!!.getInteger((it + 1).toString())) as ItemSkill).originalName)
 				val item = (getItemById(stack.tagCompound!!.getInteger((it + 1).toString()))) as ItemSkill
-				val color = item.rarity.colorChar
+				val color = item.getGeneralRarity().colorChar
 				val count = (it + 1).toString()
 
 				cost += item.cost
@@ -46,12 +50,12 @@ open class ItemSkillContainer(name: String, val capacity: Int, private val coolD
 				tooltip.add("$count : $color${TextFormatting.UNDERLINE}$format")
 			}
 		}
-
 		if (stack.tagCompound != null) {
 			tooltip.add("")
 			tooltip.add("${TextComponentTranslation("text.skill_cost").formattedText} : " + cost.toString() + "MP")
 		}
 		tooltip.add("${TextComponentTranslation("text.cooldown").formattedText} : ${coolDown.toFloat() / 20F}${TextComponentTranslation("text.second").formattedText}")
+		indicateRarity(tooltip)
 	}
 
 	override fun onItemRightClick(world: World, player: EntityPlayer, handIn: EnumHand): ActionResult<ItemStack> {
@@ -87,5 +91,10 @@ open class ItemSkillContainer(name: String, val capacity: Int, private val coolD
 		}else{
 			super.getAttributeModifiers(slot, stack)
 		}
+	}
+
+	override fun getItemStackDisplayName(stack: ItemStack): String {
+		originalName = "${getGeneralRarity().colorChar}${I18n.format(super.getItemStackDisplayName(stack))}"
+		return indicateDisplayRarity(super.getItemStackDisplayName(stack))
 	}
 }

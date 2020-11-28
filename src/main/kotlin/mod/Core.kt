@@ -35,6 +35,7 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.item.Item
 import net.minecraft.item.ItemBlock
+import net.minecraft.item.ItemStack
 import net.minecraft.potion.Potion
 import net.minecraft.util.DamageSource
 import net.minecraft.util.ResourceLocation
@@ -152,8 +153,6 @@ class Core {
 	@Mod.EventHandler
 	fun preInit(event: FMLPreInitializationEvent?) {
 		proxy?.preInit()
-		ArmorType()
-		Attributes()
 		if (event?.side?.isClient!!) {
 			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(injection_table), 0, ModelResourceLocation(ResourceLocation(ID, "injection_table"), "inventory"))
 		}

@@ -2,6 +2,9 @@ package mod.item.baseitem
 
 import mod.Core
 import mod.enums.ItemRarity
+import mod.module.IGeneralRarity
+import net.minecraft.client.resources.I18n
+import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.entity.item.EntityItem
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemStack
@@ -12,17 +15,15 @@ import net.minecraft.util.ResourceLocation
 import net.minecraft.world.World
 import java.util.*
 
-open class ItemToken(name: String, private var rarity: ItemRarity) : GeneralRPGItem() {
+open class ItemToken(name: String, private var rarity: ItemRarity): GeneralRPGItem(), IGeneralRarity{
 	init {
 		this.maxStackSize = 64
 		this.unlocalizedName = name
 		this.registryName = ResourceLocation(Core.ID, name)
-		Rarity = rarity
 	}
 
-	companion object {
-		var Rarity: ItemRarity = ItemRarity.COMMON
-	}
+	override val itemRarity: ItemRarity = rarity
+	override var originalName: String = ""
 
 	override fun onItemRightClick(worldIn: World, playerIn: EntityPlayer, handIn: EnumHand): ActionResult<ItemStack> {
 		if (this.rarity.skills.size != 0) {
@@ -33,5 +34,14 @@ open class ItemToken(name: String, private var rarity: ItemRarity) : GeneralRPGI
 		}
 		println(this.rarity)
 		return ActionResult(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn))
+	}
+
+	override fun addInformation(stack: ItemStack, worldIn: World?, tooltip: MutableList<String>, flagIn: ITooltipFlag) {
+		indicateRarity(tooltip)
+	}
+
+	override fun getItemStackDisplayName(stack: ItemStack): String {
+		originalName = "${getGeneralRarity().colorChar}${I18n.format(super.getItemStackDisplayName(stack))}"
+		return indicateDisplayRarity(super.getItemStackDisplayName(stack))
 	}
 }

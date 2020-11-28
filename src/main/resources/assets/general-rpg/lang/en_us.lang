@@ -62,6 +62,8 @@ text.cooldown=CoolDown
 text.second=s
 text.level_up=Level UP !!
 text.strength=Strength
+text.rarity=Rarity
+text.star=✪
 
 potion.burning.name=Burning
 potion.frozen.name=Frozen

@@ -2,6 +2,7 @@ package mod.item.baseitem
 
 import mod.Core
 import mod.enums.ItemRarity
+import mod.module.IGeneralRarity
 import mod.util.JsonReference
 import mod.util.Storage
 import net.minecraft.client.resources.I18n
@@ -10,18 +11,18 @@ import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemStack
 import net.minecraft.util.EnumHand
 import net.minecraft.util.ResourceLocation
+import net.minecraft.util.text.TextComponentTranslation
 import net.minecraft.util.text.TextFormatting
 import net.minecraft.world.World
 import java.io.File
 
-open class ItemSkill(val name: String, val cost: Double, val rarity: ItemRarity, val includeEvents: Boolean) : GeneralRPGItem() {
+open class ItemSkill(val name: String, val cost: Double, val rarity: ItemRarity, includeEvents: Boolean): GeneralRPGItem(), IGeneralRarity{
 	init {
 		this.unlocalizedName = name
 		this.maxStackSize = 1
 		this.creativeTab = Core.skillTab
 		this.registryName = ResourceLocation(Core.ID, name)
 		Cost = cost
-		Rarity = rarity
 		Storage.Skills.add(this)
 		rarity.skills.add(this)
 		if (includeEvents) Storage.Instances.add(this)
@@ -35,19 +36,23 @@ open class ItemSkill(val name: String, val cost: Double, val rarity: ItemRarity,
 
 	companion object {
 		var Cost = 0.0
-		var Rarity = ItemRarity.COMMON
 	}
+
+	override val itemRarity: ItemRarity = rarity
+	override var originalName: String = ""
 
 	override fun addInformation(stack: ItemStack, worldIn: World?, tooltip: MutableList<String>, flagIn: ITooltipFlag) {
 		super.addInformation(stack, worldIn, tooltip, flagIn)
-		val rarityFormat = I18n.format(rarity.toString())
 		val costFormat = I18n.format(cost.toString())
-		val item = stack.item as ItemSkill
-		val rarity = item.rarity
-
+		stack.item as ItemSkill
 		tooltip.add("Cost : ${TextFormatting.BOLD}$costFormat")
-		tooltip.add("Rarity : ${rarity.colorChar}${TextFormatting.BOLD}$rarityFormat")
+		indicateRarity(tooltip)
 	}
 
 	open fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand){}
+
+	override fun getItemStackDisplayName(stack: ItemStack): String {
+		originalName = "${getGeneralRarity().colorChar}${I18n.format(super.getItemStackDisplayName(stack))}"
+		return indicateDisplayRarity(super.getItemStackDisplayName(stack))
+	}
 }

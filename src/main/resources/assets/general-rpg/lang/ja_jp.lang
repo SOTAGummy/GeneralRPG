@@ -55,7 +55,7 @@ itemGroup.general-rpg.skill=GeneralRPG-Skill
 attribute.name.general-rpg.maxmp=最大MP
 attribute.name.general-rpg.savingrate=MP節約率
 attribute.name.general-rpg.mprecoverrate=自然MP回復量
-attribute.name.general-rpg.electricattack=雷攻撃
+attribute.name.general-rpg.electricattack=雷攻撃⚡
 attribute.name.general-rpg.electricbody=雷ボディ
 
 text.skill_cost=コスト
@@ -63,6 +63,8 @@ text.cooldown=クールダウン
 text.second=秒
 text.level_up=レベルアップ！！
 text.strength=攻撃力
+text.rarity=レア度
+text.star=✪
 
 potion.burning.name=火傷
 potion.frozen.name=凍結

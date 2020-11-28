@@ -1,14 +1,17 @@
 package mod.item.fruit
 
+import mod.enums.ItemRarity
 import mod.item.baseitem.GeneralRPGFood
+import mod.module.IGeneralRarity
 import mod.util.Attributes
+import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.entity.ai.attributes.AttributeModifier
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemStack
 import net.minecraft.world.World
 import java.util.*
 
-object SkillFruit : GeneralRPGFood(0, 0F, false, "skill_fruit") {
+object SkillFruit: GeneralRPGFood(0, 0F, false, "skill_fruit", ItemRarity.RARE){
 	init {
 		this.setAlwaysEdible()
 	}
