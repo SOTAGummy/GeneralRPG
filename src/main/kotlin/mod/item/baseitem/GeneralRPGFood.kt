@@ -22,14 +22,12 @@ open class GeneralRPGFood(amount: Int, saturation: Float, isWolfFood: Boolean, n
 	}
 
 	override val itemRarity: ItemRarity = rarity
-	override var originalName: String = ""
 
 	override fun addInformation(stack: ItemStack, worldIn: World?, tooltip: MutableList<String>, flagIn: ITooltipFlag) {
 		indicateRarity(tooltip)
 	}
 
 	override fun getItemStackDisplayName(stack: ItemStack): String {
-		originalName = "${getGeneralRarity().colorChar}${I18n.format(super.getItemStackDisplayName(stack))}"
 		return indicateDisplayRarity(super.getItemStackDisplayName(stack))
 	}
 }

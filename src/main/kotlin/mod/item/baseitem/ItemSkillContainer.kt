@@ -33,14 +33,15 @@ open class ItemSkillContainer(name: String, rarity: ItemRarity, val capacity: In
 	}
 
 	override val itemRarity: ItemRarity = rarity
-	override var originalName: String = ""
 
 	override fun addInformation(stack: ItemStack, worldIn: World?, tooltip: MutableList<String>, flagIn: ITooltipFlag) {
 		super.addInformation(stack, worldIn, tooltip, flagIn)
 		var cost = 0.0
 		repeat(capacity + 1) {
 			if (stack.tagCompound != null && stack.tagCompound!!.getInteger((it + 1).toString()) != 0) {
-				val format = I18n.format((getItemById(stack.tagCompound!!.getInteger((it + 1).toString())) as ItemSkill).originalName)
+				val itemStack = ItemStack(getItemById(stack.tagCompound!!.getInteger("${it + 1}"))).displayName
+				val displayName = itemStack.split(" ")[0]
+				val format = I18n.format(displayName)
 				val item = (getItemById(stack.tagCompound!!.getInteger((it + 1).toString()))) as ItemSkill
 				val color = item.getGeneralRarity().colorChar
 				val count = (it + 1).toString()
@@ -94,7 +95,6 @@ open class ItemSkillContainer(name: String, rarity: ItemRarity, val capacity: In
 	}
 
 	override fun getItemStackDisplayName(stack: ItemStack): String {
-		originalName = "${getGeneralRarity().colorChar}${I18n.format(super.getItemStackDisplayName(stack))}"
 		return indicateDisplayRarity(super.getItemStackDisplayName(stack))
 	}
 }

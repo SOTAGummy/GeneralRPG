@@ -23,7 +23,6 @@ open class ItemToken(name: String, private var rarity: ItemRarity): GeneralRPGIt
 	}
 
 	override val itemRarity: ItemRarity = rarity
-	override var originalName: String = ""
 
 	override fun onItemRightClick(worldIn: World, playerIn: EntityPlayer, handIn: EnumHand): ActionResult<ItemStack> {
 		if (this.rarity.skills.size != 0) {
@@ -41,7 +40,6 @@ open class ItemToken(name: String, private var rarity: ItemRarity): GeneralRPGIt
 	}
 
 	override fun getItemStackDisplayName(stack: ItemStack): String {
-		originalName = "${getGeneralRarity().colorChar}${I18n.format(super.getItemStackDisplayName(stack))}"
 		return indicateDisplayRarity(super.getItemStackDisplayName(stack))
 	}
 }

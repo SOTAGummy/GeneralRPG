@@ -39,7 +39,6 @@ open class ItemSkill(val name: String, val cost: Double, val rarity: ItemRarity,
 	}
 
 	override val itemRarity: ItemRarity = rarity
-	override var originalName: String = ""
 
 	override fun addInformation(stack: ItemStack, worldIn: World?, tooltip: MutableList<String>, flagIn: ITooltipFlag) {
 		super.addInformation(stack, worldIn, tooltip, flagIn)
@@ -52,7 +51,6 @@ open class ItemSkill(val name: String, val cost: Double, val rarity: ItemRarity,
 	open fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand){}
 
 	override fun getItemStackDisplayName(stack: ItemStack): String {
-		originalName = "${getGeneralRarity().colorChar}${I18n.format(super.getItemStackDisplayName(stack))}"
 		return indicateDisplayRarity(super.getItemStackDisplayName(stack))
 	}
 }

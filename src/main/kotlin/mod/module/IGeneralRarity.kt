@@ -7,7 +7,6 @@ import net.minecraft.util.text.TextFormatting
 
 interface IGeneralRarity {
 	val itemRarity: ItemRarity
-	var originalName: String
 
 	fun getGeneralRarity(): ItemRarity {
 		return itemRarity
@@ -27,6 +26,6 @@ interface IGeneralRarity {
 
 		val nameResult = "${getGeneralRarity().colorChar}${I18n.format(original)}"
 
-		return "$nameResult  $starResult"
+		return "$nameResult $starResult"
 	}
 }
