@@ -65,6 +65,14 @@ text.level_up=レベルアップ！！
 text.strength=攻撃力
 text.rarity=レア度
 text.star=✪
+text.element.fire=🔥
+text.element.water=💧
+text.element.ice=❄
+text.element.wind=🍃
+text.elenent.earthen=🐚
+text.element.lightning=⚡
+text.element.light=☀
+text.element.dark=🌀
 
 potion.burning.name=火傷
 potion.frozen.name=凍結

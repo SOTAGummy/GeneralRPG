@@ -64,6 +64,14 @@ text.level_up=Level UP !!
 text.strength=Strength
 text.rarity=Rarity
 text.star=✪
+text.element.fire=🔥
+text.element.water=💧
+text.element.ice=❄
+text.element.wind=🍃
+text.elenent.earthen=🐚
+text.element.lightning=⚡
+text.element.light=☀
+text.element.dark=🌀
 
 potion.burning.name=Burning
 potion.frozen.name=Frozen
