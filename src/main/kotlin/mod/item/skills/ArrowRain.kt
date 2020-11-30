@@ -22,12 +22,12 @@ object ArrowRain : ItemSkill("arrowrain", 20.0, ItemRarity.UNCOMMON, false) {
 				val pos = player.rayTrace(15.0, 0.0F)?.blockPos!!
 				val itemstack = ItemStack(Items.ARROW)
 				repeat(5) {
-					val randomx = Random.nextDouble(3.0)
-					val randomz = Random.nextDouble(3.0)
+					val randomX = Random.nextDouble(3.0)
+					val randomZ = Random.nextDouble(3.0)
 
-					val itemarrow = (if (itemstack.getItem() is ItemArrow) itemstack.getItem() else Items.ARROW) as ItemArrow
-					val arrow = itemarrow.createArrow(world, itemstack, player)
-					arrow.setPosition(pos.x.toDouble() + randomx, pos.y.toDouble() + 5.0, pos.z.toDouble() + randomz)
+					val itemArrow = (if (itemstack.item is ItemArrow) itemstack.item else Items.ARROW) as ItemArrow
+					val arrow = itemArrow.createArrow(world, itemstack, player)
+					arrow.setPosition(pos.x.toDouble() + randomX, pos.y.toDouble() + 5.0, pos.z.toDouble() + randomZ)
 					arrow.damage = 1.0
 					arrow.shootingEntity = player
 					arrow.addVelocity(0.0, -2.0, 0.0)
