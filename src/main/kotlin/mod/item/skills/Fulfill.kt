@@ -1,6 +1,5 @@
 package mod.item.skills
 
-import mod.SuspendCore
 import mod.enums.ItemRarity
 import mod.item.baseitem.ItemSkill
 import mod.util.Attributes
