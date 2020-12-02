@@ -2,8 +2,6 @@ package mod.item.fruit
 
 import mod.enums.ItemRarity
 import mod.item.baseitem.GeneralRPGFood
-import mod.module.IGeneralRarity
-import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.entity.SharedMonsterAttributes
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemStack

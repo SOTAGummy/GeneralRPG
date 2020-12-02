@@ -4,7 +4,6 @@ import mod.Core
 import mod.enums.ItemRarity
 import mod.module.IGeneralRarity
 import mod.util.Storage
-import net.minecraft.client.resources.I18n
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.item.ItemFood
 import net.minecraft.item.ItemStack

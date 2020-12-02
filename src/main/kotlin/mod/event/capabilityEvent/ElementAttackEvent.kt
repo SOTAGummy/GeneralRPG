@@ -2,7 +2,6 @@ package mod.event.capabilityEvent
 
 import mod.Core
 import mod.util.Attributes
-import net.minecraft.client.Minecraft
 import net.minecraft.entity.EntityLiving
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.player.EntityPlayer

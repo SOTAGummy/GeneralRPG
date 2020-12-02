@@ -27,16 +27,12 @@ import mod.potion.*
 import mod.proxy.CommonProxy
 import mod.tab.GeneralRPGSkillTab
 import mod.tab.GeneralRPGTab
-import mod.util.ArmorType
-import mod.util.Attributes
 import mod.util.Storage
 import net.minecraft.block.Block
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.item.Item
 import net.minecraft.item.ItemBlock
-import net.minecraft.item.ItemStack
-import net.minecraft.item.ItemSword
 import net.minecraft.potion.Potion
 import net.minecraft.util.DamageSource
 import net.minecraft.util.ResourceLocation

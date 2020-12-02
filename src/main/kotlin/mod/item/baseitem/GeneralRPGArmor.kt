@@ -5,7 +5,6 @@ import mod.enums.ItemRarity
 import mod.module.IGeneralRarity
 import mod.util.JsonReference
 import mod.util.Storage
-import net.minecraft.client.resources.I18n
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.inventory.EntityEquipmentSlot

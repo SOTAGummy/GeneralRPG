@@ -3,7 +3,6 @@ package mod.item.baseitem
 import mod.Core
 import mod.enums.ItemRarity
 import mod.module.IGeneralRarity
-import net.minecraft.client.resources.I18n
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.entity.item.EntityItem
 import net.minecraft.entity.player.EntityPlayer

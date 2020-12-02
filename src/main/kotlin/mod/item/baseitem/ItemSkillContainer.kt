@@ -1,5 +1,7 @@
 package mod.item.baseitem
 
+import PPPSystem.PPPSystem
+import PPPSystem.UniqueBinaryOperator
 import com.google.common.collect.Multimap
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
@@ -66,13 +68,17 @@ open class ItemSkillContainer(name: String, rarity: ItemRarity, val capacity: In
 			repeat(capacity + 1) {
 				if (itemstack.tagCompound!!.getInteger((it + 1).toString()) != 0) {
 					val item = (getItemById(itemstack.tagCompound!!.getInteger((it + 1).toString()))) as ItemSkill
-					player.getEntityAttribute(Attributes.SAVINGRATE).attributeValue
-					GlobalScope.launch {
-						item.skillFunction(world, player, handIn)
-						launch {
-							delay(500)
-						}.join()
+					val skillFunc = object : UniqueBinaryOperator{
+						override val World: World = world
+						override val Player: EntityPlayer = player
+						override val Hand: EnumHand = handIn
+
+						override fun call(world: World, player: EntityPlayer, hand: EnumHand) {
+							item.skillFunction(world, player, hand)
+						}
 					}
+					PPPSystem.addProcess(skillFunc)
+					PPPSystem.addDelay(10)
 				}
 			}
 		}

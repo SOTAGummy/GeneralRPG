@@ -2,7 +2,6 @@ package mod.item
 
 import mod.Core
 import mod.item.baseitem.GeneralRPGItem
-import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.util.ResourceLocation
 import net.minecraftforge.items.IItemHandler

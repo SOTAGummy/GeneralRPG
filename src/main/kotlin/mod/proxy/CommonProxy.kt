@@ -1,5 +1,6 @@
 package mod.proxy
 
+import PPPSystem.PPPSystem
 import mod.Core
 import mod.event.capabilityEvent.*
 import net.minecraft.entity.player.EntityPlayer
@@ -17,6 +18,7 @@ open class CommonProxy {
 		MinecraftForge.EVENT_BUS.register(PlayerAttributeEvent())
 		MinecraftForge.EVENT_BUS.register(TickEvent())
 		MinecraftForge.EVENT_BUS.register(ElementAttackEvent())
+		MinecraftForge.EVENT_BUS.register(PPPSystem)
 	}
 
 	open fun postInit() {

@@ -5,7 +5,6 @@ import net.minecraft.entity.ai.attributes.IAttribute
 import net.minecraft.item.Item
 import net.minecraft.potion.Potion
 import java.util.*
-import kotlin.collections.ArrayList
 
 class Storage {
 	companion object {

@@ -2,9 +2,7 @@ package mod.item.fruit
 
 import mod.enums.ItemRarity
 import mod.item.baseitem.GeneralRPGFood
-import mod.module.IGeneralRarity
 import mod.util.Attributes
-import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.entity.ai.attributes.AttributeModifier
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemStack
