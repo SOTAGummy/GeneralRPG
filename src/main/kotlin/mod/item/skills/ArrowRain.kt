@@ -1,9 +1,9 @@
 package mod.item.skills
 
-import PPPSystem.PPPSystem
-import PPPSystem.UniqueBinaryOperator
 import mod.enums.ItemRarity
 import mod.item.baseitem.ItemSkill
+import mod.pppSystem.PPPSystem
+import mod.pppSystem.UniqueBinaryOperator
 import mod.util.StatusUtil
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.init.Items
@@ -36,8 +36,8 @@ object ArrowRain : ItemSkill("arrowrain", 20.0, ItemRarity.UNCOMMON, false) {
 				}
 			}
 
-			repeat(5){
-				PPPSystem.addProcess(spawn)
+			repeat(5) {
+				PPPSystem.insertProcess(spawn)
 				PPPSystem.addDelay(2)
 			}
 		}

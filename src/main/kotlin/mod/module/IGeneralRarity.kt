@@ -12,7 +12,7 @@ interface IGeneralRarity {
 		return itemRarity
 	}
 
-	fun indicateRarity(tooltip: MutableList<String>, ){
+	fun indicateRarity(tooltip: MutableList<String>) {
 		val rarityFormat = I18n.format(itemRarity.toString())
 		val localizedRarity = TextComponentTranslation("text.rarity").formattedText
 		tooltip.add("$localizedRarity : ${itemRarity.colorChar}${TextFormatting.BOLD}$rarityFormat")

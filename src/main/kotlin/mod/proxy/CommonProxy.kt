@@ -1,8 +1,8 @@
 package mod.proxy
 
-import PPPSystem.PPPSystem
 import mod.Core
 import mod.event.capabilityEvent.*
+import mod.pppSystem.PPPSystem
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.fml.common.Mod

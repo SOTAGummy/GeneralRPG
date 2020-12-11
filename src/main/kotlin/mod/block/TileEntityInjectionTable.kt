@@ -1,40 +1,40 @@
 package mod.block
 
+import net.minecraft.entity.item.EntityItem
+import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.tileentity.TileEntity
-import java.util.*
+import net.minecraftforge.items.ItemStackHandler
 
 
 class TileEntityInjectionTable : TileEntity() {
-	private var id: Int = 0
-	private var uuid: UUID? = null
+	private val inventory: ItemStackHandler = ItemStackHandler(1)
+	private var item: EntityItem? = null
+
+	fun getStack(): ItemStack {
+		return inventory.getStackInSlot(0)
+	}
+
+	fun setStack(stack: ItemStack) {
+		inventory.setStackInSlot(0, stack)
+	}
+
+	fun getEntity(): EntityItem? {
+		return item
+	}
+
+	fun setEntity(entityItem: EntityItem?) {
+		item = entityItem
+	}
+
+	override fun writeToNBT(compound: NBTTagCompound): NBTTagCompound {
+		compound.merge(inventory.serializeNBT())
+		compound.merge(item?.serializeNBT()!!)
+		return compound
+	}
 
 	override fun readFromNBT(compound: NBTTagCompound) {
-		id = compound.getInteger("id")
-		uuid = compound.getUniqueId("uuid")
-		super.readFromNBT(compound)
-	}
-
-	override fun writeToNBT(compound: NBTTagCompound): NBTTagCompound? {
-		compound.setInteger("id", id)
-		if (uuid != null)
-			compound.setUniqueId("uuid", uuid)
-		return super.writeToNBT(compound)
-	}
-
-	fun getSkill(): Int {
-		return id
-	}
-
-	fun setSkill(Skill: Int) {
-		id = Skill
-	}
-
-	fun getUUID(): UUID? {
-		return uuid
-	}
-
-	fun setUUID(UUID: UUID?) {
-		uuid = UUID
+		inventory.deserializeNBT(compound)
+		item?.deserializeNBT(compound)
 	}
 }

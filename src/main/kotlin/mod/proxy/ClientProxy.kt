@@ -23,8 +23,16 @@ class ClientProxy : CommonProxy() {
 
 	override fun registerModel() {
 		for (model in Storage.Items) {
-			ModelLoader.setCustomModelResourceLocation(model, 0, ModelResourceLocation(ResourceLocation(Core.ID, model.unlocalizedName.split(".")[1]), "inventory"))
+			ModelLoader.setCustomModelResourceLocation(
+				model,
+				0,
+				ModelResourceLocation(ResourceLocation(Core.ID, model.unlocalizedName.split(".")[1]), "inventory")
+			)
 		}
-		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(Core.injection_table), 0, ModelResourceLocation(ResourceLocation(Core.ID, "injection_table"), "inventory"))
+		ModelLoader.setCustomModelResourceLocation(
+			Item.getItemFromBlock(Core.injection_table),
+			0,
+			ModelResourceLocation(ResourceLocation(Core.ID, "injection_table"), "inventory")
+		)
 	}
 }

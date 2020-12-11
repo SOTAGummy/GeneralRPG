@@ -1,4 +1,4 @@
-package PPPSystem
+package mod.pppSystem
 
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.util.EnumHand

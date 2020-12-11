@@ -316,7 +316,7 @@ object JsonReference {
 			"\t]\n" +
 			"}"
 
-	fun getJsonText(name: String): String{
+	fun getJsonText(name: String): String {
 		return "{\n" +
 				"  \"parent\": \"item/generated\",\n" +
 				"  \"textures\": {\n" +

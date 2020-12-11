@@ -6,7 +6,7 @@ import net.minecraft.item.ItemStack
 import net.minecraft.util.ResourceLocation
 import net.minecraftforge.items.IItemHandler
 
-object ArmorWardrobe: GeneralRPGItem(), IItemHandler{
+object ArmorWardrobe : GeneralRPGItem(), IItemHandler {
 
 
 	init {

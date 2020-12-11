@@ -14,7 +14,7 @@ import net.minecraft.util.ResourceLocation
 import net.minecraft.world.World
 import java.util.*
 
-open class ItemToken(name: String, private var rarity: ItemRarity): GeneralRPGItem(), IGeneralRarity{
+open class ItemToken(name: String, private var rarity: ItemRarity) : GeneralRPGItem(), IGeneralRarity {
 	init {
 		this.maxStackSize = 64
 		this.unlocalizedName = name
@@ -26,7 +26,8 @@ open class ItemToken(name: String, private var rarity: ItemRarity): GeneralRPGIt
 	override fun onItemRightClick(worldIn: World, playerIn: EntityPlayer, handIn: EnumHand): ActionResult<ItemStack> {
 		if (this.rarity.skills.size != 0) {
 			val random = Random().nextInt(this.rarity.skills.size)
-			val item = EntityItem(worldIn, playerIn.posX, playerIn.posY, playerIn.posZ, ItemStack(this.rarity.skills[random]))
+			val item =
+				EntityItem(worldIn, playerIn.posX, playerIn.posY, playerIn.posZ, ItemStack(this.rarity.skills[random]))
 			if (!worldIn.isRemote) worldIn.spawnEntity(item)
 			if (!playerIn.isCreative) playerIn.getHeldItem(handIn).count -= 1
 		}

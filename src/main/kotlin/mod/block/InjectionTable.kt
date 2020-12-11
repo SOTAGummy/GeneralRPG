@@ -3,8 +3,7 @@ package mod.block
 import mod.Core
 import mod.entity.AnimateItem
 import mod.item.baseitem.ItemSkill
-import mod.item.baseitem.ItemSkillContainer
-import mod.util.getEntityFromUUID
+import mod.module.ISkillStorable
 import net.minecraft.block.BlockContainer
 import net.minecraft.block.material.Material
 import net.minecraft.block.state.IBlockState
@@ -35,52 +34,88 @@ class InjectionTable : BlockContainer(Material.IRON) {
 		return EnumBlockRenderType.MODEL
 	}
 
-	override fun onBlockActivated(world: World, pos: BlockPos?, state: IBlockState?, player: EntityPlayer?, hand: EnumHand?, side: EnumFacing?, hitX: Float, hitY: Float, hitZ: Float): Boolean {
-		val te = world.getTileEntity(pos) as TileEntityInjectionTable
-		val stack = player!!.getHeldItem(hand)
-		if (!world.isRemote) {
-			if (stack.item is ItemSkill) {
-				te.setSkill(Item.getIdFromItem(stack.item))
-				val entity = AnimateItem(world, pos!!.x.toDouble() + 0.5, pos.y.toDouble() + 1, pos.z.toDouble() + 0.5, ItemStack(Item.getItemById(te.getSkill())), ItemStack(Item.getItemById(te.getSkill())).displayName)
-				world.spawnEntity(entity)
-				te.setUUID(entity.uniqueID)
-				stack.count--
-				player.setHeldItem(hand, stack)
-			} else if (stack.item is ItemSkillContainer) {
-				if (te.getSkill() != 0) {
-					if (stack.tagCompound == null) {
-						val nbt = NBTTagCompound()
-						stack.tagCompound = nbt
-					}
-					if (stack.tagCompound != null) {
-						repeat((stack.item as ItemSkillContainer).capacity) {
-							if (stack.tagCompound!!.getInteger("${it + 1}") == 0) {
-								stack.tagCompound!!.setInteger("${it + 1}", te.getSkill())
-								te.setSkill(0)
-								if (world.getEntityFromUUID(te.getUUID()!!) != null)
-									world.removeEntity(world.getEntityFromUUID(te.getUUID()!!))
-								te.setUUID(null)
-							}
-						}
-					}
-				}
-			}
-		}
-		return true
-	}
-
 	override fun createNewTileEntity(worldIn: World, meta: Int): TileEntity? {
 		return TileEntityInjectionTable()
 	}
 
-	override fun breakBlock(world: World, pos: BlockPos?, state: IBlockState?) {
-		val te = world.getTileEntity(pos) as TileEntityInjectionTable
-		if (te.getUUID() != null) {
-			val entity = world.getEntityFromUUID(te.getUUID()!!)
-			world.removeEntity(entity)
-			val item = ItemStack(Item.getItemById(te.getSkill()))
-			world.spawnEntity(EntityItem(world, pos!!.x.toDouble(), pos.y.toDouble(), pos.z.toDouble(), item))
+	override fun onBlockActivated(
+		world: World,
+		pos: BlockPos,
+		state: IBlockState,
+		player: EntityPlayer,
+		hand: EnumHand,
+		facing: EnumFacing,
+		hitX: Float,
+		hitY: Float,
+		hitZ: Float
+	): Boolean {
+		if (!world.isRemote && hand == EnumHand.MAIN_HAND) {
+			val te = world.getTileEntity(pos) as TileEntityInjectionTable
+			val stack = player.getHeldItem(hand)
+			when {
+				stack.item is ItemSkill -> {
+					if (te.getEntity() == null) {
+						val item = AnimateItem(
+							world,
+							pos.x.toDouble() + 0.5,
+							(pos.y + 1).toDouble(),
+							pos.z.toDouble() + 0.5,
+							player.getHeldItem(hand)
+						)
+						te.setEntity(item)
+						world.spawnEntity(item)
+					}
+					if (te.getStack() == ItemStack.EMPTY) {
+						te.setStack(player.getHeldItem(hand))
+						val next = ItemStack(stack.item, stack.count - 1)
+						player.setHeldItem(hand, next)
+					}
+				}
+				stack.item is ISkillStorable -> {
+					val capacity = (stack.item as ISkillStorable).storeCap
+					if (!te.getStack().isEmpty) {
+						if (stack.tagCompound == null) {
+							val nbt = NBTTagCompound()
+							val array = IntArray(capacity)
+							array[0] = Item.getIdFromItem(te.getStack().item)
+							nbt.setIntArray("SkillArray", array)
+							stack.tagCompound = nbt
+							player.setHeldItem(hand, stack)
+							te.setStack(ItemStack.EMPTY)
+							world.removeEntity(te.getEntity())
+						} else if (stack.tagCompound != null && stack.tagCompound!!.getIntArray("SkillArray").size <= capacity) {
+							val nbt = stack.tagCompound!!
+							val array = nbt.getIntArray("SkillArray")
+							array[array.size - 1] = Item.getIdFromItem(te.getStack().item)
+							nbt.setIntArray("SkillArray", array)
+							stack.tagCompound = nbt
+							player.setHeldItem(hand, stack)
+							te.setStack(ItemStack.EMPTY)
+							world.removeEntity(te.getEntity())
+						}
+					}
+					println(stack.tagCompound?.getIntArray("SkillArray"))
+				}
+				stack.isEmpty -> {
+					player.setHeldItem(hand, te.getStack())
+					te.setStack(ItemStack.EMPTY)
+					if (te.getEntity() != null)
+						world.removeEntity(te.getEntity())
+					te.setEntity(null)
+				}
+			}
 		}
-		super.breakBlock(world, pos!!, state as IBlockState)
+		return super.onBlockActivated(world, pos, state, player, hand, facing, hitX, hitY, hitZ)
+	}
+
+	override fun breakBlock(world: World, pos: BlockPos, state: IBlockState) {
+		val te = world.getTileEntity(pos) as TileEntityInjectionTable
+		val stack = te.getStack()
+		if (te.getEntity() != null) world.removeEntity(te.getEntity())
+		world.removeTileEntity(pos)
+		val item = EntityItem(world, pos.x.toDouble(), pos.y.toDouble(), pos.z.toDouble(), stack)
+		item.setPickupDelay(0)
+		world.spawnEntity(item)
+		super.breakBlock(world, pos, state)
 	}
 }

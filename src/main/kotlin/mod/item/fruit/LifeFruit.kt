@@ -7,7 +7,7 @@ import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemStack
 import net.minecraft.world.World
 
-object LifeFruit: GeneralRPGFood(0, 0F, false, "life_fruit", ItemRarity.RARE){
+object LifeFruit : GeneralRPGFood(0, 0F, false, "life_fruit", ItemRarity.RARE) {
 	init {
 		this.setAlwaysEdible()
 	}

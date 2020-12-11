@@ -11,8 +11,12 @@ import net.minecraft.world.World
 object LeapP : ItemSkill("leap+", 35.0, ItemRarity.LEGEND, false) {
 	override fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand) {
 		if (StatusUtil.useMP(player, this.cost)) {
-			val vx = -MathHelper.sin(Math.toRadians(player.rotationYaw.toDouble()).toFloat()) * MathHelper.cos(Math.toRadians(player.rotationPitch.toDouble()).toFloat())
-			val vz = MathHelper.cos(Math.toRadians(player.rotationYaw.toDouble()).toFloat()) * MathHelper.cos(Math.toRadians(player.rotationPitch.toDouble()).toFloat())
+			val vx = -MathHelper.sin(
+				Math.toRadians(player.rotationYaw.toDouble()).toFloat()
+			) * MathHelper.cos(Math.toRadians(player.rotationPitch.toDouble()).toFloat())
+			val vz = MathHelper.cos(Math.toRadians(player.rotationYaw.toDouble()).toFloat()) * MathHelper.cos(
+				Math.toRadians(player.rotationPitch.toDouble()).toFloat()
+			)
 			val vy = -MathHelper.sin(Math.toRadians(player.rotationPitch.toDouble()).toFloat())
 			player.addVelocity(vx.toDouble() * 1.5, vy.toDouble() * 1.5, vz.toDouble() * 1.5)
 		}

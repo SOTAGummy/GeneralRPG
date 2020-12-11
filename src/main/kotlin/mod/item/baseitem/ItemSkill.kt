@@ -15,7 +15,8 @@ import net.minecraft.util.text.TextFormatting
 import net.minecraft.world.World
 import java.io.File
 
-open class ItemSkill(val name: String, val cost: Double, val rarity: ItemRarity, includeEvents: Boolean): GeneralRPGItem(), IGeneralRarity{
+open class ItemSkill(val name: String, val cost: Double, val rarity: ItemRarity, includeEvents: Boolean) :
+	GeneralRPGItem(), IGeneralRarity {
 	init {
 		this.unlocalizedName = name
 		this.maxStackSize = 1
@@ -47,7 +48,7 @@ open class ItemSkill(val name: String, val cost: Double, val rarity: ItemRarity,
 		indicateRarity(tooltip)
 	}
 
-	open fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand){}
+	open fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand) {}
 
 	override fun getItemStackDisplayName(stack: ItemStack): String {
 		return indicateDisplayRarity(super.getItemStackDisplayName(stack))

@@ -23,7 +23,8 @@ class MPIndicator(mc: Minecraft) : Gui() {
 		val height = scaled.scaledHeight
 		val hp = (mc.player.health + 0.999999).toInt().toString() + "/" + mc.player.maxHealth.toInt().toString()
 		val currentMP = ((MP.toFloat() / MaxMP.toFloat()) * 81).toInt()
-		val mp = "${player.getEntityAttribute(Attributes.MP).attributeValue.toInt()}/${player.getEntityAttribute(Attributes.MAXMP).attributeValue.toInt()}"
+		val mp =
+			"${player.getEntityAttribute(Attributes.MP).attributeValue.toInt()}/${player.getEntityAttribute(Attributes.MAXMP).attributeValue.toInt()}"
 		val exp = "${player.getEntityAttribute(Attributes.EXP).attributeValue}"
 		val level = "${player.getEntityAttribute(Attributes.LEVEL).attributeValue}"
 
@@ -37,6 +38,12 @@ class MPIndicator(mc: Minecraft) : Gui() {
 
 		mc.textureManager.bindTexture(ResourceLocation(Core.ID + ":textures/gui/background_2.png"))
 		this.drawTexturedModalRect(5, 5, 0, 0, 107, 43)
-		mc.ingameGUI.drawCenteredString(mc.fontRenderer, "${player.getEntityAttribute(Attributes.SAVINGRATE).attributeValue}", 10, 10, Color.GREEN.rgb)
+		mc.ingameGUI.drawCenteredString(
+			mc.fontRenderer,
+			"${player.getEntityAttribute(Attributes.SAVINGRATE).attributeValue}",
+			10,
+			10,
+			Color.GREEN.rgb
+		)
 	}
 }

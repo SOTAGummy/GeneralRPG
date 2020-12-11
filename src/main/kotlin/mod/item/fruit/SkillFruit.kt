@@ -9,7 +9,7 @@ import net.minecraft.item.ItemStack
 import net.minecraft.world.World
 import java.util.*
 
-object SkillFruit: GeneralRPGFood(0, 0F, false, "skill_fruit", ItemRarity.RARE){
+object SkillFruit : GeneralRPGFood(0, 0F, false, "skill_fruit", ItemRarity.RARE) {
 	init {
 		this.setAlwaysEdible()
 	}

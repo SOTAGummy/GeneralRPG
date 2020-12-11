@@ -13,8 +13,12 @@ object SkillBulletTest : ItemSkill("skillbullettest", 0.0, ItemRarity.EXTRA, fal
 	override fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand) {
 		if (StatusUtil.useMP(player, this.cost)) {
 			val bullet = SkillBullet(world)
-			val vx = -MathHelper.sin(Math.toRadians(player.rotationYaw.toDouble()).toFloat()) * MathHelper.cos(Math.toRadians(player.rotationPitch.toDouble()).toFloat()).toDouble()
-			val vz = MathHelper.cos(Math.toRadians(player.rotationYaw.toDouble()).toFloat()) * MathHelper.cos(Math.toRadians(player.rotationPitch.toDouble()).toFloat()).toDouble()
+			val vx = -MathHelper.sin(
+				Math.toRadians(player.rotationYaw.toDouble()).toFloat()
+			) * MathHelper.cos(Math.toRadians(player.rotationPitch.toDouble()).toFloat()).toDouble()
+			val vz = MathHelper.cos(Math.toRadians(player.rotationYaw.toDouble()).toFloat()) * MathHelper.cos(
+				Math.toRadians(player.rotationPitch.toDouble()).toFloat()
+			).toDouble()
 			val vy = -MathHelper.sin(Math.toRadians(player.rotationPitch.toDouble()).toFloat()).toDouble()
 
 			world.spawnEntity(bullet)

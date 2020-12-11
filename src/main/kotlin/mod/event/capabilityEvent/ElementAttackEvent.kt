@@ -13,20 +13,25 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 
 class ElementAttackEvent {
 	@SubscribeEvent
-	fun onElementAttack(event: AttackEntityEvent){
+	fun onElementAttack(event: AttackEntityEvent) {
 		val target = event.target as EntityLiving
 		val player = event.entityPlayer
-		if (player.getEntityAttribute(Attributes.ELECTRICATTACK).attributeValue >= 1.0){
+		if (player.getEntityAttribute(Attributes.ELECTRICATTACK).attributeValue >= 1.0) {
 			target.attackEntityFrom(Core.LightningSource, 0.00001F)
 		}
 	}
 
 	@SubscribeEvent
-	fun onAttackedEvent(event: LivingHurtEvent){
-		if (event.entityLiving is EntityPlayerMP){
+	fun onAttackedEvent(event: LivingHurtEvent) {
+		if (event.entityLiving is EntityPlayerMP) {
 			val player = event.entityLiving as EntityPlayer
-			if (player.getEntityAttribute(Attributes.ELECTRICBODY).attributeValue >= 1.0){
-				(event.source.trueSource as EntityLivingBase).addPotionEffect(PotionEffect(Core.electricShockEffect, 30))
+			if (player.getEntityAttribute(Attributes.ELECTRICBODY).attributeValue >= 1.0) {
+				(event.source.trueSource as EntityLivingBase).addPotionEffect(
+					PotionEffect(
+						Core.electricShockEffect,
+						30
+					)
+				)
 			}
 		}
 	}

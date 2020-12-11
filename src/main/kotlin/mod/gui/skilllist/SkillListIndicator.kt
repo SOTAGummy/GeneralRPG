@@ -22,12 +22,23 @@ class SkillListIndicator(mc: Minecraft) : Gui() {
 			val scaled = ScaledResolution(mc)
 			val height = scaled.scaledHeight
 			repeat(capacity + 1) {
-				if (player.getHeldItem(EnumHand.MAIN_HAND).tagCompound != null && player.getHeldItem(EnumHand.MAIN_HAND).tagCompound!!.getInteger("$it") != 0) {
+				if (player.getHeldItem(EnumHand.MAIN_HAND).tagCompound != null && player.getHeldItem(EnumHand.MAIN_HAND).tagCompound!!.getInteger(
+						"$it"
+					) != 0
+				) {
 					count++
-					val text = ItemStack(Item.getItemById(player.getHeldItem(EnumHand.MAIN_HAND).tagCompound!!.getInteger("$it"))).displayName
+					val text =
+						ItemStack(Item.getItemById(player.getHeldItem(EnumHand.MAIN_HAND).tagCompound!!.getInteger("$it"))).displayName
 					if (text.length > length) length = text.length
-					val item = Item.getItemById(player.getHeldItem(EnumHand.MAIN_HAND).tagCompound!!.getInteger("$it")) as ItemSkill
-					mc.ingameGUI.drawString(mc.fontRenderer, text, 10, (height / 2 - 10) + 8 * it, item.rarity.colorCode)
+					val item =
+						Item.getItemById(player.getHeldItem(EnumHand.MAIN_HAND).tagCompound!!.getInteger("$it")) as ItemSkill
+					mc.ingameGUI.drawString(
+						mc.fontRenderer,
+						text,
+						10,
+						(height / 2 - 10) + 8 * it,
+						item.rarity.colorCode
+					)
 				}
 			}
 			mc.ingameGUI.drawString(mc.fontRenderer, "", 0, 0, Color.BLACK.rgb)

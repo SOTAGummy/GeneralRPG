@@ -10,7 +10,8 @@ import net.minecraft.item.ItemStack
 import net.minecraft.util.ResourceLocation
 import net.minecraft.world.World
 
-open class GeneralRPGFood(amount: Int, saturation: Float, isWolfFood: Boolean, name: String, rarity: ItemRarity): ItemFood(amount, saturation, isWolfFood), IGeneralRarity{
+open class GeneralRPGFood(amount: Int, saturation: Float, isWolfFood: Boolean, name: String, rarity: ItemRarity) :
+	ItemFood(amount, saturation, isWolfFood), IGeneralRarity {
 	init {
 		this.maxStackSize = 64
 		this.unlocalizedName = name

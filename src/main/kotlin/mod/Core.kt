@@ -62,7 +62,7 @@ class Core {
 
 		@JvmStatic
 		@SidedProxy(clientSide = "mod.proxy.ClientProxy", serverSide = "mod.proxy.ServerProxy")
-		var proxy: CommonProxy? = null
+		lateinit var proxy: CommonProxy
 
 		@JvmStatic
 		@Mod.Instance(ID)
@@ -88,6 +88,7 @@ class Core {
 		val light = Light
 		val blackhole = BlackHole
 		val blow = Blow
+		val spawnslimetest = SpawnSlimeTest
 
 		val common_token = CommonToken
 		val uncommon_token = UncommonToken
@@ -151,7 +152,11 @@ class Core {
 	fun preInit(event: FMLPreInitializationEvent?) {
 		proxy?.preInit()
 		if (event?.side?.isClient!!) {
-			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(injection_table), 0, ModelResourceLocation(ResourceLocation(ID, "injection_table"), "inventory"))
+			ModelLoader.setCustomModelResourceLocation(
+				Item.getItemFromBlock(injection_table),
+				0,
+				ModelResourceLocation(ResourceLocation(ID, "injection_table"), "inventory")
+			)
 		}
 		GameRegistry.registerTileEntity(TileEntityInjectionTable::class.java, ResourceLocation(ID, "injection_table"))
 		mod.util.registerModel(StrongHelmet, 0)
@@ -187,7 +192,16 @@ class Core {
 
 	@SubscribeEvent
 	fun registerEntities(event: RegistryEvent.Register<EntityEntry>) {
-		EntityRegistry.registerModEntity(ResourceLocation("skill_bullet"), SkillBullet::class.java, "skill_bullet", 1, instance, 64, 10, true)
+		EntityRegistry.registerModEntity(
+			ResourceLocation("skill_bullet"),
+			SkillBullet::class.java,
+			"skill_bullet",
+			1,
+			instance,
+			64,
+			10,
+			true
+		)
 	}
 
 	@SubscribeEvent
@@ -199,6 +213,6 @@ class Core {
 
 	@SubscribeEvent
 	fun registerModel(event: ModelRegistryEvent) {
-		proxy?.registerModel()
+		proxy.registerModel()
 	}
 }

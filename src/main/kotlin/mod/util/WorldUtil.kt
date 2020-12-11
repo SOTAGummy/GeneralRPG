@@ -30,3 +30,4 @@ fun World.getEntityFromUUID(UUID: UUID): Entity? {
 fun registerModel(item: Item, meta: Int) {
 	ModelLoader.setCustomModelResourceLocation(item, meta, ModelResourceLocation(item.registryName, "inventory"))
 }
+

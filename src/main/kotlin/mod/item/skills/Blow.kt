@@ -14,7 +14,9 @@ object Blow : ItemSkill("blow", 40.0, ItemRarity.UNCOMMON, false) {
 		if (StatusUtil.useMP(player, this.cost)) {
 			val entity = arrayListOf<EntityLiving>()
 			repeat(world.loadedEntityList.size) {
-				if (world.loadedEntityList[it] is EntityLiving && player.getDistance(world.loadedEntityList[it]).toInt() <= 10) {
+				if (world.loadedEntityList[it] is EntityLiving && player.getDistance(world.loadedEntityList[it])
+						.toInt() <= 10
+				) {
 					entity.add(world.loadedEntityList[it] as EntityLiving)
 				}
 			}

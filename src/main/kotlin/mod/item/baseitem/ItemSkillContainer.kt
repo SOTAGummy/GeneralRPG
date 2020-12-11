@@ -1,14 +1,12 @@
 package mod.item.baseitem
 
-import PPPSystem.PPPSystem
-import PPPSystem.UniqueBinaryOperator
 import com.google.common.collect.Multimap
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import mod.Core
 import mod.enums.ItemRarity
 import mod.module.IGeneralRarity
+import mod.module.ISkillStorable
+import mod.pppSystem.PPPSystem
+import mod.pppSystem.UniqueBinaryOperator
 import mod.util.Attributes
 import mod.util.UUIDReference
 import net.minecraft.client.resources.I18n
@@ -26,7 +24,13 @@ import net.minecraft.util.text.TextComponentTranslation
 import net.minecraft.util.text.TextFormatting
 import net.minecraft.world.World
 
-open class ItemSkillContainer(name: String, rarity: ItemRarity, val capacity: Int, private val coolDown: Int, val savingRate: Double): GeneralRPGItem(), IGeneralRarity{
+open class ItemSkillContainer(
+	name: String,
+	rarity: ItemRarity,
+	val capacity: Int,
+	private val coolDown: Int,
+	val savingRate: Double
+) : GeneralRPGItem(), IGeneralRarity, ISkillStorable {
 	init {
 		this.unlocalizedName = name
 		this.creativeTab = Core.modTab
@@ -35,18 +39,19 @@ open class ItemSkillContainer(name: String, rarity: ItemRarity, val capacity: In
 	}
 
 	override val itemRarity: ItemRarity = rarity
+	override val storeCap: Int = capacity
 
 	override fun addInformation(stack: ItemStack, worldIn: World?, tooltip: MutableList<String>, flagIn: ITooltipFlag) {
 		super.addInformation(stack, worldIn, tooltip, flagIn)
 		var cost = 0.0
-		repeat(capacity + 1) {
-			if (stack.tagCompound != null && stack.tagCompound!!.getInteger((it + 1).toString()) != 0) {
-				val itemStack = ItemStack(getItemById(stack.tagCompound!!.getInteger("${it + 1}"))).displayName
+		for (i in 0 until capacity) {
+			if (stack.tagCompound != null && stack.tagCompound!!.getIntArray("SkillArray")[i] != 0) {
+				val itemStack = ItemStack(getItemById(stack.tagCompound!!.getIntArray("SkillArray")[i])).displayName
 				val displayName = itemStack.split(" ")[0]
 				val format = I18n.format(displayName)
-				val item = (getItemById(stack.tagCompound!!.getInteger((it + 1).toString()))) as ItemSkill
+				val item = (getItemById(stack.tagCompound!!.getIntArray("SkillArray")[i])) as ItemSkill
 				val color = item.getGeneralRarity().colorChar
-				val count = (it + 1).toString()
+				val count = (i + 1).toString()
 
 				cost += item.cost
 				cost.toInt()
@@ -57,7 +62,13 @@ open class ItemSkillContainer(name: String, rarity: ItemRarity, val capacity: In
 			tooltip.add("")
 			tooltip.add("${TextComponentTranslation("text.skill_cost").formattedText} : " + cost.toString() + "MP")
 		}
-		tooltip.add("${TextComponentTranslation("text.cooldown").formattedText} : ${coolDown.toFloat() / 20F}${TextComponentTranslation("text.second").formattedText}")
+		tooltip.add(
+			"${TextComponentTranslation("text.cooldown").formattedText} : ${coolDown.toFloat() / 20F}${
+				TextComponentTranslation(
+					"text.second"
+				).formattedText
+			}"
+		)
 		indicateRarity(tooltip)
 	}
 
@@ -65,10 +76,10 @@ open class ItemSkillContainer(name: String, rarity: ItemRarity, val capacity: In
 		val itemstack = player.getHeldItem(handIn)
 		player.activeHand = handIn
 		if (itemstack.tagCompound != null) {
-			repeat(capacity + 1) {
-				if (itemstack.tagCompound!!.getInteger((it + 1).toString()) != 0) {
-					val item = (getItemById(itemstack.tagCompound!!.getInteger((it + 1).toString()))) as ItemSkill
-					val skillFunc = object : UniqueBinaryOperator{
+			for (i in 0 until capacity) {
+				if (itemstack.tagCompound!!.getIntArray("SkillArray")[i] != 0) {
+					val item = (getItemById(itemstack.tagCompound!!.getIntArray("SkillArray")[i])) as ItemSkill
+					val skillFunc = object : UniqueBinaryOperator {
 						override val World: World = world
 						override val Player: EntityPlayer = player
 						override val Hand: EnumHand = handIn
@@ -90,12 +101,18 @@ open class ItemSkillContainer(name: String, rarity: ItemRarity, val capacity: In
 		return EnumAction.BLOCK
 	}
 
-	override fun getAttributeModifiers(slot: EntityEquipmentSlot, stack: ItemStack): Multimap<String, AttributeModifier> {
+	override fun getAttributeModifiers(
+		slot: EntityEquipmentSlot,
+		stack: ItemStack
+	): Multimap<String, AttributeModifier> {
 		val multimap = super.getAttributeModifiers(slot, stack)
-		return if (slot == EntityEquipmentSlot.MAINHAND && savingRate != 0.0){
-			multimap.put(Attributes.SAVINGRATE.name, AttributeModifier(UUIDReference.ItemSkillContainerSavingRate, "savingrate", savingRate, 0))
+		return if (slot == EntityEquipmentSlot.MAINHAND && savingRate != 0.0) {
+			multimap.put(
+				Attributes.SAVINGRATE.name,
+				AttributeModifier(UUIDReference.ItemSkillContainerSavingRate, "savingrate", savingRate, 0)
+			)
 			multimap
-		}else{
+		} else {
 			super.getAttributeModifiers(slot, stack)
 		}
 	}
