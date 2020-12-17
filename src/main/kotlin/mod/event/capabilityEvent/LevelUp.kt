@@ -21,7 +21,7 @@ class LevelUp {
 			val mod = AttributeModifier(UUID.randomUUID(), "exp", event.entityLiving.maxHealth.toDouble() / 2, 0)
 			player.getEntityAttribute(Attributes.EXP).applyModifier(mod)
 		}
-		StatusUtil.canLevelUp(player)
+		//StatusUtil.canLevelUp(player)
 		println(type)
 	}
 }

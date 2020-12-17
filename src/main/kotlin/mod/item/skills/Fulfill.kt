@@ -8,12 +8,9 @@ import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.util.EnumHand
 import net.minecraft.world.World
 
-object Fulfill : ItemSkill("fulfill", 0.0, ItemRarity.MASTER, false) {
+object Fulfill : ItemSkill("fulfill", 0.0, ItemRarity.MASTER) {
 	override fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand) {
-		if (StatusUtil.useMP(player, this.cost)) {
-			val amount =
-				player.getEntityAttribute(Attributes.MAXMP).attributeValue - player.getEntityAttribute(Attributes.MP).attributeValue
-			StatusUtil.addMP(player, amount)
-		}
+		val amount = player.getEntityAttribute(Attributes.MAXMP).attributeValue - player.getEntityAttribute(Attributes.MP).attributeValue
+		StatusUtil.addMP(player, amount)
 	}
 }

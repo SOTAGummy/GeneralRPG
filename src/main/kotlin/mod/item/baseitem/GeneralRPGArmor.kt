@@ -52,10 +52,6 @@ open class GeneralRPGArmor(
 		itemStack.itemDamage = 0
 	}
 
-	override fun getItemStackDisplayName(stack: ItemStack): String {
-		return indicateDisplayRarity(super.getItemStackDisplayName(stack))
-	}
-
 	override fun addInformation(stack: ItemStack, worldIn: World?, tooltip: MutableList<String>, flagIn: ITooltipFlag) {
 		indicateRarity(tooltip)
 	}

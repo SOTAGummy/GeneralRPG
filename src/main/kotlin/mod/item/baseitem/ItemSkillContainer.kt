@@ -8,6 +8,7 @@ import mod.module.ISkillStorable
 import mod.pppSystem.PPPSystem
 import mod.pppSystem.UniqueBinaryOperator
 import mod.util.Attributes
+import mod.util.StatusUtil
 import mod.util.UUIDReference
 import net.minecraft.client.resources.I18n
 import net.minecraft.client.util.ITooltipFlag
@@ -15,6 +16,7 @@ import net.minecraft.entity.ai.attributes.AttributeModifier
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.inventory.EntityEquipmentSlot
 import net.minecraft.item.EnumAction
+import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.util.ActionResult
 import net.minecraft.util.EnumActionResult
@@ -27,10 +29,10 @@ import net.minecraft.world.World
 open class ItemSkillContainer(
 	name: String,
 	rarity: ItemRarity,
-	val capacity: Int,
+	private val capacity: Int,
 	private val coolDown: Int,
 	val savingRate: Double
-) : GeneralRPGItem(), IGeneralRarity, ISkillStorable {
+): GeneralRPGItem(), IGeneralRarity, ISkillStorable {
 	init {
 		this.unlocalizedName = name
 		this.creativeTab = Core.modTab
@@ -72,24 +74,27 @@ open class ItemSkillContainer(
 		indicateRarity(tooltip)
 	}
 
-	override fun onItemRightClick(world: World, player: EntityPlayer, handIn: EnumHand): ActionResult<ItemStack> {
-		val itemstack = player.getHeldItem(handIn)
-		player.activeHand = handIn
-		if (itemstack.tagCompound != null) {
+	override fun onItemRightClick(world: World, player: EntityPlayer, hand: EnumHand): ActionResult<ItemStack> {
+		val itemstack = player.getHeldItem(hand)
+		player.activeHand = hand
+		if (itemstack.tagCompound != null && hand == EnumHand.MAIN_HAND) {
 			for (i in 0 until capacity) {
 				if (itemstack.tagCompound!!.getIntArray("SkillArray")[i] != 0) {
-					val item = (getItemById(itemstack.tagCompound!!.getIntArray("SkillArray")[i])) as ItemSkill
-					val skillFunc = object : UniqueBinaryOperator {
-						override val World: World = world
-						override val Player: EntityPlayer = player
-						override val Hand: EnumHand = handIn
+					val cost = (getItemById(itemstack.tagCompound!!.getIntArray("SkillArray")[i]) as ItemSkill).cost
+					if (StatusUtil.useMP(player, cost)){
+						val item = (getItemById(itemstack.tagCompound!!.getIntArray("SkillArray")[i])) as ItemSkill
+						val skillFunc = object : UniqueBinaryOperator {
+							override val World: World = world
+							override val Player: EntityPlayer = player
+							override val Hand: EnumHand = hand
 
-						override fun call(world: World, player: EntityPlayer, hand: EnumHand) {
-							item.skillFunction(world, player, hand)
+							override fun call(world: World, player: EntityPlayer, hand: EnumHand) {
+								item.skillFunction(world, player, hand)
+							}
 						}
+						PPPSystem.addProcess(skillFunc)
+						if (coolDown != 0) PPPSystem.addDelay(10)
 					}
-					PPPSystem.addProcess(skillFunc)
-					PPPSystem.addDelay(10)
 				}
 			}
 		}
@@ -115,9 +120,5 @@ open class ItemSkillContainer(
 		} else {
 			super.getAttributeModifiers(slot, stack)
 		}
-	}
-
-	override fun getItemStackDisplayName(stack: ItemStack): String {
-		return indicateDisplayRarity(super.getItemStackDisplayName(stack))
 	}
 }

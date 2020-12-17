@@ -23,7 +23,7 @@ import mod.item.fruit.LifeFruit
 import mod.item.fruit.SkillFruit
 import mod.item.skills.*
 import mod.item.tokens.*
-import mod.potion.*
+import mod.potionEffect.*
 import mod.proxy.CommonProxy
 import mod.tab.GeneralRPGSkillTab
 import mod.tab.GeneralRPGTab
@@ -89,6 +89,7 @@ class Core {
 		val blackhole = BlackHole
 		val blow = Blow
 		val spawnslimetest = SpawnSlimeTest
+		val codeTest = CodeTest
 
 		val common_token = CommonToken
 		val uncommon_token = UncommonToken
@@ -192,16 +193,7 @@ class Core {
 
 	@SubscribeEvent
 	fun registerEntities(event: RegistryEvent.Register<EntityEntry>) {
-		EntityRegistry.registerModEntity(
-			ResourceLocation("skill_bullet"),
-			SkillBullet::class.java,
-			"skill_bullet",
-			1,
-			instance,
-			64,
-			10,
-			true
-		)
+		EntityRegistry.registerModEntity(ResourceLocation("skill_bullet"), SkillBullet::class.java, "skill_bullet", 1, instance, 64, 10, true)
 	}
 
 	@SubscribeEvent

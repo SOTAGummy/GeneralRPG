@@ -1,4 +1,4 @@
-package mod.potion
+package mod.potionEffect
 
 import mod.Core
 import mod.util.Storage

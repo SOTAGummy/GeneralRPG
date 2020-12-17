@@ -38,8 +38,4 @@ open class ItemToken(name: String, private var rarity: ItemRarity) : GeneralRPGI
 	override fun addInformation(stack: ItemStack, worldIn: World?, tooltip: MutableList<String>, flagIn: ITooltipFlag) {
 		indicateRarity(tooltip)
 	}
-
-	override fun getItemStackDisplayName(stack: ItemStack): String {
-		return indicateDisplayRarity(super.getItemStackDisplayName(stack))
-	}
 }

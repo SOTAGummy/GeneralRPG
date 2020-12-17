@@ -38,30 +38,14 @@ class InjectionTable : BlockContainer(Material.IRON) {
 		return TileEntityInjectionTable()
 	}
 
-	override fun onBlockActivated(
-		world: World,
-		pos: BlockPos,
-		state: IBlockState,
-		player: EntityPlayer,
-		hand: EnumHand,
-		facing: EnumFacing,
-		hitX: Float,
-		hitY: Float,
-		hitZ: Float
-	): Boolean {
+	override fun onBlockActivated(world: World, pos: BlockPos, state: IBlockState, player: EntityPlayer, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
 		if (!world.isRemote && hand == EnumHand.MAIN_HAND) {
 			val te = world.getTileEntity(pos) as TileEntityInjectionTable
 			val stack = player.getHeldItem(hand)
 			when {
 				stack.item is ItemSkill -> {
 					if (te.getEntity() == null) {
-						val item = AnimateItem(
-							world,
-							pos.x.toDouble() + 0.5,
-							(pos.y + 1).toDouble(),
-							pos.z.toDouble() + 0.5,
-							player.getHeldItem(hand)
-						)
+						val item = AnimateItem(world, pos.x.toDouble() + 0.5, (pos.y + 1).toDouble(), pos.z.toDouble() + 0.5, player.getHeldItem(hand))
 						te.setEntity(item)
 						world.spawnEntity(item)
 					}
@@ -83,18 +67,26 @@ class InjectionTable : BlockContainer(Material.IRON) {
 							player.setHeldItem(hand, stack)
 							te.setStack(ItemStack.EMPTY)
 							world.removeEntity(te.getEntity())
+							te.setEntity(null)
 						} else if (stack.tagCompound != null && stack.tagCompound!!.getIntArray("SkillArray").size <= capacity) {
 							val nbt = stack.tagCompound!!
 							val array = nbt.getIntArray("SkillArray")
-							array[array.size - 1] = Item.getIdFromItem(te.getStack().item)
+							var index = 0
+							repeat(capacity){
+								if (array[it] == 0){
+									index = it
+									return@repeat
+								}
+							}
+							array[index] = Item.getIdFromItem(te.getStack().item)
 							nbt.setIntArray("SkillArray", array)
 							stack.tagCompound = nbt
 							player.setHeldItem(hand, stack)
 							te.setStack(ItemStack.EMPTY)
 							world.removeEntity(te.getEntity())
+							te.setEntity(null)
 						}
 					}
-					println(stack.tagCompound?.getIntArray("SkillArray"))
 				}
 				stack.isEmpty -> {
 					player.setHeldItem(hand, te.getStack())

@@ -17,15 +17,4 @@ interface IGeneralRarity {
 		val localizedRarity = TextComponentTranslation("text.rarity").formattedText
 		tooltip.add("$localizedRarity : ${itemRarity.colorChar}${TextFormatting.BOLD}$rarityFormat")
 	}
-
-	fun indicateDisplayRarity(original: String): String {
-		val star = TextComponentTranslation("text.star").formattedText
-		val starFormat = I18n.format(star)
-		val starColor = TextFormatting.YELLOW
-		val starResult = "$starColor$starFormat".repeat(getGeneralRarity().ordinal + 1)
-
-		val nameResult = "${getGeneralRarity().colorChar}${I18n.format(original)}"
-
-		return "$nameResult $starResult"
-	}
 }

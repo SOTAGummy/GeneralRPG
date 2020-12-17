@@ -15,14 +15,12 @@ import java.util.*
 
 object Rage : ItemSkill("rage", 10.0, ItemRarity.UNCOMMON, false) {
 	override fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand) {
-		if (StatusUtil.useMP(player, this.cost)) {
-			GlobalScope.launch {
-				val uuid = UUID.fromString("42368924-8a13-4409-990c-4e7c6cc57227")
-				val mod = AttributeModifier(uuid, "atk", 2.0, 0)
-				player.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).applyModifier(mod)
-				delay(10000)
-				player.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).removeModifier(mod)
-			}
+		GlobalScope.launch {
+			val uuid = UUID.fromString("42368924-8a13-4409-990c-4e7c6cc57227")
+			val mod = AttributeModifier(uuid, "atk", 2.0, 0)
+			player.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).applyModifier(mod)
+			delay(10000)
+			player.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).removeModifier(mod)
 		}
 	}
 }

@@ -11,11 +11,12 @@ import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemStack
 import net.minecraft.util.EnumHand
 import net.minecraft.util.ResourceLocation
+import net.minecraft.util.text.TextComponentTranslation
 import net.minecraft.util.text.TextFormatting
 import net.minecraft.world.World
 import java.io.File
 
-open class ItemSkill(val name: String, val cost: Double, val rarity: ItemRarity, includeEvents: Boolean) :
+open class ItemSkill(val name: String, val cost: Double, val rarity: ItemRarity, includeEvents: Boolean = false) :
 	GeneralRPGItem(), IGeneralRarity {
 	init {
 		this.unlocalizedName = name
@@ -44,13 +45,9 @@ open class ItemSkill(val name: String, val cost: Double, val rarity: ItemRarity,
 		super.addInformation(stack, worldIn, tooltip, flagIn)
 		val costFormat = I18n.format(cost.toString())
 		stack.item as ItemSkill
-		tooltip.add("Cost : ${TextFormatting.BOLD}$costFormat")
+		tooltip.add("${TextComponentTranslation("text.skill_cost").formattedText} : ${TextFormatting.BOLD}$costFormat")
 		indicateRarity(tooltip)
 	}
 
 	open fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand) {}
-
-	override fun getItemStackDisplayName(stack: ItemStack): String {
-		return indicateDisplayRarity(super.getItemStackDisplayName(stack))
-	}
 }

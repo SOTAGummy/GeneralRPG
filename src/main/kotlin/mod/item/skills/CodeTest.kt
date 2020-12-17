@@ -2,18 +2,17 @@ package mod.item.skills
 
 import mod.enums.ItemRarity
 import mod.item.baseitem.ItemSkill
-import mod.util.StatusUtil
+import net.minecraft.entity.monster.EntityMob
 import net.minecraft.entity.monster.EntitySlime
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.util.EnumHand
 import net.minecraft.world.World
 
-object SpawnSlimeTest : ItemSkill("spawnslimetest", 0.0, ItemRarity.EXTRA, false) {
+object CodeTest: ItemSkill("codetest", 0.0, ItemRarity.MASTER){
 	override fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand) {
-		repeat(7) {
-			val slime = EntitySlime(world)
-			slime.setPosition(player.posX, player.posY, player.posZ)
-			world.spawnEntity(slime)
+		repeat(world.loadedEntityList.size){
+			if (world.loadedEntityList[it] is EntityMob || world.loadedEntityList[it] is EntitySlime)
+			world.loadedEntityList[it].addVelocity(0.0, 0.5, 0.0)
 		}
 	}
 }

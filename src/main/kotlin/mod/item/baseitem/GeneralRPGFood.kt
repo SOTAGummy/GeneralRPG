@@ -26,8 +26,4 @@ open class GeneralRPGFood(amount: Int, saturation: Float, isWolfFood: Boolean, n
 	override fun addInformation(stack: ItemStack, worldIn: World?, tooltip: MutableList<String>, flagIn: ITooltipFlag) {
 		indicateRarity(tooltip)
 	}
-
-	override fun getItemStackDisplayName(stack: ItemStack): String {
-		return indicateDisplayRarity(super.getItemStackDisplayName(stack))
-	}
 }
