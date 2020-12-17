@@ -26,13 +26,7 @@ import net.minecraft.util.text.TextComponentTranslation
 import net.minecraft.util.text.TextFormatting
 import net.minecraft.world.World
 
-open class ItemSkillContainer(
-	name: String,
-	rarity: ItemRarity,
-	private val capacity: Int,
-	private val coolDown: Int,
-	val savingRate: Double
-): GeneralRPGItem(), IGeneralRarity, ISkillStorable {
+open class ItemSkillContainer(name: String, rarity: ItemRarity, private val capacity: Int, private val coolDown: Int, val savingRate: Double): GeneralRPGItem(), IGeneralRarity, ISkillStorable {
 	init {
 		this.unlocalizedName = name
 		this.creativeTab = Core.modTab

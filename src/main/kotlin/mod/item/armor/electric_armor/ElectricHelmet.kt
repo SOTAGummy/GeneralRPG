@@ -12,20 +12,11 @@ import net.minecraft.item.ItemStack
 
 object ElectricHelmet :
 	GeneralRPGArmor("electric_helmet", ArmorType.ElectricArmor, EntityEquipmentSlot.HEAD, ItemRarity.EPIC) {
-	override fun getAttributeModifiers(
-		slot: EntityEquipmentSlot,
-		stack: ItemStack
-	): Multimap<String, AttributeModifier> {
+	override fun getAttributeModifiers(slot: EntityEquipmentSlot, stack: ItemStack): Multimap<String, AttributeModifier> {
 		val multimap = super.getAttributeModifiers(slot, stack)
 		if (slot == EntityEquipmentSlot.HEAD) {
-			multimap.put(
-				Attributes.ELECTRICATTACK.name,
-				AttributeModifier(ARMOR_MODIFIERS[equipmentSlot.index], "electricattack", 1.0, 0)
-			)
-			multimap.put(
-				SharedMonsterAttributes.MAX_HEALTH.name,
-				AttributeModifier(ARMOR_MODIFIERS[equipmentSlot.index], "maxhealth", 5.0, 0)
-			)
+			multimap.put(Attributes.ELECTRICATTACK.name, AttributeModifier(ARMOR_MODIFIERS[equipmentSlot.index], "electricattack", 1.0, 0))
+			multimap.put(SharedMonsterAttributes.MAX_HEALTH.name, AttributeModifier(ARMOR_MODIFIERS[equipmentSlot.index], "maxhealth", 5.0, 0))
 		}
 		return multimap
 	}

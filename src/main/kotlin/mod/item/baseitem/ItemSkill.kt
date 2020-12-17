@@ -16,8 +16,7 @@ import net.minecraft.util.text.TextFormatting
 import net.minecraft.world.World
 import java.io.File
 
-open class ItemSkill(val name: String, val cost: Double, val rarity: ItemRarity, includeEvents: Boolean = false) :
-	GeneralRPGItem(), IGeneralRarity {
+open class ItemSkill(val name: String, val cost: Double, val rarity: ItemRarity, includeEvents: Boolean = false) : GeneralRPGItem(), IGeneralRarity {
 	init {
 		this.unlocalizedName = name
 		this.maxStackSize = 1
