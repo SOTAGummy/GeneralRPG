@@ -25,6 +25,7 @@ import mod.item.skills.*
 import mod.item.tokens.*
 import mod.potionEffect.*
 import mod.proxy.CommonProxy
+import mod.tab.GeneralAccessoryTab
 import mod.tab.GeneralRPGSkillTab
 import mod.tab.GeneralRPGTab
 import mod.util.Storage
@@ -70,6 +71,7 @@ class Core {
 
 		val modTab: CreativeTabs = GeneralRPGTab()
 		val skillTab: CreativeTabs = GeneralRPGSkillTab()
+		val accessoryTab: CreativeTabs = GeneralAccessoryTab()
 
 		val skilldust = SkillDust
 

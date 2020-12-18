@@ -8,6 +8,7 @@ import mod.module.ISkillStorable
 import mod.pppSystem.PPPSystem
 import mod.pppSystem.UniqueBinaryOperator
 import mod.util.Attributes
+import mod.util.JsonReference
 import mod.util.StatusUtil
 import mod.util.UUIDReference
 import net.minecraft.client.resources.I18n
@@ -25,13 +26,20 @@ import net.minecraft.util.ResourceLocation
 import net.minecraft.util.text.TextComponentTranslation
 import net.minecraft.util.text.TextFormatting
 import net.minecraft.world.World
+import java.io.File
 
-open class ItemSkillContainer(name: String, rarity: ItemRarity, private val capacity: Int, private val coolDown: Int, val savingRate: Double): GeneralRPGItem(), IGeneralRarity, ISkillStorable {
+open class ItemSkillContainer(name: String, rarity: ItemRarity, private val capacity: Int, private val coolDown: Int, val savingRate: Double): GeneralRPGItem(rarity), IGeneralRarity, ISkillStorable {
 	init {
 		this.unlocalizedName = name
 		this.creativeTab = Core.modTab
 		this.maxStackSize = 1
 		this.registryName = ResourceLocation(Core.ID, name)
+
+		val file = File("D:\\mod\\GeneralRPG\\src\\main\\resources\\assets\\general-rpg\\models\\item\\$name.json")
+		if (!file.exists()) {
+			file.createNewFile()
+			file.writeText(JsonReference.getJsonText(name))
+		}
 	}
 
 	override val itemRarity: ItemRarity = rarity

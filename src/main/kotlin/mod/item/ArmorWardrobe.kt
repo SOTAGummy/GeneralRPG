@@ -1,12 +1,13 @@
 package mod.item
 
 import mod.Core
+import mod.enums.ItemRarity
 import mod.item.baseitem.GeneralRPGItem
 import net.minecraft.item.ItemStack
 import net.minecraft.util.ResourceLocation
 import net.minecraftforge.items.IItemHandler
 
-object ArmorWardrobe : GeneralRPGItem(), IItemHandler {
+object ArmorWardrobe : GeneralRPGItem(ItemRarity.EPIC), IItemHandler {
 
 
 	init {

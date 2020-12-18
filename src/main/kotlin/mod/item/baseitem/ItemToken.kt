@@ -3,6 +3,7 @@ package mod.item.baseitem
 import mod.Core
 import mod.enums.ItemRarity
 import mod.module.IGeneralRarity
+import mod.util.JsonReference
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.entity.item.EntityItem
 import net.minecraft.entity.player.EntityPlayer
@@ -12,13 +13,20 @@ import net.minecraft.util.EnumActionResult
 import net.minecraft.util.EnumHand
 import net.minecraft.util.ResourceLocation
 import net.minecraft.world.World
+import java.io.File
 import java.util.*
 
-open class ItemToken(name: String, private var rarity: ItemRarity) : GeneralRPGItem(), IGeneralRarity {
+open class ItemToken(name: String, private var rarity: ItemRarity) : GeneralRPGItem(rarity), IGeneralRarity {
 	init {
 		this.maxStackSize = 64
 		this.unlocalizedName = name
 		this.registryName = ResourceLocation(Core.ID, name)
+
+		val file = File("D:\\mod\\GeneralRPG\\src\\main\\resources\\assets\\general-rpg\\models\\item\\$name.json")
+		if (!file.exists()) {
+			file.createNewFile()
+			file.writeText(JsonReference.getJsonText(name))
+		}
 	}
 
 	override val itemRarity: ItemRarity = rarity

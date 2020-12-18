@@ -1,7 +1,7 @@
 package mod.util
 
 object JsonReference {
-	val ItemSkillJsonText = "{\n" +
+	const val ItemSkillJsonText = "{\n" +
 			"\t\"credit\": \"Made with Blockbench\",\n" +
 			"\t\"textures\": {\n" +
 			"\t\t\"1\": \"general-rpg:items/itemskill/b\",\n" +
