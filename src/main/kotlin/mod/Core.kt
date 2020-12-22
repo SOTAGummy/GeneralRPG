@@ -29,6 +29,8 @@ import mod.proxy.CommonProxy
 import mod.tab.GeneralAccessoryTab
 import mod.tab.GeneralRPGSkillTab
 import mod.tab.GeneralRPGTab
+import mod.util.Attributes
+import mod.util.SlotExtension
 import mod.util.Storage
 import net.minecraft.block.Block
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
@@ -69,6 +71,8 @@ class Core {
 		@JvmStatic
 		@Mod.Instance(ID)
 		lateinit var instance: Core
+
+		val accessory = SlotExtension.addSlotType("ACCESSORY", 6, 0, 0, "accessory")
 
 		val modTab: CreativeTabs = GeneralRPGTab()
 		val skillTab: CreativeTabs = GeneralRPGSkillTab()

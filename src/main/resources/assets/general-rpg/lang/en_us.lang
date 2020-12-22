@@ -74,6 +74,8 @@ text.element.lightning=⚡
 text.element.light=☀
 text.element.dark=🌀
 
+item.modifiers.accessory=When equipped
+
 potion.burning.name=Burning
 potion.frozen.name=Frozen
 potion.paralysis.name=Paralysis

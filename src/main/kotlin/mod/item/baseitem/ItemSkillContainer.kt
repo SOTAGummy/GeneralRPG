@@ -66,13 +66,7 @@ open class ItemSkillContainer(name: String, rarity: ItemRarity, private val capa
 			tooltip.add("")
 			tooltip.add("${TextComponentTranslation("text.skill_cost").formattedText} : " + cost.toString() + "MP")
 		}
-		tooltip.add(
-			"${TextComponentTranslation("text.cooldown").formattedText} : ${coolDown.toFloat() / 20F}${
-				TextComponentTranslation(
-					"text.second"
-				).formattedText
-			}"
-		)
+		tooltip.add("${TextComponentTranslation("text.cooldown").formattedText} : ${coolDown.toFloat() / 20F}${TextComponentTranslation("text.second").formattedText}")
 		indicateRarity(tooltip)
 	}
 
@@ -108,16 +102,10 @@ open class ItemSkillContainer(name: String, rarity: ItemRarity, private val capa
 		return EnumAction.BLOCK
 	}
 
-	override fun getAttributeModifiers(
-		slot: EntityEquipmentSlot,
-		stack: ItemStack
-	): Multimap<String, AttributeModifier> {
+	override fun getAttributeModifiers(slot: EntityEquipmentSlot, stack: ItemStack): Multimap<String, AttributeModifier> {
 		val multimap = super.getAttributeModifiers(slot, stack)
 		return if (slot == EntityEquipmentSlot.MAINHAND && savingRate != 0.0) {
-			multimap.put(
-				Attributes.SAVINGRATE.name,
-				AttributeModifier(UUIDReference.ItemSkillContainerSavingRate, "savingrate", savingRate, 0)
-			)
+			multimap.put(Attributes.SAVINGRATE.name, AttributeModifier(UUIDReference.ItemSkillContainerSavingRate, "savingrate", savingRate, 0))
 			multimap
 		} else {
 			super.getAttributeModifiers(slot, stack)

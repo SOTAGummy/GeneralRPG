@@ -1,6 +1,7 @@
 package mod.item.armor.strong_armor
 
 import com.google.common.collect.Multimap
+import mod.Core
 import mod.enums.ItemRarity
 import mod.item.baseitem.GeneralRPGArmor
 import mod.util.ArmorType

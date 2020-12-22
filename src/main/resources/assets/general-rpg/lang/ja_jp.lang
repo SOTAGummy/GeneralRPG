@@ -75,6 +75,8 @@ text.element.lightning=⚡
 text.element.light=✦
 text.element.dark=🌀
 
+item.modifiers.accessory=装備したとき
+
 potion.burning.name=火傷
 potion.frozen.name=凍結
 potion.paralysis.name=麻痺
