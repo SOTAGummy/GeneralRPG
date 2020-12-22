@@ -64,6 +64,7 @@ text.second=秒
 text.level_up=レベルアップ！！
 text.strength=攻撃力
 text.rarity=レア度
+text.equipping=装備しているとき
 text.star=✪
 text.element.fire=🔥
 text.element.water=💧

@@ -5,6 +5,7 @@ import mod.block.TileEntityInjectionTable
 import mod.entity.bullet.SkillBullet
 import mod.gui.mpindicator.RenderMPIndicator
 import mod.item.SkillDust
+import mod.item.accessory.PowerNeckless
 import mod.item.animate.TargetMark
 import mod.item.armor.electric_armor.ElectricBoots
 import mod.item.armor.electric_armor.ElectricChestplate
@@ -120,6 +121,8 @@ class Core {
 		val electric_chestplate = ElectricChestplate
 		val electric_leggins = ElectricLeggings
 		val electric_boots = ElectricBoots
+
+		val power_neckless = PowerNeckless
 
 		val injection_table = InjectionTable()
 

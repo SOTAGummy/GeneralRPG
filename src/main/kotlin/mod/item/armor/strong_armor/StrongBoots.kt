@@ -14,7 +14,7 @@ object StrongBoots : GeneralRPGArmor("strong_boots", ArmorType.StrongArmor, Enti
 	override fun getAttributeModifiers(slot: EntityEquipmentSlot, stack: ItemStack): Multimap<String, AttributeModifier> {
 		val multimap = super.getAttributeModifiers(slot, stack)
 		if (slot == EntityEquipmentSlot.FEET) {
-			multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.name, AttributeModifier(ARMOR_MODIFIERS[equipmentSlot.index], "strength", 2.0, 0))
+			multimap.put(SharedMonsterAttributes.MAX_HEALTH.name, AttributeModifier(ARMOR_MODIFIERS[equipmentSlot.index], "strength", 2.0, 0))
 			multimap.put(Attributes.MAXMP.name, AttributeModifier(ARMOR_MODIFIERS[equipmentSlot.index], "maxmp", 50.0, 0))
 		}
 		return multimap
