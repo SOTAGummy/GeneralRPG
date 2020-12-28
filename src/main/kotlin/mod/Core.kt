@@ -3,6 +3,7 @@ package mod
 import mod.block.InjectionTable
 import mod.block.TileEntityInjectionTable
 import mod.capability.CapabilityEvent
+import mod.capability.accessory.AccessoryHandler
 import mod.capability.accessory.AccessoryItemContainer
 import mod.capability.accessory.AccessoryStorage
 import mod.capability.accessory.IAccessory
@@ -184,7 +185,7 @@ class Core {
 		GameRegistry.registerTileEntity(TileEntityInjectionTable::class.java, ResourceLocation(ID, "injection_table"))
 		mod.util.registerModel(StrongHelmet, 0)
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, GuiAccessoryHandler())
-		CapabilityManager.INSTANCE.register(IAccessory::class.java, AccessoryStorage(), )
+		CapabilityManager.INSTANCE.register(IAccessory::class.java, AccessoryStorage(), AccessoryHandler::class.java)
 	}
 
 	@Mod.EventHandler
