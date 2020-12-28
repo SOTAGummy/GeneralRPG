@@ -2,8 +2,13 @@ package mod
 
 import mod.block.InjectionTable
 import mod.block.TileEntityInjectionTable
+import mod.capability.CapabilityEvent
+import mod.capability.accessory.AccessoryItemContainer
+import mod.capability.accessory.AccessoryStorage
+import mod.capability.accessory.IAccessory
 import mod.entity.bullet.SkillBullet
-import mod.gui.mpindicator.RenderMPIndicator
+import mod.gui.RenderHandler
+import mod.gui.accessory.GuiAccessoryHandler
 import mod.item.SkillDust
 import mod.item.accessory.PowerNeckless
 import mod.item.animate.TargetMark
@@ -29,7 +34,6 @@ import mod.proxy.CommonProxy
 import mod.tab.GeneralAccessoryTab
 import mod.tab.GeneralRPGSkillTab
 import mod.tab.GeneralRPGTab
-import mod.util.Attributes
 import mod.util.SlotExtension
 import mod.util.Storage
 import net.minecraft.block.Block
@@ -40,9 +44,11 @@ import net.minecraft.item.ItemBlock
 import net.minecraft.potion.Potion
 import net.minecraft.util.DamageSource
 import net.minecraft.util.ResourceLocation
+import net.minecraftforge.client.IRenderHandler
 import net.minecraftforge.client.event.ModelRegistryEvent
 import net.minecraftforge.client.model.ModelLoader
 import net.minecraftforge.common.MinecraftForge
+import net.minecraftforge.common.capabilities.CapabilityManager
 import net.minecraftforge.event.RegistryEvent
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.common.SidedProxy
@@ -51,9 +57,11 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
+import net.minecraftforge.fml.common.network.NetworkRegistry
 import net.minecraftforge.fml.common.registry.EntityEntry
 import net.minecraftforge.fml.common.registry.EntityRegistry
 import net.minecraftforge.fml.common.registry.GameRegistry
+import net.minecraftforge.items.IItemHandler
 
 
 @Mod(modid = Core.ID, name = Core.Name, version = Core.version, modLanguage = "kotlin")
@@ -72,7 +80,12 @@ class Core {
 		@Mod.Instance(ID)
 		lateinit var instance: Core
 
-		val accessory = SlotExtension.addSlotType("ACCESSORY", 6, 0, 0, "accessory")
+		val accessory = SlotExtension.addSlotType("ACCESSORY", 2)
+		val necklace = SlotExtension.addEquipmentSlot("NECKLACE", 6, accessory, 0, 1, "necklace")
+		val amulet = SlotExtension.addEquipmentSlot("AMULET", 7, accessory, 1, 2, "amulet")
+		val glove = SlotExtension.addEquipmentSlot("GLOVE", 8, accessory, 2, 3, "glove")
+		val gem = SlotExtension.addEquipmentSlot("GEM", 9, accessory, 3, 4, "gem")
+
 
 		val modTab: CreativeTabs = GeneralRPGTab()
 		val skillTab: CreativeTabs = GeneralRPGSkillTab()
@@ -160,7 +173,7 @@ class Core {
 
 	@Mod.EventHandler
 	fun preInit(event: FMLPreInitializationEvent?) {
-		proxy?.preInit()
+		proxy.preInit()
 		if (event?.side?.isClient!!) {
 			ModelLoader.setCustomModelResourceLocation(
 				Item.getItemFromBlock(injection_table),
@@ -170,19 +183,21 @@ class Core {
 		}
 		GameRegistry.registerTileEntity(TileEntityInjectionTable::class.java, ResourceLocation(ID, "injection_table"))
 		mod.util.registerModel(StrongHelmet, 0)
+		NetworkRegistry.INSTANCE.registerGuiHandler(this, GuiAccessoryHandler())
+		CapabilityManager.INSTANCE.register(IAccessory::class.java, AccessoryStorage(), )
 	}
 
 	@Mod.EventHandler
 	fun init(event: FMLInitializationEvent?) {
 		//RenderingRegistry.registerEntityRenderingHandler(SkillBullet::class.java, RenderSkillBullet())
 
-		proxy?.init()
+		proxy.init()
 	}
 
 	@Mod.EventHandler
 	fun postInit(event: FMLPostInitializationEvent?) {
-		MinecraftForge.EVENT_BUS.register(RenderMPIndicator())
-		proxy?.postInit()
+		MinecraftForge.EVENT_BUS.register(RenderHandler())
+		proxy.postInit()
 	}
 
 	@SubscribeEvent

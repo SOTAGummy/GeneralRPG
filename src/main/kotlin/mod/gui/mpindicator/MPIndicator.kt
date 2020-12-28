@@ -8,7 +8,7 @@ import net.minecraft.client.gui.ScaledResolution
 import net.minecraft.util.ResourceLocation
 import java.awt.Color
 
-class MPIndicator(mc: Minecraft) : Gui() {
+class MPIndicator(mc: Minecraft): Gui() {
 	companion object {
 		@JvmStatic
 		private val texture = ResourceLocation(Core.ID + ":textures/gui/mp_bar.png")
@@ -35,15 +35,5 @@ class MPIndicator(mc: Minecraft) : Gui() {
 		mc.ingameGUI.drawCenteredString(mc.fontRenderer, mp, width / 2 + 50, height - 48, Color.WHITE.rgb)
 		mc.ingameGUI.drawCenteredString(mc.fontRenderer, exp, width / 2 + 50, height - 55, Color.WHITE.rgb)
 		mc.ingameGUI.drawCenteredString(mc.fontRenderer, level, width / 2 + 50, height - 60, Color.WHITE.rgb)
-
-		mc.textureManager.bindTexture(ResourceLocation(Core.ID + ":textures/gui/background_2.png"))
-		this.drawTexturedModalRect(5, 5, 0, 0, 107, 43)
-		mc.ingameGUI.drawCenteredString(
-			mc.fontRenderer,
-			"${player.getEntityAttribute(Attributes.SAVINGRATE).attributeValue}",
-			10,
-			10,
-			Color.GREEN.rgb
-		)
 	}
 }

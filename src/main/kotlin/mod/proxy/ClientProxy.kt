@@ -1,7 +1,7 @@
 package mod.proxy
 
 import mod.Core
-import mod.gui.mpindicator.RenderMPIndicator
+import mod.gui.RenderHandler
 import mod.util.Storage
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
@@ -18,7 +18,7 @@ class ClientProxy : CommonProxy() {
 	}
 
 	fun init(event: FMLInitializationEvent) {
-		MinecraftForge.EVENT_BUS.register(RenderMPIndicator())
+		MinecraftForge.EVENT_BUS.register(RenderHandler())
 	}
 
 	override fun registerModel() {

@@ -1,19 +1,21 @@
 package mod.item.accessory
 
 import com.google.common.collect.Multimap
+import mod.Core
 import mod.enums.ItemRarity
 import mod.item.baseitem.ItemAccessory
+import net.minecraft.entity.SharedMonsterAttributes
 import net.minecraft.entity.ai.attributes.AttributeModifier
 import net.minecraft.inventory.EntityEquipmentSlot
 import net.minecraft.item.ItemStack
 import java.util.*
 
-object PowerNeckless: ItemAccessory("power_neckless", ItemRarity.UNCOMMON){
-	init {
-		attributeMap.add(AttributeModifier(UUID.fromString("48500c3d-6c7f-47e9-88a1-18b33302601f"), "generic.maxHealth", 10.0, 0))
-	}
-
+object PowerNeckless: ItemAccessory("power_neckless", Core.necklace, ItemRarity.UNCOMMON){
 	override fun getAttributeModifiers(slot: EntityEquipmentSlot, stack: ItemStack): Multimap<String, AttributeModifier> {
-		return super.getAttributeModifiers(slot, stack)
+		val multimap = super.getAttributeModifiers(slot, stack)
+		if (slot == Core.necklace){
+			multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.name, AttributeModifier(UUID.fromString("426ba541-894a-459c-94e6-30dc2d92f582"), "atk", 2.0, 0))
+		}
+		return multimap
 	}
 }

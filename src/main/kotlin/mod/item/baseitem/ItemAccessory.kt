@@ -6,6 +6,7 @@ import mod.util.JsonReference
 import net.minecraft.client.resources.I18n
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.entity.ai.attributes.AttributeModifier
+import net.minecraft.inventory.EntityEquipmentSlot
 import net.minecraft.item.ItemStack
 import net.minecraft.util.ResourceLocation
 import net.minecraft.util.text.TextComponentTranslation
@@ -13,8 +14,8 @@ import net.minecraft.util.text.TextFormatting
 import net.minecraft.world.World
 import java.io.File
 
-open class ItemAccessory(name: String, rarity: ItemRarity): GeneralRPGItem(rarity){
-	val attributeMap: ArrayList<AttributeModifier> = arrayListOf()
+open class ItemAccessory(name: String, slot: EntityEquipmentSlot, rarity: ItemRarity): GeneralRPGItem(rarity){
+	val equipmentSlot = slot
 
 	init {
 		this.creativeTab = Core.accessoryTab
@@ -29,23 +30,7 @@ open class ItemAccessory(name: String, rarity: ItemRarity): GeneralRPGItem(rarit
 		}
 	}
 
-	override fun addInformation(stack: ItemStack, worldIn: World?, tooltip: MutableList<String>, flagIn: ITooltipFlag) {
-		attributeMap[0].let {
-			tooltip.add(TextComponentTranslation("text.equipping").formattedText)
-		}
-		repeat(attributeMap.size){
-			if (attributeMap[it].operation == 0){
-				if (attributeMap[it].amount > 0)
-					tooltip.add(" ${TextFormatting.BLUE}${I18n.format(TextComponentTranslation(attributeMap[it].name).formattedText)} ${TextFormatting.BLUE}${I18n.format("+${attributeMap[it].amount}")}")
-				else
-					tooltip.add(" ${TextFormatting.RED}${I18n.format(TextComponentTranslation(attributeMap[it].name).formattedText)} ${TextFormatting.RED}${I18n.format("-${attributeMap[it].amount}")}")
-			}else{
-				if (attributeMap[it].amount > 0)
-					tooltip.add(" ${TextFormatting.BLUE}${I18n.format(TextComponentTranslation(attributeMap[it].name).formattedText)} ${TextFormatting.BLUE}${I18n.format("${attributeMap[it].amount}%")}")
-				else
-					tooltip.add(" ${TextFormatting.RED}${I18n.format(TextComponentTranslation(attributeMap[it].name).formattedText)} ${TextFormatting.RED}${I18n.format("${attributeMap[it].amount}%")}")
-			}
-		}
-		super.addInformation(stack, worldIn, tooltip, flagIn)
+	fun getSlot(): EntityEquipmentSlot{
+		return  equipmentSlot
 	}
 }

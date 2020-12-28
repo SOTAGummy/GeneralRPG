@@ -63,7 +63,6 @@ text.second=s
 text.level_up=Level UP !!
 text.strength=Strength
 text.rarity=Rarity
-text.equipping=When equipped
 text.star=✪
 text.element.fire=🔥
 text.element.water=💧
@@ -74,7 +73,10 @@ text.element.lightning=⚡
 text.element.light=☀
 text.element.dark=🌀
 
-item.modifiers.accessory=When equipped
+item.modifiers.necklace=When equipped on the neck
+item.modifiers.amulet=When equipped on the waist
+item.modifiers.glove=When equipped on the hand
+item.modifiers.gem=When equipped on the back
 
 potion.burning.name=Burning
 potion.frozen.name=Frozen

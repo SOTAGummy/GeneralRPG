@@ -64,7 +64,6 @@ text.second=秒
 text.level_up=レベルアップ！！
 text.strength=攻撃力
 text.rarity=レア度
-text.equipping=装備しているとき
 text.star=✪
 text.element.fire=🔥
 text.element.water=💧
@@ -75,7 +74,10 @@ text.element.lightning=⚡
 text.element.light=✦
 text.element.dark=🌀
 
-item.modifiers.accessory=装備したとき
+item.modifiers.necklace=首に装備したとき
+item.modifiers.amulet=腰に装備したとき
+item.modifiers.glove=手に装備したとき
+item.modifiers.gem=背中に装備したとき
 
 potion.burning.name=火傷
 potion.frozen.name=凍結

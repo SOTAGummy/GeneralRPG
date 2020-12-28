@@ -8,23 +8,35 @@ import java.lang.reflect.Field
 import java.lang.reflect.Method
 
 object SlotExtension {
-	fun addSlotType(name: String, ordinal: Int, index: Int, slotIndex: Int, nameln: String): EntityEquipmentSlot {
+	fun addEquipmentSlot(name: String, ordinal: Int, type: EntityEquipmentSlot.Type, index: Int, slotIndex: Int, nameln: String): EntityEquipmentSlot {
 		val method: Method = Constructor::class.java.getDeclaredMethod("acquireConstructorAccessor")
 		method.isAccessible = true
 
 		val cls: Constructor<out EntityEquipmentSlot> = EntityEquipmentSlot::class.java.getDeclaredConstructor(String::class.java, Int::class.java, EntityEquipmentSlot.Type::class.java, Int::class.java, Int::class.java, String::class.java)
 		val ca: ConstructorAccessor = method.invoke(cls) as ConstructorAccessor
 
-		val result: EntityEquipmentSlot = ca.newInstance(arrayOf<Any>(name, ordinal, EntityEquipmentSlot.Type.ARMOR, index, slotIndex, nameln)) as EntityEquipmentSlot
+		val result: EntityEquipmentSlot = ca.newInstance(arrayOf<Any>(name, ordinal, type, index, slotIndex, nameln)) as EntityEquipmentSlot
 		addValueToEnum(result)
 		return result
 	}
 
-	private fun addValueToEnum(value: EntityEquipmentSlot) {
+	fun addSlotType(name: String, ordinal: Int): EntityEquipmentSlot.Type {
+		val method: Method = Constructor::class.java.getDeclaredMethod("acquireConstructorAccessor")
+		method.isAccessible = true
+
+		val cls: Constructor<out EntityEquipmentSlot.Type> = EntityEquipmentSlot.Type::class.java.getDeclaredConstructor(String::class.java, Int::class.java)
+		val ca: ConstructorAccessor = method.invoke(cls) as ConstructorAccessor
+
+		val result: EntityEquipmentSlot.Type = ca.newInstance(arrayOf<Any>(name, ordinal)) as EntityEquipmentSlot.Type
+		addValueToEnum(result)
+		return result
+	}
+
+	private fun <T: Enum<*>> addValueToEnum(value: T) {
 		val field: Field = value::class.java.getDeclaredField("\$VALUES")
 		field.isAccessible = true
 		@SuppressWarnings("unchecked")
-		val values: Array<EntityEquipmentSlot> = field.get(null) as Array<EntityEquipmentSlot>
+		val values: Array<T> = field.get(null) as Array<T>
 		val newValues = values.copyOf(values.size + 1)
 		newValues[values.size] = value
 
