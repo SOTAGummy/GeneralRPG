@@ -2,12 +2,6 @@ package mod
 
 import mod.block.InjectionTable
 import mod.block.TileEntityInjectionTable
-import mod.capability.CapabilityEvent
-import mod.capability.accessory.AccessoryHandler
-import mod.capability.accessory.AccessoryItemContainer
-import mod.capability.accessory.AccessoryStorage
-import mod.capability.accessory.IAccessory
-import mod.entity.bullet.SkillBullet
 import mod.gui.RenderHandler
 import mod.gui.accessory.GuiAccessoryHandler
 import mod.item.SkillDust
@@ -45,11 +39,9 @@ import net.minecraft.item.ItemBlock
 import net.minecraft.potion.Potion
 import net.minecraft.util.DamageSource
 import net.minecraft.util.ResourceLocation
-import net.minecraftforge.client.IRenderHandler
 import net.minecraftforge.client.event.ModelRegistryEvent
 import net.minecraftforge.client.model.ModelLoader
 import net.minecraftforge.common.MinecraftForge
-import net.minecraftforge.common.capabilities.CapabilityManager
 import net.minecraftforge.event.RegistryEvent
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.common.SidedProxy
@@ -60,10 +52,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 import net.minecraftforge.fml.common.network.NetworkRegistry
 import net.minecraftforge.fml.common.registry.EntityEntry
-import net.minecraftforge.fml.common.registry.EntityRegistry
 import net.minecraftforge.fml.common.registry.GameRegistry
-import net.minecraftforge.items.IItemHandler
-
 
 @Mod(modid = Core.ID, name = Core.Name, version = Core.version, modLanguage = "kotlin")
 
@@ -92,24 +81,24 @@ class Core {
 		val skillTab: CreativeTabs = GeneralRPGSkillTab()
 		val accessoryTab: CreativeTabs = GeneralAccessoryTab()
 
-		val skilldust = SkillDust
+		val skill_dust = SkillDust
 
 		val heal = Heal
-		val healP = HealP
-		val healPP = HealPP
+		val heal_P = HealP
+		val heal_PP = HealPP
 		val rage = Rage
 		val shield = Shield
 		val leap = Leap
-		val leapP = LeapP
-		val leapPP = LeapPP
+		val leap_P = LeapP
+		val leap_PP = LeapPP
 		val explosion = Explosion
-		val arrowrain = ArrowRain
-		val togglemode = ToggleMode
+		val arrow_rain = ArrowRain
+		val toggle_mode = ToggleMode
 		val fulfill = Fulfill
 		val light = Light
 		val blackhole = BlackHole
 		val blow = Blow
-		val spawnslimetest = SpawnSlimeTest
+		val spawn_slime_test = SpawnSlimeTest
 		val codeTest = CodeTest
 
 		val common_token = CommonToken
@@ -118,11 +107,11 @@ class Core {
 		val epic_token = EpicToken
 		val legend_token = LegendToken
 
-		val skillbook = SkillBook
-		val skillstaff = SkillStaff
-		val skillorb = SkillOrb
-		val enderdragonartifact = EnderDragonArtifact
-		val witherartifact = WitherArtifact
+		val skill_book = SkillBook
+		val skill_staff = SkillStaff
+		val skill_orb = SkillOrb
+		val ender_dragon_artifact = EnderDragonArtifact
+		val wither_artifact = WitherArtifact
 
 		val skill_fruit = SkillFruit
 		val life_fruit = LifeFruit
@@ -185,7 +174,6 @@ class Core {
 		GameRegistry.registerTileEntity(TileEntityInjectionTable::class.java, ResourceLocation(ID, "injection_table"))
 		mod.util.registerModel(StrongHelmet, 0)
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, GuiAccessoryHandler())
-		CapabilityManager.INSTANCE.register(IAccessory::class.java, AccessoryStorage(), AccessoryHandler::class.java)
 	}
 
 	@Mod.EventHandler
@@ -218,7 +206,7 @@ class Core {
 
 	@SubscribeEvent
 	fun registerEntities(event: RegistryEvent.Register<EntityEntry>) {
-		EntityRegistry.registerModEntity(ResourceLocation("skill_bullet"), SkillBullet::class.java, "skill_bullet", 1, instance, 64, 10, true)
+
 	}
 
 	@SubscribeEvent

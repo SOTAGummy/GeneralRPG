@@ -1,16 +1,25 @@
 package mod.gui.accessory
 
-import mod.capability.accessory.AccessoryItemContainer
+import mod.Core
 import mod.gui.accessory.slot.AmuletSlot
 import mod.gui.accessory.slot.GemSlot
 import mod.gui.accessory.slot.GloveSlot
 import mod.gui.accessory.slot.NecklaceSlot
+import mod.item.baseitem.ItemAccessory
+import mod.util.Attributes
 import net.minecraft.enchantment.EnchantmentHelper
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.entity.player.InventoryPlayer
 import net.minecraft.inventory.*
+import net.minecraft.item.Item
 import net.minecraft.item.ItemArmor
 import net.minecraft.item.ItemStack
+import net.minecraft.entity.EntityLiving
+
+import net.minecraft.inventory.EntityEquipmentSlot
+
+
+
 
 class AccessoryContainer(val player: EntityPlayer, customInventory: AccessoryItemContainer): Container(){
 	val playerInv: InventoryPlayer = player.inventory
@@ -20,11 +29,15 @@ class AccessoryContainer(val player: EntityPlayer, customInventory: AccessoryIte
 	private val equipmentSlots = arrayOf(EntityEquipmentSlot.HEAD, EntityEquipmentSlot.CHEST, EntityEquipmentSlot.LEGS, EntityEquipmentSlot.FEET)
 
 	init {
-		//ACCESSORYSLOT
-		addSlotToContainer(NecklaceSlot(customInventory, 41, 114, 82))
-		addSlotToContainer(AmuletSlot(customInventory, 42, 114, 100))
-		addSlotToContainer(GloveSlot(customInventory, 43, 114, 118))
-		addSlotToContainer(GemSlot(customInventory, 44, 114, 136))
+		//CRAFTRESULTSLOT
+		addSlotToContainer(SlotCrafting(playerInv.player, craftMatrix, craftResult, 0, 154, 28))
+
+		//CRAFTMTRIXSLOT
+		for (i in 0..1) {
+			for (j in 0..1) {
+				addSlotToContainer(Slot(craftMatrix, j + i * 2, 98 + j * 18, 18 + i * 18))
+			}
+		}
 
 		//ARMORSLOT
 		for (k in 0..3) {
@@ -64,7 +77,7 @@ class AccessoryContainer(val player: EntityPlayer, customInventory: AccessoryIte
 		}
 
 		//OFFHANDSLOT
-		addSlotToContainer(object : Slot(playerInv, 40, 96, 62) {
+		addSlotToContainer(object : Slot(playerInv, 40, 77, 62) {
 			override fun isItemValid(stack: ItemStack): Boolean {
 				return super.isItemValid(stack)
 			}
@@ -74,25 +87,17 @@ class AccessoryContainer(val player: EntityPlayer, customInventory: AccessoryIte
 			}
 		})
 
-		//CRAFTMTRIXSLOT
-		for (i in 0..1) {
-			for (j in 0..1) {
-				addSlotToContainer(Slot(craftMatrix, j + i * 2, 116 + j * 18, 18 + i * 18))
-			}
-		}
+		this.onCraftMatrixChanged(craftMatrix)
 
-		//CRAFTRESULTSLOT
-		addSlotToContainer(SlotCrafting(playerInv.player, craftMatrix, craftResult, 0, 154, 28))
-
-		this.onCraftMatrixChanged(craftMatrix);
+		//ACCESSORYSLOT
+		addSlotToContainer(NecklaceSlot(customInventory, 0, -10, 8))
+		addSlotToContainer(AmuletSlot(customInventory, 1, -10, 26))
+		addSlotToContainer(GloveSlot(customInventory, 2, -10, 44))
+		addSlotToContainer(GemSlot(customInventory, 3, -10, 62))
 	}
 
 	override fun canInteractWith(playerIn: EntityPlayer): Boolean {
 		return true
-	}
-
-	override fun onCraftMatrixChanged(par1IInventory: IInventory?) {
-		slotChangedCraftingGrid(player.entityWorld, player, craftMatrix, this.craftResult)
 	}
 
 	override fun onContainerClosed(player: EntityPlayer) {
@@ -101,18 +106,83 @@ class AccessoryContainer(val player: EntityPlayer, customInventory: AccessoryIte
 		if (!player.world.isRemote) {
 			clearContainer(player, player.world, craftMatrix)
 		}
-	}
 
-	override fun canMergeSlot(stack: ItemStack?, slot: Slot): Boolean {
-		return slot.inventory !== craftResult && super.canMergeSlot(stack, slot)
+		player.getEntityAttribute(Attributes.NECKLACE).baseValue = Item.getIdFromItem(inventorySlots[0].stack.item).toDouble()
+		player.getEntityAttribute(Attributes.AMULET).baseValue = Item.getIdFromItem(inventorySlots[1].stack.item).toDouble()
+		player.getEntityAttribute(Attributes.GLOVE).baseValue = Item.getIdFromItem(inventorySlots[2].stack.item).toDouble()
+		player.getEntityAttribute(Attributes.GEM).baseValue = Item.getIdFromItem(inventorySlots[3].stack.item).toDouble()
 	}
 
 	override fun transferStackInSlot(playerIn: EntityPlayer, index: Int): ItemStack {
 		var itemstack = ItemStack.EMPTY
-		val slot = inventorySlots[index] as Slot
+		val slot = inventorySlots[index]
 
-		if (slot != null && slot.hasStack){
+		if (slot != null && slot.hasStack) {
+			val itemstack1 = slot.stack
+			itemstack = itemstack1.copy()
+			val entityEquipmentSlot = EntityLiving.getSlotForItemStack(itemstack)
 
+			//craftResult -> inv
+			if (index == 0) {
+				if (!this.mergeItemStack(itemstack1, 9, 45, true)) return ItemStack.EMPTY
+				slot.onSlotChange(itemstack1, itemstack)
+			}
+			//craftMatrix -> inv
+			else if (index in 1..4) {
+				if (!this.mergeItemStack(itemstack1, 9, 45, false)) return ItemStack.EMPTY
+			}
+			//armor -> inv
+			else if (index in 5..8) {
+				if (!this.mergeItemStack(itemstack1, 9, 45, false)) return ItemStack.EMPTY
+			}
+			//inv -> armor
+			else if (index in 9..44 && entityEquipmentSlot == EntityEquipmentSlot.HEAD && !inventorySlots[4].hasStack){
+				if (!this.mergeItemStack(itemstack1, 5, 6, false)) return ItemStack.EMPTY
+			}else if (index in 9..44 && entityEquipmentSlot == EntityEquipmentSlot.CHEST && !inventorySlots[5].hasStack){
+				if (!this.mergeItemStack(itemstack1, 6, 7, false)) return ItemStack.EMPTY
+			}else if (index in 9..44 && entityEquipmentSlot == EntityEquipmentSlot.LEGS && !inventorySlots[6].hasStack){
+				if (!this.mergeItemStack(itemstack1, 7, 8, false)) return ItemStack.EMPTY
+			}else if (index in 9..44 && entityEquipmentSlot == EntityEquipmentSlot.FEET && !inventorySlots[7].hasStack){
+				if (!this.mergeItemStack(itemstack1, 8, 9, false)) return ItemStack.EMPTY
+			}
+			//inv -> accessory
+			else if (index in 9..44 && !inventorySlots[0].hasStack && inventorySlots[index].stack.item is ItemAccessory && (inventorySlots[index].stack.item as ItemAccessory).equipmentSlot == Core.necklace){
+				if (!this.mergeItemStack(itemstack1, 46, 47, false)) return ItemStack.EMPTY
+			}else if (index in 9..44 && !inventorySlots[1].hasStack && inventorySlots[index].stack.item is ItemAccessory && (inventorySlots[index].stack.item as ItemAccessory).equipmentSlot == Core.amulet){
+				if (!this.mergeItemStack(itemstack1, 47, 48, false)) return ItemStack.EMPTY
+			}else if (index in 9..44 && !inventorySlots[2].hasStack && inventorySlots[index].stack.item is ItemAccessory && (inventorySlots[index].stack.item as ItemAccessory).equipmentSlot == Core.glove){
+				if (!this.mergeItemStack(itemstack1, 48, 49, false)) return ItemStack.EMPTY
+			}else if (index in 9..44 && !inventorySlots[3].hasStack && inventorySlots[index].stack.item is ItemAccessory && (inventorySlots[index].stack.item as ItemAccessory).equipmentSlot == Core.gem){
+				if (!this.mergeItemStack(itemstack1, 49, 50, false)) return ItemStack.EMPTY
+			}
+			//inv -> offhand
+			else if (index in 9..44 && entityEquipmentSlot == EntityEquipmentSlot.OFFHAND && !inventorySlots[44].hasStack){
+				if (!this.mergeItemStack(itemstack1, 45, 46, false)) return ItemStack.EMPTY
+			}
+			//offhand -> inv
+			else if (index == 45){
+				if (!this.mergeItemStack(itemstack1, 9, 45, false)) return ItemStack.EMPTY
+			}
+			//accessory -> inv
+			else if (index in 46..49){
+				if (!this.mergeItemStack(itemstack1, 9, 45, false)) return ItemStack.EMPTY
+			}
+			//inv -> hotbar
+			else if (index in 9..34){
+				if (!this.mergeItemStack(itemstack1, 36, 45, false)) return ItemStack.EMPTY
+			}
+			//hotbar -> inv
+			else if (index in 36..44){
+				if (!this.mergeItemStack(itemstack1, 9, 36, false)) return ItemStack.EMPTY
+			}
+
+			if (itemstack1.isEmpty) slot.putStack(ItemStack.EMPTY)
+			else slot.onSlotChanged()
+
+			if (itemstack1.count == itemstack.count) return ItemStack.EMPTY
+
+			val itemstack2 = slot.onTake(playerIn, itemstack1)
+			if (index == 0) playerIn.dropItem(itemstack2, false)
 		}
 		return itemstack
 	}

@@ -11,6 +11,12 @@ import java.lang.reflect.Method
 import java.lang.reflect.Field
 
 object Attributes {
+	//ACCESSORY
+	val NECKLACE = addAttribute("necklace", 0.0, 0.0, Double.MAX_VALUE)
+	val AMULET = addAttribute("amulet", 0.0, 0.0, Double.MAX_VALUE)
+	val GLOVE = addAttribute("glove", 0.0, 0.0, Double.MAX_VALUE)
+	val GEM = addAttribute("gem", 0.0, 0.0, Double.MAX_VALUE)
+
 	val MP = addAttribute("mp", 100.0, 0.0, Double.MAX_VALUE)
 	val MAXMP = addAttribute("maxmp", 100.0, 100.0, Double.MAX_VALUE)
 	val EXP = addAttribute("exp", 0.0, 0.0, Double.MAX_VALUE)

@@ -6,6 +6,6 @@ import net.minecraft.item.ItemStack
 
 class GeneralRPGTab : CreativeTabs(Core.ID) {
 	override fun getTabIconItem(): ItemStack {
-		return ItemStack(Core.skillbook)
+		return ItemStack(Core.skill_book)
 	}
 }

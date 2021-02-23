@@ -24,16 +24,6 @@ class RenderHandler {
 		}
 	}
 
-	@SideOnly(Side.CLIENT)
-	@SubscribeEvent
-	fun onGuiEvent(event: GuiScreenEvent.DrawScreenEvent.Post){
-		if (event.gui.toString().split("@")[0] == "net.minecraft.client.gui.inventory.GuiInventory"){
-			val mc = event.gui.mc
-			val player = mc.player
-			val world = mc.world
-		}
-	}
-
 	@SubscribeEvent
 	fun guiPostInit(event: GuiScreenEvent.InitGuiEvent.Post){
 		if (event.gui is GuiInventory)
