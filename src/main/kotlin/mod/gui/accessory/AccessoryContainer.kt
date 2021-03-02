@@ -15,7 +15,6 @@ import net.minecraft.item.Item
 import net.minecraft.item.ItemArmor
 import net.minecraft.item.ItemStack
 import net.minecraft.entity.EntityLiving
-
 import net.minecraft.inventory.EntityEquipmentSlot
 
 
@@ -136,23 +135,23 @@ class AccessoryContainer(val player: EntityPlayer, customInventory: AccessoryIte
 				if (!this.mergeItemStack(itemstack1, 9, 45, false)) return ItemStack.EMPTY
 			}
 			//inv -> armor
-			else if (index in 9..44 && entityEquipmentSlot == EntityEquipmentSlot.HEAD && !inventorySlots[4].hasStack){
+			else if (index in 9..44 && entityEquipmentSlot == EntityEquipmentSlot.HEAD && !inventorySlots[5].hasStack){
 				if (!this.mergeItemStack(itemstack1, 5, 6, false)) return ItemStack.EMPTY
-			}else if (index in 9..44 && entityEquipmentSlot == EntityEquipmentSlot.CHEST && !inventorySlots[5].hasStack){
+			}else if (index in 9..44 && entityEquipmentSlot == EntityEquipmentSlot.CHEST && !inventorySlots[6].hasStack){
 				if (!this.mergeItemStack(itemstack1, 6, 7, false)) return ItemStack.EMPTY
-			}else if (index in 9..44 && entityEquipmentSlot == EntityEquipmentSlot.LEGS && !inventorySlots[6].hasStack){
+			}else if (index in 9..44 && entityEquipmentSlot == EntityEquipmentSlot.LEGS && !inventorySlots[7].hasStack){
 				if (!this.mergeItemStack(itemstack1, 7, 8, false)) return ItemStack.EMPTY
-			}else if (index in 9..44 && entityEquipmentSlot == EntityEquipmentSlot.FEET && !inventorySlots[7].hasStack){
+			}else if (index in 9..44 && entityEquipmentSlot == EntityEquipmentSlot.FEET && !inventorySlots[8].hasStack){
 				if (!this.mergeItemStack(itemstack1, 8, 9, false)) return ItemStack.EMPTY
 			}
 			//inv -> accessory
-			else if (index in 9..44 && !inventorySlots[0].hasStack && inventorySlots[index].stack.item is ItemAccessory && (inventorySlots[index].stack.item as ItemAccessory).equipmentSlot == Core.necklace){
+			else if (index in 9..44 && !inventorySlots[46].hasStack && inventorySlots[index].stack.item is ItemAccessory && (inventorySlots[index].stack.item as ItemAccessory).equipmentSlot == Core.necklace){
 				if (!this.mergeItemStack(itemstack1, 46, 47, false)) return ItemStack.EMPTY
-			}else if (index in 9..44 && !inventorySlots[1].hasStack && inventorySlots[index].stack.item is ItemAccessory && (inventorySlots[index].stack.item as ItemAccessory).equipmentSlot == Core.amulet){
+			}else if (index in 9..44 && !inventorySlots[47].hasStack && inventorySlots[index].stack.item is ItemAccessory && (inventorySlots[index].stack.item as ItemAccessory).equipmentSlot == Core.amulet){
 				if (!this.mergeItemStack(itemstack1, 47, 48, false)) return ItemStack.EMPTY
-			}else if (index in 9..44 && !inventorySlots[2].hasStack && inventorySlots[index].stack.item is ItemAccessory && (inventorySlots[index].stack.item as ItemAccessory).equipmentSlot == Core.glove){
+			}else if (index in 9..44 && !inventorySlots[48].hasStack && inventorySlots[index].stack.item is ItemAccessory && (inventorySlots[index].stack.item as ItemAccessory).equipmentSlot == Core.glove){
 				if (!this.mergeItemStack(itemstack1, 48, 49, false)) return ItemStack.EMPTY
-			}else if (index in 9..44 && !inventorySlots[3].hasStack && inventorySlots[index].stack.item is ItemAccessory && (inventorySlots[index].stack.item as ItemAccessory).equipmentSlot == Core.gem){
+			}else if (index in 9..44 && !inventorySlots[49].hasStack && inventorySlots[index].stack.item is ItemAccessory && (inventorySlots[index].stack.item as ItemAccessory).equipmentSlot == Core.gem){
 				if (!this.mergeItemStack(itemstack1, 49, 50, false)) return ItemStack.EMPTY
 			}
 			//inv -> offhand
@@ -185,5 +184,14 @@ class AccessoryContainer(val player: EntityPlayer, customInventory: AccessoryIte
 			if (index == 0) playerIn.dropItem(itemstack2, false)
 		}
 		return itemstack
+	}
+
+	override fun slotClick(slotId: Int, dragype: Int, clickType: ClickType, player: EntityPlayer): ItemStack {
+		println(slotId)
+		return super.slotClick(slotId, dragype, clickType, player)
+	}
+
+	override fun canMergeSlot(stack: ItemStack, slot: Slot): Boolean {
+		return slot.inventory !== craftResult && super.canMergeSlot(stack, slot)
 	}
 }

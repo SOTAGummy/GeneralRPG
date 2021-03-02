@@ -1,18 +1,19 @@
 package mod.item.skills
 
-import mod.Core
+import mod.capability.MpProvider
 import mod.enums.ItemRarity
+import mod.enums.SkillType
 import mod.item.baseitem.ItemSkill
-import mod.util.Attributes
 import net.minecraft.entity.player.EntityPlayer
-import net.minecraft.item.Item
 import net.minecraft.util.EnumHand
 import net.minecraft.world.World
 
-object CodeTest: ItemSkill("codetest", 0.0, ItemRarity.MASTER){
+object CodeTest: ItemSkill("codetest", 0.0, ItemRarity.MASTER, SkillType.UTIL){
 	override fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand) {
-		if (!world.isRemote){
-			player.getEntityAttribute(Attributes.NECKLACE).baseValue = getIdFromItem(Core.power_neckless).toDouble()
+		if (world.isRemote){
+			println(player.getCapability(MpProvider.MP!!, null)?.getMp())
+			player.getCapability(MpProvider.MP, null)?.useMp(30)
+			println(player.getCapability(MpProvider.MP, null)?.getMp())
 		}
 	}
 }

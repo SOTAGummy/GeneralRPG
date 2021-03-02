@@ -1,6 +1,7 @@
 package mod.item.skills
 
 import mod.enums.ItemRarity
+import mod.enums.SkillType
 import mod.item.baseitem.ItemSkill
 import mod.pppSystem.PPPSystem
 import mod.pppSystem.UniqueBinaryOperator
@@ -13,7 +14,7 @@ import net.minecraft.util.EnumHand
 import net.minecraft.world.World
 import kotlin.random.Random
 
-object ArrowRain : ItemSkill("arrowrain", 20.0, ItemRarity.UNCOMMON) {
+object ArrowRain : ItemSkill("arrowrain", 20.0, ItemRarity.UNCOMMON, SkillType.PHYSICAL) {
 	override fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand) {
 		val pos = player.rayTrace(15.0, 0.0F)?.blockPos!!
 		val itemstack = ItemStack(Items.ARROW)

@@ -2,6 +2,7 @@ package mod.item.baseitem
 
 import mod.Core
 import mod.enums.ItemRarity
+import mod.enums.SkillType
 import mod.module.IGeneralRarity
 import mod.util.JsonReference
 import mod.util.Storage
@@ -16,7 +17,7 @@ import net.minecraft.util.text.TextFormatting
 import net.minecraft.world.World
 import java.io.File
 
-open class ItemSkill(val name: String, val cost: Double, val rarity: ItemRarity, includeEvents: Boolean = false) : GeneralRPGItem(rarity), IGeneralRarity {
+open class ItemSkill(val name: String, val cost: Double, val rarity: ItemRarity, type: SkillType, includeEvents: Boolean = false): GeneralRPGItem(rarity), IGeneralRarity {
 	init {
 		this.unlocalizedName = name
 		this.maxStackSize = 1
@@ -30,7 +31,7 @@ open class ItemSkill(val name: String, val cost: Double, val rarity: ItemRarity,
 		val file = File("D:\\mod\\GeneralRPG\\src\\main\\resources\\assets\\general-rpg\\models\\item\\$name.json")
 		if (!file.exists()) {
 			file.createNewFile()
-			file.writeText(JsonReference.ItemSkillJsonText)
+			file.writeText(JsonReference.getJsonText("skill_gem_${type.name.toLowerCase()}"))
 		}
 	}
 

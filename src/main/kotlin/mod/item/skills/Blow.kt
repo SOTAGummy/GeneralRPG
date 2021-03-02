@@ -1,6 +1,7 @@
 package mod.item.skills
 
 import mod.enums.ItemRarity
+import mod.enums.SkillType
 import mod.item.baseitem.ItemSkill
 import mod.util.StatusUtil
 import net.minecraft.entity.EntityLiving
@@ -9,7 +10,7 @@ import net.minecraft.util.EnumHand
 import net.minecraft.world.World
 import kotlin.math.abs
 
-object Blow : ItemSkill("blow", 40.0, ItemRarity.UNCOMMON, false) {
+object Blow : ItemSkill("blow", 40.0, ItemRarity.UNCOMMON, SkillType.WIND, false) {
 	override fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand) {
 	if (!world.isRemote){
 		val entity = arrayListOf<EntityLiving>()

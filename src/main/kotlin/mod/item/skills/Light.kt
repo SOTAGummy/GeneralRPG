@@ -1,6 +1,7 @@
 package mod.item.skills
 
 import mod.enums.ItemRarity
+import mod.enums.SkillType
 import mod.item.baseitem.ItemSkill
 import mod.util.StatusUtil
 import net.minecraft.entity.player.EntityPlayer
@@ -8,7 +9,7 @@ import net.minecraft.util.EnumFacing
 import net.minecraft.util.EnumHand
 import net.minecraft.world.World
 
-object Light : ItemSkill("light", 5.0, ItemRarity.COMMON) {
+object Light : ItemSkill("light", 5.0, ItemRarity.COMMON, SkillType.UTIL) {
 	override fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand) {
 		val pos = player.rayTrace(15.0, 0.0F)!!.blockPos
 		//val down = pos.down()

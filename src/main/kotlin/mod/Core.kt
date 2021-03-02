@@ -2,6 +2,10 @@ package mod
 
 import mod.block.InjectionTable
 import mod.block.TileEntityInjectionTable
+import mod.capability.IMp
+import mod.capability.Mp
+import mod.capability.MpStorage
+import mod.event.capabilityEvent.CapabilityEvent
 import mod.gui.RenderHandler
 import mod.gui.accessory.GuiAccessoryHandler
 import mod.item.SkillDust
@@ -42,6 +46,7 @@ import net.minecraft.util.ResourceLocation
 import net.minecraftforge.client.event.ModelRegistryEvent
 import net.minecraftforge.client.model.ModelLoader
 import net.minecraftforge.common.MinecraftForge
+import net.minecraftforge.common.capabilities.CapabilityManager
 import net.minecraftforge.event.RegistryEvent
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.common.SidedProxy
@@ -156,6 +161,7 @@ class Core {
 	fun construct(event: FMLConstructionEvent?) {
 		MinecraftForge.EVENT_BUS.register(this)
 		MinecraftForge.EVENT_BUS.register(proxy)
+		MinecraftForge.EVENT_BUS.register(CapabilityEvent())
 		for (item in Storage.Instances) {
 			MinecraftForge.EVENT_BUS.register(item)
 		}
@@ -174,6 +180,7 @@ class Core {
 		GameRegistry.registerTileEntity(TileEntityInjectionTable::class.java, ResourceLocation(ID, "injection_table"))
 		mod.util.registerModel(StrongHelmet, 0)
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, GuiAccessoryHandler())
+		CapabilityManager.INSTANCE.register(IMp::class.java, MpStorage(), Mp::class.java)
 	}
 
 	@Mod.EventHandler

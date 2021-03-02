@@ -4,6 +4,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import mod.enums.ItemRarity
+import mod.enums.SkillType
 import mod.item.baseitem.ItemSkill
 import mod.util.StatusUtil
 import net.minecraft.entity.SharedMonsterAttributes
@@ -13,7 +14,7 @@ import net.minecraft.util.EnumHand
 import net.minecraft.world.World
 import java.util.*
 
-object Shield : ItemSkill("shield", 15.0, ItemRarity.RARE) {
+object Shield : ItemSkill("shield", 15.0, ItemRarity.RARE, SkillType.UTIL) {
 	override fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand) {
 		GlobalScope.launch {
 			val uuid = UUID.fromString("55453023-7166-4cd7-970a-9c12803b53c3")

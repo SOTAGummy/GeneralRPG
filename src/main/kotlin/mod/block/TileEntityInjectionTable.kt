@@ -29,7 +29,7 @@ class TileEntityInjectionTable : TileEntity() {
 
 	override fun writeToNBT(compound: NBTTagCompound): NBTTagCompound {
 		compound.merge(inventory.serializeNBT())
-		item.let { compound.merge(item?.serializeNBT()) }
+		item?.serializeNBT().let { compound.merge(item?.serializeNBT()) }
 		return compound
 	}
 
