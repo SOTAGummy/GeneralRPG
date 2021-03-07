@@ -15,7 +15,12 @@ class Mp: IMp{
 		this.mpValue += value
 	}
 
-	override fun useMp(value: Int) {
-		this.mpValue -= value
+	override fun useMp(value: Int): Boolean{
+		return if (this.mpValue - value < 0){
+			false
+		} else {
+			this.mpValue -= value
+			true
+		}
 	}
 }

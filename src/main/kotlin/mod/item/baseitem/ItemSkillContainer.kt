@@ -2,6 +2,7 @@ package mod.item.baseitem
 
 import com.google.common.collect.Multimap
 import mod.Core
+import mod.capability.MpProvider
 import mod.enums.ItemRarity
 import mod.module.IGeneralRarity
 import mod.module.ISkillStorable
@@ -75,8 +76,8 @@ open class ItemSkillContainer(name: String, rarity: ItemRarity, private val capa
 		if (itemstack.tagCompound != null && hand == EnumHand.MAIN_HAND) {
 			for (i in 0 until capacity) {
 				if (itemstack.tagCompound!!.getIntArray("SkillArray")[i] != 0) {
-					val cost = (getItemById(itemstack.tagCompound!!.getIntArray("SkillArray")[i]) as ItemSkill).cost
-					if (StatusUtil.useMP(player, cost)){
+					val cost = (getItemById(itemstack.tagCompound!!.getIntArray("SkillArray")[i]) as ItemSkill).cost.toInt()
+					if (player.getCapability(MpProvider.MP!!, null)!!.useMp(cost)){
 						val item = (getItemById(itemstack.tagCompound!!.getIntArray("SkillArray")[i])) as ItemSkill
 						val skillFunc = object : IFunctionOperator {
 							override val world: World = world

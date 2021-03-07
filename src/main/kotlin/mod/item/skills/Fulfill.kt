@@ -1,5 +1,6 @@
 package mod.item.skills
 
+import mod.capability.MpProvider
 import mod.enums.ItemRarity
 import mod.enums.SkillType
 import mod.item.baseitem.ItemSkill
@@ -11,7 +12,6 @@ import net.minecraft.world.World
 
 object Fulfill : ItemSkill("fulfill", 0.0, ItemRarity.MASTER, SkillType.UTIL) {
 	override fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand) {
-		val amount = player.getEntityAttribute(Attributes.MAXMP).attributeValue - player.getEntityAttribute(Attributes.MP).attributeValue
-		StatusUtil.addMP(player, amount)
+		player.getCapability(MpProvider.MP!!, null)?.setMp(player.getEntityAttribute(Attributes.MAXMP).attributeValue.toInt())
 	}
 }

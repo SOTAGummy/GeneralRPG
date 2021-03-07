@@ -12,7 +12,7 @@ import net.minecraft.world.World
 
 object CodeTest: ItemSkill("codetest", 0.0, ItemRarity.MASTER, SkillType.UTIL){
 	override fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand) {
-
+		player.getCapability(MpProvider.MP!!, null)?.useMp(10)
 	}
 
 	override fun onItemRightClick(world: World, player: EntityPlayer, hand: EnumHand): ActionResult<ItemStack> {

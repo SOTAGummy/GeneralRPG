@@ -1,5 +1,7 @@
 package mod.event.capabilityEvent
 
+import mod.capability.MpProvider
+import mod.util.Attributes
 import mod.util.Storage
 import net.minecraft.entity.SharedMonsterAttributes
 import net.minecraft.entity.player.EntityPlayer
@@ -10,9 +12,7 @@ import net.minecraftforge.fml.common.gameevent.PlayerEvent
 class PlayerAttributeEvent {
 	@SubscribeEvent
 	fun onJoinEvent(event: PlayerEvent.PlayerLoggedInEvent) {
-		event.player.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).baseValue = 1.0
-		event.player.getEntityAttribute(SharedMonsterAttributes.ARMOR).baseValue =
-			event.player.totalArmorValue.toDouble()
+		event.player.getCapability(MpProvider.MP!!, null)?.setMp(event.player.getEntityAttribute(Attributes.MAXMP).attributeValue.toInt())
 	}
 
 	@SubscribeEvent

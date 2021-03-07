@@ -19,7 +19,9 @@ class RenderHandler {
 	fun onRenderGui(event: RenderGameOverlayEvent.Post) {
 		if (event.type == RenderGameOverlayEvent.ElementType.EXPERIENCE && !Minecraft.getMinecraft().player.isCreative) {
 			val mc = Minecraft.getMinecraft()
-			MPIndicator(mc)
+			var correction = 0
+			if (event.type == RenderGameOverlayEvent.ElementType.AIR) correction = 8
+			MPIndicator(mc, correction)
 			SkillListIndicator(mc)
 		}
 	}
