@@ -1,5 +1,6 @@
 package mod.event.capabilityEvent
 
+import mod.capability.MpProvider
 import mod.util.Attributes
 import mod.util.StatusUtil
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
@@ -11,9 +12,9 @@ class TickEvent {
 	@SubscribeEvent
 	fun onTickEvent(event: TickEvent.PlayerTickEvent) {
 		count++
-		if (count >= 80) {
+		if (count >= 30 && event.phase == TickEvent.Phase.START) {
 			count = 0
-			StatusUtil.addMP(event.player, event.player.getEntityAttribute(Attributes.MPRECOVERRATE).attributeValue)
+			event.player.getCapability(MpProvider.MP!!, null)?.addMp(event.player, 1)
 		}
 	}
 }

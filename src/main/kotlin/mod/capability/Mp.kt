@@ -1,5 +1,8 @@
 package mod.capability
 
+import mod.util.Attributes
+import net.minecraft.entity.player.EntityPlayer
+
 class Mp: IMp{
 	var mpValue: Int = 100
 
@@ -11,7 +14,8 @@ class Mp: IMp{
 	 this.mpValue = value
 	}
 
-	override fun addMp(value: Int) {
+	override fun addMp(player: EntityPlayer, value: Int) {
+		if ((player.getCapability(MpProvider.MP!!, null)?.getMp()?.plus(value))!! <= player.getEntityAttribute(Attributes.MAXMP).attributeValue.toInt())
 		this.mpValue += value
 	}
 
