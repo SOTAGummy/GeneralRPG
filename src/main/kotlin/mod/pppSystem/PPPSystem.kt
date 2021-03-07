@@ -4,44 +4,60 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 import net.minecraftforge.fml.common.gameevent.TickEvent
 
 object PPPSystem {
-	private val processArray: ArrayList<UniqueBinaryOperator?> = arrayListOf()
+	private val processTree: MutableMap<String, ArrayList<IFunctionOperator?>> = mutableMapOf()
+	private val idList: ArrayList<String> = arrayListOf()
+	private val mainProcess: ArrayList<IFunctionOperator?> = arrayListOf()
 
-	fun addProcess(function: UniqueBinaryOperator) {
-		this.processArray.add(function)
-	}
-
-	fun insertProcess(function: UniqueBinaryOperator?) {
-		val alter: ArrayList<UniqueBinaryOperator?> = processArray
-		this.processArray[0] = function
-		processArray.plus(alter)
-	}
-
-	fun addDelay(delay: Int) {
-		repeat(delay) {
-			this.processArray.add(null)
-		}
-	}
-
-	private fun shiftArray(list: ArrayList<UniqueBinaryOperator?>) {
-		if (list.size == 1) {
-			list.clear()
-		} else {
-			repeat(list.size - 1) {
-				list[it] = list[it + 1]
+	fun addDelay(id: String, count: Int){
+		if (id == "main"){
+			repeat(count){
+				mainProcess.add(null)
 			}
-			list.removeAt(list.size - 1)
+		} else {
+			if (processTree[id] != null){
+				repeat(count){
+					processTree[id]?.add(null)
+				}
+			}
 		}
+	}
+
+	fun addProcess(id: String, function: IFunctionOperator?) {
+		if (id == "main") {
+			mainProcess.add(function)
+		} else {
+			if (processTree[id] != null){
+				processTree[id]?.add(function)
+			}
+		}
+	}
+
+	fun launchNewThread(id: String){
+		processTree[id] = arrayListOf()
+		idList.add(id)
 	}
 
 	@SubscribeEvent
 	fun tickEvent(event: TickEvent.WorldTickEvent) {
-		if (processArray.isNotEmpty()) {
-			if (processArray[0] is UniqueBinaryOperator) {
-				val func = processArray[0]!!
-				func.call(func.World, func.Player, func.Hand)
-				shiftArray(processArray)
-			} else if (processArray[0] == null) {
-				shiftArray(processArray)
+		if (mainProcess.isNotEmpty()){
+			val obj = mainProcess[0]
+			if (obj == null){
+				mainProcess.removeAt(0)
+			} else {
+				obj.call(obj.world, obj.player, obj.hand)
+				if(mainProcess.isNotEmpty()) mainProcess.removeAt(0)
+			}
+		}
+
+		repeat(processTree.size){
+			if (processTree[idList[it]] != null && processTree[idList[it]]?.isNotEmpty()!!){
+				val obj = processTree[idList[it]]?.get(0)
+				if (obj == null){
+					processTree[idList[it]]?.removeAt(0)
+				} else {
+					obj.call(obj.world, obj.player, obj.hand)
+					if (processTree[idList[it]]?.isNotEmpty()!!) processTree[idList[it]]?.removeAt(0)
+				}
 			}
 		}
 	}

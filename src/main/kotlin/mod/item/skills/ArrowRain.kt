@@ -3,9 +3,7 @@ package mod.item.skills
 import mod.enums.ItemRarity
 import mod.enums.SkillType
 import mod.item.baseitem.ItemSkill
-import mod.pppSystem.PPPSystem
-import mod.pppSystem.UniqueBinaryOperator
-import mod.util.StatusUtil
+import mod.pppSystem.IFunctionOperator
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.init.Items
 import net.minecraft.item.ItemArrow
@@ -18,10 +16,10 @@ object ArrowRain : ItemSkill("arrowrain", 20.0, ItemRarity.UNCOMMON, SkillType.P
 	override fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand) {
 		val pos = player.rayTrace(15.0, 0.0F)?.blockPos!!
 		val itemstack = ItemStack(Items.ARROW)
-		val spawn = object : UniqueBinaryOperator {
-			override val World: World = world
-			override val Player: EntityPlayer = player
-			override val Hand: EnumHand = handIn
+		val spawn = object : IFunctionOperator {
+			override val world: World = world
+			override val player: EntityPlayer = player
+			override val hand: EnumHand = handIn
 
 			override fun call(world: World, player: EntityPlayer, hand: EnumHand) {
 				val randomX = Random.nextDouble(3.0)
@@ -34,11 +32,6 @@ object ArrowRain : ItemSkill("arrowrain", 20.0, ItemRarity.UNCOMMON, SkillType.P
 				arrow.addVelocity(0.0, -2.0, 0.0)
 				world.spawnEntity(arrow)
 			}
-		}
-
-		repeat(5) {
-			PPPSystem.insertProcess(spawn)
-			PPPSystem.addDelay(2)
 		}
 	}
 }

@@ -12,7 +12,7 @@ import net.minecraftforge.client.model.ModelLoader
 import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.fml.common.event.FMLInitializationEvent
 
-class ClientProxy : CommonProxy() {
+class ClientProxy: CommonProxy() {
 	override fun getEntityPlayerInstance(): EntityPlayer? {
 		return Minecraft.getMinecraft().player
 	}

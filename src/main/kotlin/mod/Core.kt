@@ -58,6 +58,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 import net.minecraftforge.fml.common.network.NetworkRegistry
 import net.minecraftforge.fml.common.registry.EntityEntry
 import net.minecraftforge.fml.common.registry.GameRegistry
+import java.util.concurrent.Callable
 
 @Mod(modid = Core.ID, name = Core.Name, version = Core.version, modLanguage = "kotlin")
 
@@ -180,7 +181,7 @@ class Core {
 		GameRegistry.registerTileEntity(TileEntityInjectionTable::class.java, ResourceLocation(ID, "injection_table"))
 		mod.util.registerModel(StrongHelmet, 0)
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, GuiAccessoryHandler())
-		CapabilityManager.INSTANCE.register(IMp::class.java, MpStorage(), Mp::class.java)
+		CapabilityManager.INSTANCE.register(IMp::class.java, MpStorage()){ Mp() }
 	}
 
 	@Mod.EventHandler

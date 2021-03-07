@@ -6,7 +6,7 @@ import mod.enums.ItemRarity
 import mod.module.IGeneralRarity
 import mod.module.ISkillStorable
 import mod.pppSystem.PPPSystem
-import mod.pppSystem.UniqueBinaryOperator
+import mod.pppSystem.IFunctionOperator
 import mod.util.Attributes
 import mod.util.JsonReference
 import mod.util.StatusUtil
@@ -17,7 +17,6 @@ import net.minecraft.entity.ai.attributes.AttributeModifier
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.inventory.EntityEquipmentSlot
 import net.minecraft.item.EnumAction
-import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.util.ActionResult
 import net.minecraft.util.EnumActionResult
@@ -79,17 +78,17 @@ open class ItemSkillContainer(name: String, rarity: ItemRarity, private val capa
 					val cost = (getItemById(itemstack.tagCompound!!.getIntArray("SkillArray")[i]) as ItemSkill).cost
 					if (StatusUtil.useMP(player, cost)){
 						val item = (getItemById(itemstack.tagCompound!!.getIntArray("SkillArray")[i])) as ItemSkill
-						val skillFunc = object : UniqueBinaryOperator {
-							override val World: World = world
-							override val Player: EntityPlayer = player
-							override val Hand: EnumHand = hand
+						val skillFunc = object : IFunctionOperator {
+							override val world: World = world
+							override val player: EntityPlayer = player
+							override val hand: EnumHand = hand
 
 							override fun call(world: World, player: EntityPlayer, hand: EnumHand) {
 								item.skillFunction(world, player, hand)
 							}
 						}
-						PPPSystem.addProcess(skillFunc)
-						if (coolDown != 0) PPPSystem.addDelay(10)
+						PPPSystem.addProcess("main", skillFunc)
+						if (coolDown != 0) PPPSystem.addDelay("main", 10)
 					}
 				}
 			}
