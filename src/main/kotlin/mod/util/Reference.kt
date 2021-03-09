@@ -1,6 +1,6 @@
 package mod.util
 
-object JsonReference {
+object Reference {
 	fun getJsonText(name: String): String {
 		return "{\n" +
 				"  \"parent\": \"item/generated\",\n" +

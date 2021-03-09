@@ -9,8 +9,7 @@ import mod.module.ISkillStorable
 import mod.pppSystem.PPPSystem
 import mod.pppSystem.IFunctionOperator
 import mod.util.Attributes
-import mod.util.JsonReference
-import mod.util.StatusUtil
+import mod.util.Reference
 import mod.util.UUIDReference
 import net.minecraft.client.resources.I18n
 import net.minecraft.client.util.ITooltipFlag
@@ -38,7 +37,7 @@ open class ItemSkillContainer(name: String, rarity: ItemRarity, private val capa
 		val file = File("D:\\mod\\GeneralRPG\\src\\main\\resources\\assets\\general-rpg\\models\\item\\$name.json")
 		if (!file.exists()) {
 			file.createNewFile()
-			file.writeText(JsonReference.getJsonText(name))
+			file.writeText(Reference.getJsonText(name))
 		}
 	}
 

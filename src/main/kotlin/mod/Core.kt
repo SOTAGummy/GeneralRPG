@@ -1,5 +1,6 @@
 package mod
 
+import com.google.common.base.Predicate
 import mod.block.InjectionTable
 import mod.block.TileEntityInjectionTable
 import mod.capability.IMp
@@ -23,6 +24,7 @@ import mod.item.armor.wizard_armor.WizardBoots
 import mod.item.armor.wizard_armor.WizardChestplate
 import mod.item.armor.wizard_armor.WizardHelmet
 import mod.item.armor.wizard_armor.WizardLeggings
+import mod.item.baseitem.ItemAccessory
 import mod.item.containers.*
 import mod.item.fruit.LifeFruit
 import mod.item.fruit.SkillFruit
@@ -47,6 +49,7 @@ import net.minecraftforge.client.event.ModelRegistryEvent
 import net.minecraftforge.client.model.ModelLoader
 import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.common.capabilities.CapabilityManager
+import net.minecraftforge.common.util.EnumHelper
 import net.minecraftforge.event.RegistryEvent
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.common.SidedProxy
@@ -59,6 +62,10 @@ import net.minecraftforge.fml.common.network.NetworkRegistry
 import net.minecraftforge.fml.common.registry.EntityEntry
 import net.minecraftforge.fml.common.registry.GameRegistry
 import java.util.concurrent.Callable
+import net.minecraft.item.ItemShield
+
+
+
 
 @Mod(modid = Core.ID, name = Core.Name, version = Core.version, modLanguage = "kotlin")
 
@@ -82,6 +89,7 @@ class Core {
 		val glove = SlotExtension.addEquipmentSlot("GLOVE", 8, accessory, 2, 3, "glove")
 		val gem = SlotExtension.addEquipmentSlot("GEM", 9, accessory, 3, 4, "gem")
 
+		val accessoryType = EnumHelper.addEnchantmentType("ACCESSORY") { item -> item is ItemAccessory }
 
 		val modTab: CreativeTabs = GeneralRPGTab()
 		val skillTab: CreativeTabs = GeneralRPGSkillTab()

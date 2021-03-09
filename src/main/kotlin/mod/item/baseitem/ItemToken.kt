@@ -3,7 +3,7 @@ package mod.item.baseitem
 import mod.Core
 import mod.enums.ItemRarity
 import mod.module.IGeneralRarity
-import mod.util.JsonReference
+import mod.util.Reference
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.entity.item.EntityItem
 import net.minecraft.entity.player.EntityPlayer
@@ -25,7 +25,7 @@ open class ItemToken(name: String, private var rarity: ItemRarity) : GeneralRPGI
 		val file = File("D:\\mod\\GeneralRPG\\src\\main\\resources\\assets\\general-rpg\\models\\item\\$name.json")
 		if (!file.exists()) {
 			file.createNewFile()
-			file.writeText(JsonReference.getJsonText(name))
+			file.writeText(Reference.getJsonText(name))
 		}
 	}
 
