@@ -1,11 +1,11 @@
 package mod
 
-import com.google.common.base.Predicate
 import mod.block.InjectionTable
 import mod.block.TileEntityInjectionTable
 import mod.capability.IMp
 import mod.capability.Mp
 import mod.capability.MpStorage
+import mod.enchantment.TestEnchantment
 import mod.event.capabilityEvent.CapabilityEvent
 import mod.gui.RenderHandler
 import mod.gui.accessory.GuiAccessoryHandler
@@ -40,6 +40,8 @@ import mod.util.Storage
 import net.minecraft.block.Block
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
 import net.minecraft.creativetab.CreativeTabs
+import net.minecraft.enchantment.Enchantment
+import net.minecraft.enchantment.EnchantmentHelper
 import net.minecraft.item.Item
 import net.minecraft.item.ItemBlock
 import net.minecraft.potion.Potion
@@ -61,10 +63,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 import net.minecraftforge.fml.common.network.NetworkRegistry
 import net.minecraftforge.fml.common.registry.EntityEntry
 import net.minecraftforge.fml.common.registry.GameRegistry
-import java.util.concurrent.Callable
-import net.minecraft.item.ItemShield
-
-
 
 
 @Mod(modid = Core.ID, name = Core.Name, version = Core.version, modLanguage = "kotlin")
@@ -89,7 +87,7 @@ class Core {
 		val glove = SlotExtension.addEquipmentSlot("GLOVE", 8, accessory, 2, 3, "glove")
 		val gem = SlotExtension.addEquipmentSlot("GEM", 9, accessory, 3, 4, "gem")
 
-		val accessoryType = EnumHelper.addEnchantmentType("ACCESSORY") { item -> item is ItemAccessory }
+		val accessoryType = EnumHelper.addEnchantmentType("ACCESSORY"){item: Item? -> item is ItemAccessory}!!
 
 		val modTab: CreativeTabs = GeneralRPGTab()
 		val skillTab: CreativeTabs = GeneralRPGSkillTab()
@@ -163,6 +161,8 @@ class Core {
 		val electricShockEffect = ElectricShockEffect()
 		val floodedEffect = FloodedEffect()
 
+		val testEnchantment = TestEnchantment
+
 		val target_mark = TargetMark
 	}
 
@@ -180,11 +180,7 @@ class Core {
 	fun preInit(event: FMLPreInitializationEvent?) {
 		proxy.preInit()
 		if (event?.side?.isClient!!) {
-			ModelLoader.setCustomModelResourceLocation(
-				Item.getItemFromBlock(injection_table),
-				0,
-				ModelResourceLocation(ResourceLocation(ID, "injection_table"), "inventory")
-			)
+			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(injection_table), 0, ModelResourceLocation(ResourceLocation(ID, "injection_table"), "inventory"))
 		}
 		GameRegistry.registerTileEntity(TileEntityInjectionTable::class.java, ResourceLocation(ID, "injection_table"))
 		mod.util.registerModel(StrongHelmet, 0)
@@ -206,7 +202,7 @@ class Core {
 	}
 
 	@SubscribeEvent
-	fun registerItem(event: RegistryEvent.Register<Item?>?) {
+	fun registerItems(event: RegistryEvent.Register<Item?>?) {
 		for (item in Storage.Items) {
 			event?.registry?.register(item)
 		}
@@ -216,7 +212,7 @@ class Core {
 	}
 
 	@SubscribeEvent
-	fun registerBlock(event: RegistryEvent.Register<Block?>?) {
+	fun registerBlocks(event: RegistryEvent.Register<Block?>?) {
 		event?.registry?.register(injection_table)
 	}
 
@@ -229,6 +225,13 @@ class Core {
 	fun registerPotionEffects(event: RegistryEvent.Register<Potion>) {
 		repeat(Storage.Effects.size) {
 			event.registry.register(Storage.Effects[it])
+		}
+	}
+
+	@SubscribeEvent
+	fun registerEnchantments(event: RegistryEvent.Register<Enchantment>){
+		repeat(Storage.Enchantments.size){
+			event.registry.register(Storage.Enchantments[it])
 		}
 	}
 

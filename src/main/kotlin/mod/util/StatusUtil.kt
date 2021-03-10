@@ -1,38 +1,12 @@
 package mod.util
 
+import mod.item.baseitem.ItemAccessory
 import net.minecraft.entity.ai.attributes.AttributeModifier
 import net.minecraft.entity.player.EntityPlayer
+import net.minecraft.inventory.EntityEquipmentSlot
 import java.util.*
 
 object StatusUtil {
-	fun useMP(player: EntityPlayer, use: Double): Boolean {
-		val mp = player.getEntityAttribute(Attributes.MP).attributeValue.toInt()
-		val savingRate = player.getEntityAttribute(Attributes.SAVINGRATE).attributeValue
-		val cost = (use * ((100.0 - savingRate) / 100.0))
-		if (player.isCreative) {
-			return true
-		} else {
-			if (mp >= cost) {
-				val mod = AttributeModifier(UUID.randomUUID(), "mp", -cost, 0)
-				player.getEntityAttribute(Attributes.MP).applyModifier(mod)
-				return true
-			}
-			return false
-		}
-	}
-
-	fun addMP(player: EntityPlayer, amount: Double) {
-		val mp = player.getEntityAttribute(Attributes.MP).attributeValue
-		val max = player.getEntityAttribute(Attributes.MAXMP).attributeValue
-		if (mp + amount <= max) {
-			val mod = AttributeModifier(UUID.randomUUID(), "mp", amount, 0)
-			player.getEntityAttribute(Attributes.MP).applyModifier(mod)
-		} else {
-			val mod = AttributeModifier(UUID.randomUUID(), "mp", max - mp, 0)
-			player.getEntityAttribute(Attributes.MP).applyModifier(mod)
-		}
-	}
-
 	fun canLevelUp(player: EntityPlayer) {
 		player.let {
 			if (player.getEntityAttribute(Attributes.LEVEL).attributeValue.toInt() <= 15) {

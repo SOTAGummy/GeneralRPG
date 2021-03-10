@@ -2,8 +2,12 @@ package mod.item.accessory
 
 import com.google.common.collect.Multimap
 import mod.Core
+import mod.enchantment.AccessoryEnchantment
 import mod.enums.ItemRarity
 import mod.item.baseitem.ItemAccessory
+import mod.util.Storage
+import net.minecraft.enchantment.Enchantment
+import net.minecraft.enchantment.EnchantmentHelper
 import net.minecraft.entity.SharedMonsterAttributes
 import net.minecraft.entity.ai.attributes.AttributeModifier
 import net.minecraft.inventory.EntityEquipmentSlot
@@ -17,5 +21,9 @@ object PowerNeckless: ItemAccessory("power_neckless", Core.necklace, ItemRarity.
 			multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.name, AttributeModifier(UUID.fromString("426ba541-894a-459c-94e6-30dc2d92f582"), "atk", 2.0, 0))
 		}
 		return multimap
+	}
+
+	override fun canApplyAtEnchantingTable(stack: ItemStack, enchantment: Enchantment): Boolean {
+		return true
 	}
 }
