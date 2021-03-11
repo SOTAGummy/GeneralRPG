@@ -1,15 +1,19 @@
-package mod.capability
+package mod.capability.mp
 
-import net.minecraftforge.common.capabilities.ICapabilitySerializable
 import net.minecraft.nbt.NBTBase
-import mod.capability.IMp
-import mod.capability.MpProvider
 import net.minecraft.util.EnumFacing
 import net.minecraftforge.common.capabilities.Capability
 import net.minecraftforge.common.capabilities.CapabilityInject
+import net.minecraftforge.common.capabilities.ICapabilitySerializable
 
 class MpProvider : ICapabilitySerializable<NBTBase?> {
+	companion object {
+		@CapabilityInject(IMp::class)
+		val MP: Capability<IMp?>? = null
+	}
+
 	private val instance = MP!!.defaultInstance
+
 	override fun hasCapability(capability: Capability<*>, facing: EnumFacing?): Boolean {
 		return capability === MP
 	}
@@ -24,10 +28,5 @@ class MpProvider : ICapabilitySerializable<NBTBase?> {
 
 	override fun deserializeNBT(nbt: NBTBase?) {
 		MP!!.storage.readNBT(MP, instance, null, nbt)
-	}
-
-	companion object {
-		@CapabilityInject(IMp::class)
-		val MP: Capability<IMp?>? = null
 	}
 }

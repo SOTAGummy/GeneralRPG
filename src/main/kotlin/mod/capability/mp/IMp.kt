@@ -1,4 +1,4 @@
-package mod.capability
+package mod.capability.mp
 
 import net.minecraft.entity.player.EntityPlayer
 

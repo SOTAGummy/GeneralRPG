@@ -2,12 +2,10 @@ package mod.util
 
 import mod.enchantment.AccessoryEnchantment
 import mod.item.baseitem.ItemSkill
-import net.minecraft.enchantment.Enchantment
 import net.minecraft.entity.ai.attributes.IAttribute
 import net.minecraft.item.Item
 import net.minecraft.potion.Potion
 import java.util.*
-import kotlin.collections.ArrayList
 
 class Storage {
 	companion object {

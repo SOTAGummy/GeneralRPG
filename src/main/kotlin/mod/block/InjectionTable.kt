@@ -38,14 +38,30 @@ class InjectionTable : BlockContainer(Material.IRON) {
 		return TileEntityInjectionTable()
 	}
 
-	override fun onBlockActivated(world: World, pos: BlockPos, state: IBlockState, player: EntityPlayer, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
+	override fun onBlockActivated(
+		world: World,
+		pos: BlockPos,
+		state: IBlockState,
+		player: EntityPlayer,
+		hand: EnumHand,
+		facing: EnumFacing,
+		hitX: Float,
+		hitY: Float,
+		hitZ: Float
+	): Boolean {
 		if (!world.isRemote && hand == EnumHand.MAIN_HAND) {
 			val te = world.getTileEntity(pos) as TileEntityInjectionTable
 			val stack = player.getHeldItem(hand)
 			when {
 				stack.item is ItemSkill -> {
 					if (te.getEntity() == null) {
-						val item = AnimateItem(world, pos.x.toDouble() + 0.5, (pos.y + 1).toDouble(), pos.z.toDouble() + 0.5, player.getHeldItem(hand))
+						val item = AnimateItem(
+							world,
+							pos.x.toDouble() + 0.5,
+							(pos.y + 1).toDouble(),
+							pos.z.toDouble() + 0.5,
+							player.getHeldItem(hand)
+						)
 						te.setEntity(item)
 						world.spawnEntity(item)
 					}
@@ -72,8 +88,8 @@ class InjectionTable : BlockContainer(Material.IRON) {
 							val nbt = stack.tagCompound!!
 							val array = nbt.getIntArray("SkillArray")
 							var index = 0
-							repeat(capacity){
-								if (array[it] == 0){
+							repeat(capacity) {
+								if (array[it] == 0) {
 									index = it
 									return@repeat
 								}

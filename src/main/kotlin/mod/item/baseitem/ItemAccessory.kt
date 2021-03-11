@@ -15,8 +15,9 @@ import net.minecraft.util.ResourceLocation
 import java.io.File
 import java.util.*
 
-open class ItemAccessory(name: String, val equipmentSlot: EntityEquipmentSlot, rarity: ItemRarity): GeneralRPGItem(rarity){
-	companion object{
+open class ItemAccessory(name: String, val equipmentSlot: EntityEquipmentSlot, rarity: ItemRarity) :
+	GeneralRPGItem(rarity) {
+	companion object {
 		val ACCESSORY_MODIFIER = arrayListOf(
 			UUID.fromString("1ee3ca10-3da2-4d4a-b15c-b4c62dca1f8f"),
 			UUID.fromString("a139bb38-cd04-481a-b4b8-f55da85be43b"),
@@ -38,12 +39,15 @@ open class ItemAccessory(name: String, val equipmentSlot: EntityEquipmentSlot, r
 		}
 	}
 
-	override fun getAttributeModifiers(slot: EntityEquipmentSlot, stack: ItemStack): Multimap<String, AttributeModifier> {
+	override fun getAttributeModifiers(
+		slot: EntityEquipmentSlot,
+		stack: ItemStack
+	): Multimap<String, AttributeModifier> {
 		val multimap = super.getAttributeModifiers(slot, stack)
 
-		if (slot == (stack.item as ItemAccessory).equipmentSlot){
-			if (stack.isItemEnchanted){
-				repeat(Storage.Enchantments.size){
+		if (slot == (stack.item as ItemAccessory).equipmentSlot) {
+			if (stack.isItemEnchanted) {
+				repeat(Storage.Enchantments.size) {
 					val enchantment = Storage.Enchantments[it]
 					val level = EnchantmentHelper.getEnchantmentLevel(Storage.Enchantments[it], stack)
 					if (level > 0) {
@@ -57,7 +61,7 @@ open class ItemAccessory(name: String, val equipmentSlot: EntityEquipmentSlot, r
 		return multimap
 	}
 
-	fun getUUID(slot: EntityEquipmentSlot): UUID?{
+	fun getUUID(slot: EntityEquipmentSlot): UUID? {
 		return if (slot.index - 4 > 0) ACCESSORY_MODIFIER[slot.index - 4] else null
 	}
 

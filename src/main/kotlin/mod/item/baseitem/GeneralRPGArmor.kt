@@ -15,7 +15,13 @@ import net.minecraft.world.World
 import java.io.File
 import java.util.*
 
-open class GeneralRPGArmor(name: String, material: ArmorMaterial?, ArmorSlot: EntityEquipmentSlot, rarity: ItemRarity, includeEvents: Boolean = false) : ItemArmor(material!!, 0, ArmorSlot), IGeneralRarity {
+open class GeneralRPGArmor(
+	name: String,
+	material: ArmorMaterial?,
+	ArmorSlot: EntityEquipmentSlot,
+	rarity: ItemRarity,
+	includeEvents: Boolean = false
+) : ItemArmor(material!!, 0, ArmorSlot), IGeneralRarity {
 	init {
 		this.maxStackSize = 1
 		this.unlocalizedName = name

@@ -7,7 +7,8 @@ import net.minecraft.client.gui.GuiButton
 import net.minecraft.client.renderer.GlStateManager
 import net.minecraft.util.ResourceLocation
 
-class AccessoryButton(id: Int, x: Int, y: Int, width: Int, height: Int, name: String): GuiButton(id, x, y, width, height, name){
+class AccessoryButton(id: Int, x: Int, y: Int, width: Int, height: Int, name: String) :
+	GuiButton(id, x, y, width, height, name) {
 	override fun drawButton(mc: Minecraft, mouseX: Int, mouseY: Int, partialTicks: Float) {
 		val fontRenderer = mc.fontRenderer
 		mc.textureManager.bindTexture(ResourceLocation("${Core.ID}:textures/gui/accessory_button.png"))
@@ -22,8 +23,8 @@ class AccessoryButton(id: Int, x: Int, y: Int, width: Int, height: Int, name: St
 			GlStateManager.DestFactor.ZERO
 		)
 		GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA)
-		if (i == 1)		this.drawTexturedModalRect(x, y, 0, 0, 12, 14)
-		else if (i == 2)	this.drawTexturedModalRect(x, y, 12, 0, 12, 14)
+		if (i == 1) this.drawTexturedModalRect(x, y, 0, 0, 12, 14)
+		else if (i == 2) this.drawTexturedModalRect(x, y, 12, 0, 12, 14)
 		mouseDragged(mc, mouseX, mouseY)
 		var j = 14737632
 
@@ -42,7 +43,7 @@ class AccessoryButton(id: Int, x: Int, y: Int, width: Int, height: Int, name: St
 	}
 
 	override fun mousePressed(mc: Minecraft, mouseX: Int, mouseY: Int): Boolean {
-		if (super.mousePressed(mc, mouseX, mouseY)){
+		if (super.mousePressed(mc, mouseX, mouseY)) {
 			mc.player.openGui(Core.instance, GuiAccessoryHandler.AccessoryGui, mc.world, 0, 0, 0)
 		}
 		return super.mousePressed(mc, mouseX, mouseY)

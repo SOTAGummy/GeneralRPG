@@ -8,14 +8,29 @@ import java.lang.reflect.Field
 import java.lang.reflect.Method
 
 object SlotExtension {
-	fun addEquipmentSlot(name: String, ordinal: Int, type: EntityEquipmentSlot.Type, index: Int, slotIndex: Int, nameln: String): EntityEquipmentSlot {
+	fun addEquipmentSlot(
+		name: String,
+		ordinal: Int,
+		type: EntityEquipmentSlot.Type,
+		index: Int,
+		slotIndex: Int,
+		nameln: String
+	): EntityEquipmentSlot {
 		val method: Method = Constructor::class.java.getDeclaredMethod("acquireConstructorAccessor")
 		method.isAccessible = true
 
-		val cls: Constructor<out EntityEquipmentSlot> = EntityEquipmentSlot::class.java.getDeclaredConstructor(String::class.java, Int::class.java, EntityEquipmentSlot.Type::class.java, Int::class.java, Int::class.java, String::class.java)
+		val cls: Constructor<out EntityEquipmentSlot> = EntityEquipmentSlot::class.java.getDeclaredConstructor(
+			String::class.java,
+			Int::class.java,
+			EntityEquipmentSlot.Type::class.java,
+			Int::class.java,
+			Int::class.java,
+			String::class.java
+		)
 		val ca: ConstructorAccessor = method.invoke(cls) as ConstructorAccessor
 
-		val result: EntityEquipmentSlot = ca.newInstance(arrayOf<Any>(name, ordinal, type, index, slotIndex, nameln)) as EntityEquipmentSlot
+		val result: EntityEquipmentSlot =
+			ca.newInstance(arrayOf<Any>(name, ordinal, type, index, slotIndex, nameln)) as EntityEquipmentSlot
 		addValueToEnum(result)
 		return result
 	}
@@ -24,7 +39,8 @@ object SlotExtension {
 		val method: Method = Constructor::class.java.getDeclaredMethod("acquireConstructorAccessor")
 		method.isAccessible = true
 
-		val cls: Constructor<out EntityEquipmentSlot.Type> = EntityEquipmentSlot.Type::class.java.getDeclaredConstructor(String::class.java, Int::class.java)
+		val cls: Constructor<out EntityEquipmentSlot.Type> =
+			EntityEquipmentSlot.Type::class.java.getDeclaredConstructor(String::class.java, Int::class.java)
 		val ca: ConstructorAccessor = method.invoke(cls) as ConstructorAccessor
 
 		val result: EntityEquipmentSlot.Type = ca.newInstance(arrayOf<Any>(name, ordinal)) as EntityEquipmentSlot.Type
@@ -32,7 +48,7 @@ object SlotExtension {
 		return result
 	}
 
-	private fun <T: Enum<*>> addValueToEnum(value: T) {
+	private fun <T : Enum<*>> addValueToEnum(value: T) {
 		val field: Field = value::class.java.getDeclaredField("\$VALUES")
 		field.isAccessible = true
 		@SuppressWarnings("unchecked")

@@ -4,7 +4,6 @@ import mod.gui.accessory.button.AccessoryButton
 import mod.gui.mpindicator.MPIndicator
 import mod.gui.skilllist.SkillListIndicator
 import net.minecraft.client.Minecraft
-import net.minecraft.client.gui.GuiButton
 import net.minecraft.client.gui.inventory.GuiInventory
 import net.minecraftforge.client.event.GuiScreenEvent
 import net.minecraftforge.client.event.RenderGameOverlayEvent
@@ -27,8 +26,17 @@ class RenderHandler {
 	}
 
 	@SubscribeEvent
-	fun guiPostInit(event: GuiScreenEvent.InitGuiEvent.Post){
+	fun guiPostInit(event: GuiScreenEvent.InitGuiEvent.Post) {
 		if (event.gui is GuiInventory)
-		event.buttonList.add(AccessoryButton(70, event.gui.mc.displayWidth / 2 - 314, event.gui.mc.displayHeight / 2 - 190, 12, 14, ""))
+			event.buttonList.add(
+				AccessoryButton(
+					70,
+					event.gui.mc.displayWidth / 2 - 314,
+					event.gui.mc.displayHeight / 2 - 190,
+					12,
+					14,
+					""
+				)
+			)
 	}
 }

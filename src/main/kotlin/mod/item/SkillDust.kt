@@ -9,7 +9,7 @@ import net.minecraft.item.ItemStack
 import net.minecraft.util.ResourceLocation
 import net.minecraft.world.World
 
-object SkillDust: GeneralRPGItem(ItemRarity.COMMON), IGeneralRarity{
+object SkillDust : GeneralRPGItem(ItemRarity.COMMON), IGeneralRarity {
 	init {
 		this.maxStackSize = 64
 		this.unlocalizedName = "skill_dust"

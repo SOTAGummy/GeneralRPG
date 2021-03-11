@@ -5,7 +5,6 @@ import mod.enums.ItemRarity
 import mod.enums.SkillType
 import mod.item.baseitem.ItemSkill
 import mod.item.baseitem.ItemSkillContainer
-import mod.util.StatusUtil
 import net.minecraft.client.Minecraft
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.util.EnumHand

@@ -1,9 +1,8 @@
 package mod.event.capabilityEvent
 
-import mod.capability.MpProvider
-import mod.util.Attributes
+import mod.Core
+import mod.capability.mp.MpProvider
 import mod.util.Storage
-import net.minecraft.entity.SharedMonsterAttributes
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraftforge.event.entity.EntityEvent
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
@@ -12,7 +11,8 @@ import net.minecraftforge.fml.common.gameevent.PlayerEvent
 class PlayerAttributeEvent {
 	@SubscribeEvent
 	fun onJoinEvent(event: PlayerEvent.PlayerLoggedInEvent) {
-		event.player.getCapability(MpProvider.MP!!, null)?.setMp(event.player.getEntityAttribute(Attributes.MAXMP).attributeValue.toInt())
+		event.player.getCapability(MpProvider.MP!!, null)
+			?.setMp(event.player.getEntityAttribute(Core.MAXMP).attributeValue.toInt())
 	}
 
 	@SubscribeEvent

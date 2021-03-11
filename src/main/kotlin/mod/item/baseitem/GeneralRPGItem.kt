@@ -6,7 +6,7 @@ import mod.module.IGeneralRarity
 import mod.util.Storage
 import net.minecraft.item.Item
 
-open class GeneralRPGItem(rarity: ItemRarity): Item(), IGeneralRarity{
+open class GeneralRPGItem(rarity: ItemRarity) : Item(), IGeneralRarity {
 	init {
 		this.creativeTab = Core.modTab
 		Storage.Items.add(this)

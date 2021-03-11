@@ -6,7 +6,6 @@ import kotlinx.coroutines.launch
 import mod.enums.ItemRarity
 import mod.enums.SkillType
 import mod.item.baseitem.ItemSkill
-import mod.util.StatusUtil
 import net.minecraft.entity.SharedMonsterAttributes
 import net.minecraft.entity.ai.attributes.AttributeModifier
 import net.minecraft.entity.player.EntityPlayer

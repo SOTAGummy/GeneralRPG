@@ -4,23 +4,13 @@ import mod.Core
 import net.minecraft.client.gui.inventory.GuiContainer
 import net.minecraft.client.gui.inventory.GuiInventory
 import net.minecraft.client.renderer.GlStateManager
-import net.minecraft.entity.player.EntityPlayer
-import net.minecraft.client.renderer.OpenGlHelper
-
-import org.lwjgl.opengl.GL11
-
-import org.lwjgl.opengl.GL12
-
-import net.minecraft.client.renderer.RenderHelper
-
-import net.minecraft.client.renderer.entity.RenderManager
 import net.minecraft.client.resources.I18n
-
-import net.minecraft.entity.EntityLivingBase
+import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.util.ResourceLocation
 
 
-class GuiAccessoryContainer(player: EntityPlayer, customInv: AccessoryItemContainer): GuiContainer(AccessoryContainer(player, customInv)){
+class GuiAccessoryContainer(player: EntityPlayer, customInv: AccessoryItemContainer) :
+	GuiContainer(AccessoryContainer(player, customInv)) {
 	init {
 		this.xSize = 192
 		this.ySize = 166
@@ -30,7 +20,14 @@ class GuiAccessoryContainer(player: EntityPlayer, customInv: AccessoryItemContai
 		GlStateManager.color(1F, 1F, 1F, 1F)
 		mc.textureManager.bindTexture(ResourceLocation("${Core.ID}:textures/gui/accessory.png"))
 		drawTexturedModalRect(guiLeft - 16, guiTop, 0, 0, xSize, ySize)
-		GuiInventory.drawEntityOnScreen(guiLeft + 51, guiTop + 75, 30, ((guiLeft + 51) - mouseX).toFloat(), ((guiTop + 25) - mouseY).toFloat(), mc.player)
+		GuiInventory.drawEntityOnScreen(
+			guiLeft + 51,
+			guiTop + 75,
+			30,
+			((guiLeft + 51) - mouseX).toFloat(),
+			((guiTop + 25) - mouseY).toFloat(),
+			mc.player
+		)
 		GlStateManager.color(0F, 0F, 0F, 0F)
 	}
 

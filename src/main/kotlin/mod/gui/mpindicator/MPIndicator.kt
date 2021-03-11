@@ -1,15 +1,14 @@
 package mod.gui.mpindicator
 
 import mod.Core
-import mod.capability.MpProvider
-import mod.util.Attributes
+import mod.capability.mp.MpProvider
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.Gui
 import net.minecraft.client.gui.ScaledResolution
 import net.minecraft.util.ResourceLocation
 import java.awt.Color
 
-class MPIndicator(mc: Minecraft, correction: Int): Gui() {
+class MPIndicator(mc: Minecraft, correction: Int) : Gui() {
 	companion object {
 		@JvmStatic
 		private val texture = ResourceLocation(Core.ID + ":textures/gui/mp_bar.png")
@@ -20,7 +19,7 @@ class MPIndicator(mc: Minecraft, correction: Int): Gui() {
 		val scaled = ScaledResolution(mc)
 		val width = scaled.scaledWidth
 		val MP = player.getCapability(MpProvider.MP!!, null)?.getMp()!!
-		val MaxMP = player.getEntityAttribute(Attributes.MAXMP).attributeValue.toInt()
+		val MaxMP = player.getEntityAttribute(Core.MAXMP).attributeValue.toInt()
 		val height = scaled.scaledHeight
 		val hp = (mc.player.health + 0.999999).toInt().toString() + "/" + mc.player.maxHealth.toInt().toString()
 		val currentMP = ((MP.toFloat() / MaxMP.toFloat()) * 81).toInt()

@@ -1,5 +1,5 @@
 package mod.proxy
 
-class ServerProxy: CommonProxy() {
+class ServerProxy : CommonProxy() {
 
 }

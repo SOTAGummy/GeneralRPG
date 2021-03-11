@@ -3,7 +3,6 @@ package mod.item.skills
 import mod.enums.ItemRarity
 import mod.enums.SkillType
 import mod.item.baseitem.ItemSkill
-import mod.util.StatusUtil
 import net.minecraft.entity.EntityLiving
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.util.EnumHand
@@ -12,8 +11,8 @@ import kotlin.math.abs
 
 object Blow : ItemSkill("blow", 40.0, ItemRarity.UNCOMMON, SkillType.WIND, false) {
 	override fun skillFunction(world: World, player: EntityPlayer, handIn: EnumHand) {
-	if (!world.isRemote){
-		val entity = arrayListOf<EntityLiving>()
+		if (!world.isRemote) {
+			val entity = arrayListOf<EntityLiving>()
 			repeat(world.loadedEntityList.size) {
 				if (world.loadedEntityList[it] is EntityLiving && player.getDistance(world.loadedEntityList[it])
 						.toInt() <= 10

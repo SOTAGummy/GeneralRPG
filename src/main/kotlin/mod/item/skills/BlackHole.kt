@@ -3,7 +3,6 @@ package mod.item.skills
 import mod.enums.ItemRarity
 import mod.enums.SkillType
 import mod.item.baseitem.ItemSkill
-import mod.util.StatusUtil
 import net.minecraft.entity.EntityLiving
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.util.EnumHand
@@ -16,11 +15,21 @@ object BlackHole : ItemSkill("blackhole", 50.0, ItemRarity.LEGEND, SkillType.DAR
 		val livingList = arrayListOf<EntityLiving>()
 		val pos = player.rayTrace(15.0, 0.0F)!!.blockPos
 		repeat(10) {
-			world.spawnParticle(EnumParticleTypes.SPELL_WITCH, pos.x.toDouble(), pos.y.toDouble(), pos.z.toDouble(), 0.0, 0.5, 0.0)
+			world.spawnParticle(
+				EnumParticleTypes.SPELL_WITCH,
+				pos.x.toDouble(),
+				pos.y.toDouble(),
+				pos.z.toDouble(),
+				0.0,
+				0.5,
+				0.0
+			)
 		}
 
 		repeat(entityList.size) {
-			if (entityList[it] is EntityLiving && entityList[it] !is EntityPlayer && entityList[it].getDistanceSq(pos).toInt() <= 15.0) {
+			if (entityList[it] is EntityLiving && entityList[it] !is EntityPlayer && entityList[it].getDistanceSq(pos)
+					.toInt() <= 15.0
+			) {
 				livingList.add(entityList[it] as EntityLiving)
 			}
 		}

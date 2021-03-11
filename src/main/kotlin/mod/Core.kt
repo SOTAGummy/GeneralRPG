@@ -2,16 +2,18 @@ package mod
 
 import mod.block.InjectionTable
 import mod.block.TileEntityInjectionTable
-import mod.capability.IMp
-import mod.capability.Mp
-import mod.capability.MpStorage
+import mod.capability.accessory.Accessory
+import mod.capability.accessory.AccessoryStorage
+import mod.capability.accessory.IAccessory
+import mod.capability.mp.IMp
+import mod.capability.mp.Mp
+import mod.capability.mp.MpStorage
 import mod.enchantment.TestEnchantment
 import mod.event.capabilityEvent.CapabilityEvent
 import mod.gui.RenderHandler
 import mod.gui.accessory.GuiAccessoryHandler
 import mod.item.SkillDust
 import mod.item.accessory.PowerNeckless
-import mod.item.animate.TargetMark
 import mod.item.armor.electric_armor.ElectricBoots
 import mod.item.armor.electric_armor.ElectricChestplate
 import mod.item.armor.electric_armor.ElectricHelmet
@@ -35,13 +37,13 @@ import mod.proxy.CommonProxy
 import mod.tab.GeneralAccessoryTab
 import mod.tab.GeneralRPGSkillTab
 import mod.tab.GeneralRPGTab
+import mod.util.Attributes
 import mod.util.SlotExtension
 import mod.util.Storage
 import net.minecraft.block.Block
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.enchantment.Enchantment
-import net.minecraft.enchantment.EnchantmentHelper
 import net.minecraft.item.Item
 import net.minecraft.item.ItemBlock
 import net.minecraft.potion.Potion
@@ -87,7 +89,7 @@ class Core {
 		val glove = SlotExtension.addEquipmentSlot("GLOVE", 8, accessory, 2, 3, "glove")
 		val gem = SlotExtension.addEquipmentSlot("GEM", 9, accessory, 3, 4, "gem")
 
-		val accessoryType = EnumHelper.addEnchantmentType("ACCESSORY"){item: Item? -> item is ItemAccessory}!!
+		val accessoryType = EnumHelper.addEnchantmentType("ACCESSORY") { item: Item? -> item is ItemAccessory }!!
 
 		val modTab: CreativeTabs = GeneralRPGTab()
 		val skillTab: CreativeTabs = GeneralRPGSkillTab()
@@ -111,7 +113,7 @@ class Core {
 		val blackhole = BlackHole
 		val blow = Blow
 		val spawn_slime_test = SpawnSlimeTest
-		val codeTest = CodeTest
+		val code_test = CodeTest
 
 		val common_token = CommonToken
 		val uncommon_token = UncommonToken
@@ -163,7 +165,13 @@ class Core {
 
 		val testEnchantment = TestEnchantment
 
-		val target_mark = TargetMark
+		val MAXMP = Attributes.addAttribute("maxmp", 100.0, 100.0, Double.MAX_VALUE)
+		val EXP = Attributes.addAttribute("exp", 0.0, 0.0, Double.MAX_VALUE)
+		val LEVEL = Attributes.addAttribute("level", 1.0, 1.0, Double.MAX_VALUE)
+		val SAVINGRATE = Attributes.addAttribute("savingrate", 0.0, 0.0, 80.0)
+		val MPRECOVERRATE = Attributes.addAttribute("mprecoverrate", 2.0, 2.0, Double.MAX_VALUE)
+		val ELECTRICATTACK = Attributes.addAttribute("electricattack", 0.0, 0.0, 1.0)
+		val ELECTRICBODY = Attributes.addAttribute("electricbody", 0.0, 0.0, 1.0)
 	}
 
 	@Mod.EventHandler
@@ -180,12 +188,17 @@ class Core {
 	fun preInit(event: FMLPreInitializationEvent?) {
 		proxy.preInit()
 		if (event?.side?.isClient!!) {
-			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(injection_table), 0, ModelResourceLocation(ResourceLocation(ID, "injection_table"), "inventory"))
+			ModelLoader.setCustomModelResourceLocation(
+				Item.getItemFromBlock(injection_table),
+				0,
+				ModelResourceLocation(ResourceLocation(ID, "injection_table"), "inventory")
+			)
 		}
 		GameRegistry.registerTileEntity(TileEntityInjectionTable::class.java, ResourceLocation(ID, "injection_table"))
 		mod.util.registerModel(StrongHelmet, 0)
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, GuiAccessoryHandler())
-		CapabilityManager.INSTANCE.register(IMp::class.java, MpStorage()){ Mp() }
+		CapabilityManager.INSTANCE.register(IMp::class.java, MpStorage()) { Mp() }
+		CapabilityManager.INSTANCE.register(IAccessory::class.java, AccessoryStorage()) { Accessory() }
 	}
 
 	@Mod.EventHandler
@@ -229,8 +242,8 @@ class Core {
 	}
 
 	@SubscribeEvent
-	fun registerEnchantments(event: RegistryEvent.Register<Enchantment>){
-		repeat(Storage.Enchantments.size){
+	fun registerEnchantments(event: RegistryEvent.Register<Enchantment>) {
+		repeat(Storage.Enchantments.size) {
 			event.registry.register(Storage.Enchantments[it])
 		}
 	}

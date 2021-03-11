@@ -23,11 +23,18 @@ class SkillListIndicator(mc: Minecraft) : Gui() {
 			val scaled = ScaledResolution(mc)
 			val height = scaled.scaledHeight
 			for (i in 0 until capacity) {
-				if (player.getHeldItem(EnumHand.MAIN_HAND).tagCompound != null && player.getHeldItem(EnumHand.MAIN_HAND).tagCompound!!.getIntArray("SkillArray")[i] != 0) {
+				if (player.getHeldItem(EnumHand.MAIN_HAND).tagCompound != null && player.getHeldItem(EnumHand.MAIN_HAND).tagCompound!!.getIntArray(
+						"SkillArray"
+					)[i] != 0
+				) {
 					count++
-					val text = ItemStack(Item.getItemById(player.getHeldItem(EnumHand.MAIN_HAND).tagCompound!!.getIntArray("SkillArray")[i])).displayName.split(" ")[0]
+					val text =
+						ItemStack(Item.getItemById(player.getHeldItem(EnumHand.MAIN_HAND).tagCompound!!.getIntArray("SkillArray")[i])).displayName.split(
+							" "
+						)[0]
 					if (text.length > length) length = text.length
-					val item = Item.getItemById(player.getHeldItem(EnumHand.MAIN_HAND).tagCompound!!.getIntArray("SkillArray")[i]) as ItemSkill
+					val item =
+						Item.getItemById(player.getHeldItem(EnumHand.MAIN_HAND).tagCompound!!.getIntArray("SkillArray")[i]) as ItemSkill
 					mc.ingameGUI.drawString(mc.fontRenderer, text, 10, (height / 2 - 10) + 8 * i, item.rarity.colorCode)
 				}
 			}

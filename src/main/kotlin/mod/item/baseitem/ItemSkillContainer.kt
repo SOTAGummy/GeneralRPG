@@ -2,13 +2,12 @@ package mod.item.baseitem
 
 import com.google.common.collect.Multimap
 import mod.Core
-import mod.capability.MpProvider
+import mod.capability.mp.MpProvider
 import mod.enums.ItemRarity
 import mod.module.IGeneralRarity
 import mod.module.ISkillStorable
-import mod.pppSystem.PPPSystem
 import mod.pppSystem.IFunctionOperator
-import mod.util.Attributes
+import mod.pppSystem.PPPSystem
 import mod.util.Reference
 import mod.util.UUIDReference
 import net.minecraft.client.resources.I18n
@@ -27,7 +26,13 @@ import net.minecraft.util.text.TextFormatting
 import net.minecraft.world.World
 import java.io.File
 
-open class ItemSkillContainer(name: String, rarity: ItemRarity, private val capacity: Int, private val coolDown: Int, val savingRate: Double): GeneralRPGItem(rarity), IGeneralRarity, ISkillStorable {
+open class ItemSkillContainer(
+	name: String,
+	rarity: ItemRarity,
+	private val capacity: Int,
+	private val coolDown: Int,
+	val savingRate: Double
+) : GeneralRPGItem(rarity), IGeneralRarity, ISkillStorable {
 	init {
 		this.unlocalizedName = name
 		this.creativeTab = Core.modTab
@@ -65,7 +70,13 @@ open class ItemSkillContainer(name: String, rarity: ItemRarity, private val capa
 			tooltip.add("")
 			tooltip.add("${TextComponentTranslation("text.skill_cost").formattedText} : " + cost.toString() + "MP")
 		}
-		tooltip.add("${TextComponentTranslation("text.cooldown").formattedText} : ${coolDown.toFloat() / 20F}${TextComponentTranslation("text.second").formattedText}")
+		tooltip.add(
+			"${TextComponentTranslation("text.cooldown").formattedText} : ${coolDown.toFloat() / 20F}${
+				TextComponentTranslation(
+					"text.second"
+				).formattedText
+			}"
+		)
 		indicateRarity(tooltip)
 	}
 
@@ -75,8 +86,9 @@ open class ItemSkillContainer(name: String, rarity: ItemRarity, private val capa
 		if (itemstack.tagCompound != null && hand == EnumHand.MAIN_HAND) {
 			for (i in 0 until capacity) {
 				if (itemstack.tagCompound!!.getIntArray("SkillArray")[i] != 0) {
-					val cost = (getItemById(itemstack.tagCompound!!.getIntArray("SkillArray")[i]) as ItemSkill).cost.toInt()
-					if (player.getCapability(MpProvider.MP!!, null)!!.useMp(cost)){
+					val cost =
+						(getItemById(itemstack.tagCompound!!.getIntArray("SkillArray")[i]) as ItemSkill).cost.toInt()
+					if (player.getCapability(MpProvider.MP!!, null)!!.useMp(cost)) {
 						val item = (getItemById(itemstack.tagCompound!!.getIntArray("SkillArray")[i])) as ItemSkill
 						val skillFunc = object : IFunctionOperator {
 							override val world: World = world
@@ -101,10 +113,16 @@ open class ItemSkillContainer(name: String, rarity: ItemRarity, private val capa
 		return EnumAction.BLOCK
 	}
 
-	override fun getAttributeModifiers(slot: EntityEquipmentSlot, stack: ItemStack): Multimap<String, AttributeModifier> {
+	override fun getAttributeModifiers(
+		slot: EntityEquipmentSlot,
+		stack: ItemStack
+	): Multimap<String, AttributeModifier> {
 		val multimap = super.getAttributeModifiers(slot, stack)
 		return if (slot == EntityEquipmentSlot.MAINHAND && savingRate != 0.0) {
-			multimap.put(Attributes.SAVINGRATE.name, AttributeModifier(UUIDReference.ItemSkillContainerSavingRate, "savingrate", savingRate, 0))
+			multimap.put(
+				Core.SAVINGRATE.name,
+				AttributeModifier(UUIDReference.ItemSkillContainerSavingRate, "savingrate", savingRate, 0)
+			)
 			multimap
 		} else {
 			super.getAttributeModifiers(slot, stack)
