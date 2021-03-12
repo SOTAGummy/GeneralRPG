@@ -10,6 +10,7 @@ import mod.capability.mp.Mp
 import mod.capability.mp.MpStorage
 import mod.enchantment.TestEnchantment
 import mod.event.capabilityEvent.CapabilityEvent
+import mod.event.entityEvent.PlayerEvents
 import mod.gui.RenderHandler
 import mod.gui.accessory.GuiAccessoryHandler
 import mod.item.SkillDust
@@ -179,6 +180,7 @@ class Core {
 		MinecraftForge.EVENT_BUS.register(this)
 		MinecraftForge.EVENT_BUS.register(proxy)
 		MinecraftForge.EVENT_BUS.register(CapabilityEvent())
+		MinecraftForge.EVENT_BUS.register(PlayerEvents())
 		for (item in Storage.Instances) {
 			MinecraftForge.EVENT_BUS.register(item)
 		}

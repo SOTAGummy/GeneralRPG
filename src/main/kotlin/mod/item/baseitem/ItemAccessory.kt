@@ -39,10 +39,7 @@ open class ItemAccessory(name: String, val equipmentSlot: EntityEquipmentSlot, r
 		}
 	}
 
-	override fun getAttributeModifiers(
-		slot: EntityEquipmentSlot,
-		stack: ItemStack
-	): Multimap<String, AttributeModifier> {
+	override fun getAttributeModifiers(slot: EntityEquipmentSlot, stack: ItemStack): Multimap<String, AttributeModifier> {
 		val multimap = super.getAttributeModifiers(slot, stack)
 
 		if (slot == (stack.item as ItemAccessory).equipmentSlot) {
@@ -62,7 +59,7 @@ open class ItemAccessory(name: String, val equipmentSlot: EntityEquipmentSlot, r
 	}
 
 	fun getUUID(slot: EntityEquipmentSlot): UUID? {
-		return if (slot.index - 4 > 0) ACCESSORY_MODIFIER[slot.index - 4] else null
+		return ACCESSORY_MODIFIER[slot.index]
 	}
 
 	override fun isEnchantable(stack: ItemStack): Boolean {

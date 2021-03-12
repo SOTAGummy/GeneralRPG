@@ -15,7 +15,7 @@ object PowerNeckless : ItemAccessory("power_neckless", Core.necklace, ItemRarity
 	override fun getAttributeModifiers(slot: EntityEquipmentSlot, stack: ItemStack): Multimap<String, AttributeModifier> {
 		val multimap = super.getAttributeModifiers(slot, stack)
 		if (slot == Core.necklace) {
-			multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.name, AttributeModifier(UUID.fromString("426ba541-894a-459c-94e6-30dc2d92f582"), "atk", 2.0, 0))
+			multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.name, AttributeModifier(getUUID(slot), "atk", 2.0, 0))
 		}
 		return multimap
 	}

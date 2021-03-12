@@ -24,13 +24,6 @@ object Attributes {
 		Storage.Attributes.add(attributes)
 		return attributes
 	}
-
-	fun getAttributes(name: String): IAttribute?{
-		repeat(attributes.size){
-			if (attributes[it].name == name) return attributes[it]
-		}
-		return null
-	}
 }
 
 
