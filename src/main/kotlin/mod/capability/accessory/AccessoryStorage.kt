@@ -9,11 +9,9 @@ import net.minecraftforge.common.capabilities.Capability
 class AccessoryStorage : Capability.IStorage<IAccessory> {
 	override fun readNBT(capability: Capability<IAccessory>?, instance: IAccessory?, side: EnumFacing?, nbt: NBTBase?) {
 		val tag = nbt as NBTTagCompound
-		repeat(4) {
-			capability?.defaultInstance?.setItem(
-				it,
-				ItemStack(capability.defaultInstance?.getItem(it)?.writeToNBT(NBTTagCompound()))
-			)
+		val array = arrayOf("necklace", "amulet", "glove", "gem")
+		repeat(4) { i ->
+			(tag.getTag(array[i]) as NBTTagCompound?)?.let { it -> capability?.defaultInstance?.setItem(i, ItemStack(it)) }
 		}
 	}
 

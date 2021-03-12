@@ -33,6 +33,7 @@ import mod.item.fruit.LifeFruit
 import mod.item.fruit.SkillFruit
 import mod.item.skills.*
 import mod.item.tokens.*
+import mod.packet.PacketHandler
 import mod.potionEffect.*
 import mod.proxy.CommonProxy
 import mod.tab.GeneralAccessoryTab
@@ -201,6 +202,7 @@ class Core {
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, GuiAccessoryHandler())
 		CapabilityManager.INSTANCE.register(IMp::class.java, MpStorage()) { Mp() }
 		CapabilityManager.INSTANCE.register(IAccessory::class.java, AccessoryStorage()) { Accessory() }
+		PacketHandler.register()
 	}
 
 	@Mod.EventHandler
