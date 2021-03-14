@@ -7,9 +7,12 @@ import mod.gui.accessory.slot.GemSlot
 import mod.gui.accessory.slot.GloveSlot
 import mod.gui.accessory.slot.NecklaceSlot
 import mod.item.baseitem.ItemAccessory
+import mod.packet.PacketHandler
+import mod.packet.ServerPacket
 import net.minecraft.enchantment.EnchantmentHelper
 import net.minecraft.entity.EntityLiving
 import net.minecraft.entity.player.EntityPlayer
+import net.minecraft.entity.player.EntityPlayerMP
 import net.minecraft.entity.player.InventoryPlayer
 import net.minecraft.inventory.*
 import net.minecraft.item.ItemArmor

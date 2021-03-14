@@ -10,8 +10,7 @@ import net.minecraft.entity.ai.attributes.AttributeModifier
 import net.minecraft.item.ItemStack
 import net.minecraft.util.ResourceLocation
 
-open class AccessoryEnchantment(name: String, rarity: Rarity) :
-	Enchantment(rarity, Core.accessoryType, arrayOf(Core.necklace, Core.amulet, Core.glove, Core.gem)) {
+open class AccessoryEnchantment(name: String, rarity: Rarity): Enchantment(rarity, Core.accessoryType, arrayOf(Core.necklace, Core.amulet, Core.glove, Core.gem)) {
 	init {
 		Storage.Enchantments.add(this)
 		this.registryName = ResourceLocation(Core.ID, name)

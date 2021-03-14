@@ -37,6 +37,7 @@ import mod.packet.PacketHandler
 import mod.potionEffect.*
 import mod.proxy.CommonProxy
 import mod.tab.GeneralAccessoryTab
+import mod.tab.GeneralEnchantmentTab
 import mod.tab.GeneralRPGSkillTab
 import mod.tab.GeneralRPGTab
 import mod.util.Attributes
@@ -96,6 +97,7 @@ class Core {
 		val modTab: CreativeTabs = GeneralRPGTab()
 		val skillTab: CreativeTabs = GeneralRPGSkillTab()
 		val accessoryTab: CreativeTabs = GeneralAccessoryTab()
+		val enchantmentTab: CreativeTabs = GeneralEnchantmentTab()
 
 		val skill_dust = SkillDust
 
