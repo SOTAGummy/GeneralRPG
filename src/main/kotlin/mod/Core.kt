@@ -69,7 +69,6 @@ import net.minecraftforge.fml.common.network.NetworkRegistry
 import net.minecraftforge.fml.common.registry.EntityEntry
 import net.minecraftforge.fml.common.registry.GameRegistry
 
-
 @Mod(modid = Core.ID, name = Core.Name, version = Core.version, modLanguage = "kotlin")
 
 class Core {
@@ -77,6 +76,7 @@ class Core {
 		const val ID = "general-rpg"
 		const val Name = "GeneralRPG"
 		const val version = "1.0"
+		const val channel = "${ID}Channel"
 
 		@JvmStatic
 		@SidedProxy(clientSide = "mod.proxy.ClientProxy", serverSide = "mod.proxy.ServerProxy")
@@ -86,6 +86,7 @@ class Core {
 		@Mod.Instance(ID)
 		lateinit var instance: Core
 
+		//EnumExtension
 		val accessory = SlotExtension.addSlotType("ACCESSORY", 2)
 		val necklace = SlotExtension.addEquipmentSlot("NECKLACE", 6, accessory, 0, 1, "necklace")
 		val amulet = SlotExtension.addEquipmentSlot("AMULET", 7, accessory, 1, 2, "amulet")
@@ -94,13 +95,16 @@ class Core {
 
 		val accessoryType = EnumHelper.addEnchantmentType("ACCESSORY") { item: Item? -> item is ItemAccessory }!!
 
+		//CreativeTabs
 		val modTab: CreativeTabs = GeneralRPGTab()
 		val skillTab: CreativeTabs = GeneralRPGSkillTab()
 		val accessoryTab: CreativeTabs = GeneralAccessoryTab()
 		val enchantmentTab: CreativeTabs = GeneralEnchantmentTab()
 
+		//Items
 		val skill_dust = SkillDust
 
+		//ItemSkills
 		val heal = Heal
 		val heal_P = HealP
 		val heal_PP = HealPP
@@ -119,21 +123,25 @@ class Core {
 		val spawn_slime_test = SpawnSlimeTest
 		val code_test = CodeTest
 
+		//Tokens
 		val common_token = CommonToken
 		val uncommon_token = UncommonToken
 		val rare_token = RareToken
 		val epic_token = EpicToken
 		val legend_token = LegendToken
 
+		//SkillContainers
 		val skill_book = SkillBook
 		val skill_staff = SkillStaff
 		val skill_orb = SkillOrb
 		val ender_dragon_artifact = EnderDragonArtifact
 		val wither_artifact = WitherArtifact
 
+		//Foods
 		val skill_fruit = SkillFruit
 		val life_fruit = LifeFruit
 
+		//Armors
 		val strong_helmet = StrongHelmet
 		val strong_chestplate = StrongChestplate
 		val strong_leggins = StrongLeggings
@@ -147,10 +155,13 @@ class Core {
 		val electric_leggins = ElectricLeggings
 		val electric_boots = ElectricBoots
 
+		//Accessories
 		val power_neckless = PowerNeckless
 
+		//Blocks
 		val injection_table = InjectionTable()
 
+		//DamageSources
 		val FireSource = DamageSource("fire")
 		val IceSource = DamageSource("ice")
 		val WindSource = DamageSource("wind")
@@ -160,6 +171,7 @@ class Core {
 		val LightSource = DamageSource("light")
 		val DarkSource = DamageSource("light")
 
+		//PotionEffects
 		val burnEffect = BurningEffect()
 		val frozenEffect = FrozenEffect()
 		val paralysisEffect = ParalysisEffect()
@@ -167,8 +179,10 @@ class Core {
 		val electricShockEffect = ElectricShockEffect()
 		val floodedEffect = FloodedEffect()
 
+		//Enchantments
 		val testEnchantment = TestEnchantment
 
+		//Attributes
 		val MAXMP = Attributes.addAttribute("maxmp", 100.0, 100.0, Double.MAX_VALUE)
 		val EXP = Attributes.addAttribute("exp", 0.0, 0.0, Double.MAX_VALUE)
 		val LEVEL = Attributes.addAttribute("level", 1.0, 1.0, Double.MAX_VALUE)
@@ -193,11 +207,7 @@ class Core {
 	fun preInit(event: FMLPreInitializationEvent?) {
 		proxy.preInit()
 		if (event?.side?.isClient!!) {
-			ModelLoader.setCustomModelResourceLocation(
-				Item.getItemFromBlock(injection_table),
-				0,
-				ModelResourceLocation(ResourceLocation(ID, "injection_table"), "inventory")
-			)
+			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(injection_table), 0, ModelResourceLocation(ResourceLocation(ID, "injection_table"), "inventory"))
 		}
 		GameRegistry.registerTileEntity(TileEntityInjectionTable::class.java, ResourceLocation(ID, "injection_table"))
 		mod.util.registerModel(StrongHelmet, 0)

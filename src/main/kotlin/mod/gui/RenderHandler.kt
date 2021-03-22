@@ -28,15 +28,6 @@ class RenderHandler {
 	@SubscribeEvent
 	fun guiPostInit(event: GuiScreenEvent.InitGuiEvent.Post) {
 		if (event.gui is GuiInventory)
-			event.buttonList.add(
-				AccessoryButton(
-					70,
-					event.gui.mc.displayWidth / 2 - 314,
-					event.gui.mc.displayHeight / 2 - 190,
-					12,
-					14,
-					""
-				)
-			)
+			event.buttonList.add(AccessoryButton(70, event.gui.mc.displayWidth / 2 - 314, event.gui.mc.displayHeight / 2 - 190, 12, 14, ""))
 	}
 }

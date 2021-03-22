@@ -1,6 +1,5 @@
 package mod.item.skills
 
-import mod.Core
 import mod.capability.accessory.AccessoryProvider
 import mod.capability.mp.MpProvider
 import mod.enums.ItemRarity
