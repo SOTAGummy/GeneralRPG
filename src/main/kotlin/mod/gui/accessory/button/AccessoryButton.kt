@@ -2,6 +2,8 @@ package mod.gui.accessory.button
 
 import mod.Core
 import mod.gui.accessory.GuiAccessoryHandler
+import mod.packet.PacketHandler
+import mod.packet.PacketOpenAccessoryGui
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.GuiButton
 import net.minecraft.client.renderer.GlStateManager
@@ -45,6 +47,7 @@ class AccessoryButton(id: Int, x: Int, y: Int, width: Int, height: Int, name: St
 	override fun mousePressed(mc: Minecraft, mouseX: Int, mouseY: Int): Boolean {
 		if (super.mousePressed(mc, mouseX, mouseY)) {
 			mc.player.openGui(Core.instance, GuiAccessoryHandler.AccessoryGui, mc.world, 0, 0, 0)
+			PacketHandler.INSTANCE.sendToServer(PacketOpenAccessoryGui())
 		}
 		return super.mousePressed(mc, mouseX, mouseY)
 	}

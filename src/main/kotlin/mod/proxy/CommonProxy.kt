@@ -14,10 +14,8 @@ open class CommonProxy {
 
 	open fun init() {
 		MinecraftForge.EVENT_BUS.register(CapabilityCloneEvent())
-		MinecraftForge.EVENT_BUS.register(LevelUp())
 		MinecraftForge.EVENT_BUS.register(PlayerAttributeEvent())
 		MinecraftForge.EVENT_BUS.register(TickEvent())
-		MinecraftForge.EVENT_BUS.register(ElementAttackEvent())
 		MinecraftForge.EVENT_BUS.register(PPPSystem)
 	}
 

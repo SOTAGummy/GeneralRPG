@@ -6,6 +6,7 @@ import mod.Core
 import mod.item.baseitem.ItemAccessory
 import mod.util.Storage
 import net.minecraft.enchantment.Enchantment
+import net.minecraft.enchantment.EnumEnchantmentType
 import net.minecraft.entity.ai.attributes.AttributeModifier
 import net.minecraft.item.ItemStack
 import net.minecraft.util.ResourceLocation

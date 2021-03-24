@@ -6,14 +6,11 @@ import net.minecraft.entity.SharedMonsterAttributes
 import net.minecraft.entity.ai.attributes.AttributeModifier
 import net.minecraft.item.ItemStack
 
-object TestEnchantment : AccessoryEnchantment("test", Rarity.COMMON) {
+object TestEnchantment: AccessoryEnchantment("test", Rarity.COMMON) {
 	override fun getAttributes(stack: ItemStack, level: Int): Multimap<String, AttributeModifier> {
 		val multimap = super.getAttributes(stack, level)
 		val item = stack.item as ItemAccessory
-		multimap.put(
-			SharedMonsterAttributes.MAX_HEALTH.name,
-			AttributeModifier(item.getUUID(item.equipmentSlot)!!, "hp", 2.0 * level, 0)
-		)
+		multimap.put(SharedMonsterAttributes.MAX_HEALTH.name, AttributeModifier(item.getUUID(item.equipmentSlot)!!, "hp", 2.0 * level, 0))
 		return multimap
 	}
 

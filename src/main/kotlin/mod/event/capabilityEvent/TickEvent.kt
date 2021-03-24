@@ -2,6 +2,7 @@ package mod.event.capabilityEvent
 
 import mod.capability.mp.MpProvider
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
+import net.minecraftforge.fml.common.gameevent.PlayerEvent
 import net.minecraftforge.fml.common.gameevent.TickEvent
 
 class TickEvent {

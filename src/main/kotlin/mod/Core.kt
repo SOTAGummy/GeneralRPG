@@ -76,7 +76,6 @@ class Core {
 		const val ID = "general-rpg"
 		const val Name = "GeneralRPG"
 		const val version = "1.0"
-		const val channel = "${ID}Channel"
 
 		@JvmStatic
 		@SidedProxy(clientSide = "mod.proxy.ClientProxy", serverSide = "mod.proxy.ServerProxy")
@@ -200,6 +199,7 @@ class Core {
 		MinecraftForge.EVENT_BUS.register(PlayerEvents())
 		for (item in Storage.Instances) {
 			MinecraftForge.EVENT_BUS.register(item)
+
 		}
 	}
 

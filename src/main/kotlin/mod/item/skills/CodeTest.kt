@@ -23,8 +23,6 @@ object CodeTest : ItemSkill("codetest", 0.0, ItemRarity.MASTER, SkillType.UTIL) 
 			println("CLIENT:${player.getCapability(AccessoryProvider.ACCESSORY!!, null)?.getItem(0)}")
 			println("CLIENT:${player.getCapability(MpProvider.MP!!, null)?.getMp()}")
 		}
-
-		
 	}
 
 	override fun onItemRightClick(world: World, player: EntityPlayer, hand: EnumHand): ActionResult<ItemStack> {

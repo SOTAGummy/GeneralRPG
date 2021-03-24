@@ -12,8 +12,7 @@ class PacketHandler {
 
 		@JvmStatic
 		fun register(){
-			INSTANCE.registerMessage(ClientMessageHandler::class.java, ClientPacket::class.java, 0, Side.CLIENT)
-			INSTANCE.registerMessage(ServerMessageHandler::class.java, ServerPacket::class.java, 1, Side.SERVER)
+			INSTANCE.registerMessage(PacketOpenAccessoryGui::class.java, PacketOpenAccessoryGui::class.java, 0, Side.SERVER)
 			INSTANCE.registerMessage(MpMessageHandler::class.java, MpMessage::class.java, 2, Side.CLIENT)
 		}
 	}
