@@ -9,6 +9,7 @@ import mod.gui.accessory.slot.NecklaceSlot
 import mod.item.baseitem.ItemAccessory
 import net.minecraft.enchantment.EnchantmentHelper
 import net.minecraft.entity.EntityLiving
+import net.minecraft.entity.ai.attributes.AttributeMap
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.entity.player.InventoryPlayer
 import net.minecraft.inventory.*
@@ -21,8 +22,9 @@ class AccessoryContainer(val player: EntityPlayer, val customInventory: Accessor
 	val inventory = AccessoryItemContainer()
 	private val craftMatrix = InventoryCrafting(this, 2, 2)
 	private val craftResult = InventoryCraftResult()
-	private val equipmentSlots =
-		arrayOf(EntityEquipmentSlot.HEAD, EntityEquipmentSlot.CHEST, EntityEquipmentSlot.LEGS, EntityEquipmentSlot.FEET)
+	private val equipmentSlots = arrayOf(EntityEquipmentSlot.HEAD, EntityEquipmentSlot.CHEST, EntityEquipmentSlot.LEGS, EntityEquipmentSlot.FEET)
+	private val accessorySlots = arrayOf(Core.necklace, Core.amulet, Core.glove, Core.gem)
+	private val old = arrayOf(ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY)
 
 	init {
 		//CRAFTRESULTSLOT
@@ -101,12 +103,41 @@ class AccessoryContainer(val player: EntityPlayer, val customInventory: Accessor
 		craftResult.clear()
 		if (!player.world.isRemote) {
 			clearContainer(player, player.world, craftMatrix)
+			player.getCapability(AccessoryProvider.ACCESSORY!!, null)?.setItem(0, customInventory.getStackInSlot(0))
+			player.getCapability(AccessoryProvider.ACCESSORY, null)?.setItem(1, customInventory.getStackInSlot(1))
+			player.getCapability(AccessoryProvider.ACCESSORY, null)?.setItem(2, customInventory.getStackInSlot(2))
+			player.getCapability(AccessoryProvider.ACCESSORY, null)?.setItem(3, customInventory.getStackInSlot(3))
+		}else{
+			player.getCapability(AccessoryProvider.ACCESSORY!!, null)?.setItem(0, customInventory.getStackInSlot(0))
+			player.getCapability(AccessoryProvider.ACCESSORY, null)?.setItem(1, customInventory.getStackInSlot(1))
+			player.getCapability(AccessoryProvider.ACCESSORY, null)?.setItem(2, customInventory.getStackInSlot(2))
+			player.getCapability(AccessoryProvider.ACCESSORY, null)?.setItem(3, customInventory.getStackInSlot(3))
+
+			repeat(4){
+				val stack = player.getCapability(AccessoryProvider.ACCESSORY, null)?.getItem(it)!!
+				if (old[it] != stack){
+					if (old[it].isEmpty && !stack.isEmpty){
+						player.attributeMap.applyAttributeModifiers(stack.getAttributeModifiers(accessorySlots[it]))
+						println(1)
+					}else if (!old[it].isEmpty && stack.isEmpty){
+						player.attributeMap.removeAttributeModifiers(old[it].getAttributeModifiers(accessorySlots[it]))
+						println(2)
+					}else if (!old[it].isEmpty && !stack.isEmpty){
+						player.attributeMap.removeAttributeModifiers(old[it].getAttributeModifiers(accessorySlots[it]))
+						player.attributeMap.applyAttributeModifiers(stack.getAttributeModifiers(accessorySlots[it]))
+						println(3)
+					}
+				}
+				old[it] = stack
+			}
+
+			println(old)
 		}
 
-		player.getCapability(AccessoryProvider.ACCESSORY!!, null)?.setItem(0, customInventory.getStackInSlot(0))
-		player.getCapability(AccessoryProvider.ACCESSORY, null)?.setItem(1, customInventory.getStackInSlot(1))
-		player.getCapability(AccessoryProvider.ACCESSORY, null)?.setItem(2, customInventory.getStackInSlot(2))
-		player.getCapability(AccessoryProvider.ACCESSORY, null)?.setItem(3, customInventory.getStackInSlot(3))
+		println(player.getCapability(AccessoryProvider.ACCESSORY, null)?.getItem(0))
+		println(player.getCapability(AccessoryProvider.ACCESSORY, null)?.getItem(1))
+		println(player.getCapability(AccessoryProvider.ACCESSORY, null)?.getItem(2))
+		println(player.getCapability(AccessoryProvider.ACCESSORY, null)?.getItem(3))
 	}
 
 	override fun transferStackInSlot(playerIn: EntityPlayer, index: Int): ItemStack {

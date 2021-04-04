@@ -46,6 +46,8 @@ item.electric_chestplate.name=ElectricChestplate
 item.electric_leggings.name=ElectricLeggings
 item.electric_boots.name=ElectricBoots
 
+enchantment.life_boost=LifeBoost
+
 tile.injection_table.name=InjectionTable
 
 itemGroup.general-rpg=GeneralRPG

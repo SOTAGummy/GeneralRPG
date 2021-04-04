@@ -46,6 +46,7 @@ item.electric_chestplate.name=エレキチェストプレート
 item.electric_leggings.name=エレキレギンス
 item.electric_boots.name=エレキブーツ
 
+enchantment.life_boost=ライフブースト
 
 tile.injection_table.name=インジェクションテーブル
 

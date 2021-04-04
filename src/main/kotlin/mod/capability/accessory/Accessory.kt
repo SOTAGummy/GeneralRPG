@@ -6,7 +6,7 @@ import net.minecraft.item.ItemStack
 class Accessory : IAccessory {
 	private val items = arrayOf(ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY)
 
-	override fun getItem(slot: Int): ItemStack {
+	override fun getItem(slot: Int): ItemStack{
 		return items[slot]
 	}
 

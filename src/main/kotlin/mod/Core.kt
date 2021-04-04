@@ -8,17 +8,13 @@ import mod.capability.accessory.IAccessory
 import mod.capability.mp.IMp
 import mod.capability.mp.Mp
 import mod.capability.mp.MpStorage
-import mod.enchantment.TestEnchantment
+import mod.enchantment.LifeBoost
 import mod.event.capabilityEvent.CapabilityEvent
 import mod.event.entityEvent.PlayerEvents
 import mod.gui.RenderHandler
 import mod.gui.accessory.GuiAccessoryHandler
 import mod.item.SkillDust
 import mod.item.accessory.PowerNeckless
-import mod.item.armor.electric_armor.ElectricBoots
-import mod.item.armor.electric_armor.ElectricChestplate
-import mod.item.armor.electric_armor.ElectricHelmet
-import mod.item.armor.electric_armor.ElectricLeggings
 import mod.item.armor.strong_armor.StrongBoots
 import mod.item.armor.strong_armor.StrongChestplate
 import mod.item.armor.strong_armor.StrongHelmet
@@ -149,10 +145,6 @@ class Core {
 		val wizard_chestplate = WizardChestplate
 		val wizard_leggins = WizardLeggings
 		val wizard_boots = WizardBoots
-		val electric_helmet = ElectricHelmet
-		val electric_chestplate = ElectricChestplate
-		val electric_leggins = ElectricLeggings
-		val electric_boots = ElectricBoots
 
 		//Accessories
 		val power_neckless = PowerNeckless
@@ -179,7 +171,7 @@ class Core {
 		val floodedEffect = FloodedEffect()
 
 		//Enchantments
-		val testEnchantment = TestEnchantment
+		val testEnchantment = LifeBoost
 
 		//Attributes
 		val MAXMP = Attributes.addAttribute("maxmp", 100.0, 100.0, Double.MAX_VALUE)
@@ -187,8 +179,6 @@ class Core {
 		val LEVEL = Attributes.addAttribute("level", 1.0, 1.0, Double.MAX_VALUE)
 		val SAVINGRATE = Attributes.addAttribute("savingrate", 0.0, 0.0, 80.0)
 		val MPRECOVERRATE = Attributes.addAttribute("mprecoverrate", 2.0, 2.0, Double.MAX_VALUE)
-		val ELECTRICATTACK = Attributes.addAttribute("electricattack", 0.0, 0.0, 1.0)
-		val ELECTRICBODY = Attributes.addAttribute("electricbody", 0.0, 0.0, 1.0)
 	}
 
 	@Mod.EventHandler
